@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="gpsNetwork"
+        android:summary="Choose whether to use GPS or network to get speed. If unchecked, network will be used."
+        android:title="GPS" />
+
+    <ListPreference
+        android:entries="@array/gpsList"
+        android:entryValues="@array/gpsValues"
+        android:key="gps"
+        android:summary="Choose how often GPS will check speed"
+        android:title="GPS Frequency" >
+    </ListPreference>
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="autoReply"
+        android:summary="Enable or disable the auto reply feature."
+        android:title="Auto Reply SMS" />
+
+    <EditTextPreference
+        android:key="msg"
+        android:summary="This message will be automatically sent while driving."
+        android:title="Auto Reply Message" />
+
+</PreferenceScreen><!-- From: file:/home/kyle/Development/ShutUpAndDrive1/app/src/main/res/xml/prefs.xml -->
