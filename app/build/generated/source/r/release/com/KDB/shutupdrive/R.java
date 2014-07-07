@@ -1326,7 +1326,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f090027;
         public static final int action_menu_presenter=0x7f090028;
         public static final int action_mode_close_button=0x7f090036;
-        public static final int action_settings=0x7f090055;
+        public static final int action_settings=0x7f090054;
         public static final int activity_chooser_view_content=0x7f090037;
         public static final int adView=0x7f090053;
         public static final int always=0x7f090012;
@@ -1386,7 +1386,6 @@ containing a value of this type.
         public static final int showCustom=0x7f090007;
         public static final int showHome=0x7f090004;
         public static final int showTitle=0x7f090006;
-        public static final int speed=0x7f090054;
         public static final int split_action_bar=0x7f090030;
         public static final int startButton=0x7f090051;
         public static final int stopButton=0x7f090052;
@@ -1432,8 +1431,7 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_main=0x7f030018;
-        public static final int fragment_main=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f030019;
     }
     public static final class menu {
         public static final int main=0x7f0e0000;

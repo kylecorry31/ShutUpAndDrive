@@ -341,7 +341,7 @@ int id action_context_bar 0x7f09002f
 int id action_menu_divider 0x7f090027
 int id action_menu_presenter 0x7f090028
 int id action_mode_close_button 0x7f090036
-int id action_settings 0x7f090055
+int id action_settings 0x7f090054
 int id activity_chooser_view_content 0x7f090037
 int id adView 0x7f090053
 int id always 0x7f090012
@@ -401,7 +401,6 @@ int id shortcut 0x7f090040
 int id showCustom 0x7f090007
 int id showHome 0x7f090004
 int id showTitle 0x7f090006
-int id speed 0x7f090054
 int id split_action_bar 0x7f090030
 int id startButton 0x7f090051
 int id stopButton 0x7f090052
@@ -443,8 +442,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
 int layout activity_main 0x7f030018
-int layout fragment_main 0x7f030019
-int layout support_simple_spinner_dropdown_item 0x7f03001a
+int layout support_simple_spinner_dropdown_item 0x7f030019
 int menu main 0x7f0e0000
 int string _15_seconds 0x7f0c0000
 int string _1_minute 0x7f0c0001
