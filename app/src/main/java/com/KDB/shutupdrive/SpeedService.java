@@ -111,10 +111,10 @@ public class SpeedService extends Service implements LocationListener {
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		nm.cancel(mId);
         lm.removeUpdates(this);
 		Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
 	}
 
 	public void userSettings() {
