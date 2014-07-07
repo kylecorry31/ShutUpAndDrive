@@ -26,4 +26,4 @@
         android:summary="This message will be automatically sent while driving."
         android:title="Auto Reply Message" />
 
-</PreferenceScreen><!-- From: file:/home/kyle/Development/ShutUpAndDrive1/app/src/main/res/xml/prefs.xml -->
+</PreferenceScreen><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/xml/prefs.xml -->

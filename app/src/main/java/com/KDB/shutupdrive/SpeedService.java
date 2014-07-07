@@ -33,6 +33,7 @@ public class SpeedService extends Service implements LocationListener {
 	String textNotification = "Shut Up & Drive is monitoring your speed";
 	NotificationManager nm;
 	SharedPreferences getPrefs;
+    LocationManager lm;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -77,12 +78,12 @@ public class SpeedService extends Service implements LocationListener {
 
 	public void locationCall(long minTimeValue) {
 		if (userGPS) {
-			LocationManager lm = (LocationManager) this
+			 lm = (LocationManager) this
 					.getSystemService(Context.LOCATION_SERVICE);
 			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 					minTimeValue, 0, this);
 		} else {
-			LocationManager lm = (LocationManager) this
+			 lm = (LocationManager) this
 					.getSystemService(Context.LOCATION_SERVICE);
 			lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
 					this);
@@ -112,6 +113,7 @@ public class SpeedService extends Service implements LocationListener {
 	public void onDestroy() {
 		super.onDestroy();
 		nm.cancel(mId);
+        lm.removeUpdates(this);
 		Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
 	}
 
