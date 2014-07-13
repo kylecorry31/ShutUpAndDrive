@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.KDB.shutupdrive.MainActivity$PlaceholderFragment" >
+    tools:context="com.KDB.shutupdrive.MainActivity$PlaceholderFragment">
 
     <TextView
         android:id="@+id/tvRemember"
@@ -28,9 +28,9 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:src="@drawable/ic_launcher"
-        android:contentDescription="Text Icon"/>
+        android:contentDescription="Text Icon" />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivImage"
@@ -50,7 +50,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:text="Stop" />
-    </LinearLayout>
+    </LinearLayout>-->
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/ivImage"
+        android:src="@drawable/pb_not_active_gray"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/mainButton" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Not Activated"
+        android:textColor="@color/holo_blue"
+        android:layout_below="@id/mainButton"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:id="@+id/activeView" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

@@ -1308,11 +1308,13 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f020071;
         public static final int ic_plusone_standard_off_client=0x7f020072;
         public static final int ic_plusone_tall_off_client=0x7f020073;
-        public static final int powered_by_google_dark=0x7f020074;
-        public static final int powered_by_google_light=0x7f020075;
-        public static final int text_off=0x7f020076;
-        public static final int text_off_notification=0x7f020077;
-        public static final int text_on=0x7f020078;
+        public static final int pb_active_blue=0x7f020074;
+        public static final int pb_not_active_gray=0x7f020075;
+        public static final int powered_by_google_dark=0x7f020076;
+        public static final int powered_by_google_light=0x7f020077;
+        public static final int text_off=0x7f020078;
+        public static final int text_off_notification=0x7f020079;
+        public static final int text_on=0x7f02007a;
     }
     public static final class id {
         public static final int action_bar=0x7f09002e;
@@ -1327,6 +1329,7 @@ containing a value of this type.
         public static final int action_menu_presenter=0x7f090028;
         public static final int action_mode_close_button=0x7f090036;
         public static final int action_settings=0x7f090054;
+        public static final int activeView=0x7f090052;
         public static final int activity_chooser_view_content=0x7f090037;
         public static final int adView=0x7f090053;
         public static final int always=0x7f090012;
@@ -1359,6 +1362,7 @@ containing a value of this type.
         public static final int layout=0x7f09004e;
         public static final int listMode=0x7f090001;
         public static final int list_item=0x7f09003b;
+        public static final int mainButton=0x7f090051;
         public static final int match_parent=0x7f09001e;
         public static final int middle=0x7f09000b;
         public static final int monochrome=0x7f090025;
@@ -1387,8 +1391,6 @@ containing a value of this type.
         public static final int showHome=0x7f090004;
         public static final int showTitle=0x7f090006;
         public static final int split_action_bar=0x7f090030;
-        public static final int startButton=0x7f090051;
-        public static final int stopButton=0x7f090052;
         public static final int strict_sandbox=0x7f09001b;
         public static final int submit_area=0x7f09004b;
         public static final int tabMode=0x7f090002;

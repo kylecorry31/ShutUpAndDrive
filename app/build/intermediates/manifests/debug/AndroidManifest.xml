@@ -58,6 +58,12 @@
         </receiver>
 
         <service android:name="com.KDB.shutupdrive.SpeedService" />
+
+        <receiver android:name="com.KDB.shutupdrive.BootCompletedReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -325,11 +325,13 @@ int drawable ic_plusone_medium_off_client 0x7f020070
 int drawable ic_plusone_small_off_client 0x7f020071
 int drawable ic_plusone_standard_off_client 0x7f020072
 int drawable ic_plusone_tall_off_client 0x7f020073
-int drawable powered_by_google_dark 0x7f020074
-int drawable powered_by_google_light 0x7f020075
-int drawable text_off 0x7f020076
-int drawable text_off_notification 0x7f020077
-int drawable text_on 0x7f020078
+int drawable pb_active_blue 0x7f020074
+int drawable pb_not_active_gray 0x7f020075
+int drawable powered_by_google_dark 0x7f020076
+int drawable powered_by_google_light 0x7f020077
+int drawable text_off 0x7f020078
+int drawable text_off_notification 0x7f020079
+int drawable text_on 0x7f02007a
 int id action_bar 0x7f09002e
 int id action_bar_activity_content 0x7f090026
 int id action_bar_container 0x7f09002d
@@ -342,6 +344,7 @@ int id action_menu_divider 0x7f090027
 int id action_menu_presenter 0x7f090028
 int id action_mode_close_button 0x7f090036
 int id action_settings 0x7f090054
+int id activeView 0x7f090052
 int id activity_chooser_view_content 0x7f090037
 int id adView 0x7f090053
 int id always 0x7f090012
@@ -374,6 +377,7 @@ int id ivImage 0x7f090050
 int id layout 0x7f09004e
 int id listMode 0x7f090001
 int id list_item 0x7f09003b
+int id mainButton 0x7f090051
 int id match_parent 0x7f09001e
 int id middle 0x7f09000b
 int id monochrome 0x7f090025
@@ -402,8 +406,6 @@ int id showCustom 0x7f090007
 int id showHome 0x7f090004
 int id showTitle 0x7f090006
 int id split_action_bar 0x7f090030
-int id startButton 0x7f090051
-int id stopButton 0x7f090052
 int id strict_sandbox 0x7f09001b
 int id submit_area 0x7f09004b
 int id tabMode 0x7f090002
