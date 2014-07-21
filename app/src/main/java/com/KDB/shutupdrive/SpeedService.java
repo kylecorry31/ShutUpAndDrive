@@ -46,9 +46,8 @@ public class SpeedService extends Service implements LocationListener {
         // TODO Auto-generated method stub
         Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
 
-            notification();
-        // getActionBar().setDisplayShowTitleEnabled(false);
-        // getActionBar().setDisplayShowHomeEnabled(false);
+        notification();
+
         final AudioManager current = (AudioManager) this
                 .getSystemService(Context.AUDIO_SERVICE);
         audioMode = current.getRingerMode();
@@ -107,7 +106,7 @@ public class SpeedService extends Service implements LocationListener {
             PendingIntent pi = sb.getPendingIntent(0,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pi);
-        } else{
+        } else {
             Intent intent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pendingIntent);
@@ -210,15 +209,15 @@ public class SpeedService extends Service implements LocationListener {
                 }
                 icon = R.drawable.text_off_notification;
                 textNotification = "Shut Up & Drive is running";
+                nm.cancel(mId);
                 notification();
             } else {
                 soundMode();
-                // the next line is for testing purposes
-                // autoreply = true;
                 // this sets the autoreply to false
                 autoreply = false;
                 icon = R.drawable.text_off_notification;
                 textNotification = "Shut Up & Drive is monitoring your speed";
+                nm.cancel(mId);
                 notification();
             }
         }

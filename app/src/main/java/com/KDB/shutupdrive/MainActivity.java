@@ -32,10 +32,7 @@ public class MainActivity extends Activity implements OnClickListener {
         adView = (AdView) findViewById(R.id.adView);
         AdRequest.Builder adRequest = new AdRequest.Builder();
         adView.loadAd(adRequest.build());
-        /*start = (Button) findViewById(R.id.startButton);
-        stop = (Button) findViewById(R.id.stopButton);
-		start.setOnClickListener(this);
-		stop.setOnClickListener(this);*/
+        startService(new Intent(getBaseContext(), SpeedService.class));
         mainBtn = (ImageButton) findViewById(R.id.mainButton);
         activeView = (TextView) findViewById(R.id.activeView);
         if (isServiceRunning()) {
