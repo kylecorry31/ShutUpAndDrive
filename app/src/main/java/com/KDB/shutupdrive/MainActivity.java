@@ -2,44 +2,67 @@ package com.KDB.shutupdrive;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends Activity implements OnClickListener {
-    // Author - Kyle Corry(programmer), Dylan Kiley(design, research and idea),
+    // Author - Kyle Corry(programmer, design), Dylan Kiley(design, research and idea),
     // Brian Thornber(design, research and idea), Arianna Hatcher(research)
 
     AdView adView;
     Button start, stop;
-    ImageButton mainBtn;
-    TextView activeView;
+    // ImageButton mainBtn;
+    Button btn;
+    TextView tv;
+    ImageView img;
+    //TextView activeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
         adView = (AdView) findViewById(R.id.adView);
         AdRequest.Builder adRequest = new AdRequest.Builder();
         adView.loadAd(adRequest.build());
-        startService(new Intent(getBaseContext(), SpeedService.class));
-        mainBtn = (ImageButton) findViewById(R.id.mainButton);
-        activeView = (TextView) findViewById(R.id.activeView);
-        if (isServiceRunning()) {
-            mainBtn.setImageResource(R.drawable.pb_active_blue);
-            activeView.setText("Activated");
+        //this is for the developers
+        //adView.setVisibility(View.GONE);
+        if (!isServiceRunning()) {
+            if (gps())
+                startService(new Intent(getBaseContext(), SpeedService.class));
+            else
+                gpsDialog();
         }
-        mainBtn.setOnClickListener(this);
+        img = (ImageView) findViewById(R.id.car);
+        btn = (Button) findViewById(R.id.button);
+        tv = (TextView) findViewById(R.id.tv);
+        //mainBtn = (ImageButton) findViewById(R.id.mainButton);
+        //activeView = (TextView) findViewById(R.id.activeView);
+        if (isServiceRunning()) {
+            btn.setBackgroundColor(getResources().getColor(R.color.green));
+            btn.setText(getResources().getString(R.string.activated));
+            tv.setText(getResources().getString(R.string.tap_deactivate));
+            img.setImageResource(R.drawable.car_green);
+            //mainBtn.setImageResource(R.drawable.pb_active_blue);
+            //activeView.setText("Activated");
+        }
+        btn.setOnClickListener(this);
+        // mainBtn.setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +83,16 @@ public class MainActivity extends Activity implements OnClickListener {
         adView.pause();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                moveTaskToBack(true);
+                return true;
+        }
+        return false;
+    }
+
     // this is for an options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,14 +110,18 @@ public class MainActivity extends Activity implements OnClickListener {
                 Intent openGPSsettings = new Intent("com.KDB.shutupdrive.PREFS");
                 startActivity(openGPSsettings);
                 break;
+            case R.id.action_tutorial:
+                Intent openTut = new Intent(this, Tutorial1.class);
+                startActivity(openTut);
+                break;
         }
         return false;
     }
 
     @Override
     public void onClick(View v) {
-		/*switch (v.getId()) {
-		case R.id.startButton:
+        /*switch (v.getId()) {
+        case R.id.startButton:
 			startService(new Intent(getBaseContext(), SpeedService.class));
 			break;
 		case R.id.stopButton:
@@ -92,13 +129,25 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		}*/
         if (isServiceRunning()) {
-            mainBtn.setImageResource(R.drawable.pb_not_active_gray);
+            // mainBtn.setImageResource(R.drawable.pb_not_active_gray);
+            btn.setBackgroundColor(getResources().getColor(R.color.red));
+            btn.setText(getResources().getString(R.string.not_activated));
+            tv.setText(getResources().getString(R.string.tap_activate));
+            img.setImageResource(R.drawable.car_red);
             stopService(new Intent(getBaseContext(), SpeedService.class));
-            activeView.setText("Not Activated");
+            //activeView.setText("Not Activated");
         } else {
-            mainBtn.setImageResource(R.drawable.pb_active_blue);
-            startService(new Intent(getBaseContext(), SpeedService.class));
-            activeView.setText("Activated");
+            if (gps()) {
+                //mainBtn.setImageResource(R.drawable.pb_active_blue);
+                btn.setBackgroundColor(getResources().getColor(R.color.green));
+                btn.setText(getResources().getString(R.string.activated));
+                tv.setText(getResources().getString(R.string.tap_deactivate));
+                img.setImageResource(R.drawable.car_green);
+                startService(new Intent(getBaseContext(), SpeedService.class));
+                // activeView.setText("Activated");
+            } else
+                gpsDialog();
+
         }
     }
 
@@ -110,6 +159,35 @@ public class MainActivity extends Activity implements OnClickListener {
             }
         }
         return false;
+    }
+
+    private boolean gps() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void gpsDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("GPS is disabled. Shut Up & Drive! requires the GPS to be enabled.").setCancelable(false).setPositiveButton("Settings",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent callGPSSettingIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(callGPSSettingIntent);
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
 }

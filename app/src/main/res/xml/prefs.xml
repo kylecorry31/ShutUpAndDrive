@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="gpsNetwork"
-        android:summary="Choose whether to use GPS or network to get speed. If unchecked, network will be used."
-        android:title="GPS" />
-
     <ListPreference
         android:entries="@array/gpsList"
         android:entryValues="@array/gpsValues"
@@ -14,6 +8,11 @@
         android:summary="Choose how often GPS will check speed"
         android:title="GPS Frequency"></ListPreference>
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="phone"
+        android:summary="Block phone calls while driving."
+        android:title="Block Calls" />
     <SwitchPreference
         android:defaultValue="true"
         android:key="autoReply"
@@ -30,5 +29,9 @@
         android:key="bootStart"
         android:summary="Start service automatically after rebooting"
         android:title="Run On Startup" />
+    <EditTextPreference
+        android:key="number"
+        android:summary="A message will be automatically sent to this number if the app is deactivated."
+        android:title="Deactivation Number" />
 
 </PreferenceScreen>

@@ -19,6 +19,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.PhoneStateListener;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
@@ -28,12 +29,14 @@ public class SpeedService extends Service implements LocationListener {
     public long minTimeGPS;
     public static boolean autoreply = false;
     static String msg = "I am driving right now, I will contact you later --Auto reply message--";
-    boolean auto, userGPS;
-    int icon = R.drawable.text_off_notification;
+    String deactivated = "Shut Up & Drive! has been deactivated!";
+    boolean auto, phone;
+    int icon = R.drawable.notification;
     String textNotification = "Shut Up & Drive is monitoring your speed";
     NotificationManager nm;
     SharedPreferences getPrefs;
     LocationManager lm;
+    String number;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -55,39 +58,35 @@ public class SpeedService extends Service implements LocationListener {
                 .getDefaultSharedPreferences(getBaseContext());
         userSettings();
         locationCall(minTimeGPS);
-        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        PhoneStateListener psl = new PhoneStateListener() {
-            public void onCallStateChanged(int state, String incomingNumber) {
-                if (state == TelephonyManager.CALL_STATE_RINGING) {
-                    System.out.println("ringing");
-                    if (autoreply) {
-                        normal();
+        if (!phone) {
+            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            PhoneStateListener psl = new PhoneStateListener() {
+                public void onCallStateChanged(int state, String incomingNumber) {
+                    if (state == TelephonyManager.CALL_STATE_RINGING) {
+                        System.out.println("ringing");
+                        if (autoreply) {
+                            normal();
+                        }
+                    }
+                    if (state == TelephonyManager.CALL_STATE_IDLE) {
+                        System.out.println("idle");
+                        if (autoreply) {
+                            silent();
+                        }
                     }
                 }
-                if (state == TelephonyManager.CALL_STATE_IDLE) {
-                    System.out.println("idle");
-                    if (autoreply) {
-                        silent();
-                    }
-                }
-            }
-        };
-        tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
+            };
+            tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
+        }
         return START_STICKY;
     }
 
     public void locationCall(long minTimeValue) {
-        if (userGPS) {
-            lm = (LocationManager) this
-                    .getSystemService(Context.LOCATION_SERVICE);
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    minTimeValue, 0, this);
-        } else {
-            lm = (LocationManager) this
-                    .getSystemService(Context.LOCATION_SERVICE);
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
-                    this);
-        }
+
+        lm = (LocationManager) this
+                .getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                minTimeValue, 0, this);
     }
 
     // notification
@@ -119,13 +118,20 @@ public class SpeedService extends Service implements LocationListener {
     public void onDestroy() {
         nm.cancel(mId);
         lm.removeUpdates(this);
+        if (!number.isEmpty()) {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, deactivated,
+                    null, null);
+        }
         Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
     public void userSettings() {
-        // gps or network
-        userGPS = getPrefs.getBoolean("gpsNetwork", true);
+        //number
+        number = getPrefs.getString("number", "");
+        //phone
+        phone = getPrefs.getBoolean("phone", false);
         // autoreply
         auto = getPrefs.getBoolean("autoReply", true);
         // autoreply message
@@ -207,7 +213,6 @@ public class SpeedService extends Service implements LocationListener {
                 if (auto) {
                     autoreply = true;
                 }
-                icon = R.drawable.text_off_notification;
                 textNotification = "Shut Up & Drive is running";
                 nm.cancel(mId);
                 notification();
@@ -215,7 +220,6 @@ public class SpeedService extends Service implements LocationListener {
                 soundMode();
                 // this sets the autoreply to false
                 autoreply = false;
-                icon = R.drawable.text_off_notification;
                 textNotification = "Shut Up & Drive is monitoring your speed";
                 nm.cancel(mId);
                 notification();
