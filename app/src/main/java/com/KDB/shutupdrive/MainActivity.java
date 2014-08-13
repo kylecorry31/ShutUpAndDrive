@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends ActionBarActivity implements OnClickListener {
     // Author - Kyle Corry(programmer, design), Dylan Kiley(design, research and idea),
     // Brian Thornber(design, research and idea), Arianna Hatcher(research)
 

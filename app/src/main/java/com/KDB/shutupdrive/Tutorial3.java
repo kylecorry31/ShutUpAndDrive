@@ -31,7 +31,7 @@ public class Tutorial3 extends Activity implements View.OnClickListener {
 
     private void userSettings() {
 
-        phone = getPrefs.getBoolean("phone", true);
+        phone = getPrefs.getBoolean("phone", false);
         cb.setChecked(phone);
     }
 

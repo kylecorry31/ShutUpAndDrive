@@ -8,12 +8,12 @@
         android:summary="Choose how often GPS will check speed"
         android:title="GPS Frequency"></ListPreference>
 
-    <SwitchPreference
+    <CheckBoxPreference
         android:defaultValue="false"
         android:key="phone"
         android:summary="Block phone calls while driving."
         android:title="Block Calls" />
-    <SwitchPreference
+    <CheckBoxPreference
         android:defaultValue="true"
         android:key="autoReply"
         android:summary="Enable or disable the auto reply feature."
@@ -24,7 +24,7 @@
         android:summary="This message will be automatically sent while driving."
         android:title="Auto Reply Message" />
 
-    <SwitchPreference
+    <CheckBoxPreference
         android:defaultValue="false"
         android:key="bootStart"
         android:summary="Start service automatically after rebooting"
