@@ -17430,18 +17430,8 @@ normal
                 </style>
             </file>
             <file
-                name="red_cross"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/red_cross.png"
-                qualifiers=""
-                type="drawable" />
-            <file
                 name="car_white"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/car_white.png"
-                qualifiers=""
-                type="drawable" />
-            <file
-                name="pb_active_blue"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/pb_active_blue.png"
                 qualifiers=""
                 type="drawable" />
             <file
@@ -17462,11 +17452,6 @@ normal
             <file
                 name="text"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/text.png"
-                qualifiers=""
-                type="drawable" />
-            <file
-                name="pb_not_active_gray"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/pb_not_active_gray.png"
                 qualifiers=""
                 type="drawable" />
             <file

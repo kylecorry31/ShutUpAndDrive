@@ -1,6 +1,5 @@
 package com.KDB.shutupdrive;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener {
     // Author - Kyle Corry(programmer, design), Dylan Kiley(design, research and idea),
@@ -38,9 +38,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        AdBuddiz.setPublisherKey("db90cfe0-28ed-43fc-8a81-88f83cffead1");
+        AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
         AdRequest.Builder adRequest = new AdRequest.Builder();
         adView.loadAd(adRequest.build());
+        AdBuddiz.showAd(this);
         //this is for the developers
         //adView.setVisibility(View.GONE);
         if (!isServiceRunning()) {
@@ -64,6 +67,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         }
         btn.setOnClickListener(this);
         // mainBtn.setOnClickListener(this);
+
     }
 
     @Override

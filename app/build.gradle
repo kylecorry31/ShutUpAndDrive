@@ -17,9 +17,9 @@ android {
         }
     }
 }
-
 dependencies {
     compile 'com.android.support:support-v4:19.+'
     compile 'com.google.android.gms:play-services:+'
     compile 'com.android.support:appcompat-v7:19.+'
+    compile files('/home/kyle/Development/ShutUpAndDrive/libs/AdBuddiz-2.3.3.jar')
 }
