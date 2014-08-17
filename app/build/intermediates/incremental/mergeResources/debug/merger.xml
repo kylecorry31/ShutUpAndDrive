@@ -17272,7 +17272,7 @@ normal
             <file
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml"
                 qualifiers="" >
-                <color name="green" >#009500
+                <color name="blue" >#0093fa
                 </color>
                 <color name="white" >#ffffff
                 </color>
@@ -17429,6 +17429,11 @@ normal
                     </item>
                 </style>
             </file>
+            <file
+                name="car_blue"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/car_blue.png"
+                qualifiers=""
+                type="drawable" />
             <file
                 name="car_white"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/car_white.png"

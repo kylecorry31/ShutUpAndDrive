@@ -58,10 +58,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         //mainBtn = (ImageButton) findViewById(R.id.mainButton);
         //activeView = (TextView) findViewById(R.id.activeView);
         if (isServiceRunning()) {
-            btn.setBackgroundColor(getResources().getColor(R.color.green));
+            btn.setBackgroundColor(getResources().getColor(R.color.blue));
             btn.setText(getResources().getString(R.string.activated));
             tv.setText(getResources().getString(R.string.tap_deactivate));
-            img.setImageResource(R.drawable.car_green);
+            img.setImageResource(R.drawable.car_blue);
             //mainBtn.setImageResource(R.drawable.pb_active_blue);
             //activeView.setText("Activated");
         }
@@ -144,10 +144,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         } else {
             if (gps()) {
                 //mainBtn.setImageResource(R.drawable.pb_active_blue);
-                btn.setBackgroundColor(getResources().getColor(R.color.green));
+                btn.setBackgroundColor(getResources().getColor(R.color.blue));
                 btn.setText(getResources().getString(R.string.activated));
                 tv.setText(getResources().getString(R.string.tap_deactivate));
-                img.setImageResource(R.drawable.car_green);
+                img.setImageResource(R.drawable.car_blue);
                 startService(new Intent(getBaseContext(), SpeedService.class));
                 // activeView.setText("Activated");
             } else
