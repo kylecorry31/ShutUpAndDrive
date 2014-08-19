@@ -29,6 +29,11 @@
         android:key="bootStart"
         android:summary="Start service automatically after rebooting"
         android:title="Run On Startup" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="activityRecognition"
+        android:summary="Use experimental driving detection (This greatly improves battery efficiency)"
+        android:title="Activity Recognition" />
     <EditTextPreference
         android:key="number"
         android:summary="A message will be automatically sent to this number if the app is deactivated."

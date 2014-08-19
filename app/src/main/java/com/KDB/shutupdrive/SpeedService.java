@@ -24,19 +24,23 @@ import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 public class SpeedService extends Service implements LocationListener {
-    static int audioMode, beforeCall;
-    int mId;
-    public long minTimeGPS;
+    private static int audioMode;
+    private int mId;
+    private long minTimeGPS;
     public static boolean autoreply = false;
     static String msg = "I am driving right now, I will contact you later --Auto reply message--";
-    String deactivated = "Shut Up & Drive! has been deactivated!";
-    boolean auto, phone;
-    int icon = R.drawable.notification;
-    String textNotification = "Shut Up & Drive is monitoring your speed";
-    NotificationManager nm;
-    SharedPreferences getPrefs;
-    LocationManager lm;
-    String number;
+    private final String deactivated = "Shut Up & Drive! has been deactivated!";
+    private boolean auto;
+    private boolean phone;
+    private final int icon = R.drawable.notification;
+    private String textNotification = "Shut Up & Drive is monitoring your speed";
+    private NotificationManager nm;
+    private SharedPreferences getPrefs;
+    private LocationManager lm;
+    private String number;
+    private static final double KM_TO_MILES = 2.23694;
+    private static final int MIN_SPEED = 10;
+    private static final int MAX_SPEED = 100;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -81,7 +85,7 @@ public class SpeedService extends Service implements LocationListener {
         return START_STICKY;
     }
 
-    public void locationCall(long minTimeValue) {
+    void locationCall(long minTimeValue) {
 
         lm = (LocationManager) this
                 .getSystemService(Context.LOCATION_SERVICE);
@@ -92,7 +96,7 @@ public class SpeedService extends Service implements LocationListener {
     // notification
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("NewApi")
-    public void notification() {
+    void notification() {
         mId = 753815731;
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(icon).setContentTitle("Shut Up & Drive!")
@@ -123,11 +127,12 @@ public class SpeedService extends Service implements LocationListener {
             smsManager.sendTextMessage(number, null, deactivated,
                     null, null);
         }
+        soundMode();
         Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
-    public void userSettings() {
+    void userSettings() {
         //number
         number = getPrefs.getString("number", "");
         //phone
@@ -163,31 +168,31 @@ public class SpeedService extends Service implements LocationListener {
         System.out.println("Min Time is set to " + minTimeGPS);
     }
 
-    public float speed;
+    private float speed;
 
-    // SilentToNomal and NormalToSilent device
-    public void silent() {
+    // SilentToNormal and NormalToSilent device
+    void silent() {
         final AudioManager mode = (AudioManager) this
                 .getSystemService(Context.AUDIO_SERVICE);
         // Silent Mode
         mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
     }
 
-    public void vibrate() {
+    void vibrate() {
         final AudioManager mode = (AudioManager) this
                 .getSystemService(Context.AUDIO_SERVICE);
         // vibrate mode
         mode.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
     }
 
-    public void normal() {
+    void normal() {
         final AudioManager mode = (AudioManager) this
                 .getSystemService(Context.AUDIO_SERVICE);
         // Normal Mode
         mode.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
     }
 
-    public void soundMode() {
+    void soundMode() {
         if (audioMode == 1) {
             vibrate();
         } else if (audioMode == 2) {
@@ -206,9 +211,9 @@ public class SpeedService extends Service implements LocationListener {
         } else {
             speed = location.getSpeed();
             System.out.println(speed);
-            speed *= 2.23694;
+            speed *= KM_TO_MILES;
             speed = Math.round(speed);
-            if (speed > 10 && speed < 100) {
+            if (speed > MIN_SPEED && speed < MAX_SPEED) {
                 silent();
                 if (auto) {
                     autoreply = true;

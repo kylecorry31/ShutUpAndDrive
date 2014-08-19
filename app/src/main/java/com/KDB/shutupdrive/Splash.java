@@ -10,8 +10,8 @@ import android.view.Window;
  * Created by kyle on 8/12/14.
  */
 public class Splash extends Activity {
-    public static String FILENAME = "firstTime";
-    boolean first;
+    private static final String FILENAME = "firstTime";
+    private boolean first;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class Splash extends Activity {
         if (first) {
             SharedPreferences.Editor editor = getPrefs.edit();
             editor.putBoolean("firstTime", false);
-            editor.commit();
+            editor.apply();
             Intent intent = new Intent(getApplicationContext(), Tutorial1.class);
             startActivity(intent);
             return true;

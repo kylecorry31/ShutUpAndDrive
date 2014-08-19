@@ -1,14 +1,18 @@
 package com.KDB.shutupdrive;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,26 +22,35 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.KDB.shutupdrive.ActivityUtils.REQUEST_TYPE;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener {
     // Author - Kyle Corry(programmer, design), Dylan Kiley(design, research and idea),
     // Brian Thornber(design, research and idea), Arianna Hatcher(research)
 
-    AdView adView;
-    Button start, stop;
-    // ImageButton mainBtn;
-    Button btn;
-    TextView tv;
-    ImageView img;
-    //TextView activeView;
+    private AdView adView;
+    private Button btn;
+    private TextView tv;
+    private ImageView img;
+    // Store the current request type (ADD or REMOVE)
+    private REQUEST_TYPE mRequestType;
+    // The activity recognition update request object
+    private DetectionRequester mDetectionRequester;
+    // The activity recognition update removal object
+    private DetectionRemover mDetectionRemover;
+    boolean activityRecognition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        activityRecognition();
         AdBuddiz.setPublisherKey("db90cfe0-28ed-43fc-8a81-88f83cffead1");
         AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
@@ -46,28 +59,40 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         AdBuddiz.showAd(this);
         //this is for the developers
         //adView.setVisibility(View.GONE);
-        if (!isServiceRunning()) {
+        img = (ImageView) findViewById(R.id.car);
+        btn = (Button) findViewById(R.id.button);
+        tv = (TextView) findViewById(R.id.tv);
+        activityRecognitionRunning();
+        if (activityRecognition) {
+            mDetectionRequester = new DetectionRequester(this);
+            mDetectionRemover = new DetectionRemover(this);
+        }
+        if (!isServiceRunning() && !activityRecognition) {
             if (gps())
                 startService(new Intent(getBaseContext(), SpeedService.class));
             else
                 gpsDialog();
+        } else if (!isServiceRunning() && activityRecognition) {
+            onStartUpdates();
+            btn.setBackgroundColor(getResources().getColor(R.color.blue));
+            btn.setText(getResources().getString(R.string.activated));
+            tv.setText(getResources().getString(R.string.tap_deactivate));
+            img.setImageResource(R.drawable.car_blue);
         }
-        img = (ImageView) findViewById(R.id.car);
-        btn = (Button) findViewById(R.id.button);
-        tv = (TextView) findViewById(R.id.tv);
-        //mainBtn = (ImageButton) findViewById(R.id.mainButton);
-        //activeView = (TextView) findViewById(R.id.activeView);
+
         if (isServiceRunning()) {
             btn.setBackgroundColor(getResources().getColor(R.color.blue));
             btn.setText(getResources().getString(R.string.activated));
             tv.setText(getResources().getString(R.string.tap_deactivate));
             img.setImageResource(R.drawable.car_blue);
-            //mainBtn.setImageResource(R.drawable.pb_active_blue);
-            //activeView.setText("Activated");
         }
         btn.setOnClickListener(this);
-        // mainBtn.setOnClickListener(this);
 
+    }
+
+    private void activityRecognition() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        activityRecognition = prefs.getBoolean("activityRecognition", false);
     }
 
     @Override
@@ -112,8 +137,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 // settings menu
-                Intent openGPSsettings = new Intent("com.KDB.shutupdrive.PREFS");
-                startActivity(openGPSsettings);
+                Intent openSettings = new Intent("com.KDB.shutupdrive.PREFS");
+                startActivity(openSettings);
                 break;
             case R.id.action_tutorial:
                 Intent openTut = new Intent(this, Tutorial1.class);
@@ -125,54 +150,122 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        /*switch (v.getId()) {
-        case R.id.startButton:
-			startService(new Intent(getBaseContext(), SpeedService.class));
-			break;
-		case R.id.stopButton:
-			stopService(new Intent(getBaseContext(), SpeedService.class));
-			break;
-		}*/
         if (isServiceRunning()) {
-            // mainBtn.setImageResource(R.drawable.pb_not_active_gray);
             btn.setBackgroundColor(getResources().getColor(R.color.red));
             btn.setText(getResources().getString(R.string.not_activated));
             tv.setText(getResources().getString(R.string.tap_activate));
             img.setImageResource(R.drawable.car_red);
-            stopService(new Intent(getBaseContext(), SpeedService.class));
-            //activeView.setText("Not Activated");
+            if (activityRecognition) {
+                onStopUpdates();
+            } else {
+                stopService(new Intent(getBaseContext(), SpeedService.class));
+            }
         } else {
-            if (gps()) {
-                //mainBtn.setImageResource(R.drawable.pb_active_blue);
+            if (activityRecognition) {
+                btn.setBackgroundColor(getResources().getColor(R.color.blue));
+                btn.setText(getResources().getString(R.string.activated));
+                tv.setText(getResources().getString(R.string.tap_deactivate));
+                img.setImageResource(R.drawable.car_blue);
+                onStartUpdates();
+            } else if (gps()) {
                 btn.setBackgroundColor(getResources().getColor(R.color.blue));
                 btn.setText(getResources().getString(R.string.activated));
                 tv.setText(getResources().getString(R.string.tap_deactivate));
                 img.setImageResource(R.drawable.car_blue);
                 startService(new Intent(getBaseContext(), SpeedService.class));
-                // activeView.setText("Activated");
             } else
                 gpsDialog();
 
         }
     }
 
+    /**
+     * activity recognition start
+     */
+    public void onStartUpdates() {
+        if (!servicesConnected()) {
+            return;
+        }
+        mRequestType = ActivityUtils.REQUEST_TYPE.ADD;
+
+        mDetectionRequester.requestUpdates();
+    }
+
+    /**
+     * activity recognition stop
+     */
+    public void onStopUpdates() {
+        if (!servicesConnected()) {
+            return;
+        }
+        mRequestType = ActivityUtils.REQUEST_TYPE.REMOVE;
+        mDetectionRemover.removeUpdates(mDetectionRequester.getRequestPendingIntent());
+        if (mDetectionRequester != null) {
+            if (mDetectionRequester.getRequestPendingIntent() != null)
+                mDetectionRequester.getRequestPendingIntent().cancel();
+        }
+    }
+
+    /**
+     * activity recognition google play services
+     */
+    private boolean servicesConnected() {
+        int resultCode =
+                GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (ConnectionResult.SUCCESS == resultCode) {
+            Log.d(ActivityUtils.APPTAG, "Google Play Services Available");
+            return true;
+        } else {
+            GooglePlayServicesUtil.getErrorDialog(resultCode, this, 0).show();
+            return false;
+        }
+    }
+
+    /*
+    * receive activity recognition stuff
+    */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        switch (requestCode) {
+            case ActivityUtils.CONNECTION_FAILURE_RESOLUTION_REQUEST:
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        if (ActivityUtils.REQUEST_TYPE.ADD == mRequestType) {
+                            mDetectionRequester.requestUpdates();
+                        } else if (ActivityUtils.REQUEST_TYPE.REMOVE == mRequestType) {
+                            mDetectionRemover.removeUpdates(
+                                    mDetectionRequester.getRequestPendingIntent());
+                        }
+                        break;
+                    default:
+                        Log.d(ActivityUtils.APPTAG, "no resolution");
+                }
+            default:
+                Log.d(ActivityUtils.APPTAG,
+                        "unknown request code " + requestCode);
+                break;
+        }
+    }
+
     private boolean isServiceRunning() {
+        activityRecognitionRunning();
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (SpeedService.class.getName().equals(service.service.getClassName())) {
+            if (SpeedService.class.getName().equals(service.service.getClassName()) || ActivityRecognitionIntentService.class.getName().equals(service.service.getClassName()) || ActivityUtils.activityRecognitionRunning) {
                 return true;
             }
         }
         return false;
     }
 
+    private void activityRecognitionRunning() {
+        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        ActivityUtils.activityRecognitionRunning = getPrefs.getBoolean("activityRecognitionRunning", false);
+    }
+
     private boolean gps() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            return true;
-        } else {
-            return false;
-        }
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     private void gpsDialog() {

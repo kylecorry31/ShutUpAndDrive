@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -118,6 +119,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <service android:name="com.KDB.shutupdrive.ActivityRecognitionIntentService" />
+        <service android:name="com.KDB.shutupdrive.CarMode" />
     </application>
 
 </manifest>

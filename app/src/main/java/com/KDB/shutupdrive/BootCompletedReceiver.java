@@ -10,7 +10,7 @@ import android.preference.PreferenceManager;
  * Created by kyle on 7/13/14.
  */
 public class BootCompletedReceiver extends BroadcastReceiver {
-    boolean start_service_bootup = false;
+    private boolean start_service_bootup = false;
 
     @Override
     public void onReceive(Context context, Intent intent) {

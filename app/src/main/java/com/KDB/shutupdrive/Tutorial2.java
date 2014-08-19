@@ -14,12 +14,12 @@ import android.widget.EditText;
  * Created by kyle on 8/12/14.
  */
 public class Tutorial2 extends Activity implements View.OnClickListener {
-    Button next;
-    CheckBox cb;
-    EditText et;
-    SharedPreferences getPrefs;
-    String msg;
-    boolean auto;
+    private Button next;
+    private CheckBox cb;
+    private EditText et;
+    private SharedPreferences getPrefs;
+    private String msg;
+    private boolean auto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class Tutorial2 extends Activity implements View.OnClickListener {
         SharedPreferences.Editor editor = getPrefs.edit();
         editor.putBoolean("autoReply", cb.isChecked());
         editor.putString("msg", et.getText().toString());
-        editor.commit();
+        editor.apply();
         Intent i = new Intent(this, Tutorial3.class);
         startActivity(i);
     }

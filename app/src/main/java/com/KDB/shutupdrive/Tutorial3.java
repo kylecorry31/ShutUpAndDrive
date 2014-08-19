@@ -13,10 +13,10 @@ import android.widget.CheckBox;
  * Created by kyle on 8/12/14.
  */
 public class Tutorial3 extends Activity implements View.OnClickListener {
-    Button next;
-    CheckBox cb;
-    boolean phone;
-    SharedPreferences getPrefs;
+    private Button next;
+    private CheckBox cb;
+    private boolean phone;
+    private SharedPreferences getPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

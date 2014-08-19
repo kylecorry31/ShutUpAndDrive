@@ -13,10 +13,10 @@ import android.widget.EditText;
  * Created by kyle on 8/12/14.
  */
 public class Tutorial4 extends Activity implements View.OnClickListener {
-    Button next;
-    EditText et;
-    SharedPreferences getPrefs;
-    String number;
+    private Button next;
+    private EditText et;
+    private SharedPreferences getPrefs;
+    private String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class Tutorial4 extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         SharedPreferences.Editor editor = getPrefs.edit();
         editor.putString("number", et.getText().toString());
-        editor.commit();
+        editor.apply();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }

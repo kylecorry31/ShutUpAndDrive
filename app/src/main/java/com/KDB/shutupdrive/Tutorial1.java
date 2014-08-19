@@ -14,7 +14,7 @@ import android.widget.Button;
  * Created by kyle on 8/12/14.
  */
 public class Tutorial1 extends Activity implements View.OnClickListener {
-    Button next;
+    private Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
