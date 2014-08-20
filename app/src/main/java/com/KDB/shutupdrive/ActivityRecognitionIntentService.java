@@ -79,11 +79,13 @@ public class ActivityRecognitionIntentService extends IntentService {
             case DetectedActivity.IN_VEHICLE:
             case DetectedActivity.ON_BICYCLE:
                 Log.d("Activity Recognition", "Activate Driving Mode");
+                //remove notifications for final version
                 drivingNotification("Driving mode on ");
                 startService(new Intent(this, CarMode.class));
                 break;
             default:
                 Log.d("Activity Recognition", "Not Driving, disable driving mode");
+                //remove notifications for final version
                 drivingNotification("Driving mode off");
                 stopService(new Intent(this, CarMode.class));
                 break;

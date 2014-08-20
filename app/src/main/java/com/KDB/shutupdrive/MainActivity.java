@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.KDB.shutupdrive.ActivityUtils.REQUEST_TYPE;
 import com.google.android.gms.ads.AdRequest;
@@ -50,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        activityRecognition();
+
         AdBuddiz.setPublisherKey("db90cfe0-28ed-43fc-8a81-88f83cffead1");
         AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
@@ -62,6 +63,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         img = (ImageView) findViewById(R.id.car);
         btn = (Button) findViewById(R.id.button);
         tv = (TextView) findViewById(R.id.tv);
+        activityRecognition();
         activityRecognitionRunning();
         if (activityRecognition) {
             mDetectionRequester = new DetectionRequester(this);
@@ -74,6 +76,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                 gpsDialog();
         } else if (!isServiceRunning() && activityRecognition) {
             onStartUpdates();
+            Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
             btn.setBackgroundColor(getResources().getColor(R.color.blue));
             btn.setText(getResources().getString(R.string.activated));
             tv.setText(getResources().getString(R.string.tap_deactivate));
@@ -93,6 +96,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     private void activityRecognition() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         activityRecognition = prefs.getBoolean("activityRecognition", false);
+        if (!activityRecognition) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("activityRecognitionRunning", false);
+            editor.apply();
+        }
     }
 
     @Override
@@ -105,6 +113,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     protected void onResume() {
         super.onResume();
         adView.resume();
+        activityRecognition();
+        activityRecognitionRunning();
     }
 
     @Override
@@ -157,6 +167,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
             img.setImageResource(R.drawable.car_red);
             if (activityRecognition) {
                 onStopUpdates();
+                Toast.makeText(this, "Service Stopped", Toast.LENGTH_SHORT).show();
+
             } else {
                 stopService(new Intent(getBaseContext(), SpeedService.class));
             }
@@ -166,6 +178,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                 btn.setText(getResources().getString(R.string.activated));
                 tv.setText(getResources().getString(R.string.tap_deactivate));
                 img.setImageResource(R.drawable.car_blue);
+                Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
                 onStartUpdates();
             } else if (gps()) {
                 btn.setBackgroundColor(getResources().getColor(R.color.blue));
@@ -175,7 +188,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                 startService(new Intent(getBaseContext(), SpeedService.class));
             } else
                 gpsDialog();
-
         }
     }
 
@@ -199,11 +211,16 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
             return;
         }
         mRequestType = ActivityUtils.REQUEST_TYPE.REMOVE;
-        mDetectionRemover.removeUpdates(mDetectionRequester.getRequestPendingIntent());
+        if (mDetectionRequester.getRequestPendingIntent() != null)
+            mDetectionRemover.removeUpdates(mDetectionRequester.getRequestPendingIntent());
         if (mDetectionRequester != null) {
             if (mDetectionRequester.getRequestPendingIntent() != null)
                 mDetectionRequester.getRequestPendingIntent().cancel();
         }
+        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = getPrefs.edit();
+        editor.putBoolean("activityRecognitionRunning", false);
+        editor.apply();
     }
 
     /**
