@@ -3,6 +3,8 @@ package com.KDB.shutupdrive;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -52,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        AdBuddiz.setPublisherKey("db90cfe0-28ed-43fc-8a81-88f83cffead1");
+        AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
         AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
         AdRequest.Builder adRequest = new AdRequest.Builder();
@@ -76,7 +79,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                 gpsDialog();
         } else if (!isServiceRunning() && activityRecognition) {
             onStartUpdates();
-            Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
+            if (!gps())
+                sendNotification();
+            Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
             btn.setBackgroundColor(getResources().getColor(R.color.blue));
             btn.setText(getResources().getString(R.string.activated));
             tv.setText(getResources().getString(R.string.tap_deactivate));
@@ -167,7 +172,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
             img.setImageResource(R.drawable.car_red);
             if (activityRecognition) {
                 onStopUpdates();
-                Toast.makeText(this, "Service Stopped", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
 
             } else {
                 stopService(new Intent(getBaseContext(), SpeedService.class));
@@ -178,7 +183,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                 btn.setText(getResources().getString(R.string.activated));
                 tv.setText(getResources().getString(R.string.tap_deactivate));
                 img.setImageResource(R.drawable.car_blue);
-                Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
+                if (!gps())
+                    sendNotification();
                 onStartUpdates();
             } else if (gps()) {
                 btn.setBackgroundColor(getResources().getColor(R.color.blue));
@@ -201,6 +208,38 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         mRequestType = ActivityUtils.REQUEST_TYPE.ADD;
 
         mDetectionRequester.requestUpdates();
+    }
+
+    private void sendNotification() {
+
+        // Create a notification builder that's compatible with platforms >= version 4
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(getApplicationContext());
+
+        // Set the title, text, and icon
+        builder.setContentTitle(getString(R.string.app_name))
+                .setContentText(getResources().getString(R.string.gps_accuracy))
+                .setSmallIcon(R.drawable.notification)
+
+                        // Get the Intent that starts the Location settings panel
+                .setContentIntent(getContentIntent());
+
+        // Get an instance of the Notification Manager
+        NotificationManager notifyManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Build the notification and post it
+        notifyManager.notify(0, builder.build());
+    }
+
+    private PendingIntent getContentIntent() {
+
+        // Set the Intent action to open Location Settings
+        Intent gpsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+
+        // Create a PendingIntent to start an Activity
+        return PendingIntent.getActivity(getApplicationContext(), 0, gpsIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**
@@ -230,7 +269,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         int resultCode =
                 GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (ConnectionResult.SUCCESS == resultCode) {
-            Log.d(ActivityUtils.APPTAG, "Google Play Services Available");
+            Log.d(ActivityUtils.APPTAG, getResources().getString(R.string.play_services_available));
             return true;
         } else {
             GooglePlayServicesUtil.getErrorDialog(resultCode, this, 0).show();
@@ -255,11 +294,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                         }
                         break;
                     default:
-                        Log.d(ActivityUtils.APPTAG, "no resolution");
+                        Log.d(ActivityUtils.APPTAG, getResources().getString(R.string.no_resolution));
                 }
             default:
                 Log.d(ActivityUtils.APPTAG,
-                        "unknown request code " + requestCode);
+                        getResources().getString(R.string.unknown_request) + " " + requestCode);
                 break;
         }
     }
@@ -287,7 +326,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     private void gpsDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("GPS is disabled. Shut Up & Drive! requires the GPS to be enabled.").setCancelable(false).setPositiveButton("Settings",
+        alertDialogBuilder.setMessage(getResources().getString(R.string.gps_needed)).setCancelable(false).setPositiveButton("Settings",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -295,7 +334,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                         startActivity(callGPSSettingIntent);
                     }
                 });
-        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

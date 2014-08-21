@@ -27,12 +27,12 @@ public class CarMode extends Service {
     private static int audioMode;
     private int mId;
     public static boolean autoreply = false;
-    static String msg = "I am driving right now, I will contact you later --Auto reply message--";
-    private final String deactivated = "Shut Up & Drive! has been deactivated!";
+    static String msg = ActivityUtils.DEFAULT_MSG;
+    private final String deactivated = ActivityUtils.DEACTIVATION;
     private boolean auto;
     private boolean phone;
     private final int icon = R.drawable.notification;
-    private String textNotification = "Shut Up & Drive is monitoring your speed";
+    private String textNotification = ActivityUtils.SPEED_MONITOR;
     private NotificationManager nm;
     private SharedPreferences getPrefs;
     private String number;
@@ -55,7 +55,7 @@ public class CarMode extends Service {
         if (auto) {
             autoreply = true;
         }
-        textNotification = "Shut Up & Drive is running";
+        textNotification = ActivityUtils.RUNNING;
         notification();
         if (!phone) {
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -89,7 +89,7 @@ public class CarMode extends Service {
             smsManager.sendTextMessage(number, null, deactivated,
                     null, null);
         }
-        Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
@@ -97,9 +97,9 @@ public class CarMode extends Service {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("NewApi")
     void notification() {
-        mId = 753815731;
+        mId = ActivityUtils.NOTIFICATION_ID;
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(icon).setContentTitle("Shut Up & Drive!")
+                this).setSmallIcon(icon).setContentTitle(getResources().getString(R.string.app_name))
                 .setContentText(textNotification).setOngoing(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             Intent resultIntent = new Intent(this, MainActivity.class);
@@ -128,9 +128,9 @@ public class CarMode extends Service {
         // autoreply message
         msg = getPrefs
                 .getString("msg",
-                        "I am driving right now, I will contact you later --Auto reply message--");
+                        ActivityUtils.DEFAULT_MSG);
         if (msg.contentEquals("")) {
-            msg = "I am driving right now, I will contact you later --Auto reply message--";
+            msg = ActivityUtils.DEFAULT_MSG;
         }
         SpeedService.msg = msg;
     }

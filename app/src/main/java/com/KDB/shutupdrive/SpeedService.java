@@ -2,6 +2,7 @@ package com.KDB.shutupdrive;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -28,30 +29,25 @@ public class SpeedService extends Service implements LocationListener {
     private int mId;
     private long minTimeGPS;
     public static boolean autoreply = false;
-    static String msg = "I am driving right now, I will contact you later --Auto reply message--";
-    private final String deactivated = "Shut Up & Drive! has been deactivated!";
+    static String msg = ActivityUtils.DEFAULT_MSG;
+    private final String deactivated = ActivityUtils.DEACTIVATION;
     private boolean auto;
     private boolean phone;
     private final int icon = R.drawable.notification;
-    private String textNotification = "Shut Up & Drive is monitoring your speed";
+    private String textNotification = ActivityUtils.SPEED_MONITOR;
     private NotificationManager nm;
     private SharedPreferences getPrefs;
     private LocationManager lm;
     private String number;
-    private static final double KM_TO_MILES = 2.23694;
-    private static final int MIN_SPEED = 10;
-    private static final int MAX_SPEED = 100;
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // TODO Auto-generated method stub
-        Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
 
         notification();
 
@@ -97,9 +93,9 @@ public class SpeedService extends Service implements LocationListener {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("NewApi")
     void notification() {
-        mId = 753815731;
+        mId = ActivityUtils.NOTIFICATION_ID;
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(icon).setContentTitle("Shut Up & Drive!")
+                this).setSmallIcon(icon).setContentTitle(getResources().getString(R.string.app_name))
                 .setContentText(textNotification).setOngoing(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             Intent resultIntent = new Intent(this, MainActivity.class);
@@ -128,7 +124,7 @@ public class SpeedService extends Service implements LocationListener {
                     null, null);
         }
         soundMode();
-        Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
@@ -142,9 +138,9 @@ public class SpeedService extends Service implements LocationListener {
         // autoreply message
         msg = getPrefs
                 .getString("msg",
-                        "I am driving right now, I will contact you later --Auto reply message--");
+                        ActivityUtils.DEFAULT_MSG);
         if (msg.contentEquals("")) {
-            msg = "I am driving right now, I will contact you later --Auto reply message--";
+            msg = ActivityUtils.DEFAULT_MSG;
         }
         // sets the time in between gps calls
         String gpsTime = getPrefs.getString("gps", "5");
@@ -211,21 +207,21 @@ public class SpeedService extends Service implements LocationListener {
         } else {
             speed = location.getSpeed();
             System.out.println(speed);
-            speed *= KM_TO_MILES;
+            speed *= ActivityUtils.KM_TO_MILES;
             speed = Math.round(speed);
-            if (speed > MIN_SPEED && speed < MAX_SPEED) {
+            if (speed > ActivityUtils.MIN_SPEED && speed < ActivityUtils.MAX_SPEED) {
                 silent();
                 if (auto) {
                     autoreply = true;
                 }
-                textNotification = "Shut Up & Drive is running";
+                textNotification = ActivityUtils.RUNNING;
                 nm.cancel(mId);
                 notification();
             } else {
                 soundMode();
                 // this sets the autoreply to false
                 autoreply = false;
-                textNotification = "Shut Up & Drive is monitoring your speed";
+                textNotification = ActivityUtils.SPEED_MONITOR;
                 nm.cancel(mId);
                 notification();
             }

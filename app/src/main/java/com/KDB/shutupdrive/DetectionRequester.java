@@ -151,7 +151,7 @@ public class DetectionRequester
     @Override
     public void onConnected(Bundle arg0) {
         // If debugging, log the connection
-        Log.d(ActivityUtils.APPTAG, "connected to google play services");
+        Log.d(ActivityUtils.APPTAG, "Connected to Google Play services");
 
         // Continue the process of requesting activity recognition updates
         continueRequestActivityUpdates();

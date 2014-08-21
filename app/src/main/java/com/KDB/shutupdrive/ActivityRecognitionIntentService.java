@@ -33,10 +33,11 @@ import com.google.android.gms.location.DetectedActivity;
  * in the background, even if the main Activity is not visible.
  */
 public class ActivityRecognitionIntentService extends IntentService {
+    private static final String CLASS_NAME = "ActivityRecognitionIntentService";
 
     public ActivityRecognitionIntentService() {
         // Set the label for the service's background thread
-        super("ActivityRecognitionIntentService");
+        super(CLASS_NAME);
     }
 
     /**
@@ -45,7 +46,7 @@ public class ActivityRecognitionIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        Log.d("Activity Recognition", "Activity Recognition called");
+        Log.d(CLASS_NAME, getResources().getString(R.string.activity_call));
 
         // If the intent contains an update
         if (ActivityRecognitionResult.hasResult(intent)) {
@@ -78,15 +79,15 @@ public class ActivityRecognitionIntentService extends IntentService {
         switch (activityType) {
             case DetectedActivity.IN_VEHICLE:
             case DetectedActivity.ON_BICYCLE:
-                Log.d("Activity Recognition", "Activate Driving Mode");
+                Log.d(CLASS_NAME, getResources().getString(R.string.activate_driving));
                 //remove notifications for final version
-                drivingNotification("Driving mode on ");
+                drivingNotification(getResources().getString(R.string.driving_on));
                 startService(new Intent(this, CarMode.class));
                 break;
             default:
-                Log.d("Activity Recognition", "Not Driving, disable driving mode");
+                Log.d(CLASS_NAME, getResources().getString(R.string.not_driving));
                 //remove notifications for final version
-                drivingNotification("Driving mode off");
+                drivingNotification(getResources().getString(R.string.driving_off));
                 stopService(new Intent(this, CarMode.class));
                 break;
         }

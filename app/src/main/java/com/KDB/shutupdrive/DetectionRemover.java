@@ -69,7 +69,7 @@ public class DetectionRemover
     @Override
     public void onConnected(Bundle connectionData) {
         // If debugging, log the connection
-        Log.d(ActivityUtils.APPTAG, "connected to google play services");
+        Log.d(ActivityUtils.APPTAG, "Connected to Google Play services");
         // Send a request to Location Services to remove activity recognition updates
         continueRemoveUpdates();
     }

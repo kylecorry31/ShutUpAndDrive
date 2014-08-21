@@ -105,7 +105,7 @@
     <eat-comment />
 
     <color name="blue">#0093fa</color>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/common_colors.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/common_colors.xml -->
     <eat-comment />
 
     <color name="common_action_bar_splitter">#d2d2d2</color>
@@ -123,7 +123,7 @@
 
     <color name="holo_blue">#31B6E7</color>
     <color name="red">#fa0001</color>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/wallet_colors.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/wallet_colors.xml -->
     <eat-comment />
 
     <color name="wallet_bright_foreground_disabled_holo_light">#ffb2b2b2</color>
@@ -271,7 +271,7 @@
         -->
         <attr name="expandActivityOverflowButtonDrawable" format="reference" />
     </declare-styleable>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/admob_ads_attrs.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/admob_ads_attrs.xml -->
     <eat-comment />
 
     <declare-styleable name="AdsAttrs">
@@ -315,7 +315,7 @@
         <!-- Size of padding on either end of a divider. -->
         <attr name="dividerPadding" format="dimension" />
     </declare-styleable>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/maps_attrs.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/maps_attrs.xml -->
     <eat-comment />
 
     <declare-styleable name="MapAttrs">
@@ -610,7 +610,7 @@
         -->
         <attr name="android:focusable" />
     </declare-styleable>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/wallet_attrs.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/wallet_attrs.xml -->
     <eat-comment />
 
     <declare-styleable name="WalletFragmentOptions">
@@ -724,10 +724,10 @@
     <item name="progress_horizontal" type="id"/>
 
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/version.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/version.xml -->
     <eat-comment />
 
-    <integer name="google_play_services_version">5077000</integer>
+    <integer name="google_play_services_version">5089000</integer>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
@@ -757,11 +757,14 @@
     <eat-comment />
 
     <string name="action_settings">Settings</string>
+    <string name="activate_driving">Activate driving mode</string>
     <string name="activated">Activated</string>
+    <string name="activity_call">Activity Recognition called</string>
     <string name="app_name">Shut Up &amp; Drive!</string>
     <string name="autoreply">Auto-Reply</string>
     <string name="autoreply_function">While you are driving, Shut Up &amp; Drive! will automatically reply to all of the texts that you receive.</string>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/common_strings.xml -->
+    <string name="cancel">Cancel</string>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/common_strings.xml -->
     <eat-comment />
 
     <string name="common_google_play_services_enable_button" msgid="2523291102206661146">Enable Google Play services</string>
@@ -793,23 +796,34 @@
     <eat-comment />
 
     <string name="deactivation_notification">Deactivation Notification</string>
+    <string name="driving_off">Driving mode off</string>
+    <string name="driving_on">Driving mode on</string>
     <string name="function">Shut Up &amp; Drive! uses GPS to determine when you are driving. If you are driving, Shut Up &amp; Drive! will activate its driving mode features.</string>
     <string name="gps">GPS</string>
+    <string name="gps_accuracy">Turn on GPS for better accuracy</string>
     <string name="gps_frequency">GPS Frequency</string>
+    <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
     <string name="message">Custom message</string>
     <string name="next">Next</string>
+    <string name="no_resolution">No resolution</string>
     <string name="not_activated">Not Activated</string>
+    <string name="not_driving">Not driving, disable driving mode</string>
     <string name="notify_function">If Shut Up &amp; Drive! is disabled, a text will be sent to a specified number.</string>
     <string name="phone">Phone</string>
     <string name="phone_function">While you are driving, Shut Up &amp; Drive! can block calls from coming through.</string>
+    <string name="play_services_available">Google Play services available</string>
+    <string name="pref_update">Preferences updated, you may need to restart the app for your updates to take effect</string>
     <string name="remember">Remember, don\'t text and drive.</string>
+    <string name="service_start">Service Started</string>
+    <string name="service_stop">Service Stopped</string>
     <string name="speed">Current speed: 0.0 mph, texting enabled.</string>
     <string name="start">Start</string>
     <string name="tap_activate">Tap to activate</string>
     <string name="tap_deactivate">Tap to deactivate</string>
     <string name="text_on">text_on</string>
     <string name="tutorial">Tutorial</string>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/wallet_strings.xml -->
+    <string name="unknown_request">Unknown request code</string>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/wallet_strings.xml -->
     <eat-comment />
 
     <string name="wallet_buy_button_place_holder" translation_description="Text on a button that allows a user to make a payment with Google Wallet [CHAR LIMIT=30]">Buy with Google</string>
@@ -1250,7 +1264,7 @@
     <style name="Theme.Base.AppCompat.Light.DialogWhenLarge" parent="Theme.Base.AppCompat.Light" />
 
     <style name="Theme.Base.Light" parent="android:Theme.Light" />
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/admob_iap_style.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/admob_iap_style.xml -->
     <eat-comment />
 
     <style name="Theme.IAPTheme" parent="android:Theme">
@@ -1261,7 +1275,7 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.77/res/values/wallet_styles.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/res/values/wallet_styles.xml -->
     <eat-comment />
 
     <style name="WalletFragmentDefaultButtonTextAppearance">
