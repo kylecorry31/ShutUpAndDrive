@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -48,7 +49,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     // The activity recognition update removal object
     private DetectionRemover mDetectionRemover;
     boolean activityRecognition;
-
+    private final String deactivated = ActivityUtils.DEACTIVATION;
+    String number = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,6 +174,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
             img.setImageResource(R.drawable.car_red);
             if (activityRecognition) {
                 onStopUpdates();
+                stopService(new Intent(this, CarMode.class));
                 Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
 
             } else {
@@ -246,6 +249,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
      * activity recognition stop
      */
     public void onStopUpdates() {
+        if (!number.isEmpty()) {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, deactivated,
+                    null, null);
+        }
         if (!servicesConnected()) {
             return;
         }
@@ -317,6 +325,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     private void activityRecognitionRunning() {
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         ActivityUtils.activityRecognitionRunning = getPrefs.getBoolean("activityRecognitionRunning", false);
+        number = getPrefs.getString("number", "");
     }
 
     private boolean gps() {

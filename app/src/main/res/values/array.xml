@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <string-array 
-        name="gpsList">
+
+    <string-array name="gpsList">
         <item>5 Seconds</item>
         <item>15 Seconds</item>
         <item>30 Seconds</item>
@@ -11,9 +10,9 @@
         <item>5 Minutes</item>
         <item>10 Minutes</item>
         <item>15 Minutes</item>
+        <item>20 Minutes</item>
     </string-array>
-    <string-array
-        name="gpsValues">
+    <string-array name="gpsValues">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -22,6 +21,7 @@
         <item>6</item>
         <item>7</item>
         <item>8</item>
+        <item>9</item>
     </string-array>
-    
+
 </resources>

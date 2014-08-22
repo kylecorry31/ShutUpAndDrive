@@ -10,18 +10,24 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.TaskStackBuilder;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.PhoneStateListener;
-import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
+import android.util.Log;
+
+import java.util.Locale;
 
 public class CarMode extends Service {
     private static int audioMode;
@@ -36,6 +42,7 @@ public class CarMode extends Service {
     private NotificationManager nm;
     private SharedPreferences getPrefs;
     private String number;
+    TextToSpeech tts;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -54,6 +61,8 @@ public class CarMode extends Service {
         silent();
         if (auto) {
             autoreply = true;
+        } else {
+            autoreply = false;
         }
         textNotification = ActivityUtils.RUNNING;
         notification();
@@ -61,16 +70,40 @@ public class CarMode extends Service {
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             PhoneStateListener psl = new PhoneStateListener() {
                 public void onCallStateChanged(int state, String incomingNumber) {
+                    final String incoming = incomingNumber;
                     if (state == TelephonyManager.CALL_STATE_RINGING) {
-                        System.out.println("ringing");
+                        Log.d("Phone State", "Ringing");
                         if (autoreply) {
-                            normal();
+                            //normal();
+                            tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
+                                @Override
+                                public void onInit(int status) {
+                                    if (status != TextToSpeech.ERROR) {
+                                        tts.setLanguage(Locale.US);
+                                        String readNumber = "New call from ";
+                                        String name = quickCallerId(incoming);
+                                        if (name.isEmpty()) {
+                                            for (int i = 0; i < incoming.length(); i++) {
+                                                readNumber = readNumber + incoming.charAt(i) + " ";
+                                            }
+                                        } else {
+                                            readNumber = readNumber + name;
+                                        }
+                                        tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null);
+                                    }
+                                }
+                            });
                         }
                     }
                     if (state == TelephonyManager.CALL_STATE_IDLE) {
                         System.out.println("idle");
                         if (autoreply) {
-                            silent();
+                            //silent();
+                            Log.d("Phone State", "Idle");
+                            if (tts != null) {
+                                tts.stop();
+                                tts.shutdown();
+                            }
                         }
                     }
                 }
@@ -80,16 +113,32 @@ public class CarMode extends Service {
         return START_STICKY;
     }
 
+    private String quickCallerId(String phoneNumber) {
+        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+        ContentResolver resolver = getContentResolver();
+        Cursor cur = resolver.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+        if (cur != null && cur.moveToFirst()) {
+            String value = cur.getString(cur.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+            if (value != null) {
+                cur.close();
+                return value;
+            }
+        }
+        cur.close();
+        return "";
+    }
+
     @Override
     public void onDestroy() {
         nm.cancel(mId);
+        autoreply = false;
         soundMode();
-        if (!number.isEmpty()) {
+       /* if (!number.isEmpty()) {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(number, null, deactivated,
                     null, null);
-        }
-        Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
+        }*/
+        //Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
@@ -132,7 +181,6 @@ public class CarMode extends Service {
         if (msg.contentEquals("")) {
             msg = ActivityUtils.DEFAULT_MSG;
         }
-        SpeedService.msg = msg;
     }
 
     // SilentToNormal and NormalToSilent device

@@ -20,7 +20,7 @@ public class text extends BroadcastReceiver {
                 Bundle bundle = intent.getExtras();
                 SmsMessage[] msgs;
                 String msg_from;
-                String msg = SpeedService.msg;
+                String msg = CarMode.msg;
                 if (bundle != null) {
                     // ---retrieve the SMS message received---
                     try {

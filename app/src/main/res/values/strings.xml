@@ -23,7 +23,7 @@
     <string name="autoreply">Auto-Reply</string>
     <string name="autoreply_function">While you are driving, Shut Up &amp; Drive! will automatically reply to all of the texts that you receive.</string>
     <string name="message">Custom message</string>
-    <string name="phone_function">While you are driving, Shut Up &amp; Drive! can block calls from coming through.</string>
+    <string name="phone_function">While you are driving, Shut Up &amp; Drive! can block calls from coming through. If you choose not to block calls, incoming callers will be will be read out.</string>
     <string name="phone">Phone</string>
     <string name="deactivation_notification">Deactivation Notification</string>
     <string name="notify_function">If Shut Up &amp; Drive! is disabled, a text will be sent to a specified number.</string>

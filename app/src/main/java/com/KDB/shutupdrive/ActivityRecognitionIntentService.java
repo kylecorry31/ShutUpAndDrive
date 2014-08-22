@@ -81,13 +81,13 @@ public class ActivityRecognitionIntentService extends IntentService {
             case DetectedActivity.ON_BICYCLE:
                 Log.d(CLASS_NAME, getResources().getString(R.string.activate_driving));
                 //remove notifications for final version
-                drivingNotification(getResources().getString(R.string.driving_on));
+               // drivingNotification(getResources().getString(R.string.driving_on));
                 startService(new Intent(this, CarMode.class));
                 break;
             default:
                 Log.d(CLASS_NAME, getResources().getString(R.string.not_driving));
                 //remove notifications for final version
-                drivingNotification(getResources().getString(R.string.driving_off));
+                //drivingNotification(getResources().getString(R.string.driving_off));
                 stopService(new Intent(this, CarMode.class));
                 break;
         }
