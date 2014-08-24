@@ -1,22 +1,20 @@
 package com.KDB.shutupdrive;
 
-import android.app.Activity;
-import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,11 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.KDB.shutupdrive.ActivityUtils.REQUEST_TYPE;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener {
@@ -42,21 +37,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     private Button btn;
     private TextView tv;
     private ImageView img;
-    // Store the current request type (ADD or REMOVE)
-    private REQUEST_TYPE mRequestType;
-    // The activity recognition update request object
-    private DetectionRequester mDetectionRequester;
-    // The activity recognition update removal object
-    private DetectionRemover mDetectionRemover;
-    boolean activityRecognition;
     private final String deactivated = ActivityUtils.DEACTIVATION;
     String number = "";
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
+    SharedPreferences getPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
         AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
@@ -68,29 +59,13 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         img = (ImageView) findViewById(R.id.car);
         btn = (Button) findViewById(R.id.button);
         tv = (TextView) findViewById(R.id.tv);
-        activityRecognition();
-        activityRecognitionRunning();
-        if (activityRecognition) {
-            mDetectionRequester = new DetectionRequester(this);
-            mDetectionRemover = new DetectionRemover(this);
-        }
-        if (!isServiceRunning() && !activityRecognition) {
+        if (!alarmRunning()) {
             if (gps())
-                startService(new Intent(getBaseContext(), SpeedService.class));
+                startAlarm();
             else
                 gpsDialog();
-        } else if (!isServiceRunning() && activityRecognition) {
-            onStartUpdates();
-            if (!gps())
-                sendNotification();
-            Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
-            btn.setBackgroundColor(getResources().getColor(R.color.blue));
-            btn.setText(getResources().getString(R.string.activated));
-            tv.setText(getResources().getString(R.string.tap_deactivate));
-            img.setImageResource(R.drawable.car_blue);
         }
-
-        if (isServiceRunning()) {
+        if (alarmRunning()) {
             btn.setBackgroundColor(getResources().getColor(R.color.blue));
             btn.setText(getResources().getString(R.string.activated));
             tv.setText(getResources().getString(R.string.tap_deactivate));
@@ -100,15 +75,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     }
 
-    private void activityRecognition() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        activityRecognition = prefs.getBoolean("activityRecognition", false);
-        if (!activityRecognition) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("activityRecognitionRunning", false);
-            editor.apply();
-        }
-    }
 
     @Override
     protected void onDestroy() {
@@ -120,8 +86,23 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     protected void onResume() {
         super.onResume();
         adView.resume();
-        activityRecognition();
-        activityRecognitionRunning();
+        bootStart();
+
+    }
+
+    private void bootStart() {
+        boolean boot = getPrefs.getBoolean("bootStart", false);
+        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
+        PackageManager packageManager = getPackageManager();
+        if (boot) {
+            packageManager.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        } else {
+            packageManager.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
     }
 
     @Override
@@ -167,172 +148,76 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (isServiceRunning()) {
+        //turn off
+        if (alarmRunning()) {
             btn.setBackgroundColor(getResources().getColor(R.color.red));
             btn.setText(getResources().getString(R.string.not_activated));
             tv.setText(getResources().getString(R.string.tap_activate));
             img.setImageResource(R.drawable.car_red);
-            if (activityRecognition) {
-                onStopUpdates();
-                stopService(new Intent(this, CarMode.class));
-                Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
-
-            } else {
-                stopService(new Intent(getBaseContext(), SpeedService.class));
-            }
+            cancelAlarm();
         } else {
-            if (activityRecognition) {
+            //turn on
+            if (gps()) {
                 btn.setBackgroundColor(getResources().getColor(R.color.blue));
                 btn.setText(getResources().getString(R.string.activated));
                 tv.setText(getResources().getString(R.string.tap_deactivate));
                 img.setImageResource(R.drawable.car_blue);
-                Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
-                if (!gps())
-                    sendNotification();
-                onStartUpdates();
-            } else if (gps()) {
-                btn.setBackgroundColor(getResources().getColor(R.color.blue));
-                btn.setText(getResources().getString(R.string.activated));
-                tv.setText(getResources().getString(R.string.tap_deactivate));
-                img.setImageResource(R.drawable.car_blue);
-                startService(new Intent(getBaseContext(), SpeedService.class));
+                startAlarm();
             } else
                 gpsDialog();
         }
     }
 
-    /**
-     * activity recognition start
-     */
-    public void onStartUpdates() {
-        if (!servicesConnected()) {
-            return;
+    private void startAlarm() {
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent gpsIntent = new Intent(this, GPSAlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, gpsIntent, 0);
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), frequencyMins() * ActivityUtils.MILLIS_IN_MINUTE, pendingIntent);
+        SharedPreferences.Editor editor = getPrefs.edit();
+        editor.putBoolean("alarmRunning", true);
+        editor.apply();
+        //let the user know the service was started
+        Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
+    }
+
+    private void cancelAlarm() {
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+            alarmManager = null;
         }
-        mRequestType = ActivityUtils.REQUEST_TYPE.ADD;
+        SharedPreferences.Editor editor = getPrefs.edit();
+        editor.putBoolean("alarmRunning", false);
+        editor.apply();
 
-        mDetectionRequester.requestUpdates();
-    }
-
-    private void sendNotification() {
-
-        // Create a notification builder that's compatible with platforms >= version 4
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(getApplicationContext());
-
-        // Set the title, text, and icon
-        builder.setContentTitle(getString(R.string.app_name))
-                .setContentText(getResources().getString(R.string.gps_accuracy))
-                .setSmallIcon(R.drawable.notification)
-
-                        // Get the Intent that starts the Location settings panel
-                .setContentIntent(getContentIntent());
-
-        // Get an instance of the Notification Manager
-        NotificationManager notifyManager = (NotificationManager)
-                getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // Build the notification and post it
-        notifyManager.notify(0, builder.build());
-    }
-
-    private PendingIntent getContentIntent() {
-
-        // Set the Intent action to open Location Settings
-        Intent gpsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-
-        // Create a PendingIntent to start an Activity
-        return PendingIntent.getActivity(getApplicationContext(), 0, gpsIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    /**
-     * activity recognition stop
-     */
-    public void onStopUpdates() {
+        stopService(new Intent(this, CarMode.class));
         if (!number.isEmpty()) {
+            //get the sms manager to send text
             SmsManager smsManager = SmsManager.getDefault();
+            //send message
             smsManager.sendTextMessage(number, null, deactivated,
                     null, null);
         }
-        if (!servicesConnected()) {
-            return;
-        }
-        mRequestType = ActivityUtils.REQUEST_TYPE.REMOVE;
-        if (mDetectionRequester.getRequestPendingIntent() != null)
-            mDetectionRemover.removeUpdates(mDetectionRequester.getRequestPendingIntent());
-        if (mDetectionRequester != null) {
-            if (mDetectionRequester.getRequestPendingIntent() != null)
-                mDetectionRequester.getRequestPendingIntent().cancel();
-        }
-        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = getPrefs.edit();
-        editor.putBoolean("activityRecognitionRunning", false);
-        editor.apply();
+        //let the user know the service was stopped
+        Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * activity recognition google play services
-     */
-    private boolean servicesConnected() {
-        int resultCode =
-                GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (ConnectionResult.SUCCESS == resultCode) {
-            Log.d(ActivityUtils.APPTAG, getResources().getString(R.string.play_services_available));
-            return true;
-        } else {
-            GooglePlayServicesUtil.getErrorDialog(resultCode, this, 0).show();
-            return false;
-        }
-    }
-
-    /*
-    * receive activity recognition stuff
-    */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        switch (requestCode) {
-            case ActivityUtils.CONNECTION_FAILURE_RESOLUTION_REQUEST:
-                switch (resultCode) {
-                    case Activity.RESULT_OK:
-                        if (ActivityUtils.REQUEST_TYPE.ADD == mRequestType) {
-                            mDetectionRequester.requestUpdates();
-                        } else if (ActivityUtils.REQUEST_TYPE.REMOVE == mRequestType) {
-                            mDetectionRemover.removeUpdates(
-                                    mDetectionRequester.getRequestPendingIntent());
-                        }
-                        break;
-                    default:
-                        Log.d(ActivityUtils.APPTAG, getResources().getString(R.string.no_resolution));
-                }
-            default:
-                Log.d(ActivityUtils.APPTAG,
-                        getResources().getString(R.string.unknown_request) + " " + requestCode);
-                break;
-        }
-    }
-
-    private boolean isServiceRunning() {
-        activityRecognitionRunning();
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (SpeedService.class.getName().equals(service.service.getClassName()) || ActivityRecognitionIntentService.class.getName().equals(service.service.getClassName()) || ActivityUtils.activityRecognitionRunning) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void activityRecognitionRunning() {
-        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        ActivityUtils.activityRecognitionRunning = getPrefs.getBoolean("activityRecognitionRunning", false);
+    private boolean alarmRunning() {
         number = getPrefs.getString("number", "");
+        return getPrefs.getBoolean("alarmRunning", false);
     }
 
+    private int frequencyMins() {
+        String gpsTime = getPrefs.getString("gps", "10");
+        return Integer.valueOf(gpsTime);
+    }
+
+    //determines if gps is on
     private boolean gps() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
+    //this is shown if the user does not have gps on
     private void gpsDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(getResources().getString(R.string.gps_needed)).setCancelable(false).setPositiveButton("Settings",

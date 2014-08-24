@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:entries="@array/gpsList"
+        android:entryValues="@array/gpsValues"
+        android:key="gps"
+        android:summary="Choose how often GPS will check speed"
+        android:title="@string/gps_frequency"></ListPreference>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="phone"
+        android:summary="Block phone calls while driving."
+        android:title="Block Calls" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="autoReply"
+        android:summary="Enable or disable the auto reply feature."
+        android:title="Auto Reply SMS" />
+    <EditTextPreference
+        android:key="msg"
+        android:summary="This message will be automatically sent while driving."
+        android:title="Auto Reply Message" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="bootStart"
+        android:summary="Start service automatically after rebooting"
+        android:title="Run On Startup" />
+    <EditTextPreference
+        android:key="number"
+        android:summary="A message will be automatically sent to this number if the app is deactivated."
+        android:title="Deactivation Number" />
+
+</PreferenceScreen><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/xml/prefs.xml -->

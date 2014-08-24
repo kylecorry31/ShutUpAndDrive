@@ -1,5 +1,8 @@
 package com.KDB.shutupdrive;
 
+import android.app.ActivityManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -10,16 +13,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.telephony.SmsManager;
-import android.widget.Toast;
+import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 public class SpeedService extends Service implements LocationListener {
-    private long minTimeGPS;
-    public static boolean autoreply = false;
-    private final String deactivated = ActivityUtils.DEACTIVATION;
-    private SharedPreferences getPrefs;
     private LocationManager lm;
-    private String number;
+    //the speed of the phone
+    private float speed;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -28,84 +29,117 @@ public class SpeedService extends Service implements LocationListener {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
-        getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getBaseContext());
-        userSettings();
-        locationCall(minTimeGPS);
+        //request location updates
+        locationCall();
+        //keep service running
         return START_STICKY;
     }
 
-    void locationCall(long minTimeValue) {
-
-        lm = (LocationManager) this
-                .getSystemService(Context.LOCATION_SERVICE);
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                minTimeValue, 0, this);
-    }
-
-
-    @Override
-    public void onDestroy() {
-        stopService(new Intent(this, CarMode.class));
-        lm.removeUpdates(this);
-        if (!number.isEmpty()) {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(number, null, deactivated,
-                    null, null);
+    void locationCall() {
+        if (gps()) {
+            //get the location service
+            lm = (LocationManager) this
+                    .getSystemService(Context.LOCATION_SERVICE);
+            //get gps and set to receive location updates at a user specified time
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    0, 0, this);
+        } else {
+            gpsNotification();
         }
-        Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
-        super.onDestroy();
     }
 
-    void userSettings() {
-        //number
-        number = getPrefs.getString("number", "");
-
-        // sets the time in between gps calls
-        String gpsTime = getPrefs.getString("gps", "7");
-        if (gpsTime.contentEquals("1")) {
-            minTimeGPS = 5 * 1000;
-        } else if (gpsTime.contentEquals("2")) {
-            minTimeGPS = 15 * 1000;
-        } else if (gpsTime.contentEquals("3")) {
-            minTimeGPS = 30 * 1000;
-        } else if (gpsTime.contentEquals("4")) {
-            minTimeGPS = 60 * 1000;
-        } else if (gpsTime.contentEquals("5")) {
-            minTimeGPS = 2 * 60 * 1000;
-        } else if (gpsTime.contentEquals("6")) {
-            minTimeGPS = 5 * 60 * 1000;
-        } else if (gpsTime.contentEquals("7")) {
-            minTimeGPS = 10 * 60 * 1000;
-        } else if (gpsTime.contentEquals("8")) {
-            minTimeGPS = 15 * 60 * 1000;
-        } else if (gpsTime.contentEquals("9")) {
-            minTimeGPS = 20 * 60 * 1000;
-        }
-        System.out.println("Min Time is set to " + minTimeGPS);
+    private void gpsNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
+        builder.setContentTitle(getResources().getString(R.string.app_name))
+                .setContentText(getResources().getString(R.string.gps_needed))
+                .setSmallIcon(R.drawable.notification)
+                .setContentIntent(getContentIntent());
+        NotificationManager notificationManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(7493840, builder.build());
     }
 
-    private float speed;
+    private PendingIntent getContentIntent() {
+        Intent gpsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        return PendingIntent.getActivity(getApplicationContext(), 0, gpsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
 
+    private void developerNotification(float speed) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
+        builder.setContentTitle(getResources().getString(R.string.app_name))
+                .setContentText(Float.toString(speed))
+                .setSmallIcon(R.drawable.notification)
+                .setContentIntent(developerPi());
+        NotificationManager notificationManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(9230830, builder.build());
+    }
+
+    private PendingIntent developerPi() {
+        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        return PendingIntent.getActivity(getApplicationContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+
+    //called on location received from gps
     @Override
     public void onLocationChanged(Location location) {
-        // determines the speed then sets volume and autoreply
+        lm.removeUpdates(this);
+        // determines the speed
         if (location == null) {
+            //if gps does not send location
             speed = 0;
-            autoreply = false;
         } else {
+            //if location is received
+            //get the speed of the phone
             speed = location.getSpeed();
-            System.out.println(speed);
+            Log.d("Speed Service", "The speed is " + speed);
+            //convert speed to miles per hour
             speed *= ActivityUtils.KM_TO_MILES;
+            //round the speed
             speed = Math.round(speed);
-            if (speed > ActivityUtils.MIN_SPEED && speed < ActivityUtils.MAX_SPEED) {
-                startService(new Intent(this, CarMode.class));
-            } else {
-                stopService(new Intent(this, CarMode.class));
-                //startService(new Intent(this, CarMode.class));
+            //determine if driving or not
+            if (alarmRunning()) {
+                if (speed > ActivityUtils.MIN_SPEED && speed < ActivityUtils.MAX_SPEED) {
+
+                    //enable driving mode
+                    if (!isServiceRunning())
+                        startService(new Intent(this, CarMode.class));
+                } else {
+                    //disable driving mode
+                    stopService(new Intent(this, CarMode.class));
+                    //debug mode
+                    /*if (!isServiceRunning())
+                        startService(new Intent(this, CarMode.class));*/
+                }
+            }
+            //Toast.makeText(this, Float.toString(speed), Toast.LENGTH_SHORT).show();
+
+        }
+        //remove this for final version
+        developerNotification(speed);
+
+        stopSelf();
+    }
+
+    private boolean isServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (CarMode.class.getName().equals(service.service.getClassName())) {
+                return true;
             }
         }
+        return false;
+    }
+
+    private boolean alarmRunning() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        return prefs.getBoolean("alarmRunning", false);
+    }
+
+    private boolean gps() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     @Override

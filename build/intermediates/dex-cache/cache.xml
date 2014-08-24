@@ -2,25 +2,25 @@
 <pre-dex-items>
 
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-ae33e41b1cd8f6d7102bf5cdfef1f4beba657d07.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/support-v4-19.1.0-4b370740cf8b0d3d972160879dbe2b45b0215459.jar"
-        jar="/home/kyle/Development/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-286cd1ff4c0daa8a0d0d1a8cea3f39a8971709e3.jar"
+        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-286cd1ff4c0daa8a0d0d1a8cea3f39a8971709e3.jar"
         jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar"
+        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-ae33e41b1cd8f6d7102bf5cdfef1f4beba657d07.jar"
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
+    <item
+        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-4b370740cf8b0d3d972160879dbe2b45b0215459.jar"
+        jar="/home/kyle/Development/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar"
         jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
         jumboMode="false"
         revision="20.0.0"

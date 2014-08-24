@@ -1,66 +1,58 @@
 package com.KDB.shutupdrive;
 
-import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.util.Log;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * Created by kyle on 7/13/14.
  */
 public class BootCompletedReceiver extends BroadcastReceiver {
     private boolean start_service_bootup = false;
-    private boolean activityRecognition;
-    private Context mContext;
-    // Store the current request type (ADD or REMOVE)
-    private ActivityUtils.REQUEST_TYPE mRequestType;
-    // The activity recognition update request object
-    private DetectionRequester mDetectionRequester;
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
+    SharedPreferences getPrefs;
+    Context c;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        mContext = context;
         if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
-            SharedPreferences getPrefs;
-            getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+            c = context;
+            getPrefs = PreferenceManager.getDefaultSharedPreferences(c);
             start_service_bootup = getPrefs.getBoolean("bootStart", false);
-            activityRecognition = getPrefs.getBoolean("activityRecognition", false);
-            if (activityRecognition) {
-                mDetectionRequester = new DetectionRequester(context);
-            }
-            if (start_service_bootup && !activityRecognition) {
-                Intent serviceIntent = new Intent(context, SpeedService.class);
-                context.startService(serviceIntent);
-            } else if (start_service_bootup && activityRecognition) {
-                onStartUpdates();
+            setUp();
+            if (start_service_bootup) {
+                if (alarmRunning()) {
+                    alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                            SystemClock.elapsedRealtime(),
+                            frequencyMins() * ActivityUtils.MILLIS_IN_MINUTE,
+                            pendingIntent);
+                } else {
+                    alarmManager.cancel(pendingIntent);
+                }
             }
         }
     }
 
-    public void onStartUpdates() {
-        if (!servicesConnected()) {
-            return;
-        }
-        mRequestType = ActivityUtils.REQUEST_TYPE.ADD;
-
-        mDetectionRequester.requestUpdates();
+    private void setUp() {
+        alarmManager = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+        Intent gpsIntent = new Intent(c, GPSAlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(c, 0, gpsIntent, 0);
     }
 
-    private boolean servicesConnected() {
-        int resultCode =
-                GooglePlayServicesUtil.isGooglePlayServicesAvailable(mContext);
-        if (ConnectionResult.SUCCESS == resultCode) {
-            Log.d(ActivityUtils.APPTAG, "Google Play Services Available");
-            return true;
-        } else {
-            GooglePlayServicesUtil.getErrorDialog(resultCode, new Activity(), 0).show();
-            return false;
-        }
+    private boolean alarmRunning() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        return prefs.getBoolean("alarmRunning", false);
+    }
+
+    private int frequencyMins() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        String gpsTime = prefs.getString("gps", "10");
+        return Integer.valueOf(gpsTime);
     }
 }
