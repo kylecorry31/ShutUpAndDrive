@@ -10,8 +10,8 @@
     <dataSet config="main" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/src/main/assets" />
     </dataSet>
-    <dataSet config="release" >
-        <source path="/home/kyle/Development/ShutUpAndDrive/app/src/release/assets" />
+    <dataSet config="debug" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/src/debug/assets" />
     </dataSet>
 
 </merger>
