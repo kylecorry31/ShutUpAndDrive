@@ -4,15 +4,7 @@
     <string name="app_name">Shut Up &amp; Drive!</string>
     <string name="action_settings">Settings</string>
     <string name="remember">Remember, don\'t text and drive.</string>
-    <string name="text_on">text_on</string>
-    <string name="speed">Current speed: 0.0 mph, texting enabled.</string>
     <string name="gps_frequency">GPS Frequency</string>
-    <string name="_5_seconds">5 Seconds</string>
-    <string name="_15_seconds">15 Seconds</string>
-    <string name="_30_seconds">30 Seconds</string>
-    <string name="_1_minute">1 Minute</string>
-    <string name="_2_minutes">2 Minutes</string>
-    <string name="_5_minutes">5 Minutes</string>
     <string name="not_activated">Not Activated</string>
     <string name="activated">Activated</string>
     <string name="function">Shut Up &amp; Drive! uses GPS to determine when you are driving. If you are driving, Shut Up &amp; Drive! will activate its driving mode features.</string>
@@ -31,16 +23,7 @@
     <string name="tutorial">Tutorial</string>
     <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
     <string name="cancel">Cancel</string>
-    <string name="unknown_request">Unknown request code</string>
-    <string name="no_resolution">No resolution</string>
-    <string name="play_services_available">Google Play services available</string>
-    <string name="gps_accuracy">Turn on GPS for better accuracy</string>
     <string name="service_start">Service Started</string>
     <string name="service_stop">Service Stopped</string>
-    <string name="activate_driving">Activate driving mode</string>
-    <string name="driving_on">Driving mode on</string>
-    <string name="not_driving">Not driving, disable driving mode</string>
-    <string name="driving_off">Driving mode off</string>
-    <string name="activity_call">Activity Recognition called</string>
     <string name="pref_update">Preferences updated, you may need to restart the app for your updates to take effect</string>
 </resources>

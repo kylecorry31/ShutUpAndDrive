@@ -12,7 +12,7 @@ public class text extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         System.out.println("message received");
-        if (SpeedService.autoreply || CarMode.autoreply) {
+        if (CarMode.autoreply) {
             if (intent.getAction().equals(
                     "android.provider.Telephony.SMS_RECEIVED")) {
                 System.out.println("SMS received");

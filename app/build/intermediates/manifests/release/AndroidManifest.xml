@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.KDB.shutupdrive"
-    android:versionCode="16"
-    android:versionName="2.1" >
+    android:versionCode="17"
+    android:versionName="2.2" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -16,8 +16,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -115,14 +115,17 @@
 
         <service android:name="com.KDB.shutupdrive.SpeedService" />
 
-        <receiver android:name="com.KDB.shutupdrive.BootCompletedReceiver" >
+        <receiver
+            android:name="com.KDB.shutupdrive.BootCompletedReceiver"
+            android:enabled="false" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.KDB.shutupdrive.ActivityRecognitionIntentService" />
         <service android:name="com.KDB.shutupdrive.CarMode" />
+
+        <receiver android:name="com.KDB.shutupdrive.GPSAlarmReceiver" />
     </application>
 
 </manifest>
