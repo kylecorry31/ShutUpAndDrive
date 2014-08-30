@@ -37,7 +37,7 @@ public class SpeedService extends Service implements LocationListener {
     }
 
     void locationCall() {
-<<<<<<< HEAD
+
         if (airplaneModeOff()) {
             if (gps()) {
                 //get the location service
@@ -76,50 +76,6 @@ public class SpeedService extends Service implements LocationListener {
             return Settings.System.getInt(getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) == 0;
         else
             return Settings.Global.getInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
-=======
-        if (gps()) {
-            //get the location service
-            lm = (LocationManager) this
-                    .getSystemService(Context.LOCATION_SERVICE);
-            //get gps and set to receive location updates at a user specified time
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    0, 0, this);
-        } else {
-            gpsNotification();
-        }
-    }
-
-    private void gpsNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
-        builder.setContentTitle(getResources().getString(R.string.app_name))
-                .setContentText(getResources().getString(R.string.gps_needed))
-                .setSmallIcon(R.drawable.notification)
-                .setContentIntent(getContentIntent());
-        NotificationManager notificationManager = (NotificationManager)
-                getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(7493840, builder.build());
-    }
-
-    private PendingIntent getContentIntent() {
-        Intent gpsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        return PendingIntent.getActivity(getApplicationContext(), 0, gpsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    private void developerNotification(float speed) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
-        builder.setContentTitle(getResources().getString(R.string.app_name))
-                .setContentText(Float.toString(speed))
-                .setSmallIcon(R.drawable.notification)
-                .setContentIntent(developerPi());
-        NotificationManager notificationManager = (NotificationManager)
-                getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(9230830, builder.build());
-    }
-
-    private PendingIntent developerPi() {
-        Intent i = new Intent(getBaseContext(), MainActivity.class);
-        return PendingIntent.getActivity(getApplicationContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
->>>>>>> 4b55dae81c17360b4680bd73f882cf0a8ff39fd4
     }
 
 
@@ -151,35 +107,16 @@ public class SpeedService extends Service implements LocationListener {
                     //disable driving mode
                     stopService(new Intent(this, CarMode.class));
                     //debug mode
-                    /*if (!isServiceRunning())
-                        startService(new Intent(this, CarMode.class));*/
+                    //if (!isServiceRunning())
+                    //    startService(new Intent(this, CarMode.class));
                 }
-<<<<<<< HEAD
-=======
             }
-            //Toast.makeText(this, Float.toString(speed), Toast.LENGTH_SHORT).show();
 
         }
-        //remove this for final version
-        developerNotification(speed);
 
         stopSelf();
     }
 
-    private boolean isServiceRunning() {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (CarMode.class.getName().equals(service.service.getClassName())) {
-                return true;
->>>>>>> 4b55dae81c17360b4680bd73f882cf0a8ff39fd4
-            }
-            //Toast.makeText(this, Float.toString(speed), Toast.LENGTH_SHORT).show();
-
-        }
-<<<<<<< HEAD
-
-        stopSelf();
-    }
 
     private boolean isServiceRunning() {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -188,8 +125,6 @@ public class SpeedService extends Service implements LocationListener {
                 return true;
             }
         }
-=======
->>>>>>> 4b55dae81c17360b4680bd73f882cf0a8ff39fd4
         return false;
     }
 
