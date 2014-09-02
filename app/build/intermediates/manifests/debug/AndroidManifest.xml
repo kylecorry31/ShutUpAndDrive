@@ -126,6 +126,7 @@
         <service android:name="com.KDB.shutupdrive.CarMode" />
 
         <receiver android:name="com.KDB.shutupdrive.GPSAlarmReceiver" />
+        <receiver android:name="com.KDB.shutupdrive.NotificationReceiver" />
     </application>
 
 </manifest>

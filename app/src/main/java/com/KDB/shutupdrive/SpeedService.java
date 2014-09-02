@@ -44,8 +44,7 @@ public class SpeedService extends Service implements LocationListener {
                 lm = (LocationManager) this
                         .getSystemService(Context.LOCATION_SERVICE);
                 //get gps and set to receive location updates at a user specified time
-                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        0, 0, this);
+                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, this);
             } else {
                 gpsNotification();
 
@@ -107,8 +106,8 @@ public class SpeedService extends Service implements LocationListener {
                     //disable driving mode
                     stopService(new Intent(this, CarMode.class));
                     //debug mode
-                    //if (!isServiceRunning())
-                    //    startService(new Intent(this, CarMode.class));
+                   // if (!isServiceRunning())
+                   //    startService(new Intent(this, CarMode.class));
                 }
             }
 

@@ -50,6 +50,8 @@ public class CarMode extends Service {
     private SharedPreferences getPrefs;
     //text to speech
     TextToSpeech tts;
+    PhoneStateListener psl;
+    TelephonyManager tm;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -81,9 +83,9 @@ public class CarMode extends Service {
         //allow or block phone calls
         if (!phone) {
             //get the phone service
-            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             //call state listener
-            PhoneStateListener psl = new PhoneStateListener() {
+            psl = new PhoneStateListener() {
                 public void onCallStateChanged(int state, String incomingNumber) {
                     //incoming number
                     final String incoming = incomingNumber;
@@ -113,9 +115,15 @@ public class CarMode extends Service {
 
                     }
                     if (state == TelephonyManager.CALL_STATE_IDLE) {
-                        System.out.println("idle");
                         Log.d("Phone State", "Idle");
                         //end text to speech
+                        if (tts != null) {
+                            tts.stop();
+                            tts.shutdown();
+                        }
+                    }
+                    if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
+                        Log.d("Phone State", "Offhook");
                         if (tts != null) {
                             tts.stop();
                             tts.shutdown();
@@ -159,6 +167,8 @@ public class CarMode extends Service {
         autoreply = false;
         //turn back the user's last sound mode
         soundMode();
+        //remove phone state listener
+        tm.listen(psl, psl.LISTEN_NONE);
         //disable tts
         if (tts != null) {
             tts.stop();
@@ -174,7 +184,8 @@ public class CarMode extends Service {
         mId = ActivityUtils.NOTIFICATION_ID;
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(icon).setContentTitle(getResources().getString(R.string.app_name))
-                .setContentText(ActivityUtils.RUNNING).setOngoing(true);
+                .setContentText(ActivityUtils.RUNNING).setOngoing(true)
+                .addAction(R.drawable.cancel, "I\'m not driving", notDriving());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             Intent resultIntent = new Intent(this, MainActivity.class);
             TaskStackBuilder sb = TaskStackBuilder.create(this);
@@ -190,6 +201,11 @@ public class CarMode extends Service {
         }
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(mId, mBuilder.build());
+    }
+
+    PendingIntent notDriving() {
+        Intent i = new Intent(getBaseContext(), NotificationReceiver.class);
+        return PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
     }
 
     void userSettings() {

@@ -121,6 +121,7 @@
         <service android:name=".CarMode"></service>
 
         <receiver android:name=".GPSAlarmReceiver" />
+        <receiver android:name=".NotificationReceiver" />
     </application>
 
 </manifest>
