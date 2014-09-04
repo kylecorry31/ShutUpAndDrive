@@ -15393,6 +15393,11 @@ classic
     <dataSet config="main" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res" >
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi-v11/cancel.png"
+                qualifiers="hdpi-v11"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi-v11/notification.png"
                 qualifiers="hdpi-v11"
@@ -15438,6 +15443,11 @@ classic
                 qualifiers=""
                 type="xml" />
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/cancel.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/notification.png"
                 qualifiers="mdpi-v4"
@@ -15468,21 +15478,21 @@ classic
             <file
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml"
                 qualifiers="" >
-                <string name="gps" >GPS
+                <string name="gps" >Driving Detection
                 </string>
                 <string name="message" >Custom message
                 </string>
-                <string name="notify_function" >If Shut Up &amp; Drive! is disabled, a text will be sent to a specified number.
+                <string name="notify_function" >Shut Up &amp; Drive! will notify a specified number if the app is deactivated.
                 </string>
                 <string name="remember" >Remember, don\'t text and drive.
                 </string>
                 <string name="autoreply" >Auto-Reply
                 </string>
-                <string name="autoreply_function" >While you are driving, Shut Up &amp; Drive! will automatically reply to all of the texts that you receive.
+                <string name="autoreply_function" >Shut Up &amp; Drive! will automatically reply to texts while you drive.
                 </string>
-                <string name="phone" >Phone
+                <string name="phone" >Caller ID Readout
                 </string>
-                <string name="function" >Shut Up &amp; Drive! uses GPS to determine when you are driving. If you are driving, Shut Up &amp; Drive! will activate its driving mode features.
+                <string name="function" >Shut Up &amp; Drive! will automatically activate its driving mode when you drive.
                 </string>
                 <string name="tap_deactivate" >Tap to deactivate
                 </string>
@@ -15512,7 +15522,7 @@ classic
                 </string>
                 <string name="start" >Start
                 </string>
-                <string name="phone_function" >While you are driving, Shut Up &amp; Drive! can block calls from coming through. If you choose not to block calls, incoming callers will be will be read out.
+                <string name="phone_function" >Shut Up &amp; Drive! will read out any caller\'s name or number while you drive.
                 </string>
                 <string name="gps_needed" >GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.
                 </string>
@@ -15584,9 +15594,19 @@ classic
                 </string-array>
             </file>
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi-v11/cancel.png"
+                qualifiers="xhdpi-v11"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi-v11/notification.png"
                 qualifiers="xhdpi-v11"
+                type="drawable" />
+            <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi-v9/cancel.png"
+                qualifiers="mdpi-v9"
                 type="drawable" />
             <file
                 name="notification"
@@ -15644,9 +15664,19 @@ classic
                 qualifiers=""
                 type="drawable" />
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi-v11/cancel.png"
+                qualifiers="mdpi-v11"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi-v11/notification.png"
                 qualifiers="mdpi-v11"
+                type="drawable" />
+            <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi-v9/cancel.png"
+                qualifiers="hdpi-v9"
                 type="drawable" />
             <file
                 name="notification"
@@ -15654,9 +15684,19 @@ classic
                 qualifiers="hdpi-v9"
                 type="drawable" />
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/cancel.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/notification.png"
                 qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi-v11/cancel.png"
+                qualifiers="xxhdpi-v11"
                 type="drawable" />
             <file
                 name="notification"
@@ -15711,9 +15751,19 @@ classic
                 </style>
             </file>
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi-v9/cancel.png"
+                qualifiers="xxhdpi-v9"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi-v9/notification.png"
                 qualifiers="xxhdpi-v9"
+                type="drawable" />
+            <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi-v9/cancel.png"
+                qualifiers="xhdpi-v9"
                 type="drawable" />
             <file
                 name="notification"
@@ -15726,9 +15776,19 @@ classic
                 qualifiers=""
                 type="menu" />
             <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi/cancel.png"
+                qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi/notification.png"
                 qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
+                name="cancel"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi/cancel.png"
+                qualifiers="xhdpi-v4"
                 type="drawable" />
             <file
                 name="notification"
@@ -15741,66 +15801,6 @@ classic
                 <dimen name="activity_horizontal_margin" >64dp
                 </dimen>
             </file>
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi-v9/cancel.png"
-                qualifiers="hdpi-v9"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi-v9/cancel.png"
-                qualifiers="xhdpi-v9"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/cancel.png"
-                qualifiers="mdpi-v4"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi-v11/cancel.png"
-                qualifiers="mdpi-v11"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi-v11/cancel.png"
-                qualifiers="xhdpi-v11"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi-v9/cancel.png"
-                qualifiers="xxhdpi-v9"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi/cancel.png"
-                qualifiers="xhdpi-v4"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/cancel.png"
-                qualifiers="hdpi-v4"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi/cancel.png"
-                qualifiers="xxhdpi-v4"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi-v11/cancel.png"
-                qualifiers="xxhdpi-v11"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi-v11/cancel.png"
-                qualifiers="hdpi-v11"
-                type="drawable" />
-            <file
-                name="cancel"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi-v9/cancel.png"
-                qualifiers="mdpi-v9"
-                type="drawable" />
         </source>
         <source path="/home/kyle/Development/ShutUpAndDrive/app/build/generated/res/rs/debug" />
         <source path="/home/kyle/Development/ShutUpAndDrive/app/build/generated/res/generated/debug" />
