@@ -48,12 +48,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
         AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
         AdRequest.Builder adRequest = new AdRequest.Builder();
         adView.loadAd(adRequest.build());
         AdBuddiz.showAd(this);
+
         //this is for the developers
         //adView.setVisibility(View.GONE);
         img = (ImageView) findViewById(R.id.car);

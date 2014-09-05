@@ -2,17 +2,17 @@
 <pre-dex-items>
 
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-ae33e41b1cd8f6d7102bf5cdfef1f4beba657d07.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
-    <item
         dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-286cd1ff4c0daa8a0d0d1a8cea3f39a8971709e3.jar"
         jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+    <item
+        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-ae33e41b1cd8f6d7102bf5cdfef1f4beba657d07.jar"
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
     <item
         dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/support-v4-19.1.0-4b370740cf8b0d3d972160879dbe2b45b0215459.jar"
         jar="/home/kyle/Development/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"

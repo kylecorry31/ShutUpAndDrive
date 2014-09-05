@@ -15423,11 +15423,6 @@ classic
                 qualifiers=""
                 type="layout" />
             <file
-                name="tutorial_gps_redesign"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/tutorial_gps_redesign.xml"
-                qualifiers=""
-                type="layout" />
-            <file
                 name="tutorial_phone"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/tutorial_phone.xml"
                 qualifiers=""
@@ -15636,11 +15631,6 @@ classic
             <file
                 name="car_red"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/car_red.png"
-                qualifiers=""
-                type="drawable" />
-            <file
-                name="ic_action_next_item"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/ic_action_next_item.png"
                 qualifiers=""
                 type="drawable" />
             <file

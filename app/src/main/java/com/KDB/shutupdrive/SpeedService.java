@@ -78,6 +78,7 @@ public class SpeedService extends Service implements LocationListener {
     }
 
 
+
     //called on location received from gps
     @Override
     public void onLocationChanged(Location location) {
@@ -106,8 +107,8 @@ public class SpeedService extends Service implements LocationListener {
                     //disable driving mode
                     stopService(new Intent(this, CarMode.class));
                     //debug mode
-                   // if (!isServiceRunning())
-                   //    startService(new Intent(this, CarMode.class));
+                    //if (!isServiceRunning())
+                    //   startService(new Intent(this, CarMode.class));
                 }
             }
 

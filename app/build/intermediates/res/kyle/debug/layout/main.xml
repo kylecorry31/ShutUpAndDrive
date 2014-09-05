@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_height="match_parent">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        android:visibility="gone"
+        ads:adUnitId="ca-app-pub-5617453255042566/1905751930" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:text="Stay safe while you drive."
+        android:paddingTop="50dp"
+        android:textSize="35sp"
+        android:paddingRight="10dp"
+        android:paddingLeft="30dp"
+        android:background="@color/blue"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        tools:ignore="RtlSymmetry" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp">
+<ImageView android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:scaleType="fitCenter"
+    android:background="@android:color/transparent"
+    android:src="@drawable/car_blue"
+    android:id="@+id/car"
+    />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automatically activate driving mode when you drive."
+            android:textSize="24sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/red"
+            android:text="@string/not_activated"
+            android:textSize="30sp"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:id="@+id/button" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tap_activate"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="35dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:id="@+id/tv" />
+    </RelativeLayout>
+
+
+</LinearLayout><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/kyle/res/layout/main.xml -->
