@@ -8,11 +8,11 @@
         revision="20.0.0"
         sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-ae33e41b1cd8f6d7102bf5cdfef1f4beba657d07.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/classes.jar"
+        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-b22ac2400c6d1880c222e5fd7d87a75b955aceae.jar"
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.2.08/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
+        sha1="1ed7a7a05185651f9af41ad93711cb96b66f331c"/>
     <item
         dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/support-v4-19.1.0-4b370740cf8b0d3d972160879dbe2b45b0215459.jar"
         jar="/home/kyle/Development/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"

@@ -1473,6 +1473,12 @@ containing a value of this type.
         public static final int action_settings=0x7f0c000d;
         public static final int activated=0x7f0c000e;
         public static final int app_name=0x7f0c000f;
+        public static final int auth_client_needs_enabling_title=0x7f0c0041;
+        public static final int auth_client_needs_installation_title=0x7f0c0042;
+        public static final int auth_client_needs_update_title=0x7f0c0043;
+        public static final int auth_client_play_services_err_notification_msg=0x7f0c0044;
+        public static final int auth_client_requested_by_msg=0x7f0c0045;
+        public static final int auth_client_using_bad_version_title=0x7f0c0046;
         public static final int autoreply=0x7f0c0010;
         public static final int autoreply_function=0x7f0c0011;
         public static final int cancel=0x7f0c0012;
@@ -1512,15 +1518,16 @@ containing a value of this type.
         public static final int notify_function=0x7f0c0034;
         public static final int phone=0x7f0c0035;
         public static final int phone_function=0x7f0c0036;
-        public static final int pref_update=0x7f0c0037;
-        public static final int remember=0x7f0c0038;
-        public static final int service_start=0x7f0c0039;
-        public static final int service_stop=0x7f0c003a;
-        public static final int start=0x7f0c003b;
-        public static final int tap_activate=0x7f0c003c;
-        public static final int tap_deactivate=0x7f0c003d;
-        public static final int tutorial=0x7f0c003e;
-        public static final int wallet_buy_button_place_holder=0x7f0c003f;
+        public static final int pre_release_do_not_ship=0x7f0c0037;
+        public static final int pref_update=0x7f0c0038;
+        public static final int remember=0x7f0c0039;
+        public static final int service_start=0x7f0c003a;
+        public static final int service_stop=0x7f0c003b;
+        public static final int start=0x7f0c003c;
+        public static final int tap_activate=0x7f0c003d;
+        public static final int tap_deactivate=0x7f0c003e;
+        public static final int tutorial=0x7f0c003f;
+        public static final int wallet_buy_button_place_holder=0x7f0c0040;
     }
     public static final class style {
         /** 

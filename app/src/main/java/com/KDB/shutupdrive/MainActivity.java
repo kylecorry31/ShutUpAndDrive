@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,7 +49,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
         AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
         AdBuddiz.cacheAds(this);
         adView = (AdView) findViewById(R.id.adView);
@@ -62,10 +62,13 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         btn = (Button) findViewById(R.id.button);
         tv = (TextView) findViewById(R.id.tv);
         if (!alarmRunning()) {
-            if (gps())
+            if (gps()) {
                 startAlarm();
-            else
+                //let the user know the service was started
+                Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
+            } else {
                 gpsDialog();
+            }
         }
         if (alarmRunning()) {
             btn.setBackgroundColor(getResources().getColor(R.color.blue));
@@ -89,6 +92,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         super.onResume();
         adView.resume();
         bootStart();
+        Log.d("Resume", "Resumed");
+        if (getPrefs.getBoolean("gpsChange", false) && alarmRunning()) {
+            cancelAlarm(true);
+            Log.d("Main Activity", Integer.toString(frequencyMins()));
+            startAlarm();
+            SharedPreferences.Editor editor = getPrefs.edit();
+            editor.putBoolean("gpsChange", false);
+            editor.apply();
+        }
 
     }
 
@@ -156,7 +168,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
             btn.setText(getResources().getString(R.string.not_activated));
             tv.setText(getResources().getString(R.string.tap_activate));
             img.setImageResource(R.drawable.car_red);
-            cancelAlarm();
+            cancelAlarm(false);
         } else {
             //turn on
             if (gps()) {
@@ -165,6 +177,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                 tv.setText(getResources().getString(R.string.tap_deactivate));
                 img.setImageResource(R.drawable.car_blue);
                 startAlarm();
+                //let the user know the service was started
+                Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
             } else
                 gpsDialog();
         }
@@ -178,11 +192,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         SharedPreferences.Editor editor = getPrefs.edit();
         editor.putBoolean("alarmRunning", true);
         editor.apply();
-        //let the user know the service was started
-        Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
+
     }
 
-    private void cancelAlarm() {
+    private void cancelAlarm(boolean self) {
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
             alarmManager = null;
@@ -190,9 +203,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         SharedPreferences.Editor editor = getPrefs.edit();
         editor.putBoolean("alarmRunning", false);
         editor.apply();
-
         stopService(new Intent(this, CarMode.class));
-        if (!number.isEmpty()) {
+        number = getPrefs.getString("number", "");
+        if (!number.isEmpty() && !self) {
+
             //get the sms manager to send text
             SmsManager smsManager = SmsManager.getDefault();
             //send message
@@ -200,11 +214,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
                     null, null);
         }
         //let the user know the service was stopped
-        Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
+        if (!self)
+            Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
     }
 
     private boolean alarmRunning() {
-        number = getPrefs.getString("number", "");
         return getPrefs.getBoolean("alarmRunning", false);
     }
 

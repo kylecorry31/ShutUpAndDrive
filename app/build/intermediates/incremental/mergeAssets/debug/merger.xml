@@ -4,8 +4,8 @@
     <dataSet config="19.1.0" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/assets" />
     </dataSet>
-    <dataSet config="5.0.89" >
-        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/assets" />
+    <dataSet config="5.2.08" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.2.08/assets" />
     </dataSet>
     <dataSet config="main" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/src/main/assets" />
