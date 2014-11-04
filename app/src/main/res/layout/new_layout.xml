@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+   >
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-5617453255042566/1905751930" />
+    <ImageView
+        android:layout_below="@id/adView"
+        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:src="@drawable/title_image"
+        android:id="@+id/titleImage"
+        android:scaleType="centerCrop" />
+    <TextView
+        android:layout_below="@id/titleImage"
+        android:layout_height="wrap_content"
+        android:textColor="@color/background_floating_material_dark"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:text="Stay safe while you drive"
+        android:id="@+id/motto"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/motto"
+        android:textSize="18sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/desc"
+        android:text="Shut Up &amp; Drive! turns on when you drive to prevent you from texting while driving."
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="OFF"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:textSize="32sp"
+        android:id="@+id/status"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        />
+    <com.shamanland.fab.FloatingActionButton
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/white_car"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/blue"
+        android:layout_alignParentEnd="true"
+        android:padding="8dp"
+        android:id="@+id/fab"
+        app:floatingActionButtonColor="@color/blue"
+        app:floatingActionButtonSize="normal"
+        />
+
+</RelativeLayout>

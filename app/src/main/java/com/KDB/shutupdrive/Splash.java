@@ -27,7 +27,7 @@ public class Splash extends Activity {
                     e.printStackTrace();
                 } finally {
                     if (!isFirst()) {
-                        Intent i = new Intent(getBaseContext(), MainActivity.class);
+                        Intent i = new Intent(getBaseContext(), TestMain.class);
                         startActivity(i);
                     }
                 }

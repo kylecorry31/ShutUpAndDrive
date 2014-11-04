@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.KDB.shutupdrive"
-    android:versionCode="21"
-    android:versionName="2.3" >
+    android:versionCode="22"
+    android:versionName="2.5" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -21,7 +21,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/car_red"
+        android:icon="@drawable/blue_car"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <meta-data
@@ -35,11 +35,11 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
-            android:name="com.KDB.shutupdrive.MainActivity"
+            android:name="com.KDB.shutupdrive.TestMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="com.KDB.shutupdrive.MAINACTIVITY" />
+                <action android:name="com.KDB.shutupdrive.TESTMAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -52,6 +52,22 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.KDB.shutupdrive.Settings"
+            android:label="@string/app_name"
+            android:parentActivityName="com.KDB.shutupdrive.TestMain"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.KDB.shutupdrive.TestMain" />
+
+            <intent-filter>
+                <action android:name="com.KDB.shutupdrive.SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity

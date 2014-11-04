@@ -2,6 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/white"
+    android:textColor="@color/background_floating_material_dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -40,7 +42,7 @@
             android:layout_height="80dp"
             android:text="@string/next"
             android:layout_alignParentBottom="true"
-            android:background="@color/red"
+            android:background="@color/blue"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:padding="10dp"

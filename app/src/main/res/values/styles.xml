@@ -10,9 +10,9 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="colorPrimary">@color/red</item>
-        <item name="colorPrimaryDark">@color/darkRed</item>
-        <item name="colorAccent">@color/accentRed</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/darkBlue</item>
+        <item name="colorAccent">@color/accentBlue</item>
     </style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">

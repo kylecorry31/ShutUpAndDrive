@@ -24,6 +24,13 @@
     <eat-comment />
 
     <attr name="drawerArrowStyle" format="reference" />
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
+    <eat-comment />
+
+    <attr name="floatingActionButtonStyle" format="reference" />
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <eat-comment />
+
     <attr name="height" format="dimension" />
     <attr name="isLightTheme" format="boolean" />
     <attr name="title" format="string" />
@@ -42,6 +49,7 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml -->
     <eat-comment />
 
+    <color name="accentBlue">#91a7ff</color>
     <color name="accentRed">#f36c60</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment />
@@ -55,6 +63,7 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml -->
     <eat-comment />
 
+    <color name="black">#000000</color>
     <color name="blue">#0093fa</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment />
@@ -83,6 +92,7 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml -->
     <eat-comment />
 
+    <color name="darkBlue">#3b50ce</color>
     <color name="darkRed">#d01716</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment />
@@ -339,6 +349,25 @@
         <!-- The thickness (stroke size) for the bar paint -->
         <attr name="thickness" format="dimension" />
     </declare-styleable>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
+    <eat-comment />
+
+    <declare-styleable name="FloatingActionButton">
+
+        <!-- Background color -->
+        <attr name="floatingActionButtonColor" format="color|reference" />
+        <!-- Size of action button -->
+        <attr name="floatingActionButtonSize" format="enum">
+
+            <!-- 56dp -->
+            <enum name="normal" value="0" />
+            <!-- 40dp -->
+            <enum name="mini" value="1" />
+        </attr>
+    </declare-styleable>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <eat-comment />
+
     <declare-styleable name="LinearLayoutCompat">
 
         <!--
@@ -1223,6 +1252,19 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item name="disabled_alpha_material_dark" format="float" type="dimen">0.30</item>
     <item name="disabled_alpha_material_light" format="float" type="dimen">0.26</item>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
+    <eat-comment />
+
+    <dimen name="floating_action_button_margin_mini">26dp</dimen>
+    <dimen name="floating_action_button_margin_mini_minus">-26dp</dimen>
+    <dimen name="floating_action_button_margin_normal">34dp</dimen>
+    <dimen name="floating_action_button_margin_normal_minus">-34dp</dimen>
+    <dimen name="floating_action_button_shadow_radius">6dp</dimen>
+    <dimen name="floating_action_button_size_mini">40dp</dimen>
+    <dimen name="floating_action_button_size_normal">56dp</dimen>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <eat-comment />
+
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
@@ -1321,7 +1363,7 @@
     <string name="gps_frequency">GPS Frequency</string>
     <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
     <string name="message">Custom message</string>
-    <string name="next">Next</string>
+    <string name="next">NEXT</string>
     <string name="not_activated">Not Activated</string>
     <string name="notify_function">Shut Up &amp; Drive! will notify a specified number if the app is deactivated.</string>
     <string name="phone">Caller ID Readout</string>
@@ -1330,7 +1372,7 @@
     <string name="remember">Remember, don\'t text and drive.</string>
     <string name="service_start">Service Started</string>
     <string name="service_stop">Service Stopped</string>
-    <string name="start">Start</string>
+    <string name="start">START</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.11/res/values/admob_strings.xml -->
     <eat-comment />
 
@@ -1356,9 +1398,9 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="colorPrimary">@color/red</item>
-        <item name="colorPrimaryDark">@color/darkRed</item>
-        <item name="colorAccent">@color/accentRed</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/darkBlue</item>
+        <item name="colorAccent">@color/accentBlue</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">
@@ -2221,6 +2263,34 @@ m>                <item name="android:textColorLink">@color/link_text_material_d
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
+    <eat-comment />
+
+    <style name="FloatingActionButton" parent="android:Widget.ImageButton">
+        <item name="floatingActionButtonSize">normal</item>
+    </style>
+
+    <style name="FloatingActionButton.Dark" parent="FloatingActionButton">
+        <item name="floatingActionButtonColor">@android:color/tab_indicator_text</item>
+    </style>
+
+    <style name="FloatingActionButton.Dark.Mini" parent="FloatingActionButton.Mini">
+        <item name="floatingActionButtonColor">@android:color/tab_indicator_text</item>
+    </style>
+
+    <style name="FloatingActionButton.Light" parent="FloatingActionButton">
+        <item name="floatingActionButtonColor">@android:color/primary_text_dark</item>
+    </style>
+
+    <style name="FloatingActionButton.Light.Mini" parent="FloatingActionButton.Mini">
+        <item name="floatingActionButtonColor">@android:color/primary_text_dark</item>
+    </style>
+
+    <style name="FloatingActionButton.Mini" parent="FloatingActionButton">
+        <item name="floatingActionButtonSize">mini</item>
+    </style>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <eat-comment />
 
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>

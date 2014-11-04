@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,5 +29,6 @@ public class prefs extends PreferenceActivity {
         prefs.registerOnSharedPreferenceChangeListener(listener);
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.prefs);
+
     }
 }

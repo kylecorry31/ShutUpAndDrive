@@ -2,12 +2,14 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/background_floating_material_dark"
         android:text="@string/deactivation_notification"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -34,6 +36,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:hint="Parent or guardian phone number"
         android:id="@+id/et" />
 
@@ -46,7 +50,7 @@
             android:layout_height="80dp"
             android:text="@string/start"
             android:layout_alignParentBottom="true"
-            android:background="@color/red"
+            android:background="@color/blue"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:padding="10dp"

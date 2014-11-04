@@ -35,7 +35,7 @@ public class Tutorial4 extends ActionBarActivity implements View.OnClickListener
         SharedPreferences.Editor editor = getPrefs.edit();
         editor.putString("number", et.getText().toString());
         editor.apply();
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, TestMain.class);
         startActivity(i);
     }
 

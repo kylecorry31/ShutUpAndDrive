@@ -187,15 +187,15 @@ public class CarMode extends Service {
                 .setContentText(ActivityUtils.RUNNING).setOngoing(true)
                 .addAction(R.drawable.cancel, "I\'m not driving", notDriving());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            Intent resultIntent = new Intent(this, MainActivity.class);
+            Intent resultIntent = new Intent(this, TestMain.class);
             TaskStackBuilder sb = TaskStackBuilder.create(this);
-            sb.addParentStack(MainActivity.class);
+            sb.addParentStack(TestMain.class);
             sb.addNextIntent(resultIntent);
             PendingIntent pi = sb.getPendingIntent(0,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pi);
         } else {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, TestMain.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pendingIntent);
         }

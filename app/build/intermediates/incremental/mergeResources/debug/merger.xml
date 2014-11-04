@@ -3,6 +3,130 @@
     version="2"
     xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
 
+    <dataSet config="0.0.5" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res" >
+            <file
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml"
+                qualifiers="" >
+
+                <style
+                    name="FloatingActionButton.Dark"
+                    parent="FloatingActionButton" >
+                    <item name="floatingActionButtonColor">
+@android:color/tab_indicator_text
+                    </item>
+                </style>
+
+                <declare-styleable name="FloatingActionButton" >
+
+                    <!-- Background color -->
+                    <attr
+                        name="floatingActionButtonColor"
+                        format="color|reference" />
+                    <!-- Size of action button -->
+                    <attr
+                        name="floatingActionButtonSize"
+                        format="enum" >
+
+                        <!-- 56dp -->
+                        <enum
+                            name="normal"
+                            value="0" />
+                        <!-- 40dp -->
+                        <enum
+                            name="mini"
+                            value="1" />
+                    </attr>
+                </declare-styleable>
+
+                <dimen name="floating_action_button_size_normal" >56dp
+                </dimen>
+                <dimen name="floating_action_button_margin_normal" >34dp
+                </dimen>
+
+                <style
+                    name="FloatingActionButton.Light"
+                    parent="FloatingActionButton" >
+                    <item name="floatingActionButtonColor">
+@android:color/primary_text_dark
+                    </item>
+                </style>
+
+                <style
+                    name="FloatingActionButton.Light.Mini"
+                    parent="FloatingActionButton.Mini" >
+                    <item name="floatingActionButtonColor">
+@android:color/primary_text_dark
+                    </item>
+                </style>
+
+                <dimen name="floating_action_button_size_mini" >40dp
+                </dimen>
+                <dimen name="floating_action_button_shadow_radius" >6dp
+                </dimen>
+                <dimen name="floating_action_button_margin_normal_minus" >-34dp
+                </dimen>
+                <dimen name="floating_action_button_margin_mini" >26dp
+                </dimen>
+
+                <style
+                    name="FloatingActionButton"
+                    parent="android:Widget.ImageButton" >
+                    <item name="floatingActionButtonSize">
+normal
+                    </item>
+                </style>
+
+                <style
+                    name="FloatingActionButton.Mini"
+                    parent="FloatingActionButton" >
+                    <item name="floatingActionButtonSize">
+mini
+                    </item>
+                </style>
+
+                <attr
+                    name="floatingActionButtonStyle"
+                    format="reference" />
+
+                <style
+                    name="FloatingActionButton.Dark.Mini"
+                    parent="FloatingActionButton.Mini" >
+                    <item name="floatingActionButtonColor">
+@android:color/tab_indicator_text
+                    </item>
+                </style>
+
+                <dimen name="floating_action_button_margin_mini_minus" >-26dp
+                </dimen>
+            </file>
+            <file
+                name="com_shamanland_fab_circle_mini"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/drawable/com_shamanland_fab_circle_mini.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="com_shamanland_fab_circle_normal"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/drawable/com_shamanland_fab_circle_normal.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="com_shamanland_fab_shadow"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/drawable/com_shamanland_fab_shadow.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="floating_action_button_show"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/anim/floating_action_button_show.xml"
+                qualifiers=""
+                type="anim" />
+            <file
+                name="floating_action_button_hide"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/anim/floating_action_button_hide.xml"
+                qualifiers=""
+                type="anim" />
+        </source>
+    </dataSet>
     <dataSet config="21.0.0" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/res" />
     </dataSet>
@@ -22359,13 +22483,18 @@ classic
                 qualifiers=""
                 type="layout" />
             <file
+                name="blank"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/blank.xml"
+                qualifiers=""
+                type="layout" />
+            <file
                 name="tutorial_gps"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/tutorial_gps.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                name="main"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/main.xml"
+                name="new_layout"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/new_layout.xml"
                 qualifiers=""
                 type="layout" />
             <file
@@ -22384,8 +22513,8 @@ classic
                 qualifiers=""
                 type="xml" />
             <file
-                name="ic_launcher"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/ic_launcher.png"
+                name="blue_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/blue_car.png"
                 qualifiers="mdpi-v4"
                 type="drawable" />
             <file
@@ -22396,6 +22525,11 @@ classic
             <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/notification.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="white_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-mdpi/white_car.png"
                 qualifiers="mdpi-v4"
                 type="drawable" />
             <file
@@ -22419,13 +22553,13 @@ classic
             backward-compatibility can go here.
                     -->
                     <item name="colorPrimary">
-@color/red
+@color/blue
                     </item>
                     <item name="colorPrimaryDark">
-@color/darkRed
+@color/darkBlue
                     </item>
                     <item name="colorAccent">
-@color/accentRed
+@color/accentBlue
                     </item>
                 </style>
             </file>
@@ -22450,7 +22584,7 @@ classic
                 </string>
                 <string name="tap_deactivate" >Tap to deactivate
                 </string>
-                <string name="next" >Next
+                <string name="next" >NEXT
                 </string>
                 <string name="activated" >Activated
                 </string>
@@ -22474,7 +22608,7 @@ classic
                 </string>
                 <string name="gps_frequency" >GPS Frequency
                 </string>
-                <string name="start" >Start
+                <string name="start" >START
                 </string>
                 <string name="phone_function" >Shut Up &amp; Drive! will read out any caller\'s name or number while you drive.
                 </string>
@@ -22494,6 +22628,8 @@ classic
             <file
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml"
                 qualifiers="" >
+                <color name="accentBlue" >#91a7ff
+                </color>
                 <color name="red" >#e51c23
                 </color>
                 <color name="blue" >#0093fa
@@ -22506,7 +22642,11 @@ classic
                 </color>
                 <color name="darkRed" >#d01716
                 </color>
+                <color name="darkBlue" >#3b50ce
+                </color>
                 <color name="white" >#ffffff
+                </color>
+                <color name="black" >#000000
                 </color>
             </file>
             <file
@@ -22574,11 +22714,6 @@ classic
                 qualifiers="mdpi-v9"
                 type="drawable" />
             <file
-                name="ic_launcher"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/ic_launcher.png"
-                qualifiers=""
-                type="drawable" />
-            <file
                 name="gps"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/gps.png"
                 qualifiers=""
@@ -22594,8 +22729,8 @@ classic
                 qualifiers=""
                 type="drawable" />
             <file
-                name="car_red"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/car_red.png"
+                name="title_image"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable/title_image.png"
                 qualifiers=""
                 type="drawable" />
             <file
@@ -22634,8 +22769,8 @@ classic
                 qualifiers="hdpi-v9"
                 type="drawable" />
             <file
-                name="ic_launcher"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/ic_launcher.png"
+                name="blue_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/blue_car.png"
                 qualifiers="hdpi-v4"
                 type="drawable" />
             <file
@@ -22646,6 +22781,11 @@ classic
             <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/notification.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="white_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-hdpi/white_car.png"
                 qualifiers="hdpi-v4"
                 type="drawable" />
             <file
@@ -22684,8 +22824,8 @@ classic
                 qualifiers=""
                 type="menu" />
             <file
-                name="ic_launcher"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
+                name="blue_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xxhdpi/blue_car.png"
                 qualifiers="xxhdpi-v4"
                 type="drawable" />
             <file
@@ -22699,8 +22839,8 @@ classic
                 qualifiers="xxhdpi-v4"
                 type="drawable" />
             <file
-                name="ic_launcher"
-                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+                name="blue_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi/blue_car.png"
                 qualifiers="xhdpi-v4"
                 type="drawable" />
             <file
@@ -22711,6 +22851,11 @@ classic
             <file
                 name="notification"
                 path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi/notification.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="white_car"
+                path="/home/kyle/Development/ShutUpAndDrive/app/src/main/res/drawable-xhdpi/white_car.png"
                 qualifiers="xhdpi-v4"
                 type="drawable" />
             <file

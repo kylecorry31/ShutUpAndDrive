@@ -4,7 +4,10 @@
     <color name="oldred">#fa0001</color>
     <color name="red">#e51c23</color>
     <color name="darkRed">#d01716</color>
+    <color name="darkBlue">#3b50ce</color>
+    <color name="accentBlue">#91a7ff</color>
     <color name="accentRed">#f36c60</color>
     <color name="white">#ffffff</color>
     <color name="blue">#0093fa</color>
+    <color name="black">#000000</color>
 </resources>

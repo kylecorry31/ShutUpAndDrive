@@ -11,7 +11,7 @@
     <string name="tap_activate">Tap to activate</string>
     <string name="tap_deactivate">Tap to deactivate</string>
     <string name="gps">Driving Detection</string>
-    <string name="next">Next</string>
+    <string name="next">NEXT</string>
     <string name="autoreply">Auto-Reply</string>
     <string name="autoreply_function">Shut Up &amp; Drive! will automatically reply to texts while you drive.</string>
     <string name="message">Custom message</string>
@@ -19,7 +19,7 @@
     <string name="phone">Caller ID Readout</string>
     <string name="deactivation_notification">Deactivation Notification</string>
     <string name="notify_function">Shut Up &amp; Drive! will notify a specified number if the app is deactivated.</string>
-    <string name="start">Start</string>
+    <string name="start">START</string>
     <string name="tutorial">Tutorial</string>
     <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
     <string name="cancel">Cancel</string>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merger version="2" >
 
+    <dataSet config="0.0.5" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/assets" />
+    </dataSet>
     <dataSet config="21.0.0" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/assets" />
     </dataSet>
