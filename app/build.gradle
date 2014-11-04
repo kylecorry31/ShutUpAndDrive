@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.KDB.shutupdrive"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 21
     }
 
@@ -25,5 +25,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:+'
     compile 'com.android.support:appcompat-v7:+'
     compile files('libs/AdBuddiz-2.3.3.jar')
-    compile 'com.shamanland:fab:0.0.5'
+    compile 'com.melnykov:floatingactionbutton:+'
 }

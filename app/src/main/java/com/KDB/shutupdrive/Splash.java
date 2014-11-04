@@ -17,8 +17,10 @@ public class Splash extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Removes actionbar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
+        // Splash screen stays on for 3 seconds
         Thread timer = new Thread() {
             public void run() {
                 try {
@@ -27,6 +29,7 @@ public class Splash extends Activity {
                     e.printStackTrace();
                 } finally {
                     if (!isFirst()) {
+                        // Open the main class
                         Intent i = new Intent(getBaseContext(), TestMain.class);
                         startActivity(i);
                     }
@@ -42,7 +45,7 @@ public class Splash extends Activity {
         super.onPause();
         finish();
     }
-
+    // If it is the first time the user opened the app, show tutorial
     private boolean isFirst() {
         SharedPreferences getPrefs;
         getPrefs = getSharedPreferences(FILENAME, 0);

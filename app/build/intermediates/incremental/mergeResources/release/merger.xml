@@ -3,132 +3,112 @@
     version="2"
     xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
 
-    <dataSet config="0.0.5" >
-        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res" >
+    <dataSet config="21.0.0" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/res" />
+    </dataSet>
+    <dataSet config="21.0.0" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/res" />
+    </dataSet>
+    <dataSet config="1.0.6" >
+        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res" >
             <file
-                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/values/values.xml"
                 qualifiers="" >
+                <string name="library_FloatingActionButton_repositoryLink" >https://github.com/makovkastar/FloatingActionButton
+                </string>
 
-                <style
-                    name="FloatingActionButton.Dark"
-                    parent="FloatingActionButton" >
-                    <item name="floatingActionButtonColor">
-@android:color/tab_indicator_text
-                    </item>
-                </style>
+                <color name="material_blue_600" >#4e6cef
+                </color>
+                <color name="material_blue_500" >#5677fc
+                </color>
+
+                <string name="library_FloatingActionButton_libraryDescription" >Android Google+ like floating action button which reacts on the list view scrolling events. Becomes visible when the list view is scrolled up and invisible when scrolled down.
+                </string>
+                <string name="library_FloatingActionButton_libraryName" >FloatingActionButton
+                </string>
+                <string name="library_FloatingActionButton_libraryVersion" >1.0.0
+                </string>
+
+                <dimen name="fab_size_mini" >40dp
+                </dimen>
+                <dimen name="fab_min_significant_scroll" >4dp
+                </dimen>
+
+                <string name="library_FloatingActionButton_authorWebsite" >https://github.com/makovkastar/FloatingActionButton
+                </string>
+
+                <dimen name="fab_size_normal" >56dp
+                </dimen>
+
+                <string name="library_FloatingActionButton_libraryWebsite" >https://github.com/makovkastar/FloatingActionButton
+                </string>
+                <string name="library_FloatingActionButton_author" >Oleksandr Melnykov
+                </string>
 
                 <declare-styleable name="FloatingActionButton" >
-
-                    <!-- Background color -->
                     <attr
-                        name="floatingActionButtonColor"
-                        format="color|reference" />
-                    <!-- Size of action button -->
+                        name="fab_colorPressed"
+                        format="color" />
                     <attr
-                        name="floatingActionButtonSize"
+                        name="fab_colorNormal"
+                        format="color" />
+                    <attr
+                        name="fab_colorRipple"
+                        format="color" />
+                    <attr
+                        name="fab_shadow"
+                        format="boolean" />
+                    <attr
+                        name="fab_type"
                         format="enum" >
-
-                        <!-- 56dp -->
                         <enum
                             name="normal"
                             value="0" />
-                        <!-- 40dp -->
                         <enum
                             name="mini"
                             value="1" />
                     </attr>
                 </declare-styleable>
 
-                <dimen name="floating_action_button_size_normal" >56dp
-                </dimen>
-                <dimen name="floating_action_button_margin_normal" >34dp
-                </dimen>
+                <string name="app_name" >FloatingActionButton
+                </string>
+                <string name="library_FloatingActionButton_licenseId" >mit
+                </string>
 
-                <style
-                    name="FloatingActionButton.Light"
-                    parent="FloatingActionButton" >
-                    <item name="floatingActionButtonColor">
-@android:color/primary_text_dark
-                    </item>
-                </style>
-
-                <style
-                    name="FloatingActionButton.Light.Mini"
-                    parent="FloatingActionButton.Mini" >
-                    <item name="floatingActionButtonColor">
-@android:color/primary_text_dark
-                    </item>
-                </style>
-
-                <dimen name="floating_action_button_size_mini" >40dp
+                <dimen name="fab_mini_shadow_size" >6dp
                 </dimen>
-                <dimen name="floating_action_button_shadow_radius" >6dp
-                </dimen>
-                <dimen name="floating_action_button_margin_normal_minus" >-34dp
-                </dimen>
-                <dimen name="floating_action_button_margin_mini" >26dp
+                <dimen name="fab_elevation_lollipop" >8dp
                 </dimen>
 
-                <style
-                    name="FloatingActionButton"
-                    parent="android:Widget.ImageButton" >
-                    <item name="floatingActionButtonSize">
-normal
-                    </item>
-                </style>
+                <string name="library_FloatingActionButton_isOpenSource" >true
+                </string>
 
-                <style
-                    name="FloatingActionButton.Mini"
-                    parent="FloatingActionButton" >
-                    <item name="floatingActionButtonSize">
-mini
-                    </item>
-                </style>
-
-                <attr
-                    name="floatingActionButtonStyle"
-                    format="reference" />
-
-                <style
-                    name="FloatingActionButton.Dark.Mini"
-                    parent="FloatingActionButton.Mini" >
-                    <item name="floatingActionButtonColor">
-@android:color/tab_indicator_text
-                    </item>
-                </style>
-
-                <dimen name="floating_action_button_margin_mini_minus" >-26dp
+                <dimen name="fab_shadow_size" >8dp
                 </dimen>
+
+                <string name="define_FloatingActionButton" ></string>
             </file>
             <file
-                name="com_shamanland_fab_circle_mini"
-                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/drawable/com_shamanland_fab_circle_mini.xml"
-                qualifiers=""
+                name="shadow"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/drawable-hdpi-v4/shadow.png"
+                qualifiers="hdpi-v4"
                 type="drawable" />
             <file
-                name="com_shamanland_fab_circle_normal"
-                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/drawable/com_shamanland_fab_circle_normal.xml"
-                qualifiers=""
+                name="shadow"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/drawable-xxhdpi-v4/shadow.png"
+                qualifiers="xxhdpi-v4"
                 type="drawable" />
             <file
-                name="com_shamanland_fab_shadow"
-                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/drawable/com_shamanland_fab_shadow.xml"
-                qualifiers=""
+                name="shadow"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/drawable-mdpi-v4/shadow.png"
+                qualifiers="mdpi-v4"
                 type="drawable" />
             <file
-                name="floating_action_button_show"
-                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/anim/floating_action_button_show.xml"
-                qualifiers=""
-                type="anim" />
-            <file
-                name="floating_action_button_hide"
-                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/anim/floating_action_button_hide.xml"
-                qualifiers=""
-                type="anim" />
+                name="shadow"
+                path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/drawable-xhdpi-v4/shadow.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
         </source>
-    </dataSet>
-    <dataSet config="21.0.0" >
-        <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/res" />
     </dataSet>
     <dataSet config="21.0.0" >
         <source path="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res" >
@@ -22642,7 +22622,7 @@ classic
                 </color>
                 <color name="darkRed" >#d01716
                 </color>
-                <color name="darkBlue" >#3b50ce
+                <color name="darkBlue" >#006ab5
                 </color>
                 <color name="white" >#ffffff
                 </color>

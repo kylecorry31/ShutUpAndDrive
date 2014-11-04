@@ -18,11 +18,14 @@ public class Settings extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         c = getApplicationContext();
+        // Show up arrow in actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.blank);
+        // Set the view to the settings
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
     public static class SettingsFragment extends PreferenceFragment{
+        //contains the settings and checks if the gps frequency was changed
         SharedPreferences.OnSharedPreferenceChangeListener listener;
         SharedPreferences prefs;
         @Override

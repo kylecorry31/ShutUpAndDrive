@@ -22,6 +22,7 @@ public class PackageReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Helps to update the app, restarts service
         Log.d("App Replaced", "Replaced!");
         if (intent.getAction().equals("android.intent.action.MY_PACKAGE_REPLACED")) {
             c = context;
@@ -39,7 +40,7 @@ public class PackageReceiver extends BroadcastReceiver {
             }
         }
     }
-
+    // Restarts the service
     private void setUp() {
         alarmManager = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
         Intent gpsIntent = new Intent(c, GPSAlarmReceiver.class);

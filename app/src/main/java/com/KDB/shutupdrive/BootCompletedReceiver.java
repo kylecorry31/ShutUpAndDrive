@@ -21,6 +21,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Start the service automatically if settings box was checked
         if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
             c = context;
             getPrefs = PreferenceManager.getDefaultSharedPreferences(c);

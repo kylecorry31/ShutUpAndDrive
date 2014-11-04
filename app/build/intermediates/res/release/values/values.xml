@@ -24,13 +24,6 @@
     <eat-comment />
 
     <attr name="drawerArrowStyle" format="reference" />
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
-    <eat-comment />
-
-    <attr name="floatingActionButtonStyle" format="reference" />
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
-    <eat-comment />
-
     <attr name="height" format="dimension" />
     <attr name="isLightTheme" format="boolean" />
     <attr name="title" format="string" />
@@ -92,7 +85,7 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml -->
     <eat-comment />
 
-    <color name="darkBlue">#3b50ce</color>
+    <color name="darkBlue">#006ab5</color>
     <color name="darkRed">#d01716</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment />
@@ -114,6 +107,14 @@
 
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="material_blue_500">#5677fc</color>
+    <color name="material_blue_600">#4e6cef</color>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <eat-comment />
+
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
     <color name="material_blue_grey_950">#ff21272b</color>
@@ -349,19 +350,16 @@
         <!-- The thickness (stroke size) for the bar paint -->
         <attr name="thickness" format="dimension" />
     </declare-styleable>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="FloatingActionButton">
-
-        <!-- Background color -->
-        <attr name="floatingActionButtonColor" format="color|reference" />
-        <!-- Size of action button -->
-        <attr name="floatingActionButtonSize" format="enum">
-
-            <!-- 56dp -->
+        <attr name="fab_colorPressed" format="color" />
+        <attr name="fab_colorNormal" format="color" />
+        <attr name="fab_colorRipple" format="color" />
+        <attr name="fab_shadow" format="boolean" />
+        <attr name="fab_type" format="enum">
             <enum name="normal" value="0" />
-            <!-- 40dp -->
             <enum name="mini" value="1" />
         </attr>
     </declare-styleable>
@@ -1252,16 +1250,15 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item name="disabled_alpha_material_dark" format="float" type="dimen">0.30</item>
     <item name="disabled_alpha_material_light" format="float" type="dimen">0.26</item>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/values/values.xml -->
     <eat-comment />
 
-    <dimen name="floating_action_button_margin_mini">26dp</dimen>
-    <dimen name="floating_action_button_margin_mini_minus">-26dp</dimen>
-    <dimen name="floating_action_button_margin_normal">34dp</dimen>
-    <dimen name="floating_action_button_margin_normal_minus">-34dp</dimen>
-    <dimen name="floating_action_button_shadow_radius">6dp</dimen>
-    <dimen name="floating_action_button_size_mini">40dp</dimen>
-    <dimen name="floating_action_button_size_normal">56dp</dimen>
+    <dimen name="fab_elevation_lollipop">8dp</dimen>
+    <dimen name="fab_min_significant_scroll">4dp</dimen>
+    <dimen name="fab_mini_shadow_size">6dp</dimen>
+    <dimen name="fab_shadow_size">8dp</dimen>
+    <dimen name="fab_size_mini">40dp</dimen>
+    <dimen name="fab_size_normal">56dp</dimen>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment />
 
@@ -1355,6 +1352,10 @@
     <eat-comment />
 
     <string name="decline">Decline</string>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="define_FloatingActionButton"></string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
@@ -1362,6 +1363,21 @@
     <string name="gps">Driving Detection</string>
     <string name="gps_frequency">GPS Frequency</string>
     <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="library_FloatingActionButton_author">Oleksandr Melnykov</string>
+    <string name="library_FloatingActionButton_authorWebsite">https://github.com/makovkastar/FloatingActionButton</string>
+    <string name="library_FloatingActionButton_isOpenSource">true</string>
+    <string name="library_FloatingActionButton_libraryDescription">Android Google+ like floating action button which reacts on the list view scrolling events. Becomes visible when the list view is scrolled up and invisible when scrolled down.</string>
+    <string name="library_FloatingActionButton_libraryName">FloatingActionButton</string>
+    <string name="library_FloatingActionButton_libraryVersion">1.0.0</string>
+    <string name="library_FloatingActionButton_libraryWebsite">https://github.com/makovkastar/FloatingActionButton</string>
+    <string name="library_FloatingActionButton_licenseId">mit</string>
+    <string name="library_FloatingActionButton_repositoryLink">https://github.com/makovkastar/FloatingActionButton</string>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
+    <eat-comment />
+
     <string name="message">Custom message</string>
     <string name="next">NEXT</string>
     <string name="not_activated">Not Activated</string>
@@ -2263,34 +2279,6 @@ m>                <item name="android:textColorLink">@color/link_text_material_d
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.shamanland/fab/0.0.5/res/values/values.xml -->
-    <eat-comment />
-
-    <style name="FloatingActionButton" parent="android:Widget.ImageButton">
-        <item name="floatingActionButtonSize">normal</item>
-    </style>
-
-    <style name="FloatingActionButton.Dark" parent="FloatingActionButton">
-        <item name="floatingActionButtonColor">@android:color/tab_indicator_text</item>
-    </style>
-
-    <style name="FloatingActionButton.Dark.Mini" parent="FloatingActionButton.Mini">
-        <item name="floatingActionButtonColor">@android:color/tab_indicator_text</item>
-    </style>
-
-    <style name="FloatingActionButton.Light" parent="FloatingActionButton">
-        <item name="floatingActionButtonColor">@android:color/primary_text_dark</item>
-    </style>
-
-    <style name="FloatingActionButton.Light.Mini" parent="FloatingActionButton.Mini">
-        <item name="floatingActionButtonColor">@android:color/primary_text_dark</item>
-    </style>
-
-    <style name="FloatingActionButton.Mini" parent="FloatingActionButton">
-        <item name="floatingActionButtonSize">mini</item>
-    </style>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
-    <eat-comment />
 
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>

@@ -29,8 +29,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.melnykov.fab.FloatingActionButton;
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
-import com.shamanland.fab.FloatingActionButton;
 
 public class TestMain extends ActionBarActivity implements OnClickListener {
     // Author - Kyle Corry(programmer, design), Dylan Kiley(design, research and idea),
@@ -49,19 +49,25 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_layout);
         getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
-        AdBuddiz.cacheAds(this);
+        // Full screen ads will appear around 75% of the time
+        if(Math.random() < .75) {
+            AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
+            AdBuddiz.cacheAds(this);
+            AdBuddiz.showAd(this);
+        }
+        // This sets up the adview
         adView = (AdView) findViewById(R.id.adView);
         AdRequest.Builder adRequest = new AdRequest.Builder();
         adView.loadAd(adRequest.build());
-        AdBuddiz.showAd(this);
         //this is for the developers
-        //adView.setVisibility(View.GONE);
+//        adView.setVisibility(View.GONE);
+        // This is for the floating action button on the bottom
         btn = (FloatingActionButton) findViewById(R.id.fab);
-        btn.setSize(FloatingActionButton.SIZE_NORMAL);
+        // Ths is the textView at the bottom with the status of the service
         tv = (TextView) findViewById(R.id.status);
         if (!alarmRunning()) {
             if (gps()) {
+                // Starts service if gps is on, else lets the user know that they need GPS on
                 startAlarm();
                 //let the user know the service was started
                 Toast.makeText(this, getResources().getString(R.string.service_start), Toast.LENGTH_SHORT).show();
@@ -69,6 +75,7 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
                 gpsDialog();
             }
         }
+        // If the service was already running, set the textview to on
         if (alarmRunning()) {
            // btn.setColor(getResources().getColor(R.color.blue));
             tv.setText("ON");
@@ -77,19 +84,21 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
 
     }
 
-
+    // called when app is closed, stops ads
     @Override
     protected void onDestroy() {
         super.onDestroy();
         adView.destroy();
     }
 
+    //This is called after returning from the settings menu
     @Override
     protected void onResume() {
         super.onResume();
         adView.resume();
         bootStart();
         Log.d("Resume", "Resumed");
+        // Checks if the GPS frequency was changed, and restarts the service if it was
         if (getPrefs.getBoolean("gpsChange", false) && alarmRunning()) {
             cancelAlarm(true);
             Log.d("Main Activity", Integer.toString(frequencyMins()));
@@ -101,6 +110,7 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
 
     }
 
+    // This checks if the app should start once the phone is rebooted
     private void bootStart() {
         boolean boot = getPrefs.getBoolean("bootStart", false);
         ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
@@ -141,20 +151,17 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         return true;
     }
 
+    // This determines which dropdown value was touched
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 // settings menu
-                Intent openSettings;
-                if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1){
-                    openSettings = new Intent("com.KDB.shutupdrive.PREFS");
-                } else {
-                    openSettings = new Intent("com.KDB.shutupdrive.SETTINGS");
-                }
+                Intent openSettings = new Intent("com.KDB.shutupdrive.SETTINGS");
                 startActivity(openSettings);
                 break;
             case R.id.action_tutorial:
+                // Tutorial
                 Intent openTut = new Intent(this, Tutorial1.class);
                 startActivity(openTut);
                 break;
@@ -181,17 +188,20 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         }
     }
 
+    // I use the repeating alarm to check speed at a set interval, this greatly reduces the amount of battery used
     private void startAlarm() {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent gpsIntent = new Intent(this, GPSAlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, gpsIntent, 0);
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), frequencyMins() * ActivityUtils.MILLIS_IN_MINUTE, pendingIntent);
         SharedPreferences.Editor editor = getPrefs.edit();
+        // Stores that the alarm is running
         editor.putBoolean("alarmRunning", true);
         editor.apply();
 
     }
 
+    // Cancels the service
     private void cancelAlarm(boolean self) {
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
@@ -202,6 +212,7 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         editor.apply();
         stopService(new Intent(this, CarMode.class));
         number = getPrefs.getString("number", "");
+        // Deactivation notification
         if (!number.isEmpty() && !self) {
 
             //get the sms manager to send text
@@ -214,11 +225,12 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         if (!self)
             Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
     }
-
+    // Checks to see if the service is running
     private boolean alarmRunning() {
         return getPrefs.getBoolean("alarmRunning", false);
     }
 
+    // Gets the gps frequency
     private int frequencyMins() {
         String gpsTime = getPrefs.getString("gps", "10");
         return Integer.valueOf(gpsTime);

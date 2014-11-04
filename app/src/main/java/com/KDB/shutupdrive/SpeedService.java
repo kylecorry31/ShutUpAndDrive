@@ -23,6 +23,7 @@ public class SpeedService extends Service implements LocationListener {
     //the speed of the phone
     private float speed;
 
+    //required by service (service runs in background)
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -55,6 +56,7 @@ public class SpeedService extends Service implements LocationListener {
     }
 
     private void gpsNotification() {
+        // Lets user know that it needs gps via notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
         builder.setContentTitle(getResources().getString(R.string.app_name))
                 .setContentText(getResources().getString(R.string.gps_needed))
@@ -66,11 +68,13 @@ public class SpeedService extends Service implements LocationListener {
     }
 
     private PendingIntent getContentIntent() {
+        // This is for the notification...opens gps if clicked
         Intent gpsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         return PendingIntent.getActivity(getApplicationContext(), 0, gpsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private boolean airplaneModeOff() {
+        // Checks if airplane mode is off
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1)
             return Settings.System.getInt(getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) == 0;
         else

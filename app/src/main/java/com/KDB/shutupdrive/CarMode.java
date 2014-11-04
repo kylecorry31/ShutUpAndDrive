@@ -125,6 +125,7 @@ public class CarMode extends Service {
                     if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
                         Log.d("Phone State", "Offhook");
                         if (tts != null) {
+                            // Stop text to speech if phone is offhook
                             tts.stop();
                             tts.shutdown();
                         }
