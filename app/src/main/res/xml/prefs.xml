@@ -22,7 +22,7 @@
             android:entryValues="@array/gpsValues"
             android:key="gps"
             android:summary="Choose how often GPS will check speed"
-            android:title="@string/gps_frequency"></ListPreference>
+            android:title="@string/gps_frequency"/>
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="bootStart"

@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -22,12 +21,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.melnykov.fab.FloatingActionButton;
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
@@ -45,22 +43,25 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
     SharedPreferences getPrefs;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_layout);
         getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        // Full screen ads will appear around 75% of the time
-        if(Math.random() < .75) {
-            AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
-            AdBuddiz.cacheAds(this);
-            AdBuddiz.showAd(this);
-        }
-        // This sets up the adview
         adView = (AdView) findViewById(R.id.adView);
-        AdRequest.Builder adRequest = new AdRequest.Builder();
-        adView.loadAd(adRequest.build());
-        //this is for the developers
-//        adView.setVisibility(View.GONE);
+        if (!ActivityUtils.DEVELOPER_EDITION) {
+            // Full screen ads will appear around 60% of the time
+            if (Math.random() < 0.6) {
+                AdBuddiz.setPublisherKey(ActivityUtils.PUB_KEY);
+                AdBuddiz.cacheAds(this);
+                AdBuddiz.showAd(this);
+            }
+            // This sets up the adview
+
+            AdRequest.Builder adRequest = new AdRequest.Builder();
+            adView.loadAd(adRequest.build());
+        }
+        if (ActivityUtils.DEVELOPER_EDITION)
+            adView.setVisibility(View.GONE);
         // This is for the floating action button on the bottom
         btn = (FloatingActionButton) findViewById(R.id.fab);
         // Ths is the textView at the bottom with the status of the service
@@ -77,7 +78,7 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         }
         // If the service was already running, set the textview to on
         if (alarmRunning()) {
-           // btn.setColor(getResources().getColor(R.color.blue));
+            // btn.setColor(getResources().getColor(R.color.blue));
             tv.setText("ON");
         }
         btn.setOnClickListener(this);
@@ -88,14 +89,16 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        adView.destroy();
+        if (!ActivityUtils.DEVELOPER_EDITION)
+            adView.destroy();
     }
 
     //This is called after returning from the settings menu
     @Override
     protected void onResume() {
         super.onResume();
-        adView.resume();
+        if (!ActivityUtils.DEVELOPER_EDITION)
+            adView.resume();
         bootStart();
         Log.d("Resume", "Resumed");
         // Checks if the GPS frequency was changed, and restarts the service if it was
@@ -129,7 +132,8 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        adView.pause();
+        if (!ActivityUtils.DEVELOPER_EDITION)
+            adView.pause();
     }
 
     @Override
@@ -148,6 +152,17 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        if(ActivityUtils.DEVELOPER_EDITION) {
+            MenuItem item = menu.add("Enable Drive Mode");
+            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    Intent carmode = new Intent(getBaseContext(), CarMode.class);
+                    startService(carmode);
+                    return true;
+                }
+            });
+        }
         return true;
     }
 
@@ -225,6 +240,7 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
         if (!self)
             Toast.makeText(this, getResources().getString(R.string.service_stop), Toast.LENGTH_SHORT).show();
     }
+
     // Checks to see if the service is running
     private boolean alarmRunning() {
         return getPrefs.getBoolean("alarmRunning", false);
@@ -245,7 +261,7 @@ public class TestMain extends ActionBarActivity implements OnClickListener {
     //this is shown if the user does not have gps on
     private void gpsDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(getResources().getString(R.string.gps_needed)).setCancelable(false).setPositiveButton("Settings",
+        alertDialogBuilder.setMessage(getResources().getString(R.string.gps_needed)).setCancelable(false).setPositiveButton("SETTINGS",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -3,71 +3,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-   >
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-5617453255042566/1905751930" />
+        ads:adUnitId="ca-app-pub-5617453255042566/1905751930"/>
+
     <ImageView
-        android:layout_below="@id/adView"
-        android:layout_height="200dp"
-        android:layout_width="match_parent"
-        android:src="@drawable/title_image"
         android:id="@+id/titleImage"
-        android:scaleType="centerCrop" />
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/adView"
+        android:scaleType="centerCrop"
+        android:src="@drawable/title_image" />
+
     <TextView
-        android:layout_below="@id/titleImage"
+        android:id="@+id/motto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/background_floating_material_dark"
+        android:layout_below="@id/titleImage"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="28sp"
         android:gravity="center"
-        android:layout_width="match_parent"
         android:text="Stay safe while you drive"
-        android:id="@+id/motto"
-        />
+        android:textColor="@color/background_floating_material_dark"
+        android:textSize="28sp" />
+
     <TextView
+        android:id="@+id/desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/motto"
-        android:textSize="18sp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:id="@+id/desc"
         android:text="Shut Up &amp; Drive! turns on when you drive to prevent you from texting while driving."
-        />
+        android:textSize="18sp" />
+
     <TextView
-        android:layout_height="wrap_content"
+        android:id="@+id/status"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:text="OFF"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:textSize="32sp"
-        android:id="@+id/status"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:text="OFF"
         android:textColor="@color/blue"
-        />
-    <com.melnykov.fab.FloatingActionButton
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <com.melnykov.fab.FloatingActionButton xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fab"
-        android:layout_gravity="bottom|right"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/white_car"
+        android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        fab:fab_type="normal"
-        fab:fab_colorRipple="@color/darkBlue"
+        android:src="@drawable/white_car"
         fab:fab_colorNormal="@color/blue"
-        fab:fab_colorPressed="@color/darkBlue"/>
+        fab:fab_colorPressed="@color/darkBlue"
+        fab:fab_colorRipple="@color/darkBlue"
+        fab:fab_type="normal" />
 
 </RelativeLayout><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/new_layout.xml -->

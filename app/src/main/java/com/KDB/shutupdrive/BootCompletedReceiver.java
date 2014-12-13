@@ -13,7 +13,6 @@ import android.preference.PreferenceManager;
  * Created by kyle on 7/13/14.
  */
 public class BootCompletedReceiver extends BroadcastReceiver {
-    private boolean start_service_bootup = false;
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
     SharedPreferences getPrefs;
@@ -25,7 +24,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
             c = context;
             getPrefs = PreferenceManager.getDefaultSharedPreferences(c);
-            start_service_bootup = getPrefs.getBoolean("bootStart", false);
+            boolean start_service_bootup = getPrefs.getBoolean("bootStart", false);
             setUp();
             if (start_service_bootup) {
                 if (alarmRunning()) {

@@ -1,8 +1,8 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "com.KDB.shutupdrive"
@@ -12,17 +12,14 @@ android {
 
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled true
+            shrinkResources true
         }
     }
 }
-repositories {
-    mavenCentral()
-}
 dependencies {
     compile 'com.android.support:support-v4:+'
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services-ads:+'
     compile 'com.android.support:appcompat-v7:+'
     compile files('libs/AdBuddiz-2.3.3.jar')
     compile 'com.melnykov:floatingactionbutton:+'

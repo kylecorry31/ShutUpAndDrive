@@ -1,59 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pre-dex-items>
+<items version="2" >
 
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar"
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-c227f4bece931fa8ccbe2b535da555fce52b2193.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-76cdb058138e37e48ffa777d783b962b3a39a20e.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-9051a220afa2caa8798be43e82e16eff52fe4afd.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-771c2529e8dc5ae3f42cd405f09583f6338d4763.jar" />
+    </item>
+    <item
+        jar="/home/kyle/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/library-2.4.0-e7d3c3c880e2a667a22ba31fe2887e9da76ea2ef.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="ee9ae2b87d57a33a7381c75d54db12bdf2995656">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-851e943927446e22559e06b1e60317f8099920af.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="95482e7c792a7c0d5a9d5461e97726bd54fe9549">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-e0d8c2d435dd8cf56bbf8127f05e8356754e696c.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ee9ae2b87d57a33a7381c75d54db12bdf2995656">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-851e943927446e22559e06b1e60317f8099920af.jar" />
+    </item>
+    <item
         jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
         jumboMode="false"
-        revision="21.0.1"
-        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91"/>
+        revision="21.1.1"
+        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
+    </item>
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/internal_impl-21.0.0-8000ea8e54f6d48207a3e40149f6f850ef3ef24b.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-1dfe1d83e5f34aea77fec70f86da33aa94d84df3.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/support-annotations-21.0.0-8fcfcfe5ab720a26c38ffa78c2c3a9fe83d055c7.jar"
-        jar="/home/kyle/Development/Android sdk/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-376c28a3b5a965ee3c309ab2a9a1770d191c55e7.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.11/classes.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="0f700f6802ba1a1f1fa7ac26d5db0666a89d75a6"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-798f7dc549b0e19996e341d3869ff73d8749bc4c.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.0.6/classes.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="9e2a086dd45f06b4bfa44ecfa63e892486699af6"/>
-    <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-76cdb058138e37e48ffa777d783b962b3a39a20e.jar"
         jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
         jumboMode="false"
         revision="21.0.1"
-        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2"/>
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-76cdb058138e37e48ffa777d783b962b3a39a20e.jar" />
+    </item>
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/classes-1077337a4ed4c9acca1dac895cc6bcbfb6a370af.jar"
-        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/6.5.87/classes.jar"
         jumboMode="false"
-        revision="21.0.1"
-        sha1="95fd37732ec852e99f07eeb516a3650172f1d136"/>
+        revision="21.1.2"
+        sha1="41aa21f9c5d9ea9aab32c0b8e33d0c13364063a9">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-5870a06c7d427b5da5b1b989eaa43bf74788f189.jar" />
+    </item>
     <item
-        dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/release/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar"
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-76cdb058138e37e48ffa777d783b962b3a39a20e.jar" />
+    </item>
+    <item
         jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
         jumboMode="false"
-        revision="20.0.0"
-        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91"/>
+        revision="21.1.2"
+        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-df8e1e00eb73fc256ba6e20ac860b46755c3947b.jar" />
+    </item>
+    <item
+        jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
+        jumboMode="false"
+        revision="21.0.1"
+        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
+    </item>
+    <item
+        jar="/home/kyle/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/library-2.4.0-e7d3c3c880e2a667a22ba31fe2887e9da76ea2ef.jar" />
+    </item>
 
-</pre-dex-items>
+</items>

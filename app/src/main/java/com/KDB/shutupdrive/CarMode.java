@@ -73,11 +73,7 @@ public class CarMode extends Service {
         //set the phone to silent
         silent();
         //enable or disable auto-reply
-        if (auto) {
-            autoreply = true;
-        } else {
-            autoreply = false;
-        }
+        autoreply = auto;
         //create a notification
         notification();
         //allow or block phone calls
@@ -108,7 +104,7 @@ public class CarMode extends Service {
                                     } else {
                                         readNumber = readNumber + name;
                                     }
-                                    tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null);
+                                    tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null, null);
                                 }
                             }
                         });
@@ -156,7 +152,12 @@ public class CarMode extends Service {
             }
         }
         //if there is no name, return nothing
-        cur.close();
+        try {
+            assert cur != null;
+            cur.close();
+        } catch (NullPointerException e) {
+            Log.e("CarMode", "Cursor caused a null pointer exception");
+        }
         return "";
     }
 

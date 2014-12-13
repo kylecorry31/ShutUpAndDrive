@@ -3,9 +3,11 @@ package com.KDB.shutupdrive;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 
 /**
  * Created by kyle on 8/12/14.
@@ -13,6 +15,9 @@ import android.view.Window;
 public class Splash extends Activity {
     private static final String FILENAME = "firstTime";
     private boolean first;
+    ImageButton muleSticker;
+    final static String url = "https://www.stickermule.com/unlock?ref_id=3567360701";
+    boolean muleClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,18 @@ public class Splash extends Activity {
         // Removes actionbar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
+        muleSticker = (ImageButton) findViewById(R.id.stickerMule);
+        if (ActivityUtils.DEVELOPER_EDITION)
+            muleSticker.setVisibility(View.GONE);
+        muleSticker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mule = new Intent(Intent.ACTION_VIEW);
+                mule.setData(Uri.parse(url));
+                muleClicked = true;
+                startActivity(mule);
+            }
+        });
         // Splash screen stays on for 3 seconds
         Thread timer = new Thread() {
             public void run() {
@@ -31,7 +48,8 @@ public class Splash extends Activity {
                     if (!isFirst()) {
                         // Open the main class
                         Intent i = new Intent(getBaseContext(), TestMain.class);
-                        startActivity(i);
+                        if (!muleClicked)
+                            startActivity(i);
                     }
                 }
             }
@@ -45,6 +63,7 @@ public class Splash extends Activity {
         super.onPause();
         finish();
     }
+
     // If it is the first time the user opened the app, show tutorial
     private boolean isFirst() {
         SharedPreferences getPrefs;

@@ -2,6 +2,7 @@ package com.KDB.shutupdrive;
 
 
 public final class ActivityUtils {
+    public static final boolean DEVELOPER_EDITION = false;
     public static final int MILLIS_IN_SECOND = 1000;
     public static final int SECONDS_IN_MINUTE = 60;
     public static final int MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;

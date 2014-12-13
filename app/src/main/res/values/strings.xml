@@ -22,7 +22,7 @@
     <string name="start">START</string>
     <string name="tutorial">Tutorial</string>
     <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">CANCEL</string>
     <string name="service_start">Service Started</string>
     <string name="service_stop">Service Stopped</string>
     <string name="pref_update">Preferences updated, you may need to restart the app for your updates to take effect</string>

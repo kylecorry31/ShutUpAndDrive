@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.telephony.SmsManager;
 import android.util.Log;
 
 /**
@@ -17,7 +16,6 @@ import android.util.Log;
 public class PackageReceiver extends BroadcastReceiver {
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
-    SharedPreferences getPrefs;
     Context c;
 
     @Override
@@ -26,7 +24,6 @@ public class PackageReceiver extends BroadcastReceiver {
         Log.d("App Replaced", "Replaced!");
         if (intent.getAction().equals("android.intent.action.MY_PACKAGE_REPLACED")) {
             c = context;
-            getPrefs = PreferenceManager.getDefaultSharedPreferences(c);
             setUp();
             if (alarmRunning()) {
                 cancelAlarm();
@@ -35,11 +32,12 @@ public class PackageReceiver extends BroadcastReceiver {
                         frequencyMins() * ActivityUtils.MILLIS_IN_MINUTE,
                         pendingIntent);
                 Log.d("Package Receiver", "Alarm Restarted");
-            } else{
+            } else {
                 alarmManager.cancel(pendingIntent);
             }
         }
     }
+
     // Restarts the service
     private void setUp() {
         alarmManager = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
