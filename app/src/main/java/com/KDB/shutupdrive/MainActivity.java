@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.action_tutorial:
                 // Tutorial
-                Intent openTut = new Intent(this, Tutorial1.class);
+                Intent openTut = new Intent(this, Tutorial.class);
                 startActivity(openTut);
                 break;
         }

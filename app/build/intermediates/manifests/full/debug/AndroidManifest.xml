@@ -57,31 +57,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.KDB.shutupdrive.Tutorial1"
+            android:name="com.KDB.shutupdrive.Tutorial"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="com.KDB.shutupdrive.TUTORIAL1" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.KDB.shutupdrive.Tutorial2"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="com.KDB.shutupdrive.TUTORIAL2" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.KDB.shutupdrive.Tutorial3"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="com.KDB.shutupdrive.TUTORIAL3" />
+                <action android:name="com.KDB.shutupdrive.TUTORIAL" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

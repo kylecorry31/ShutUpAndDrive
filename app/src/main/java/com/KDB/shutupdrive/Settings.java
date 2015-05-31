@@ -32,6 +32,11 @@ public class Settings extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.prefs);
+            String defaultMsg = getPreferenceManager().getSharedPreferences().getString("msg", ActivityUtils.DEFAULT_MSG);
+            if(defaultMsg.contentEquals("")){
+                defaultMsg = ActivityUtils.DEFAULT_MSG;
+            }
+            getPreferenceScreen().findPreference("msg").setSummary(defaultMsg);
         }
     }
 }

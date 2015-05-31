@@ -37,7 +37,7 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="accent">#64B5F6</color>
+    <color name="accent">#FF9100</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
@@ -101,6 +101,7 @@
     <eat-comment/>
     <color name="primary">#2196F3</color>
     <color name="primaryDark">#1976D2</color>
+    <color name="primaryLight">#64B5F6</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
@@ -337,7 +338,6 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
-    <string name="activated">Activated</string>
     <string name="app_name">Shut Up &amp; Drive!</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/res/values/values.xml -->
     <eat-comment/>
@@ -346,11 +346,6 @@
     <eat-comment/>
     <string name="auth_google_play_services_client_facebook_display_name">Facebook</string>
     <string name="auth_google_play_services_client_google_display_name">Google</string>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
-    <string name="autoreply">Auto-Reply</string>
-    <string name="autoreply_function">Shut Up &amp; Drive! will automatically reply to texts while you drive.</string>
-    <string name="cancel">CANCEL</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text"><ns1:g id="app_name">%1$s</ns1:g> requires an update to the Android Wear app.</string>
@@ -389,42 +384,32 @@
     <eat-comment/>
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
-    <string name="deactivation_notification">Deactivation Notification</string>
-    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
-    <eat-comment/>
     <string name="decline">Decline</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="function">Shut Up &amp; Drive! will automatically activate its driving mode when you drive.</string>
-    <string name="gps">Driving Detection</string>
-    <string name="gps_frequency">GPS Frequency</string>
-    <string name="gps_needed">GPS is disabled. Shut Up &amp; Drive! requires the GPS to be enabled.</string>
-    <string name="message">Custom message</string>
+    <string name="description_auto_reply">Automatically reply to messages while driving</string>
+    <string name="description_caller_id_readout">Read out who\'s calling while driving</string>
+    <string name="description_driving_detection">Automatically activate while driving</string>
+    <string name="description_main"><![CDATA[Shut Up & Drive! turns on when you drive to prevent you from texting while driving]]></string>
+    <string name="feature_auto_reply">Auto-Reply</string>
+    <string name="feature_caller_id_readout">Caller ID Readout</string>
+    <string name="feature_driving_detection">Driving Detection</string>
     <string name="next">NEXT</string>
-    <string name="not_activated">Not Activated</string>
-    <string name="notify_function">Shut Up &amp; Drive! will notify a specified number if the app is deactivated.</string>
     <string name="off">OFF</string>
     <string name="on">ON</string>
-    <string name="phone">Caller ID Readout</string>
-    <string name="phone_function">Shut Up &amp; Drive! will read out any caller\'s name or number while you drive.</string>
-    <string name="pref_update">Preferences updated, you may need to restart the app for your updates to take effect</string>
-    <string name="remember">Remember, don\'t text and drive.</string>
-    <string name="service_start">Service Started</string>
-    <string name="service_stop">Service Stopped</string>
     <string name="start">START</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="stay_safe">Stay safe while you drive</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="tap_activate">Tap to activate</string>
-    <string name="tap_deactivate">Tap to deactivate</string>
     <string name="tutorial">Tutorial</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>

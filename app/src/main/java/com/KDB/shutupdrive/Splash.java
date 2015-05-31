@@ -3,8 +3,20 @@ package com.KDB.shutupdrive;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by kyle on 8/12/14.
@@ -12,6 +24,8 @@ import android.view.Window;
 public class Splash extends Activity {
     private static final String FILENAME = "firstTime";
     private boolean first;
+    ImageView image;
+    TextView titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,25 +33,22 @@ public class Splash extends Activity {
         // Removes actionbar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
-
-        // Splash screen stays on for 3 seconds
-        Thread timer = new Thread() {
+        image = (ImageView) findViewById(R.id.icon);
+        titleText = (TextView) findViewById(R.id.title);
+        Animation slideRight = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right);
+        image.startAnimation(slideRight);
+        titleText.startAnimation(slideRight);
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
             public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (!isFirst()) {
-                        // Open the main class
-                        Intent i = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(i);
-                    }
+                if (!isFirst()) {
+                    // Open the main class
+                    Intent i = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(i);
                 }
             }
-        };
-        timer.start();
-
+        }, 2000);
     }
 
     @Override
@@ -45,6 +56,7 @@ public class Splash extends Activity {
         super.onPause();
         finish();
     }
+
 
     // If it is the first time the user opened the app, show tutorial
     private boolean isFirst() {
@@ -55,11 +67,12 @@ public class Splash extends Activity {
             SharedPreferences.Editor editor = getPrefs.edit();
             editor.putBoolean("firstTime", false);
             editor.apply();
-            Intent intent = new Intent(getApplicationContext(), Tutorial1.class);
+            Intent intent = new Intent(getApplicationContext(), Tutorial.class);
             startActivity(intent);
             return true;
         } else {
             return false;
         }
     }
+
 }
