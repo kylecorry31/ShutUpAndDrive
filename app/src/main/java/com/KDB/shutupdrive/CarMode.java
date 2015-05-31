@@ -43,7 +43,7 @@ public class CarMode extends Service {
     //allow phone
     private boolean phone;
     //notification icon
-    private final int icon = R.drawable.notification;
+    private final int icon = R.drawable.ic_directions_car_white_24dp;
     //notification
     private NotificationManager nm;
     //prefs
@@ -189,15 +189,15 @@ public class CarMode extends Service {
                 .setContentText(ActivityUtils.RUNNING).setOngoing(true)
                 .addAction(R.drawable.cancel, "I\'m not driving", notDriving());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            Intent resultIntent = new Intent(this, TestMain.class);
+            Intent resultIntent = new Intent(this, MainActivity.class);
             TaskStackBuilder sb = TaskStackBuilder.create(this);
-            sb.addParentStack(TestMain.class);
+            sb.addParentStack(MainActivity.class);
             sb.addNextIntent(resultIntent);
             PendingIntent pi = sb.getPendingIntent(0,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pi);
         } else {
-            Intent intent = new Intent(this, TestMain.class);
+            Intent intent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pendingIntent);
         }

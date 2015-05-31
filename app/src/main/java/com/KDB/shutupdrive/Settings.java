@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 /**
  * Created by kyle on 11/3/14.
  */
-public class Settings extends ActionBarActivity {
+public class Settings extends AppCompatActivity {
     static Context c;
 
     @Override
@@ -26,26 +27,10 @@ public class Settings extends ActionBarActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragment {
-        //contains the settings and checks if the gps frequency was changed
-        SharedPreferences.OnSharedPreferenceChangeListener listener;
-        SharedPreferences prefs;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            prefs = PreferenceManager.getDefaultSharedPreferences(c);
-            listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                    Log.d("Preference Changed", key);
-                    if (key.equals("gps")) {
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putBoolean("gpsChange", true);
-                        editor.apply();
-                    }
-                }
-            };
-            prefs.registerOnSharedPreferenceChangeListener(listener);
             addPreferencesFromResource(R.xml.prefs);
         }
     }

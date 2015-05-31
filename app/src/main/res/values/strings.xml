@@ -26,4 +26,6 @@
     <string name="service_start">Service Started</string>
     <string name="service_stop">Service Stopped</string>
     <string name="pref_update">Preferences updated, you may need to restart the app for your updates to take effect</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
 </resources>

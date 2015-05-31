@@ -61,7 +61,7 @@
             android:layout_height="80dp"
             android:text="@string/next"
             android:layout_alignParentBottom="true"
-            android:background="@color/blue"
+            android:background="@color/primary"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:padding="10dp"

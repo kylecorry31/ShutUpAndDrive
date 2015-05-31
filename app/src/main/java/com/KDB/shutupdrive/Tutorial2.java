@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 /**
  * Created by kyle on 8/12/14.
  */
-public class Tutorial2 extends ActionBarActivity implements View.OnClickListener {
+public class Tutorial2 extends AppCompatActivity implements View.OnClickListener {
     private Button next;
     private CheckBox cb;
     private EditText et;

@@ -5,12 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash">
-<ImageButton
-    android:layout_width="match_parent"
-    android:layout_marginTop="5dp"
-    android:layout_height="80dp"
-    android:id="@+id/stickerMule"
-    android:src="@drawable/sticker_mule"
-    android:background="@color/white"
-    android:scaleType="fitCenter" />
+
 </LinearLayout><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/splash.xml -->

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,7 +13,7 @@ import android.widget.CheckBox;
 /**
  * Created by kyle on 8/12/14.
  */
-public class Tutorial3 extends ActionBarActivity implements View.OnClickListener {
+public class Tutorial3 extends AppCompatActivity implements View.OnClickListener {
     private Button next;
     private CheckBox cb;
     private boolean phone;
@@ -40,7 +41,7 @@ public class Tutorial3 extends ActionBarActivity implements View.OnClickListener
         SharedPreferences.Editor editor = getPrefs.edit();
         editor.putBoolean("phone", cb.isChecked());
         editor.commit();
-        Intent i = new Intent(this, Tutorial4.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
