@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryLight"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:background="@color/primaryLight">
 
     <TextView
         android:id="@+id/feature_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center_horizontal"
-        android:paddingTop="16dp"
+        android:paddingTop="32dp"
         android:text="@string/feature_driving_detection"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@android:color/white" />
 
     <ImageView
         android:id="@+id/photo"
-        android:layout_below="@id/feature_name"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_below="@id/feature_name"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/car_image" />
 
@@ -27,34 +31,35 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:layout_below="@id/photo"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="48dp"
         android:gravity="center_horizontal"
         android:text="@string/description_driving_detection"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/white" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@android:color/white"
-        android:background="@drawable/custom_button"
-        android:layout_alignParentBottom="true"
-        android:text="Next"
-        style="?android:attr/button"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+        android:src="@drawable/ic_arrow_forward_white_24dp"
+        app:borderWidth="0dp" />
 
     <ProgressBar
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
         android:layout_above="@+id/next"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
 
 
 </RelativeLayout><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/layout/layout_tutorial.xml -->

@@ -2,10 +2,15 @@ package com.KDB.shutupdrive;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,22 +37,29 @@ public class Tutorial extends Activity implements View.OnClickListener {
     int nextCount;
     TextView featureText, descriptionText;
     ImageView image;
-    Button nextBtn;
+    FloatingActionButton fab;
     ProgressBar progressBar;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.layout_tutorial);
-        nextCount = 0;
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+        nextCount = prefs.getInt(Constants.TUT_NUM_KEY, 0);
         featureText = (TextView) findViewById(R.id.feature_name);
         descriptionText = (TextView) findViewById(R.id.description);
         image = (ImageView) findViewById(R.id.photo);
-        nextBtn = (Button) findViewById(R.id.next);
+        fab = (FloatingActionButton) findViewById(R.id.next);
+        Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+        fab.startAnimation(slideUp);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         updateUI();
-        nextBtn.setOnClickListener(this);
+        fab.setOnClickListener(this);
+
     }
 
     @Override
@@ -65,11 +77,11 @@ public class Tutorial extends Activity implements View.OnClickListener {
             ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, (int) (nextCount / (double) features.length * 100), (int) ((nextCount + 1) / (double) features.length * 100));
             anim.setDuration(500);
             progressBar.startAnimation(anim);
+            editor.putInt(Constants.TUT_NUM_KEY, nextCount);
+            editor.apply();
         } else {
+            editor.putInt(Constants.TUT_NUM_KEY, 0);
             startActivity(new Intent(this, MainActivity.class));
-        }
-        if ((nextCount + 1) == features.length) {
-            nextBtn.setText("Get started");
         }
     }
 

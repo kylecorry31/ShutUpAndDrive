@@ -3,6 +3,7 @@ package com.KDB.shutupdrive;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +15,7 @@ import android.util.Log;
  */
 public class Settings extends AppCompatActivity {
     static Context c;
+    static Preference messagePreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +28,35 @@ public class Settings extends AppCompatActivity {
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
 
-    public static class SettingsFragment extends PreferenceFragment {
+    public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.prefs);
-            String defaultMsg = getPreferenceManager().getSharedPreferences().getString("msg", ActivityUtils.DEFAULT_MSG);
-            if(defaultMsg.contentEquals("")){
-                defaultMsg = ActivityUtils.DEFAULT_MSG;
+            SharedPreferences sharedPreferences = getPreferenceManager().getSharedPreferences();
+            String userMessage = sharedPreferences.getString("msg", ActivityUtils.DEFAULT_MSG);
+            if (userMessage.contentEquals("")) {
+                userMessage = ActivityUtils.DEFAULT_MSG;
             }
-            getPreferenceScreen().findPreference("msg").setSummary(defaultMsg);
+            messagePreference = getPreferenceScreen().findPreference("msg");
+            messagePreference.setSummary(userMessage);
+            messagePreference.setEnabled(sharedPreferences.getBoolean("autoReply", true));
+
+            sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (key.contentEquals("msg")) {
+                String userMessage = sharedPreferences.getString("msg", ActivityUtils.DEFAULT_MSG);
+                if (userMessage.contentEquals("")) {
+                    userMessage = ActivityUtils.DEFAULT_MSG;
+                }
+                messagePreference.setSummary(userMessage);
+            } else if (key.contentEquals("autoReply")) {
+                messagePreference.setEnabled(sharedPreferences.getBoolean("autoReply", true));
+            }
         }
     }
 }

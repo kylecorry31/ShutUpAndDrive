@@ -8,6 +8,10 @@ public class Constants {
 
     public static final long DETECTION_INTERVAL = 10000;
 
+    public static final String TUT_NUM_KEY = "tutNum";
+
+    public static final boolean DEVELOPER_MODE = true;
+
     public static final String SERVICES_CONNECTED = "Google Play Services Connected";
 
     public static final String SERVICES_FAILED = "Connection to Google Play Services failed";

@@ -23,5 +23,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:+'
     compile 'com.google.android.gms:play-services-location:7.5.+'
     compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:support-v4:+'
     compile 'com.android.support:design:+'
 }
