@@ -168,7 +168,7 @@ public class CarMode extends Service {
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(ActivityUtils.RUNNING)
                         .setOngoing(true)
-                        .addAction(R.drawable.ic_cancel_white_24dp, "I\'m not driving", createNotDrivingPendingIntent());
+                        .addAction(R.drawable.ic_cancel_white_24dp, "Not driving", createNotDrivingPendingIntent());
         Intent resultIntent = new Intent(this, MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
