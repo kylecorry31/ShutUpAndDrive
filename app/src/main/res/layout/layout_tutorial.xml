@@ -13,7 +13,6 @@
         android:layout_marginRight="16dp"
         android:gravity="center_horizontal"
         android:paddingTop="32dp"
-        android:text="@string/feature_driving_detection"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@android:color/white" />
 
@@ -24,8 +23,7 @@
         android:layout_below="@id/feature_name"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/car_image" />
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/description"
@@ -36,7 +34,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="48dp"
         android:gravity="center_horizontal"
-        android:text="@string/description_driving_detection"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/white" />
 

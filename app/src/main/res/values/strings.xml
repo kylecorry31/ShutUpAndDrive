@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">Shut Up &amp; Drive!</string>
     <string name="action_settings">Settings</string>
-    <string name="next">NEXT</string>
-    <string name="start">START</string>
     <string name="tutorial">Tutorial</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
@@ -13,6 +11,6 @@
     <string name="description_auto_reply">Automatically reply to messages while driving</string>
     <string name="feature_caller_id_readout">Caller ID Readout</string>
     <string name="description_caller_id_readout">Read out who\'s calling while driving</string>
-    <string name="description_main"><![CDATA[Shut Up & Drive! turns on when you drive to prevent you from texting while driving]]></string>
+    <string name="description_main">Activates when you drive to keep you safe and focused on the road</string>
     <string name="stay_safe">Stay safe while you drive</string>
 </resources>
