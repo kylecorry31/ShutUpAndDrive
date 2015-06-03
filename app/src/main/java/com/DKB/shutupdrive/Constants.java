@@ -6,7 +6,13 @@ package com.DKB.shutupdrive;
 public class Constants {
     public static final String TAG = "activity-recognition";
 
-    public static final long DETECTION_INTERVAL = 10000;
+    public static final long MILLIS_IN_SECOND = 1000;
+
+    public static final long MILLIS_IN_MINUTE = 60 * MILLIS_IN_SECOND;
+
+    public static final long DETECTION_INTERVAL = 5 * MILLIS_IN_MINUTE;
+
+    public static final boolean DEVELOPER = true;
 
     public static final String TUT_NUM_KEY = "tutNum";
 

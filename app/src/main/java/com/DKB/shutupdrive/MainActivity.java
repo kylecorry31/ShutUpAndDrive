@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +26,17 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 
 /**
  * Created by kyle on 5/30/15.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, ResultCallback<Status>, Animation.AnimationListener {
+        GoogleApiClient.OnConnectionFailedListener, ResultCallback<Status> {
 
     GoogleApiClient mGoogleApiClient;
     FloatingActionButton fab;
@@ -40,10 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean toast;
     SharedPreferences prefs;
     MenuItem item;
+    private static final String FILENAME = "firstTime";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isFirst();
         setContentView(R.layout.layout_main);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         statusText = (TextView) findViewById(R.id.status);
@@ -56,15 +64,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buildGoogleApiClient();
     }
 
+    private boolean isFirst() {
+        SharedPreferences getPrefs;
+        getPrefs = getSharedPreferences(FILENAME, 0);
+        boolean first = getPrefs.getBoolean("firstTime", true);
+        if (first) {
+            SharedPreferences.Editor editor = getPrefs.edit();
+            editor.putBoolean("firstTime", false);
+            editor.apply();
+            Intent intent = new Intent(getApplicationContext(), Splash.class);
+            startActivity(intent);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     protected void setUpUI() {
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            titleImage.setVisibility(View.VISIBLE);
-        }
-        mottoText.setVisibility(View.VISIBLE);
-        descText.setVisibility(View.VISIBLE);
-        fab.setVisibility(View.VISIBLE);
-        statusText.setVisibility(View.VISIBLE);
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_top);
             slideDown.setStartOffset(275);
@@ -137,6 +155,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        if (Constants.DEVELOPER) {
+            menu.add("Clear Log");
+            menu.add("Show Log");
+        }
         return true;
     }
 
@@ -144,27 +166,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         this.item = item;
-        animateOut();
+        if (item.getTitle().equals("Clear Log")) {
+            File logFile = new File("logfile.txt");
+            logFile.delete();
+            Log.d("MainActivity", "Log Cleared");
+        } else if(item.getTitle().equals("Show Log")){
+            try {
+                FileInputStream inputStream = openFileInput("logfile.txt");
+                StringBuilder sb = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                Log.d("Activity Recognition", sb.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            animateOut();
+        }
         return false;
     }
 
     protected void animateOut() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_top);
-            //slideUp.setDuration(750);
+            slideUp.setFillAfter(true);
             titleImage.startAnimation(slideUp);
         }
         Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_bottom);
-        //slideDown.setDuration(750);
-        // Animation slideRight = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right);
+        slideDown.setFillAfter(true);
         Animation fadeOut = AnimationUtils.loadAnimation(getBaseContext(), R.anim.abc_fade_out);
-        //fadeOut.setDuration(750);
-
+        fadeOut.setFillAfter(true);
         fab.startAnimation(slideDown);
         statusText.startAnimation(fadeOut);
         descText.startAnimation(fadeOut);
         mottoText.startAnimation(fadeOut);
-        fadeOut.setAnimationListener(this);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (item.getItemId()) {
+                    case R.id.action_settings:
+                        // settings menu
+                        Intent openSettings = new Intent(getApplicationContext(), Settings.class);
+                        startActivity(openSettings);
+                        break;
+                    case R.id.action_tutorial:
+                        // Tutorial
+                        Intent openTut = new Intent(getApplicationContext(), Tutorial.class);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putInt(Constants.TUT_NUM_KEY, 0);
+                        editor.apply();
+                        startActivity(openTut);
+                        finish();
+                        break;
+                }
+            }
+        }, fadeOut.getDuration());
     }
 
     protected void stopActivityRecognition() {
@@ -210,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onResult(Status status) {
         if (status.isSuccess()) {
             Log.d(Constants.TAG, "Successful");
-            if(toast)
+            if (toast)
                 Toast.makeText(this, running ? "Started" : "Stopped", Toast.LENGTH_SHORT).show();
         }
     }
@@ -226,39 +285,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "No connection to Google Play Services", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        titleImage.setVisibility(View.GONE);
-        mottoText.setVisibility(View.GONE);
-        descText.setVisibility(View.GONE);
-        fab.setVisibility(View.GONE);
-        statusText.setVisibility(View.GONE);
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                // settings menu
-                Intent openSettings = new Intent(this, Settings.class);
-                startActivity(openSettings);
-                break;
-            case R.id.action_tutorial:
-                // Tutorial
-                Intent openTut = new Intent(this, Tutorial.class);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt(Constants.TUT_NUM_KEY, 0);
-                editor.apply();
-                startActivity(openTut);
-                finish();
-                break;
-        }
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
-    }
 
 }

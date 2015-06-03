@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -11,8 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by kyle on 8/12/14.
@@ -39,16 +38,11 @@ public class Splash extends Activity {
         fadeIn.setStartOffset(250);
         image.startAnimation(fadeIn);
         titleText.startAnimation(fadeIn);
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (!isFirst()) {
-                    // Open the main class
-
-                    Intent i = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(i);
-                }
+                Intent intent = new Intent(getApplicationContext(), Tutorial.class);
+                startActivity(intent);
             }
         }, 2000);
     }
@@ -61,21 +55,5 @@ public class Splash extends Activity {
     }
 
 
-    // If it is the first time the user opened the app, show tutorial
-    private boolean isFirst() {
-        SharedPreferences getPrefs;
-        getPrefs = getSharedPreferences(FILENAME, 0);
-        boolean first = getPrefs.getBoolean("firstTime", true);
-        if (first) {
-            SharedPreferences.Editor editor = getPrefs.edit();
-            editor.putBoolean("firstTime", false);
-            editor.apply();
-            Intent intent = new Intent(getApplicationContext(), Tutorial.class);
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 }

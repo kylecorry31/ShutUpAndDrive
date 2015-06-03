@@ -77,27 +77,27 @@
 # view res/layout/abc_screen_toolbar.xml #generated:36
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
 
-# view AndroidManifest.xml #generated:91
+# view AndroidManifest.xml #generated:90
 -keep class com.DKB.shutupdrive.CarMode { <init>(...); }
 
-# view AndroidManifest.xml #generated:92
+# view AndroidManifest.xml #generated:91
 -keep class com.DKB.shutupdrive.DetectedActivityIntentService { <init>(...); }
 
-# view AndroidManifest.xml #generated:58
+# view AndroidManifest.xml #generated:56
 -keep class com.DKB.shutupdrive.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:94
+# view AndroidManifest.xml #generated:93
 -keep class com.DKB.shutupdrive.NotificationReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:67
+# view AndroidManifest.xml #generated:66
 -keep class com.DKB.shutupdrive.Settings { <init>(...); }
 
 # view AndroidManifest.xml #generated:40
 -keep class com.DKB.shutupdrive.Splash { <init>(...); }
 
-# view AndroidManifest.xml #generated:49
+# view AndroidManifest.xml #generated:47
 -keep class com.DKB.shutupdrive.Tutorial { <init>(...); }
 
-# view AndroidManifest.xml #generated:83
+# view AndroidManifest.xml #generated:82
 -keep class com.DKB.shutupdrive.text { <init>(...); }
 

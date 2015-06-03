@@ -3,9 +3,14 @@ package com.DKB.shutupdrive;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.graphics.BitmapCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -18,7 +23,7 @@ import android.widget.TextView;
 /**
  * Created by kyle on 5/31/15.
  */
-public class Tutorial extends Activity implements View.OnClickListener, Animation.AnimationListener {
+public class Tutorial extends Activity implements View.OnClickListener {
 
     private int features[][] = {
             {R.string.feature_driving_detection, R.string.description_driving_detection},
@@ -40,11 +45,15 @@ public class Tutorial extends Activity implements View.OnClickListener, Animatio
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     Animation fadeIn, fadeOut;
+    Bitmap featureImage;
+    BitmapFactory.Options options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         setContentView(R.layout.layout_tutorial);
         getWindow().setBackgroundDrawable(null);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -84,7 +93,7 @@ public class Tutorial extends Activity implements View.OnClickListener, Animatio
             image.startAnimation(fadeOut);
             featureText.setText(getString(features[nextCount][0]));
             descriptionText.setText(getString(features[nextCount][1]));
-            image.setImageResource(images[nextCount]);
+            new LoadAndShowImages().execute(images[nextCount]);
             featureText.startAnimation(fadeIn);
             descriptionText.startAnimation(fadeIn);
             image.startAnimation(fadeIn);
@@ -100,32 +109,25 @@ public class Tutorial extends Activity implements View.OnClickListener, Animatio
             image.startAnimation(fadeOut);
             progressBar.startAnimation(fadeOut);
             Animation slideOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_bottom);
-            slideOut.setAnimationListener(this);
+            new Handler()
+                    .postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            featureText.setVisibility(View.GONE);
+                            fab.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+                            descriptionText.setVisibility(View.GONE);
+                            image.setVisibility(View.GONE);
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            image.setImageDrawable(null);
+                            featureImage.recycle();
+                            System.gc();
+                            finish();
+                        }
+                    }, slideOut.getDuration());
+
             fab.startAnimation(slideOut);
         }
-    }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        featureText.setVisibility(View.GONE);
-        fab.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
-        descriptionText.setVisibility(View.GONE);
-        image.setVisibility(View.GONE);
-        startActivity(new Intent(this, MainActivity.class));
-        image.setImageDrawable(null);
-        System.gc();
-        finish();
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
     }
 
     public class ProgressBarAnimation extends Animation {
@@ -147,6 +149,20 @@ public class Tutorial extends Activity implements View.OnClickListener, Animatio
             progressBar.setProgress((int) value);
         }
 
+    }
+
+    private class LoadAndShowImages extends AsyncTask<Integer, Void, Void> {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            image.setImageBitmap(featureImage);
+        }
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            featureImage = BitmapFactory.decodeResource(getResources(), params[0], options);
+            return null;
+        }
     }
 
 }
