@@ -55,6 +55,7 @@ public class Tutorial extends Activity implements View.OnClickListener {
         options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         setContentView(R.layout.layout_tutorial);
+        ((MyApplication) getApplication()).tracker.setScreenName("Tutorial Screen");
         getWindow().setBackgroundDrawable(null);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         editor = prefs.edit();

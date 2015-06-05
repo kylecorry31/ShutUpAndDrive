@@ -30,6 +30,7 @@ public class Splash extends Activity {
         editor.putInt(Constants.TUT_NUM_KEY, 0);
         editor.apply();
         setContentView(R.layout.splash);
+        ((MyApplication) getApplication()).tracker.setScreenName("Splash Screen");
         getWindow().setBackgroundDrawable(null);
         image = (ImageView) findViewById(R.id.icon);
         titleText = (TextView) findViewById(R.id.title);

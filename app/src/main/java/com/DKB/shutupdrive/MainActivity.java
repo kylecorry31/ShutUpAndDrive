@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -27,9 +29,10 @@ import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 
 /**
@@ -47,12 +50,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences prefs;
     MenuItem item;
     private static final String FILENAME = "firstTime";
+    Tracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isFirst();
         setContentView(R.layout.layout_main);
+        tracker = ((MyApplication) getApplication()).tracker;
+        tracker.setScreenName("Main Screen");
         fab = (FloatingActionButton) findViewById(R.id.fab);
         statusText = (TextView) findViewById(R.id.status);
         mottoText = (TextView) findViewById(R.id.motto);
@@ -167,10 +173,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         this.item = item;
         if (item.getTitle().equals("Clear Log")) {
-            File logFile = new File("logfile.txt");
-            logFile.delete();
+            try {
+                FileOutputStream outputStream = openFileOutput("logfile.txt", MODE_PRIVATE);
+                outputStream.write(" ".getBytes());
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Log.d("MainActivity", "Log Cleared");
-        } else if(item.getTitle().equals("Show Log")){
+        } else if (item.getTitle().equals("Show Log")) {
             try {
                 FileInputStream inputStream = openFileInput("logfile.txt");
                 StringBuilder sb = new StringBuilder();
@@ -181,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 Log.d("Activity Recognition", sb.toString());
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.d("MainActivity", "No Logs Found");
             }
         } else {
             animateOut();
@@ -277,11 +288,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         toast = true;
-        if (mGoogleApiClient.isConnected() && !running)
+        if (mGoogleApiClient.isConnected() && !running) {
             startActivityRecognition();
-        else if (mGoogleApiClient.isConnected() && running)
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("Control")
+                    .setAction("click")
+                    .setLabel("Start service")
+                    .build());
+            prefs.edit().putLong("NotDrivingTime", 0).apply();
+        } else if (mGoogleApiClient.isConnected() && running) {
             stopActivityRecognition();
-        else
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("Control")
+                    .setAction("click")
+                    .setLabel("Stop service")
+                    .build());
+            prefs.edit().putLong("NotDrivingTime", 0).apply();
+        } else
             Toast.makeText(this, "No connection to Google Play Services", Toast.LENGTH_SHORT).show();
     }
 

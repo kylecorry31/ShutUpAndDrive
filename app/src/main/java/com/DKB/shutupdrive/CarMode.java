@@ -38,7 +38,7 @@ public class CarMode extends Service {
     //user auto-reply
     private boolean auto;
     //allow phone
-    private boolean phone;
+    private int phone;
     //notification
     private NotificationManager nm;
     //prefs
@@ -64,7 +64,7 @@ public class CarMode extends Service {
         silent();
         autoreply = auto;
         notification();
-        if (!phone) {
+        if (phone != 1) {
             tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             createPhoneStateListener();
             tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
@@ -82,28 +82,32 @@ public class CarMode extends Service {
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
                     Log.d("Phone State", "Ringing");
                     //read out the caller name
-                    tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
-                        @Override
-                        public void onInit(int status) {
-                            if (status != TextToSpeech.ERROR) {
-                                tts.setLanguage(Locale.US);
-                                String readNumber = "New call from ";
-                                String name = quickCallerId(incoming);
-                                //if the number is not in the contacts, say the number
-                                if (name.isEmpty()) {
-                                    for (int i = 0; i < incoming.length(); i++) {
-                                        readNumber = readNumber + incoming.charAt(i) + " ";
+                    if (phone == 2) {
+                        tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
+                            @Override
+                            public void onInit(int status) {
+                                if (status != TextToSpeech.ERROR) {
+                                    tts.setLanguage(Locale.US);
+                                    String readNumber = "New call from ";
+                                    String name = quickCallerId(incoming);
+                                    //if the number is not in the contacts, say the number
+                                    if (name.isEmpty()) {
+                                        for (int i = 0; i < incoming.length(); i++) {
+                                            readNumber = readNumber + incoming.charAt(i) + " ";
+                                        }
+                                    } else {
+                                        readNumber = readNumber + name;
                                     }
-                                } else {
-                                    readNumber = readNumber + name;
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                                        tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null, null);
+                                    else
+                                        tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null);
                                 }
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                                    tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null, null);
-                                else
-                                    tts.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null);
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        normal();
+                    }
 
                 }
                 if (state == TelephonyManager.CALL_STATE_IDLE) {
@@ -113,6 +117,9 @@ public class CarMode extends Service {
                         tts.stop();
                         tts.shutdown();
                     }
+                    if (phone == 3) {
+                        silent();
+                    }
                 }
                 if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
                     Log.d("Phone State", "Offhook");
@@ -120,6 +127,10 @@ public class CarMode extends Service {
                         // Stop text to speech if phone is offhook
                         tts.stop();
                         tts.shutdown();
+                    }
+
+                    if (phone == 3) {
+                        silent();
                     }
                 }
             }
@@ -152,7 +163,8 @@ public class CarMode extends Service {
         nm.cancel(mId);
         autoreply = false;
         restorePreviousSoundMode();
-        tm.listen(psl, PhoneStateListener.LISTEN_NONE);
+        if (phone != 1)
+            tm.listen(psl, PhoneStateListener.LISTEN_NONE);
         if (tts != null) {
             tts.stop();
             tts.shutdown();
@@ -182,7 +194,7 @@ public class CarMode extends Service {
     }
 
     void getUserSettings() {
-        phone = getPrefs.getBoolean("phone", false);
+        phone = Integer.valueOf(getPrefs.getString("phoneOpt", "2"));
         auto = getPrefs.getBoolean("autoReply", true);
         msg = getPrefs
                 .getString("msg",

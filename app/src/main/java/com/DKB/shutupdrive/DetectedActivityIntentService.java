@@ -2,6 +2,7 @@ package com.DKB.shutupdrive;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
@@ -35,11 +36,13 @@ public class DetectedActivityIntentService extends IntentService {
             DetectedActivity mostProbableActivity = result.getMostProbableActivity();
             int confidence = mostProbableActivity.getConfidence();
             int activityType = mostProbableActivity.getType();
-            if (confidence >= 75 && activityType == DetectedActivity.IN_VEHICLE) {
+            long waitTime = PreferenceManager.getDefaultSharedPreferences(this).getLong("NotDrivingTime", 0);
+            boolean diffTimeOK = (new Date().getTime() - waitTime) >= 10 * Constants.MILLIS_IN_MINUTE;
+            if (confidence >= Constants.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
                 startService(new Intent(this, CarMode.class));
                 if (Constants.DEVELOPER)
                     logDriving(confidence);
-            } else if (confidence >= 75) {
+            } else if (confidence >= Constants.DETECTION_THRESHOLD) {
                 stopService(new Intent(this, CarMode.class));
             }
 

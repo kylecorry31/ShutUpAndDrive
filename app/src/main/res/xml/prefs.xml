@@ -8,10 +8,12 @@
         android:key="msg"
         android:summary="This message will be automatically sent while driving."
         android:title="Auto Reply Message" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="phone"
-        android:title="Block calls" />
+    <ListPreference
+        android:entries="@array/phoneOptions"
+        android:entryValues="@array/phoneValues"
+        android:key="phoneOpt"
+        android:defaultValue="2"
+        android:title="Phone calls"/>
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="autoStart"
