@@ -12,10 +12,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Location;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
@@ -24,30 +27,30 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
 import java.util.Locale;
 
 public class CarMode extends Service {
-    //the sound mode of the user's phone
+
     private static int previousAudioMode;
-    //notification id
     private int mId;
-    //autoreply
     public static boolean autoreply = false;
-    //auto-reply message
     static String msg = Constants.DEFAULT_MSG;
-    //user auto-reply
     private boolean auto;
-    //allow phone
     private int phone;
-    //notification
     private NotificationManager nm;
-    //prefs
     private SharedPreferences getPrefs;
-    //text to speech
     TextToSpeech tts;
     PhoneStateListener psl;
     TelephonyManager tm;
     AudioManager am;
+    GoogleApiClient mGoogleApiClient;
+    LocationRequest mLocationRequest;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -56,6 +59,12 @@ public class CarMode extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        setUp();
+
+        return START_STICKY;
+    }
+
+    private void setUp() {
         am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         previousAudioMode = am.getRingerMode();
         getPrefs = PreferenceManager
@@ -69,7 +78,6 @@ public class CarMode extends Service {
             createPhoneStateListener();
             tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
         }
-        return START_STICKY;
     }
 
 
@@ -80,10 +88,10 @@ public class CarMode extends Service {
                 final String incoming = incomingNumber;
                 //if the phone is ringing
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
-                    Log.d("Phone State", "Ringing");
                     //read out the caller name
                     if (phone == 2) {
                         tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
+                            @SuppressWarnings("deprecation")
                             @Override
                             public void onInit(int status) {
                                 if (status != TextToSpeech.ERROR) {
@@ -111,7 +119,6 @@ public class CarMode extends Service {
 
                 }
                 if (state == TelephonyManager.CALL_STATE_IDLE) {
-                    Log.d("Phone State", "Idle");
                     //end text to speech
                     if (tts != null) {
                         tts.stop();
@@ -122,7 +129,6 @@ public class CarMode extends Service {
                     }
                 }
                 if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
-                    Log.d("Phone State", "Offhook");
                     if (tts != null) {
                         // Stop text to speech if phone is offhook
                         tts.stop();
@@ -137,6 +143,7 @@ public class CarMode extends Service {
 
         };
     }
+
 
     private String quickCallerId(String phoneNumber) {
         Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
@@ -169,6 +176,7 @@ public class CarMode extends Service {
             tts.stop();
             tts.shutdown();
         }
+        
         super.onDestroy();
     }
 

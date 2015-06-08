@@ -12,7 +12,6 @@ import java.util.Date;
  * Created by kyle on 8/30/14.
  */
 public class NotificationReceiver extends BroadcastReceiver {
-    // stops service if user isn't driving
 
     @Override
     public void onReceive(Context context, Intent intent) {

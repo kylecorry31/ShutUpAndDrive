@@ -21,12 +21,10 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Show up arrow in actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.blank);
         tracker = ((MyApplication) getApplication()).tracker;
         tracker.setScreenName("Settings");
-        // Set the view to the settings
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
 

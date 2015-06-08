@@ -3,7 +3,7 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="autoReply"
-        android:title="Auto reply SMS" />
+        android:title="Auto reply" />
     <EditTextPreference
         android:key="msg"
         android:summary="This message will be automatically sent while driving."
@@ -18,4 +18,8 @@
         android:defaultValue="false"
         android:key="autoStart"
         android:title="Start when opened" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="gps"
+        android:title="Improve accuracy" />
 </PreferenceScreen><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/xml/prefs.xml -->

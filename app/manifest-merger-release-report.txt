@@ -14,39 +14,53 @@ ADDED from AndroidManifest.xml:2:1
 	xmlns:android
 		ADDED from AndroidManifest.xml:2:11
 uses-permission#android.permission.RECEIVE_SMS
+ADDED from AndroidManifest.xml:7:5
+	android:name
+		ADDED from AndroidManifest.xml:7:22
+uses-permission#android.permission.SEND_SMS
 ADDED from AndroidManifest.xml:8:5
 	android:name
 		ADDED from AndroidManifest.xml:8:22
-uses-permission#android.permission.SEND_SMS
+uses-permission#android.permission.READ_PHONE_STATE
 ADDED from AndroidManifest.xml:9:5
 	android:name
 		ADDED from AndroidManifest.xml:9:22
-uses-permission#android.permission.READ_PHONE_STATE
+uses-permission#android.permission.READ_CONTACTS
 ADDED from AndroidManifest.xml:10:5
 	android:name
 		ADDED from AndroidManifest.xml:10:22
-uses-permission#android.permission.READ_CONTACTS
-ADDED from AndroidManifest.xml:11:5
-	android:name
-		ADDED from AndroidManifest.xml:11:22
 uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:12:5
+ADDED from AndroidManifest.xml:11:5
 MERGED from com.google.android.gms:play-services-maps:7.5.0:21:5
+MERGED from com.google.android.gms:play-services-ads:7.5.0:20:5
+MERGED from com.google.android.gms:play-services-analytics:7.5.0:21:5
 MERGED from com.google.android.gms:play-services-analytics:7.5.0:21:5
 	android:name
-		ADDED from AndroidManifest.xml:12:22
+		ADDED from AndroidManifest.xml:11:22
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from AndroidManifest.xml:13:5
+ADDED from AndroidManifest.xml:12:5
 MERGED from com.google.android.gms:play-services-maps:7.5.0:20:5
+MERGED from com.google.android.gms:play-services-ads:7.5.0:21:5
 MERGED from com.google.android.gms:play-services-analytics:7.5.0:22:5
+MERGED from com.google.android.gms:play-services-analytics:7.5.0:22:5
+	android:name
+		ADDED from AndroidManifest.xml:12:22
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from AndroidManifest.xml:13:5
 	android:name
 		ADDED from AndroidManifest.xml:13:22
 uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
 ADDED from AndroidManifest.xml:14:5
 	android:name
 		ADDED from AndroidManifest.xml:14:22
+uses-feature#com.google.android.gms.location.ActivityRecognition
+ADDED from AndroidManifest.xml:16:5
+	android:required
+		ADDED from AndroidManifest.xml:18:9
+	android:name
+		ADDED from AndroidManifest.xml:17:9
 application
-ADDED from AndroidManifest.xml:17:5
+ADDED from AndroidManifest.xml:20:5
 MERGED from com.google.android.gms:play-services-location:7.5.0:19:5
 MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
@@ -60,136 +74,153 @@ MERGED from com.android.support:appcompat-v7:22.2.0:22:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
+MERGED from com.google.android.gms:play-services-ads:7.5.0:24:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
+MERGED from com.android.support:support-v4:22.2.0:22:5
+MERGED from com.google.android.gms:play-services-analytics:7.5.0:24:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
+MERGED from com.android.support:support-v4:22.2.0:22:5
 MERGED from com.google.android.gms:play-services-analytics:7.5.0:24:5
 MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
 	android:label
-		ADDED from AndroidManifest.xml:20:9
+		ADDED from AndroidManifest.xml:24:9
 	android:allowBackup
-		ADDED from AndroidManifest.xml:18:9
-	android:icon
-		ADDED from AndroidManifest.xml:19:9
-	android:theme
 		ADDED from AndroidManifest.xml:22:9
+	android:icon
+		ADDED from AndroidManifest.xml:23:9
+	android:theme
+		ADDED from AndroidManifest.xml:25:9
 	android:name
 		ADDED from AndroidManifest.xml:21:9
 meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:23:9
+ADDED from AndroidManifest.xml:27:9
+MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
+MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
 	android:value
-		ADDED from AndroidManifest.xml:25:13
+		ADDED from AndroidManifest.xml:29:13
 	android:name
-		ADDED from AndroidManifest.xml:24:13
-receiver#com.google.android.gms.analytics.AnalyticsReceiver
-ADDED from AndroidManifest.xml:26:9
-	android:enabled
-		ADDED from AndroidManifest.xml:27:13
-	android:name
-		ADDED from AndroidManifest.xml:26:19
-intent-filter#com.google.android.gms.analytics.ANALYTICS_DISPATCH
-ADDED from AndroidManifest.xml:28:13
-action#com.google.android.gms.analytics.ANALYTICS_DISPATCH
-ADDED from AndroidManifest.xml:29:17
-	android:name
-		ADDED from AndroidManifest.xml:29:25
-service#com.google.android.gms.analytics.AnalyticsService
-ADDED from AndroidManifest.xml:32:9
-	android:enabled
+		ADDED from AndroidManifest.xml:28:13
+activity#com.google.android.gms.ads.AdActivity
+ADDED from AndroidManifest.xml:31:9
+MERGED from com.google.android.gms:play-services-ads:7.5.0:26:9
+	android:configChanges
 		ADDED from AndroidManifest.xml:33:13
-	android:exported
-		ADDED from AndroidManifest.xml:34:13
-	android:name
-		ADDED from AndroidManifest.xml:32:18
-activity#com.DKB.shutupdrive.Splash
-ADDED from AndroidManifest.xml:37:9
-	android:label
-		ADDED from AndroidManifest.xml:39:13
-	android:name
-		ADDED from AndroidManifest.xml:38:13
-intent-filter#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:40:13
-category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:43:17
-	android:name
-		ADDED from AndroidManifest.xml:43:27
-activity#com.DKB.shutupdrive.Tutorial
-ADDED from AndroidManifest.xml:46:9
-	android:label
-		ADDED from AndroidManifest.xml:48:13
-	android:name
-		ADDED from AndroidManifest.xml:47:13
-intent-filter#android.intent.category.DEFAULT+com.KDB.shutupdrive.TUTORIAL
-ADDED from AndroidManifest.xml:49:13
-action#com.KDB.shutupdrive.TUTORIAL
-ADDED from AndroidManifest.xml:50:17
-	android:name
-		ADDED from AndroidManifest.xml:50:25
-activity#com.DKB.shutupdrive.MainActivity
-ADDED from AndroidManifest.xml:55:9
-	android:label
-		ADDED from AndroidManifest.xml:57:13
-	android:name
-		ADDED from AndroidManifest.xml:56:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER+com.KDB.shutupdrive.MAINACTIVITY
-ADDED from AndroidManifest.xml:58:13
-action#com.KDB.shutupdrive.MAINACTIVITY
-ADDED from AndroidManifest.xml:59:17
-	android:name
-		ADDED from AndroidManifest.xml:59:25
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:60:17
-	android:name
-		ADDED from AndroidManifest.xml:60:25
-category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:61:17
-	android:name
-		ADDED from AndroidManifest.xml:61:27
-activity#com.DKB.shutupdrive.Settings
-ADDED from AndroidManifest.xml:65:9
-	android:label
-		ADDED from AndroidManifest.xml:67:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:68:13
 	android:theme
-		ADDED from AndroidManifest.xml:69:13
+		ADDED from com.google.android.gms:play-services-ads:7.5.0:29:13
 	android:name
-		ADDED from AndroidManifest.xml:66:13
+		ADDED from AndroidManifest.xml:32:13
+receiver#com.google.android.gms.analytics.AnalyticsReceiver
+ADDED from AndroidManifest.xml:35:9
+	android:enabled
+		ADDED from AndroidManifest.xml:37:13
+	android:name
+		ADDED from AndroidManifest.xml:36:13
+intent-filter#com.google.android.gms.analytics.ANALYTICS_DISPATCH
+ADDED from AndroidManifest.xml:38:13
+action#com.google.android.gms.analytics.ANALYTICS_DISPATCH
+ADDED from AndroidManifest.xml:39:17
+	android:name
+		ADDED from AndroidManifest.xml:39:25
+service#com.google.android.gms.analytics.AnalyticsService
+ADDED from AndroidManifest.xml:42:9
+	android:enabled
+		ADDED from AndroidManifest.xml:44:13
+	android:exported
+		ADDED from AndroidManifest.xml:45:13
+	android:name
+		ADDED from AndroidManifest.xml:43:13
+activity#com.DKB.shutupdrive.MainActivity
+ADDED from AndroidManifest.xml:47:9
+	android:label
+		ADDED from AndroidManifest.xml:49:13
+	android:name
+		ADDED from AndroidManifest.xml:48:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER+com.KDB.shutupdrive.MAINACTIVITY
+ADDED from AndroidManifest.xml:50:13
+action#com.KDB.shutupdrive.MAINACTIVITY
+ADDED from AndroidManifest.xml:51:17
+	android:name
+		ADDED from AndroidManifest.xml:51:25
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:52:17
+	android:name
+		ADDED from AndroidManifest.xml:52:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:54:17
+	android:name
+		ADDED from AndroidManifest.xml:54:27
+activity#com.DKB.shutupdrive.Splash
+ADDED from AndroidManifest.xml:58:9
+	android:label
+		ADDED from AndroidManifest.xml:60:13
+	android:name
+		ADDED from AndroidManifest.xml:59:13
+intent-filter#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:61:13
+category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:62:17
+	android:name
+		ADDED from AndroidManifest.xml:62:27
+activity#com.DKB.shutupdrive.Tutorial
+ADDED from AndroidManifest.xml:66:9
+	android:label
+		ADDED from AndroidManifest.xml:68:13
+	android:name
+		ADDED from AndroidManifest.xml:67:13
+intent-filter#android.intent.category.DEFAULT+com.KDB.shutupdrive.TUTORIAL
+ADDED from AndroidManifest.xml:69:13
+action#com.KDB.shutupdrive.TUTORIAL
+ADDED from AndroidManifest.xml:70:17
+	android:name
+		ADDED from AndroidManifest.xml:70:25
+activity#com.DKB.shutupdrive.Settings
+ADDED from AndroidManifest.xml:75:9
+	android:label
+		ADDED from AndroidManifest.xml:77:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:78:13
+	android:theme
+		ADDED from AndroidManifest.xml:79:13
+	android:name
+		ADDED from AndroidManifest.xml:76:13
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:70:13
+ADDED from AndroidManifest.xml:80:13
 	android:value
-		ADDED from AndroidManifest.xml:72:17
+		ADDED from AndroidManifest.xml:82:17
 	android:name
-		ADDED from AndroidManifest.xml:71:17
+		ADDED from AndroidManifest.xml:81:17
 intent-filter#android.intent.category.DEFAULT+com.KDB.shutupdrive.SETTINGS
-ADDED from AndroidManifest.xml:73:13
+ADDED from AndroidManifest.xml:83:13
 action#com.KDB.shutupdrive.SETTINGS
-ADDED from AndroidManifest.xml:74:17
+ADDED from AndroidManifest.xml:84:17
 	android:name
-		ADDED from AndroidManifest.xml:74:25
-receiver#com.DKB.shutupdrive.text
-ADDED from AndroidManifest.xml:80:9
-	android:name
-		ADDED from AndroidManifest.xml:80:19
-intent-filter#android.intent.category.DEFAULT+android.provider.Telephony.SMS_RECEIVED
-ADDED from AndroidManifest.xml:81:13
-action#android.provider.Telephony.SMS_RECEIVED
-ADDED from AndroidManifest.xml:82:17
-	android:name
-		ADDED from AndroidManifest.xml:82:25
+		ADDED from AndroidManifest.xml:84:25
 service#com.DKB.shutupdrive.CarMode
-ADDED from AndroidManifest.xml:88:9
-	android:name
-		ADDED from AndroidManifest.xml:88:18
-service#com.DKB.shutupdrive.DetectedActivityIntentService
 ADDED from AndroidManifest.xml:89:9
 	android:name
 		ADDED from AndroidManifest.xml:89:18
-receiver#com.DKB.shutupdrive.NotificationReceiver
-ADDED from AndroidManifest.xml:91:9
+service#com.DKB.shutupdrive.DetectedActivityIntentService
+ADDED from AndroidManifest.xml:90:9
 	android:name
-		ADDED from AndroidManifest.xml:91:19
+		ADDED from AndroidManifest.xml:90:18
+receiver#com.DKB.shutupdrive.text
+ADDED from AndroidManifest.xml:92:9
+	android:name
+		ADDED from AndroidManifest.xml:92:19
+intent-filter#android.intent.category.DEFAULT+android.provider.Telephony.SMS_RECEIVED
+ADDED from AndroidManifest.xml:93:13
+action#android.provider.Telephony.SMS_RECEIVED
+ADDED from AndroidManifest.xml:94:17
+	android:name
+		ADDED from AndroidManifest.xml:94:25
+receiver#com.DKB.shutupdrive.NotificationReceiver
+ADDED from AndroidManifest.xml:100:9
+	android:name
+		ADDED from AndroidManifest.xml:100:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.google.android.gms:play-services-location:7.5.0:18:5
@@ -204,6 +235,12 @@ MERGED from com.android.support:design:22.2.0:20:5
 MERGED from com.android.support:appcompat-v7:22.2.0:20:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
+MERGED from com.android.support:support-v4:22.2.0:20:5
+MERGED from com.google.android.gms:play-services-ads:7.5.0:23:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
+MERGED from com.android.support:support-v4:22.2.0:20:5
+MERGED from com.google.android.gms:play-services-analytics:7.5.0:18:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
 MERGED from com.google.android.gms:play-services-analytics:7.5.0:18:5
 MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
@@ -230,3 +267,9 @@ ADDED from com.google.android.gms:play-services-maps:7.5.0:24:5
 		ADDED from com.google.android.gms:play-services-maps:7.5.0:26:8
 android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
 IMPLIED from AndroidManifest.xml:2:1 reason: com.google.android.gms.maps requested WRITE_EXTERNAL_STORAGE
+activity#com.google.android.gms.ads.purchase.InAppPurchaseActivity
+ADDED from com.google.android.gms:play-services-ads:7.5.0:30:9
+	android:theme
+		ADDED from com.google.android.gms:play-services-ads:7.5.0:31:13
+	android:name
+		ADDED from com.google.android.gms:play-services-ads:7.5.0:30:19

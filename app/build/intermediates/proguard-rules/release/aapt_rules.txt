@@ -4,9 +4,9 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:47
+# view land/res/layout-land/layout_main.xml #generated:57
 # view land/res/layout-land/layout_tutorial.xml #generated:40
-# view res/layout/layout_main.xml #generated:51
+# view res/layout/layout_main.xml #generated:60
 # view res/layout/layout_tutorial.xml #generated:40
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
@@ -77,36 +77,46 @@
 # view res/layout/abc_screen_toolbar.xml #generated:36
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
 
-# view AndroidManifest.xml #generated:102
+# view AndroidManifest.xml #generated:105
 -keep class com.DKB.shutupdrive.CarMode { <init>(...); }
 
-# view AndroidManifest.xml #generated:103
+# view AndroidManifest.xml #generated:106
 -keep class com.DKB.shutupdrive.DetectedActivityIntentService { <init>(...); }
 
-# view AndroidManifest.xml #generated:68
+# view AndroidManifest.xml #generated:63
 -keep class com.DKB.shutupdrive.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:29
+# view AndroidManifest.xml #generated:35
 -keep class com.DKB.shutupdrive.MyApplication { <init>(...); }
 
-# view AndroidManifest.xml #generated:105
+# view AndroidManifest.xml #generated:115
 -keep class com.DKB.shutupdrive.NotificationReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:78
+# view AndroidManifest.xml #generated:89
 -keep class com.DKB.shutupdrive.Settings { <init>(...); }
 
-# view AndroidManifest.xml #generated:52
+# view AndroidManifest.xml #generated:73
 -keep class com.DKB.shutupdrive.Splash { <init>(...); }
 
-# view AndroidManifest.xml #generated:59
+# view AndroidManifest.xml #generated:80
 -keep class com.DKB.shutupdrive.Tutorial { <init>(...); }
 
-# view AndroidManifest.xml #generated:94
+# view AndroidManifest.xml #generated:108
 -keep class com.DKB.shutupdrive.text { <init>(...); }
 
-# view AndroidManifest.xml #generated:39
+# view AndroidManifest.xml #generated:45
+-keep class com.google.android.gms.ads.AdActivity { <init>(...); }
+
+# view land/res/layout-land/layout_main.xml #generated:16
+# view res/layout/layout_main.xml #generated:11
+-keep class com.google.android.gms.ads.AdView { <init>(...); }
+
+# view AndroidManifest.xml #generated:117
+-keep class com.google.android.gms.ads.purchase.InAppPurchaseActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:50
 -keep class com.google.android.gms.analytics.AnalyticsReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:47
+# view AndroidManifest.xml #generated:58
 -keep class com.google.android.gms.analytics.AnalyticsService { <init>(...); }
 

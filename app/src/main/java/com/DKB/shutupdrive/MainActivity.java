@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.ConnectionResult;
@@ -26,13 +28,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.LocationServices;
+
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
 
 
 /**
@@ -49,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean toast;
     SharedPreferences prefs;
     MenuItem item;
-    private static final String FILENAME = "firstTime";
     Tracker tracker;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,20 +65,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mottoText = (TextView) findViewById(R.id.motto);
         descText = (TextView) findViewById(R.id.desc);
         titleImage = (ImageView) findViewById(R.id.titleImage);
+        adView = (AdView) findViewById(R.id.adView);
+        createAds();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         running = prefs.getBoolean("Running", false);
         toast = false;
         buildGoogleApiClient();
     }
 
+    private void createAds(){
+        if (!Constants.DEVELOPER) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            adView.loadAd(adRequest);
+        } else {
+            adView.setVisibility(View.GONE);
+        }
+    }
+
     private boolean isFirst() {
-        SharedPreferences getPrefs;
-        getPrefs = getSharedPreferences(FILENAME, 0);
+        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean first = getPrefs.getBoolean("firstTime", true);
         if (first) {
-            SharedPreferences.Editor editor = getPrefs.edit();
-            editor.putBoolean("firstTime", false);
-            editor.apply();
+            getPrefs.edit().putBoolean("firstTime", false).apply();
             Intent intent = new Intent(getApplicationContext(), Splash.class);
             startActivity(intent);
             return true;
@@ -88,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     protected void setUpUI() {
-
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_top);
             slideDown.setStartOffset(275);
@@ -108,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
                 .addApi(ActivityRecognition.API)
                 .build();
     }
@@ -136,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onStop() {
-        // stopActivityRecognition();
         mGoogleApiClient.disconnect();
         super.onStop();
     }
@@ -155,48 +161,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setResultCallback(this);
     }
 
-    // this is for an options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        if (Constants.DEVELOPER) {
-            menu.add("Clear Log");
-            menu.add("Show Log");
-        }
         return true;
     }
 
-    // This determines which dropdown value was touched
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         this.item = item;
-        if (item.getTitle().equals("Clear Log")) {
-            try {
-                FileOutputStream outputStream = openFileOutput("logfile.txt", MODE_PRIVATE);
-                outputStream.write(" ".getBytes());
-                outputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Log.d("MainActivity", "Log Cleared");
-        } else if (item.getTitle().equals("Show Log")) {
-            try {
-                FileInputStream inputStream = openFileInput("logfile.txt");
-                StringBuilder sb = new StringBuilder();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                Log.d("Activity Recognition", sb.toString());
-            } catch (Exception e) {
-                Log.d("MainActivity", "No Logs Found");
-            }
-        } else {
-            animateOut();
-        }
+        animateOut();
         return false;
     }
 
@@ -256,7 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toast = false;
             startActivityRecognition();
         }
-        Log.d(Constants.TAG, Constants.SERVICES_CONNECTED);
     }
 
     private PendingIntent getActivityRecognitionPI() {
@@ -273,13 +246,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Toast.makeText(getBaseContext(), "Google Play Services Unavailable", Toast.LENGTH_SHORT).show();
-        Log.e(Constants.TAG, Constants.SERVICES_FAILED);
     }
 
     @Override
     public void onResult(Status status) {
         if (status.isSuccess()) {
-            Log.d(Constants.TAG, "Successful");
             if (toast)
                 Toast.makeText(this, running ? "Started" : "Stopped", Toast.LENGTH_SHORT).show();
         }

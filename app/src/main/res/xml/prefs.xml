@@ -3,7 +3,7 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="autoReply"
-        android:title="Auto reply SMS" />
+        android:title="Auto reply" />
     <EditTextPreference
         android:key="msg"
         android:summary="This message will be automatically sent while driving."

@@ -22,7 +22,7 @@ public class text extends BroadcastReceiver {
                 String msg_from;
                 String msg = CarMode.msg;
                 if (bundle != null) {
-                    // ---retrieve the SMS message received---
+                    // ---retrieve the SMS message---
                     try {
                         // gets the sender then sends a sms back
                         Object[] pdus = (Object[]) bundle.get("pdus");
