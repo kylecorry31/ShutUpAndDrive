@@ -35,17 +35,32 @@ public class Splash extends Activity {
         image = (ImageView) findViewById(R.id.icon);
         titleText = (TextView) findViewById(R.id.title);
         Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_in);
-        fadeIn.setDuration(750);
+        fadeIn.setDuration(250);
         fadeIn.setStartOffset(250);
         image.startAnimation(fadeIn);
         titleText.startAnimation(fadeIn);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), Tutorial.class);
-                startActivity(intent);
+                if (!isFirst()) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
-        }, 2000);
+        }, 1000);
+    }
+
+    private boolean isFirst() {
+        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean first = getPrefs.getBoolean("firstTime", true);
+        if (first) {
+            getPrefs.edit().putBoolean("firstTime", false).apply();
+            Intent intent = new Intent(getApplicationContext(), Tutorial.class);
+            startActivity(intent);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -54,7 +69,6 @@ public class Splash extends Activity {
         System.gc();
         finish();
     }
-
 
 
 }

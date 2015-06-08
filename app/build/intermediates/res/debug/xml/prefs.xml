@@ -18,8 +18,4 @@
         android:defaultValue="false"
         android:key="autoStart"
         android:title="Start when opened" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="gps"
-        android:title="Improve accuracy" />
 </PreferenceScreen><!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/xml/prefs.xml -->

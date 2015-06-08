@@ -10207,43 +10207,32 @@ android.support.v7.widget.Toolbar$SavedState$1 -> android.support.v7.widget.ba:
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
 com.DKB.shutupdrive.CarMode -> com.DKB.shutupdrive.CarMode:
-    int previousAudioMode -> k
-    int mId -> l
+    int previousAudioMode -> h
+    int mId -> i
     boolean autoreply -> a
     java.lang.String msg -> b
-    boolean auto -> m
-    int phone -> n
-    android.app.NotificationManager nm -> o
-    android.content.SharedPreferences getPrefs -> p
+    boolean auto -> j
+    int phone -> k
+    android.app.NotificationManager nm -> l
+    android.content.SharedPreferences getPrefs -> m
     android.speech.tts.TextToSpeech tts -> c
     android.telephony.PhoneStateListener psl -> d
     android.telephony.TelephonyManager tm -> e
     android.media.AudioManager am -> f
-    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient -> g
-    com.google.android.gms.location.LocationRequest mLocationRequest -> h
-    boolean self -> i
-    boolean $assertionsDisabled -> j
+    boolean $assertionsDisabled -> g
     android.os.IBinder onBind(android.content.Intent) -> onBind
     int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    void setUp() -> m
+    void setUp() -> i
     void createPhoneStateListener() -> a
-    void buildGoogleApiClient() -> b
-    void stopLocationUpdates() -> c
-    void createLocationRequest() -> d
-    void startLocationUpdates() -> e
-    void onConnected(android.os.Bundle) -> a
-    void onConnectionSuspended(int) -> a
-    void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
-    void onLocationChanged(android.location.Location) -> a
     java.lang.String quickCallerId(java.lang.String) -> a
     void onDestroy() -> onDestroy
-    void notification() -> f
-    android.app.PendingIntent createNotDrivingPendingIntent() -> g
-    void getUserSettings() -> h
-    void silent() -> i
-    void vibrate() -> j
-    void normal() -> k
-    void restorePreviousSoundMode() -> l
+    void notification() -> b
+    android.app.PendingIntent createNotDrivingPendingIntent() -> c
+    void getUserSettings() -> d
+    void silent() -> e
+    void vibrate() -> f
+    void normal() -> g
+    void restorePreviousSoundMode() -> h
     int access$000(com.DKB.shutupdrive.CarMode) -> a
     java.lang.String access$100(com.DKB.shutupdrive.CarMode,java.lang.String) -> a
 com.DKB.shutupdrive.CarMode$1 -> com.DKB.shutupdrive.a:
@@ -10270,7 +10259,6 @@ com.DKB.shutupdrive.MainActivity -> com.DKB.shutupdrive.MainActivity:
     com.google.android.gms.ads.AdView adView -> y
     void onCreate(android.os.Bundle) -> onCreate
     void createAds() -> p
-    boolean isFirst() -> q
     void setUpUI() -> k
     void buildGoogleApiClient() -> l
     void onStart() -> onStart
@@ -10283,7 +10271,7 @@ com.DKB.shutupdrive.MainActivity -> com.DKB.shutupdrive.MainActivity:
     void animateOut() -> n
     void stopActivityRecognition() -> o
     void onConnected(android.os.Bundle) -> a
-    android.app.PendingIntent getActivityRecognitionPI() -> r
+    android.app.PendingIntent getActivityRecognitionPI() -> q
     void onConnectionSuspended(int) -> a
     void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
     void onResult(com.google.android.gms.common.api.Status) -> a
@@ -10313,7 +10301,9 @@ com.DKB.shutupdrive.Splash -> com.DKB.shutupdrive.Splash:
     android.widget.TextView titleText -> b
     android.content.SharedPreferences$Editor editor -> c
     void onCreate(android.os.Bundle) -> onCreate
+    boolean isFirst() -> a
     void onPause() -> onPause
+    boolean access$000(com.DKB.shutupdrive.Splash) -> a
 com.DKB.shutupdrive.Splash$1 -> com.DKB.shutupdrive.e:
     com.DKB.shutupdrive.Splash this$0 -> a
     void run() -> run
@@ -20682,10 +20672,6 @@ com.google.android.gms.location.DetectedActivityCreator -> com.google.android.gm
     void zza(com.google.android.gms.location.DetectedActivity,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.FusedLocationProviderApi -> com.google.android.gms.location.h:
-    com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener) -> a
-    com.google.android.gms.common.api.PendingResult removeLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationListener) -> a
-com.google.android.gms.location.GeofencingApi -> com.google.android.gms.location.i:
 com.google.android.gms.location.GeofencingRequest -> com.google.android.gms.location.GeofencingRequest:
     android.os.Parcelable$Creator CREATOR -> CREATOR
     int zzCY -> a
@@ -20722,14 +20708,12 @@ com.google.android.gms.location.LocationAvailability -> com.google.android.gms.l
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
     java.lang.String toString() -> toString
-com.google.android.gms.location.LocationAvailabilityCreator -> com.google.android.gms.location.j:
+com.google.android.gms.location.LocationAvailabilityCreator -> com.google.android.gms.location.h:
     com.google.android.gms.location.LocationAvailability createFromParcel(android.os.Parcel) -> a
     com.google.android.gms.location.LocationAvailability[] newArray(int) -> a
     void zza(com.google.android.gms.location.LocationAvailability,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.LocationListener -> com.google.android.gms.location.k:
-    void onLocationChanged(android.location.Location) -> a
 com.google.android.gms.location.LocationRequest -> com.google.android.gms.location.LocationRequest:
     int zzCY -> i
     int mPriority -> a
@@ -20741,20 +20725,14 @@ com.google.android.gms.location.LocationRequest -> com.google.android.gms.locati
     float zzaxX -> g
     long zzaxY -> h
     com.google.android.gms.location.LocationRequestCreator CREATOR -> CREATOR
-    com.google.android.gms.location.LocationRequest setPriority(int) -> a
-    com.google.android.gms.location.LocationRequest setInterval(long) -> a
-    com.google.android.gms.location.LocationRequest setFastestInterval(long) -> b
-    com.google.android.gms.location.LocationRequest setExpirationTime(long) -> c
-    void zzK(long) -> d
-    void zzgu(int) -> c
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-    java.lang.String zzgv(int) -> b
+    java.lang.String zzgv(int) -> a
     java.lang.String toString() -> toString
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
     int getVersionCode() -> a
-com.google.android.gms.location.LocationRequestCreator -> com.google.android.gms.location.l:
+com.google.android.gms.location.LocationRequestCreator -> com.google.android.gms.location.i:
     com.google.android.gms.location.LocationRequest createFromParcel(android.os.Parcel) -> a
     com.google.android.gms.location.LocationRequest[] newArray(int) -> a
     void zza(com.google.android.gms.location.LocationRequest,android.os.Parcel,int) -> a
@@ -20772,19 +20750,6 @@ com.google.android.gms.location.LocationResult -> com.google.android.gms.locatio
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
     java.lang.String toString() -> toString
-com.google.android.gms.location.LocationServices -> com.google.android.gms.location.m:
-    com.google.android.gms.common.api.Api$ClientKey zzNX -> e
-    com.google.android.gms.common.api.Api$zza zzNY -> f
-    com.google.android.gms.common.api.Api API -> a
-    com.google.android.gms.location.FusedLocationProviderApi FusedLocationApi -> b
-    com.google.android.gms.location.GeofencingApi GeofencingApi -> c
-    com.google.android.gms.location.SettingsApi SettingsApi -> d
-    com.google.android.gms.common.api.Api$ClientKey zzum() -> a
-com.google.android.gms.location.LocationServices$1 -> com.google.android.gms.location.n:
-    com.google.android.gms.location.internal.zzj zzo(android.content.Context,android.os.Looper,com.google.android.gms.common.internal.zze,com.google.android.gms.common.api.Api$ApiOptions$NoOptions,com.google.android.gms.common.api.GoogleApiClient$ConnectionCallbacks,com.google.android.gms.common.api.GoogleApiClient$OnConnectionFailedListener) -> a
-    int getPriority() -> a
-    com.google.android.gms.common.api.Api$Client zza(android.content.Context,android.os.Looper,com.google.android.gms.common.internal.zze,java.lang.Object,com.google.android.gms.common.api.GoogleApiClient$ConnectionCallbacks,com.google.android.gms.common.api.GoogleApiClient$OnConnectionFailedListener) -> a
-com.google.android.gms.location.LocationServices$zza -> com.google.android.gms.location.o:
 com.google.android.gms.location.LocationSettingsRequest -> com.google.android.gms.location.LocationSettingsRequest:
     int zzCY -> a
     java.util.List zzamw -> b
@@ -20829,7 +20794,6 @@ com.google.android.gms.location.LocationSettingsStates -> com.google.android.gms
     boolean isBleUsable() -> f
     boolean isBlePresent() -> g
     boolean zzus() -> h
-com.google.android.gms.location.SettingsApi -> com.google.android.gms.location.p:
 com.google.android.gms.location.copresence.internal.CopresenceApiOptions -> com.google.android.gms.location.copresence.internal.CopresenceApiOptions:
     android.os.Parcelable$Creator CREATOR -> CREATOR
     com.google.android.gms.location.copresence.internal.CopresenceApiOptions zzayn -> a
@@ -20874,8 +20838,6 @@ com.google.android.gms.location.internal.LocationRequestInternal -> com.google.a
     java.util.List zzaze -> f
     java.lang.String mTag -> g
     com.google.android.gms.location.internal.zzk CREATOR -> CREATOR
-    com.google.android.gms.location.internal.LocationRequestInternal zzb(com.google.android.gms.location.LocationRequest) -> a
-    com.google.android.gms.location.internal.LocationRequestInternal zza(java.lang.String,com.google.android.gms.location.LocationRequest) -> a
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
     int getVersionCode() -> a
@@ -20890,7 +20852,6 @@ com.google.android.gms.location.internal.LocationRequestUpdateData -> com.google
     android.app.PendingIntent mPendingIntent -> d
     com.google.android.gms.location.zzc zzazi -> e
     com.google.android.gms.location.internal.zzl CREATOR -> CREATOR
-    com.google.android.gms.location.internal.LocationRequestUpdateData zzb(com.google.android.gms.location.internal.LocationRequestInternal,com.google.android.gms.location.zzd) -> a
     com.google.android.gms.location.internal.LocationRequestUpdateData zzb(com.google.android.gms.location.zzd) -> a
     com.google.android.gms.location.internal.LocationRequestUpdateData zza(com.google.android.gms.location.zzc) -> a
     int describeContents() -> describeContents
@@ -20967,39 +20928,21 @@ com.google.android.gms.location.internal.zzc -> com.google.android.gms.location.
     void zza(com.google.android.gms.location.internal.ClientIdentity,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.internal.zzd -> com.google.android.gms.location.internal.h:
-    com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener) -> a
-    com.google.android.gms.common.api.PendingResult removeLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationListener) -> a
-com.google.android.gms.location.internal.zzd$1 -> com.google.android.gms.location.internal.i:
-    com.google.android.gms.location.LocationRequest zzayy -> b
-    com.google.android.gms.location.LocationListener zzayz -> c
-    com.google.android.gms.location.internal.zzd zzayA -> d
-    void zza(com.google.android.gms.location.internal.zzj) -> a
-    void zza(com.google.android.gms.common.api.Api$Client) -> b
-com.google.android.gms.location.internal.zzd$7 -> com.google.android.gms.location.internal.j:
-    com.google.android.gms.location.LocationListener zzayz -> b
-    com.google.android.gms.location.internal.zzd zzayA -> c
-    void zza(com.google.android.gms.location.internal.zzj) -> a
-    void zza(com.google.android.gms.common.api.Api$Client) -> b
-com.google.android.gms.location.internal.zzd$zza -> com.google.android.gms.location.internal.k:
-    com.google.android.gms.common.api.Status zzb(com.google.android.gms.common.api.Status) -> d
-    com.google.android.gms.common.api.Result createFailedResult(com.google.android.gms.common.api.Status) -> b
-com.google.android.gms.location.internal.zze -> com.google.android.gms.location.internal.l:
-com.google.android.gms.location.internal.zzf -> com.google.android.gms.location.internal.m:
+com.google.android.gms.location.internal.zzf -> com.google.android.gms.location.internal.h:
     void zza(int,java.lang.String[]) -> a
     void zzb(int,java.lang.String[]) -> b
     void zza(int,android.app.PendingIntent) -> a
-com.google.android.gms.location.internal.zzf$zza -> com.google.android.gms.location.internal.n:
+com.google.android.gms.location.internal.zzf$zza -> com.google.android.gms.location.internal.i:
     com.google.android.gms.location.internal.zzf zzbV(android.os.IBinder) -> a
     android.os.IBinder asBinder() -> asBinder
     boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-com.google.android.gms.location.internal.zzf$zza$zza -> com.google.android.gms.location.internal.o:
+com.google.android.gms.location.internal.zzf$zza$zza -> com.google.android.gms.location.internal.j:
     android.os.IBinder zznF -> a
     android.os.IBinder asBinder() -> asBinder
     void zza(int,java.lang.String[]) -> a
     void zzb(int,java.lang.String[]) -> b
     void zza(int,android.app.PendingIntent) -> a
-com.google.android.gms.location.internal.zzg -> com.google.android.gms.location.internal.p:
+com.google.android.gms.location.internal.zzg -> com.google.android.gms.location.internal.k:
     void zza(java.util.List,android.app.PendingIntent,com.google.android.gms.location.internal.zzf,java.lang.String) -> a
     void zza(com.google.android.gms.location.GeofencingRequest,android.app.PendingIntent,com.google.android.gms.location.internal.zzf) -> a
     void zza(android.app.PendingIntent,com.google.android.gms.location.internal.zzf,java.lang.String) -> a
@@ -21026,10 +20969,10 @@ com.google.android.gms.location.internal.zzg -> com.google.android.gms.location.
     com.google.android.gms.location.LocationAvailability zzdm(java.lang.String) -> c
     android.os.IBinder zzuv() -> b
     void zza(com.google.android.gms.location.LocationSettingsRequest,com.google.android.gms.location.internal.zzh,java.lang.String) -> a
-com.google.android.gms.location.internal.zzg$zza -> com.google.android.gms.location.internal.q:
+com.google.android.gms.location.internal.zzg$zza -> com.google.android.gms.location.internal.l:
     com.google.android.gms.location.internal.zzg zzbW(android.os.IBinder) -> a
     boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-com.google.android.gms.location.internal.zzg$zza$zza -> com.google.android.gms.location.internal.r:
+com.google.android.gms.location.internal.zzg$zza$zza -> com.google.android.gms.location.internal.m:
     android.os.IBinder zznF -> a
     android.os.IBinder asBinder() -> asBinder
     void zza(java.util.List,android.app.PendingIntent,com.google.android.gms.location.internal.zzf,java.lang.String) -> a
@@ -21058,72 +21001,62 @@ com.google.android.gms.location.internal.zzg$zza$zza -> com.google.android.gms.l
     com.google.android.gms.location.LocationAvailability zzdm(java.lang.String) -> c
     android.os.IBinder zzuv() -> b
     void zza(com.google.android.gms.location.LocationSettingsRequest,com.google.android.gms.location.internal.zzh,java.lang.String) -> a
-com.google.android.gms.location.internal.zzh -> com.google.android.gms.location.internal.s:
+com.google.android.gms.location.internal.zzh -> com.google.android.gms.location.internal.n:
     void zza(com.google.android.gms.location.LocationSettingsResult) -> a
-com.google.android.gms.location.internal.zzh$zza -> com.google.android.gms.location.internal.t:
+com.google.android.gms.location.internal.zzh$zza -> com.google.android.gms.location.internal.o:
     com.google.android.gms.location.internal.zzh zzbX(android.os.IBinder) -> a
     android.os.IBinder asBinder() -> asBinder
     boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-com.google.android.gms.location.internal.zzh$zza$zza -> com.google.android.gms.location.internal.u:
+com.google.android.gms.location.internal.zzh$zza$zza -> com.google.android.gms.location.internal.p:
     android.os.IBinder zznF -> a
     android.os.IBinder asBinder() -> asBinder
     void zza(com.google.android.gms.location.LocationSettingsResult) -> a
-com.google.android.gms.location.internal.zzi -> com.google.android.gms.location.internal.v:
+com.google.android.gms.location.internal.zzi -> com.google.android.gms.location.internal.q:
     com.google.android.gms.location.internal.zzn zzayq -> a
     android.content.Context mContext -> b
     android.content.ContentProviderClient zzayL -> c
     boolean zzayM -> d
     java.util.Map zzakE -> e
     java.util.Map zzayN -> f
-    void zza(com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener,android.os.Looper) -> a
-    com.google.android.gms.location.internal.zzi$zzc zza(com.google.android.gms.location.LocationListener,android.os.Looper) -> a
-    void zza(com.google.android.gms.location.LocationListener) -> a
     void zzac(boolean) -> a
     void removeAllListeners() -> a
     void zzux() -> b
-com.google.android.gms.location.internal.zzi$zza -> com.google.android.gms.location.internal.w:
+com.google.android.gms.location.internal.zzi$zza -> com.google.android.gms.location.internal.r:
     android.os.Handler zzayO -> a
     void onLocationResult(com.google.android.gms.location.LocationResult) -> a
     void onLocationAvailability(com.google.android.gms.location.LocationAvailability) -> a
     void zzb(int,java.lang.Object) -> a
-com.google.android.gms.location.internal.zzi$zzb -> com.google.android.gms.location.internal.x:
-    com.google.android.gms.location.LocationListener zzayQ -> a
-    void handleMessage(android.os.Message) -> handleMessage
-com.google.android.gms.location.internal.zzi$zzc -> com.google.android.gms.location.internal.y:
+com.google.android.gms.location.internal.zzi$zzc -> com.google.android.gms.location.internal.s:
     android.os.Handler zzayO -> a
     void onLocationChanged(android.location.Location) -> a
-    void release() -> a
-com.google.android.gms.location.internal.zzj -> com.google.android.gms.location.internal.z:
+com.google.android.gms.location.internal.zzj -> com.google.android.gms.location.internal.t:
     com.google.android.gms.location.internal.zzi zzayR -> e
     com.google.android.gms.location.copresence.internal.zzb zzayS -> f
     void disconnect() -> d
     boolean requiresAccount() -> q
     void zza(long,android.app.PendingIntent) -> a
     void zza(android.app.PendingIntent) -> a
-    void zza(com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener,android.os.Looper) -> a
-    void zza(com.google.android.gms.location.LocationListener) -> a
-com.google.android.gms.location.internal.zzk -> com.google.android.gms.location.internal.aa:
+com.google.android.gms.location.internal.zzk -> com.google.android.gms.location.internal.u:
     com.google.android.gms.location.internal.LocationRequestInternal zzek(android.os.Parcel) -> a
     com.google.android.gms.location.internal.LocationRequestInternal[] zzgE(int) -> a
     void zza(com.google.android.gms.location.internal.LocationRequestInternal,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.internal.zzl -> com.google.android.gms.location.internal.ab:
+com.google.android.gms.location.internal.zzl -> com.google.android.gms.location.internal.v:
     com.google.android.gms.location.internal.LocationRequestUpdateData zzel(android.os.Parcel) -> a
     com.google.android.gms.location.internal.LocationRequestUpdateData[] zzgF(int) -> a
     void zza(com.google.android.gms.location.internal.LocationRequestUpdateData,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.internal.zzm -> com.google.android.gms.location.internal.ac:
+com.google.android.gms.location.internal.zzm -> com.google.android.gms.location.internal.w:
     com.google.android.gms.location.internal.ParcelableGeofence zzem(android.os.Parcel) -> a
     com.google.android.gms.location.internal.ParcelableGeofence[] zzgI(int) -> a
     void zza(com.google.android.gms.location.internal.ParcelableGeofence,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.internal.zzn -> com.google.android.gms.location.internal.ad:
+com.google.android.gms.location.internal.zzn -> com.google.android.gms.location.internal.x:
     android.os.IInterface zznM() -> c
     void zznL() -> a
-com.google.android.gms.location.internal.zzo -> com.google.android.gms.location.internal.ae:
 com.google.android.gms.location.places.AddPlaceRequest -> com.google.android.gms.location.places.AddPlaceRequest:
     int zzCY -> a
     java.lang.String mName -> b
@@ -21594,59 +21527,59 @@ com.google.android.gms.location.places.zzn -> com.google.android.gms.location.pl
     void zza(com.google.android.gms.location.places.UserDataType,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.zza -> com.google.android.gms.location.q:
+com.google.android.gms.location.zza -> com.google.android.gms.location.j:
     com.google.android.gms.location.GeofencingRequest zzec(android.os.Parcel) -> a
     com.google.android.gms.location.GeofencingRequest[] zzgs(int) -> a
     void zza(com.google.android.gms.location.GeofencingRequest,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.zzb -> com.google.android.gms.location.r:
+com.google.android.gms.location.zzb -> com.google.android.gms.location.k:
     com.google.android.gms.location.GestureRequest zzed(android.os.Parcel) -> a
     com.google.android.gms.location.GestureRequest[] zzgt(int) -> a
     void zza(com.google.android.gms.location.GestureRequest,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.zzc -> com.google.android.gms.location.s:
+com.google.android.gms.location.zzc -> com.google.android.gms.location.l:
     void onLocationResult(com.google.android.gms.location.LocationResult) -> a
     void onLocationAvailability(com.google.android.gms.location.LocationAvailability) -> a
-com.google.android.gms.location.zzc$zza -> com.google.android.gms.location.t:
+com.google.android.gms.location.zzc$zza -> com.google.android.gms.location.m:
     com.google.android.gms.location.zzc zzbS(android.os.IBinder) -> a
     android.os.IBinder asBinder() -> asBinder
     boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-com.google.android.gms.location.zzc$zza$zza -> com.google.android.gms.location.u:
+com.google.android.gms.location.zzc$zza$zza -> com.google.android.gms.location.n:
     android.os.IBinder zznF -> a
     android.os.IBinder asBinder() -> asBinder
     void onLocationResult(com.google.android.gms.location.LocationResult) -> a
     void onLocationAvailability(com.google.android.gms.location.LocationAvailability) -> a
-com.google.android.gms.location.zzd -> com.google.android.gms.location.v:
+com.google.android.gms.location.zzd -> com.google.android.gms.location.o:
     void onLocationChanged(android.location.Location) -> a
-com.google.android.gms.location.zzd$zza -> com.google.android.gms.location.w:
+com.google.android.gms.location.zzd$zza -> com.google.android.gms.location.p:
     com.google.android.gms.location.zzd zzbT(android.os.IBinder) -> a
     android.os.IBinder asBinder() -> asBinder
     boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-com.google.android.gms.location.zzd$zza$zza -> com.google.android.gms.location.x:
+com.google.android.gms.location.zzd$zza$zza -> com.google.android.gms.location.q:
     android.os.IBinder zznF -> a
     android.os.IBinder asBinder() -> asBinder
     void onLocationChanged(android.location.Location) -> a
-com.google.android.gms.location.zzf -> com.google.android.gms.location.y:
+com.google.android.gms.location.zzf -> com.google.android.gms.location.r:
     com.google.android.gms.location.LocationResult zzee(android.os.Parcel) -> a
     com.google.android.gms.location.LocationResult[] zzgw(int) -> a
     void zza(com.google.android.gms.location.LocationResult,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.zzg -> com.google.android.gms.location.z:
+com.google.android.gms.location.zzg -> com.google.android.gms.location.s:
     com.google.android.gms.location.LocationSettingsRequest zzef(android.os.Parcel) -> a
     com.google.android.gms.location.LocationSettingsRequest[] zzgx(int) -> a
     void zza(com.google.android.gms.location.LocationSettingsRequest,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.zzh -> com.google.android.gms.location.aa:
+com.google.android.gms.location.zzh -> com.google.android.gms.location.t:
     com.google.android.gms.location.LocationSettingsResult zzeg(android.os.Parcel) -> a
     com.google.android.gms.location.LocationSettingsResult[] zzgy(int) -> a
     void zza(com.google.android.gms.location.LocationSettingsResult,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.location.zzi -> com.google.android.gms.location.ab:
+com.google.android.gms.location.zzi -> com.google.android.gms.location.u:
     com.google.android.gms.location.LocationSettingsStates zzeh(android.os.Parcel) -> a
     com.google.android.gms.location.LocationSettingsStates[] zzgz(int) -> a
     void zza(com.google.android.gms.location.LocationSettingsStates,android.os.Parcel,int) -> a

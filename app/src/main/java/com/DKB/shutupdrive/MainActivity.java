@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFirst();
+
         setContentView(R.layout.layout_main);
         tracker = ((MyApplication) getApplication()).tracker;
         tracker.setScreenName("Main Screen");
@@ -82,18 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private boolean isFirst() {
-        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean first = getPrefs.getBoolean("firstTime", true);
-        if (first) {
-            getPrefs.edit().putBoolean("firstTime", false).apply();
-            Intent intent = new Intent(getApplicationContext(), Splash.class);
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
 
     protected void setUpUI() {

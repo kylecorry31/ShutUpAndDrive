@@ -4254,6 +4254,9 @@ android.support.v7.widget.Toolbar$LayoutParams:
     1798:1812:public Toolbar$LayoutParams(int,int,int)
     1815:1816:public Toolbar$LayoutParams(int)
 com.DKB.shutupdrive.BuildConfig
+com.DKB.shutupdrive.CarMode:
+    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient
+    com.google.android.gms.location.LocationRequest mLocationRequest
 com.DKB.shutupdrive.Constants
 com.DKB.shutupdrive.R
 com.DKB.shutupdrive.R$anim
@@ -5548,26 +5551,11 @@ com.google.android.gms.location.DetectedActivity:
     public DetectedActivity(int,int)
 com.google.android.gms.location.DetectedActivityCreator:
     public static final int CONTENT_DESCRIPTION
-com.google.android.gms.location.FusedLocationProviderApi:
-    public static final java.lang.String KEY_LOCATION_CHANGED
-    public static final java.lang.String KEY_MOCK_LOCATION
-    public abstract android.location.Location getLastLocation(com.google.android.gms.common.api.GoogleApiClient)
-    public abstract com.google.android.gms.location.LocationAvailability getLocationAvailability(com.google.android.gms.common.api.GoogleApiClient)
-    public abstract com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener,android.os.Looper)
-    public abstract com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationCallback,android.os.Looper)
-    public abstract com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,android.app.PendingIntent)
-    public abstract com.google.android.gms.common.api.PendingResult removeLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,android.app.PendingIntent)
-    public abstract com.google.android.gms.common.api.PendingResult removeLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationCallback)
-    public abstract com.google.android.gms.common.api.PendingResult setMockMode(com.google.android.gms.common.api.GoogleApiClient,boolean)
-    public abstract com.google.android.gms.common.api.PendingResult setMockLocation(com.google.android.gms.common.api.GoogleApiClient,android.location.Location)
+com.google.android.gms.location.FusedLocationProviderApi
 com.google.android.gms.location.Geofence
 com.google.android.gms.location.Geofence$Builder
 com.google.android.gms.location.GeofenceStatusCodes
-com.google.android.gms.location.GeofencingApi:
-    public abstract com.google.android.gms.common.api.PendingResult addGeofences(com.google.android.gms.common.api.GoogleApiClient,java.util.List,android.app.PendingIntent)
-    public abstract com.google.android.gms.common.api.PendingResult addGeofences(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.GeofencingRequest,android.app.PendingIntent)
-    public abstract com.google.android.gms.common.api.PendingResult removeGeofences(com.google.android.gms.common.api.GoogleApiClient,android.app.PendingIntent)
-    public abstract com.google.android.gms.common.api.PendingResult removeGeofences(com.google.android.gms.common.api.GoogleApiClient,java.util.List)
+com.google.android.gms.location.GeofencingApi
 com.google.android.gms.location.GeofencingEvent
 com.google.android.gms.location.GeofencingRequest:
     public static final int INITIAL_TRIGGER_ENTER
@@ -5584,23 +5572,30 @@ com.google.android.gms.location.LocationAvailability:
 com.google.android.gms.location.LocationAvailabilityCreator:
     public static final int CONTENT_DESCRIPTION
 com.google.android.gms.location.LocationCallback
+com.google.android.gms.location.LocationListener
 com.google.android.gms.location.LocationRequest:
     public static final int PRIORITY_HIGH_ACCURACY
     public static final int PRIORITY_BALANCED_POWER_ACCURACY
     public static final int PRIORITY_LOW_POWER
     public static final int PRIORITY_NO_POWER
     public static com.google.android.gms.location.LocationRequest create()
+    public com.google.android.gms.location.LocationRequest setPriority(int)
     public int getPriority()
+    public com.google.android.gms.location.LocationRequest setInterval(long)
     public long getInterval()
     public com.google.android.gms.location.LocationRequest setMaxWaitTime(long)
     public long getMaxWaitTime()
+    public com.google.android.gms.location.LocationRequest setFastestInterval(long)
     public long getFastestInterval()
     public com.google.android.gms.location.LocationRequest setExpirationDuration(long)
+    public com.google.android.gms.location.LocationRequest setExpirationTime(long)
     public long getExpirationTime()
     public com.google.android.gms.location.LocationRequest setNumUpdates(int)
     public int getNumUpdates()
     public com.google.android.gms.location.LocationRequest setSmallestDisplacement(float)
     public float getSmallestDisplacement()
+    private static void zzK(long)
+    private static void zzgu(int)
     private static void zzd(float)
 com.google.android.gms.location.LocationRequestCreator:
     public static final int CONTENT_DESCRIPTION
@@ -5609,9 +5604,9 @@ com.google.android.gms.location.LocationResult:
     public android.location.Location getLastLocation()
     public static boolean hasResult(android.content.Intent)
     public static com.google.android.gms.location.LocationResult extractResult(android.content.Intent)
-com.google.android.gms.location.LocationServices:
-    private LocationServices()
-    public static com.google.android.gms.location.internal.zzj zze(com.google.android.gms.common.api.GoogleApiClient)
+com.google.android.gms.location.LocationServices
+com.google.android.gms.location.LocationServices$1
+com.google.android.gms.location.LocationServices$zza
 com.google.android.gms.location.LocationSettingsRequest:
     private LocationSettingsRequest(java.util.List,boolean,boolean,boolean)
     synthetic LocationSettingsRequest(java.util.List,boolean,boolean,boolean,com.google.android.gms.location.LocationSettingsRequest$1)
@@ -5635,37 +5630,30 @@ com.google.android.gms.location.R$raw
 com.google.android.gms.location.R$string
 com.google.android.gms.location.R$style
 com.google.android.gms.location.R$styleable
-com.google.android.gms.location.SettingsApi:
-    public abstract com.google.android.gms.common.api.PendingResult checkLocationSettings(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationSettingsRequest)
+com.google.android.gms.location.SettingsApi
+com.google.android.gms.location.internal.LocationRequestInternal:
+    public static com.google.android.gms.location.internal.LocationRequestInternal zzb(com.google.android.gms.location.LocationRequest)
+    public static com.google.android.gms.location.internal.LocationRequestInternal zza(java.lang.String,com.google.android.gms.location.LocationRequest)
 com.google.android.gms.location.internal.LocationRequestUpdateData:
+    public static com.google.android.gms.location.internal.LocationRequestUpdateData zzb(com.google.android.gms.location.internal.LocationRequestInternal,com.google.android.gms.location.zzd)
     public static com.google.android.gms.location.internal.LocationRequestUpdateData zzb(com.google.android.gms.location.internal.LocationRequestInternal,android.app.PendingIntent)
     public static com.google.android.gms.location.internal.LocationRequestUpdateData zze(android.app.PendingIntent)
     public static com.google.android.gms.location.internal.LocationRequestUpdateData zza(com.google.android.gms.location.internal.LocationRequestInternal,com.google.android.gms.location.zzc)
 com.google.android.gms.location.internal.ParcelableGeofence:
     public ParcelableGeofence(java.lang.String,int,short,double,double,float,long,int,int)
     public static com.google.android.gms.location.internal.ParcelableGeofence zzn(byte[])
-com.google.android.gms.location.internal.zzd:
-    public android.location.Location getLastLocation(com.google.android.gms.common.api.GoogleApiClient)
-    public com.google.android.gms.location.LocationAvailability getLocationAvailability(com.google.android.gms.common.api.GoogleApiClient)
-    public com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener,android.os.Looper)
-    public com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationCallback,android.os.Looper)
-    public com.google.android.gms.common.api.PendingResult requestLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationRequest,android.app.PendingIntent)
-    public com.google.android.gms.common.api.PendingResult removeLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,android.app.PendingIntent)
-    public com.google.android.gms.common.api.PendingResult removeLocationUpdates(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationCallback)
-    public com.google.android.gms.common.api.PendingResult setMockMode(com.google.android.gms.common.api.GoogleApiClient,boolean)
-    public com.google.android.gms.common.api.PendingResult setMockLocation(com.google.android.gms.common.api.GoogleApiClient,android.location.Location)
+com.google.android.gms.location.internal.zzd
+com.google.android.gms.location.internal.zzd$1
 com.google.android.gms.location.internal.zzd$2
 com.google.android.gms.location.internal.zzd$3
 com.google.android.gms.location.internal.zzd$4
 com.google.android.gms.location.internal.zzd$5
 com.google.android.gms.location.internal.zzd$6
+com.google.android.gms.location.internal.zzd$7
 com.google.android.gms.location.internal.zzd$8
 com.google.android.gms.location.internal.zzd$9
-com.google.android.gms.location.internal.zze:
-    public com.google.android.gms.common.api.PendingResult addGeofences(com.google.android.gms.common.api.GoogleApiClient,java.util.List,android.app.PendingIntent)
-    public com.google.android.gms.common.api.PendingResult addGeofences(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.GeofencingRequest,android.app.PendingIntent)
-    public com.google.android.gms.common.api.PendingResult removeGeofences(com.google.android.gms.common.api.GoogleApiClient,android.app.PendingIntent)
-    public com.google.android.gms.common.api.PendingResult removeGeofences(com.google.android.gms.common.api.GoogleApiClient,java.util.List)
+com.google.android.gms.location.internal.zzd$zza
+com.google.android.gms.location.internal.zze
 com.google.android.gms.location.internal.zze$1
 com.google.android.gms.location.internal.zze$1$1
 com.google.android.gms.location.internal.zze$2
@@ -5680,9 +5668,12 @@ com.google.android.gms.location.internal.zzh$zza:
 com.google.android.gms.location.internal.zzi:
     public android.location.Location getLastLocation()
     public com.google.android.gms.location.LocationAvailability zzuw()
+    public void zza(com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener,android.os.Looper)
     public void zza(com.google.android.gms.location.internal.LocationRequestInternal,com.google.android.gms.location.LocationCallback,android.os.Looper)
+    private com.google.android.gms.location.internal.zzi$zzc zza(com.google.android.gms.location.LocationListener,android.os.Looper)
     private com.google.android.gms.location.internal.zzi$zza zza(com.google.android.gms.location.LocationCallback,android.os.Looper)
     public void zzb(com.google.android.gms.location.LocationRequest,android.app.PendingIntent)
+    public void zza(com.google.android.gms.location.LocationListener)
     public void zza(com.google.android.gms.location.LocationCallback)
     public void zzd(android.app.PendingIntent)
     public void zzb(android.location.Location)
@@ -5690,6 +5681,10 @@ com.google.android.gms.location.internal.zzi$zza:
     zzi$zza(com.google.android.gms.location.LocationCallback,android.os.Looper)
     public void release()
 com.google.android.gms.location.internal.zzi$zza$1
+com.google.android.gms.location.internal.zzi$zzb
+com.google.android.gms.location.internal.zzi$zzc:
+    zzi$zzc(com.google.android.gms.location.LocationListener,android.os.Looper)
+    public void release()
 com.google.android.gms.location.internal.zzj:
     public void zza(com.google.android.gms.location.GeofencingRequest,android.app.PendingIntent,com.google.android.gms.location.zze$zza)
     public void zza(android.app.PendingIntent,com.google.android.gms.location.zze$zzb)
@@ -5697,7 +5692,9 @@ com.google.android.gms.location.internal.zzj:
     public android.location.Location getLastLocation()
     public com.google.android.gms.location.LocationAvailability zzuw()
     public void zza(com.google.android.gms.location.internal.LocationRequestInternal,com.google.android.gms.location.LocationCallback,android.os.Looper)
+    public void zza(com.google.android.gms.location.LocationRequest,com.google.android.gms.location.LocationListener,android.os.Looper)
     public void zzb(com.google.android.gms.location.LocationRequest,android.app.PendingIntent)
+    public void zza(com.google.android.gms.location.LocationListener)
     public void zzd(android.app.PendingIntent)
     public void zza(com.google.android.gms.location.LocationCallback)
     public void zzac(boolean)
@@ -5707,9 +5704,7 @@ com.google.android.gms.location.internal.zzj$zza
 com.google.android.gms.location.internal.zzj$zzb
 com.google.android.gms.location.internal.zzj$zzc
 com.google.android.gms.location.internal.zzj$zzd
-com.google.android.gms.location.internal.zzo:
-    public com.google.android.gms.common.api.PendingResult checkLocationSettings(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationSettingsRequest)
-    public com.google.android.gms.common.api.PendingResult zza(com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.location.LocationSettingsRequest,java.lang.String)
+com.google.android.gms.location.internal.zzo
 com.google.android.gms.location.internal.zzo$1
 com.google.android.gms.location.places.AddPlaceRequest:
     public AddPlaceRequest(java.lang.String,com.google.android.gms.maps.model.LatLng,java.lang.String,java.util.List,java.lang.String)
@@ -5852,6 +5847,8 @@ com.google.android.gms.location.places.zzm$zze
 com.google.android.gms.location.places.zzm$zzf
 com.google.android.gms.location.zzc$zza:
     public zzc$zza()
+com.google.android.gms.location.zzd$zza:
+    public zzd$zza()
 com.google.android.gms.location.zze
 com.google.android.gms.location.zze$zza
 com.google.android.gms.location.zze$zzb
