@@ -4,9 +4,9 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:57
+# view land/res/layout-land/layout_main.xml #generated:58
 # view land/res/layout-land/layout_tutorial.xml #generated:40
-# view res/layout/layout_main.xml #generated:60
+# view res/layout/layout_main.xml #generated:61
 # view res/layout/layout_tutorial.xml #generated:40
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
@@ -107,8 +107,8 @@
 # view AndroidManifest.xml #generated:45
 -keep class com.google.android.gms.ads.AdActivity { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:16
-# view res/layout/layout_main.xml #generated:11
+# view land/res/layout-land/layout_main.xml #generated:17
+# view res/layout/layout_main.xml #generated:12
 -keep class com.google.android.gms.ads.AdView { <init>(...); }
 
 # view AndroidManifest.xml #generated:118

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.layout_main);
+        getWindow().setBackgroundDrawable(null);
         tracker = ((MyApplication) getApplication()).tracker;
         tracker.setScreenName("Main Screen");
         fab = (FloatingActionButton) findViewById(R.id.fab);

@@ -23,6 +23,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.blank);
+        getWindow().setBackgroundDrawable(null);
         tracker = ((MyApplication) getApplication()).tracker;
         tracker.setScreenName("Settings");
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();

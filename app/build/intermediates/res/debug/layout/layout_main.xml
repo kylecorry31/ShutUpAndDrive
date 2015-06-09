@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
 
     <com.google.android.gms.ads.AdView
@@ -14,13 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
     <ImageView
         android:id="@+id/titleImage"
         android:layout_width="match_parent"
-        android:layout_below="@id/adView"
         android:layout_height="@dimen/title_image_height"
+        android:layout_below="@id/adView"
         android:background="@drawable/road"
         android:elevation="4dp" />
 
