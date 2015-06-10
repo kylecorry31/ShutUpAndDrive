@@ -4254,6 +4254,9 @@ android.support.v7.widget.Toolbar$LayoutParams:
     1798:1812:public Toolbar$LayoutParams(int,int,int)
     1815:1816:public Toolbar$LayoutParams(int)
 com.DKB.shutupdrive.BuildConfig
+com.DKB.shutupdrive.CarMode:
+    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient
+    com.google.android.gms.location.LocationRequest mLocationRequest
 com.DKB.shutupdrive.Constants
 com.DKB.shutupdrive.R
 com.DKB.shutupdrive.R$anim
@@ -5596,8 +5599,8 @@ com.google.android.gms.location.LocationRequest:
     public long getMaxWaitTime()
     public long getFastestInterval()
     public com.google.android.gms.location.LocationRequest setExpirationDuration(long)
+    public com.google.android.gms.location.LocationRequest setExpirationTime(long)
     public long getExpirationTime()
-    public com.google.android.gms.location.LocationRequest setNumUpdates(int)
     public int getNumUpdates()
     public com.google.android.gms.location.LocationRequest setSmallestDisplacement(float)
     public float getSmallestDisplacement()
@@ -6381,69 +6384,3 @@ com.google.android.gms.tagmanager.zzp$zzf:
 com.google.android.gms.tagmanager.zzy:
     public void zzay(java.lang.String)
     public void setLogLevel(int)
-com.purplebrain.adbuddiz.sdk.AdBuddiz
-com.purplebrain.adbuddiz.sdk.AdBuddizActivity
-com.purplebrain.adbuddiz.sdk.AdBuddizDelegate
-com.purplebrain.adbuddiz.sdk.AdBuddizError
-com.purplebrain.adbuddiz.sdk.AdBuddizLogLevel
-com.purplebrain.adbuddiz.sdk.a
-com.purplebrain.adbuddiz.sdk.a.a
-com.purplebrain.adbuddiz.sdk.a.b
-com.purplebrain.adbuddiz.sdk.a.c
-com.purplebrain.adbuddiz.sdk.a.d
-com.purplebrain.adbuddiz.sdk.a.e
-com.purplebrain.adbuddiz.sdk.a.f
-com.purplebrain.adbuddiz.sdk.a.g
-com.purplebrain.adbuddiz.sdk.a.h
-com.purplebrain.adbuddiz.sdk.b
-com.purplebrain.adbuddiz.sdk.c
-com.purplebrain.adbuddiz.sdk.model.ABOrientation
-com.purplebrain.adbuddiz.sdk.model.a
-com.purplebrain.adbuddiz.sdk.model.b
-com.purplebrain.adbuddiz.sdk.model.c
-com.purplebrain.adbuddiz.sdk.util.a
-com.purplebrain.adbuddiz.sdk.util.aa
-com.purplebrain.adbuddiz.sdk.util.b
-com.purplebrain.adbuddiz.sdk.util.c
-com.purplebrain.adbuddiz.sdk.util.d
-com.purplebrain.adbuddiz.sdk.util.device.ABScreenHelper
-com.purplebrain.adbuddiz.sdk.util.device.ABScreenHelper$AssetType
-com.purplebrain.adbuddiz.sdk.util.device.a
-com.purplebrain.adbuddiz.sdk.util.device.b
-com.purplebrain.adbuddiz.sdk.util.device.c
-com.purplebrain.adbuddiz.sdk.util.device.d
-com.purplebrain.adbuddiz.sdk.util.device.e
-com.purplebrain.adbuddiz.sdk.util.device.f
-com.purplebrain.adbuddiz.sdk.util.device.g
-com.purplebrain.adbuddiz.sdk.util.device.h
-com.purplebrain.adbuddiz.sdk.util.device.i
-com.purplebrain.adbuddiz.sdk.util.device.j
-com.purplebrain.adbuddiz.sdk.util.device.k
-com.purplebrain.adbuddiz.sdk.util.device.l
-com.purplebrain.adbuddiz.sdk.util.device.m
-com.purplebrain.adbuddiz.sdk.util.device.n
-com.purplebrain.adbuddiz.sdk.util.device.o
-com.purplebrain.adbuddiz.sdk.util.device.p
-com.purplebrain.adbuddiz.sdk.util.device.q
-com.purplebrain.adbuddiz.sdk.util.e
-com.purplebrain.adbuddiz.sdk.util.f
-com.purplebrain.adbuddiz.sdk.util.g
-com.purplebrain.adbuddiz.sdk.util.h
-com.purplebrain.adbuddiz.sdk.util.i
-com.purplebrain.adbuddiz.sdk.util.j
-com.purplebrain.adbuddiz.sdk.util.k
-com.purplebrain.adbuddiz.sdk.util.l
-com.purplebrain.adbuddiz.sdk.util.m
-com.purplebrain.adbuddiz.sdk.util.n
-com.purplebrain.adbuddiz.sdk.util.o
-com.purplebrain.adbuddiz.sdk.util.p
-com.purplebrain.adbuddiz.sdk.util.q
-com.purplebrain.adbuddiz.sdk.util.r
-com.purplebrain.adbuddiz.sdk.util.s
-com.purplebrain.adbuddiz.sdk.util.t
-com.purplebrain.adbuddiz.sdk.util.u
-com.purplebrain.adbuddiz.sdk.util.v
-com.purplebrain.adbuddiz.sdk.util.w
-com.purplebrain.adbuddiz.sdk.util.x
-com.purplebrain.adbuddiz.sdk.util.y
-com.purplebrain.adbuddiz.sdk.util.z

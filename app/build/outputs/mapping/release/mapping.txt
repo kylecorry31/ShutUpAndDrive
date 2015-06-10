@@ -10207,43 +10207,32 @@ android.support.v7.widget.Toolbar$SavedState$1 -> android.support.v7.widget.ba:
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
 com.DKB.shutupdrive.CarMode -> com.DKB.shutupdrive.CarMode:
-    int previousAudioMode -> k
-    int mId -> l
+    int previousAudioMode -> h
+    int mId -> i
     boolean autoreply -> a
     java.lang.String msg -> b
-    boolean auto -> m
-    int phone -> n
-    android.app.NotificationManager nm -> o
-    android.content.SharedPreferences getPrefs -> p
+    boolean auto -> j
+    int phone -> k
+    android.app.NotificationManager nm -> l
+    android.content.SharedPreferences getPrefs -> m
     android.speech.tts.TextToSpeech tts -> c
     android.telephony.PhoneStateListener psl -> d
     android.telephony.TelephonyManager tm -> e
     android.media.AudioManager am -> f
-    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient -> g
-    com.google.android.gms.location.LocationRequest mLocationRequest -> h
-    boolean self -> i
-    boolean $assertionsDisabled -> j
+    boolean $assertionsDisabled -> g
     android.os.IBinder onBind(android.content.Intent) -> onBind
     int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    void setUp() -> m
+    void setUp() -> i
     void createPhoneStateListener() -> a
-    void buildGoogleApiClient() -> b
-    void stopLocationUpdates() -> c
-    void createLocationRequest() -> d
-    void startLocationUpdates() -> e
-    void onConnected(android.os.Bundle) -> a
-    void onConnectionSuspended(int) -> a
-    void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
-    void onLocationChanged(android.location.Location) -> a
     java.lang.String quickCallerId(java.lang.String) -> a
     void onDestroy() -> onDestroy
-    void notification() -> f
-    android.app.PendingIntent createNotDrivingPendingIntent() -> g
-    void getUserSettings() -> h
-    void silent() -> i
-    void vibrate() -> j
-    void normal() -> k
-    void restorePreviousSoundMode() -> l
+    void notification() -> b
+    android.app.PendingIntent createNotDrivingPendingIntent() -> c
+    void getUserSettings() -> d
+    void silent() -> e
+    void vibrate() -> f
+    void normal() -> g
+    void restorePreviousSoundMode() -> h
     int access$000(com.DKB.shutupdrive.CarMode) -> a
     java.lang.String access$100(com.DKB.shutupdrive.CarMode,java.lang.String) -> a
 com.DKB.shutupdrive.CarMode$1 -> com.DKB.shutupdrive.a:
@@ -10270,7 +10259,6 @@ com.DKB.shutupdrive.MainActivity -> com.DKB.shutupdrive.MainActivity:
     com.google.android.gms.ads.AdView adView -> y
     void onCreate(android.os.Bundle) -> onCreate
     void createAds() -> p
-    boolean isFirst() -> q
     void setUpUI() -> k
     void buildGoogleApiClient() -> l
     void onStart() -> onStart
@@ -10283,7 +10271,7 @@ com.DKB.shutupdrive.MainActivity -> com.DKB.shutupdrive.MainActivity:
     void animateOut() -> n
     void stopActivityRecognition() -> o
     void onConnected(android.os.Bundle) -> a
-    android.app.PendingIntent getActivityRecognitionPI() -> r
+    android.app.PendingIntent getActivityRecognitionPI() -> q
     void onConnectionSuspended(int) -> a
     void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
     void onResult(com.google.android.gms.common.api.Status) -> a
@@ -10308,12 +10296,24 @@ com.DKB.shutupdrive.Settings$SettingsFragment -> com.DKB.shutupdrive.d:
     void onCreate(android.os.Bundle) -> onCreate
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
     java.lang.String getPhoneOption() -> a
+com.DKB.shutupdrive.SpeedService -> com.DKB.shutupdrive.SpeedService:
+    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient -> a
+    com.google.android.gms.location.LocationRequest mLocationRequest -> b
+    void onLocationChanged(android.location.Location) -> a
+    android.os.IBinder onBind(android.content.Intent) -> onBind
+    int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    void onDestroy() -> onDestroy
+    void onConnected(android.os.Bundle) -> a
+    void onConnectionSuspended(int) -> a
+    void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
 com.DKB.shutupdrive.Splash -> com.DKB.shutupdrive.Splash:
     android.widget.ImageView image -> a
     android.widget.TextView titleText -> b
     android.content.SharedPreferences$Editor editor -> c
     void onCreate(android.os.Bundle) -> onCreate
+    boolean isFirst() -> a
     void onPause() -> onPause
+    boolean access$000(com.DKB.shutupdrive.Splash) -> a
 com.DKB.shutupdrive.Splash$1 -> com.DKB.shutupdrive.e:
     com.DKB.shutupdrive.Splash this$0 -> a
     void run() -> run
@@ -20744,12 +20744,12 @@ com.google.android.gms.location.LocationRequest -> com.google.android.gms.locati
     com.google.android.gms.location.LocationRequest setPriority(int) -> a
     com.google.android.gms.location.LocationRequest setInterval(long) -> a
     com.google.android.gms.location.LocationRequest setFastestInterval(long) -> b
-    com.google.android.gms.location.LocationRequest setExpirationTime(long) -> c
-    void zzK(long) -> d
-    void zzgu(int) -> c
+    com.google.android.gms.location.LocationRequest setNumUpdates(int) -> b
+    void zzK(long) -> c
+    void zzgu(int) -> d
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-    java.lang.String zzgv(int) -> b
+    java.lang.String zzgv(int) -> c
     java.lang.String toString() -> toString
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals

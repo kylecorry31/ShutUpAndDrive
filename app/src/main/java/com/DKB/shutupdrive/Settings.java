@@ -74,6 +74,12 @@ public class Settings extends AppCompatActivity {
                         .setAction("Auto Start")
                         .setLabel(String.valueOf(sharedPreferences.getBoolean("autoStart", false)))
                         .build());
+            } else if(key.contentEquals("gps")){
+                tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Preferences")
+                        .setAction("Improve Accuracy")
+                        .setLabel(String.valueOf(sharedPreferences.getBoolean("gps", false)))
+                        .build());
             }
         }
 

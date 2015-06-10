@@ -18,4 +18,9 @@
         android:defaultValue="false"
         android:key="autoStart"
         android:title="Start when opened" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="gps"
+        android:title="Improve accuracy (experimental)" />
 </PreferenceScreen>

@@ -4694,6 +4694,8 @@ com.DKB.shutupdrive.R$styleable: int ViewStubCompat_android_layout
 com.DKB.shutupdrive.R$xml: int prefs
 com.DKB.shutupdrive.Settings
 com.DKB.shutupdrive.Settings: Settings()
+com.DKB.shutupdrive.SpeedService
+com.DKB.shutupdrive.SpeedService: SpeedService()
 com.DKB.shutupdrive.Splash
 com.DKB.shutupdrive.Splash: Splash()
 com.DKB.shutupdrive.Tutorial
@@ -5746,11 +5748,3 @@ com.google.android.gms.tagmanager.zzbf$zza: com.google.android.gms.tagmanager.zz
 com.google.android.gms.tagmanager.zzbf$zza: com.google.android.gms.tagmanager.zzbf$zza valueOf(java.lang.String)
 com.google.android.gms.tagmanager.zzcb$zza: com.google.android.gms.tagmanager.zzcb$zza[] values()
 com.google.android.gms.tagmanager.zzcb$zza: com.google.android.gms.tagmanager.zzcb$zza valueOf(java.lang.String)
-com.purplebrain.adbuddiz.sdk.AdBuddizError: com.purplebrain.adbuddiz.sdk.AdBuddizError[] values()
-com.purplebrain.adbuddiz.sdk.AdBuddizError: com.purplebrain.adbuddiz.sdk.AdBuddizError valueOf(java.lang.String)
-com.purplebrain.adbuddiz.sdk.AdBuddizLogLevel: com.purplebrain.adbuddiz.sdk.AdBuddizLogLevel[] values()
-com.purplebrain.adbuddiz.sdk.AdBuddizLogLevel: com.purplebrain.adbuddiz.sdk.AdBuddizLogLevel valueOf(java.lang.String)
-com.purplebrain.adbuddiz.sdk.model.ABOrientation: com.purplebrain.adbuddiz.sdk.model.ABOrientation[] values()
-com.purplebrain.adbuddiz.sdk.model.ABOrientation: com.purplebrain.adbuddiz.sdk.model.ABOrientation valueOf(java.lang.String)
-com.purplebrain.adbuddiz.sdk.util.device.ABScreenHelper$AssetType: com.purplebrain.adbuddiz.sdk.util.device.ABScreenHelper$AssetType[] values()
-com.purplebrain.adbuddiz.sdk.util.device.ABScreenHelper$AssetType: com.purplebrain.adbuddiz.sdk.util.device.ABScreenHelper$AssetType valueOf(java.lang.String)

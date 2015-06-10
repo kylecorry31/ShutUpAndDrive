@@ -11,7 +11,7 @@ public class Constants {
 
     public static final long DETECTION_INTERVAL = 10 * MILLIS_IN_MINUTE;
 
-    public static final int DRIVING_SPEED_THRESHOLD = 10;
+    public static final double DRIVING_SPEED_THRESHOLD = 8.5;
 
     public static final boolean DEVELOPER = true;
 
