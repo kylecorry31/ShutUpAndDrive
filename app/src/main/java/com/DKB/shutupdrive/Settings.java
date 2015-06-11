@@ -61,6 +61,7 @@ public class Settings extends AppCompatActivity {
                 messagePreference.setSummary(userMessage);
             } else if (key.contentEquals("autoReply")) {
                 messagePreference.setEnabled(sharedPreferences.getBoolean("autoReply", true));
+                // on -> permission sms
             } else if (key.contentEquals("phoneOpt")){
                 phonePreference.setSummary(getPhoneOption());
                 tracker.send(new HitBuilders.EventBuilder()
@@ -68,6 +69,7 @@ public class Settings extends AppCompatActivity {
                         .setAction("Phone Options")
                         .setLabel(getPhoneOption())
                         .build());
+                // on -> permission phone
             } else if(key.contentEquals("autoStart")){
                 tracker.send(new HitBuilders.EventBuilder()
                         .setCategory("Preferences")
@@ -80,6 +82,9 @@ public class Settings extends AppCompatActivity {
                         .setAction("Improve Accuracy")
                         .setLabel(String.valueOf(sharedPreferences.getBoolean("gps", false)))
                         .build());
+                /*
+                    on -> permission location
+                 */
             }
         }
 

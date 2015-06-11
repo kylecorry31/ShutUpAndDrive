@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,12 +27,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.ActivityRecognition;
-
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
 
 
 /**
@@ -74,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buildGoogleApiClient();
     }
 
-    private void createAds(){
+    private void createAds() {
         if (!Constants.DEVELOPER) {
             AdRequest adRequest = new AdRequest.Builder().build();
             adView.loadAd(adRequest);
@@ -82,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adView.setVisibility(View.GONE);
         }
     }
-
-
 
 
     protected void setUpUI() {
@@ -248,6 +239,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        /*
+            permission activity recognition
+                else: nothing
+         */
         toast = true;
         if (mGoogleApiClient.isConnected() && !running) {
             startActivityRecognition();

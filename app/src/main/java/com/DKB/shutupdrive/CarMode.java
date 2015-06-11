@@ -49,8 +49,6 @@ public class CarMode extends Service {
     PhoneStateListener psl;
     TelephonyManager tm;
     AudioManager am;
-    GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -202,6 +200,15 @@ public class CarMode extends Service {
     }
 
     void getUserSettings() {
+        /*
+            if phone != 1
+                check permission phone
+                    else: phone = 1, notify
+            if autoreply
+                check permission sms
+                    else: auto = false, notify
+
+         */
         phone = Integer.valueOf(getPrefs.getString("phoneOpt", "2"));
         auto = getPrefs.getBoolean("autoReply", true);
         msg = getPrefs

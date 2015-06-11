@@ -42,6 +42,11 @@ public class DetectedActivityIntentService extends IntentService {
             long waitTime = PreferenceManager.getDefaultSharedPreferences(this).getLong("NotDrivingTime", 0);
             boolean diffTimeOK = (new Date().getTime() - waitTime) >= 10 * Constants.MILLIS_IN_MINUTE;
             if (confidence >= Constants.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
+                /*
+                    if gps
+                        check permission location
+                            else: start carmode, notify
+                 */
                 if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gps", false))
                     startService(new Intent(this, SpeedService.class));
                 else

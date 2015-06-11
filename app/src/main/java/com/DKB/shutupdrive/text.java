@@ -11,11 +11,9 @@ import android.util.Log;
 public class text extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        System.out.println("message received");
         if (CarMode.autoreply) {
             if (intent.getAction().equals(
                     "android.provider.Telephony.SMS_RECEIVED")) {
-                System.out.println("SMS received");
                 // gets the message
                 Bundle bundle = intent.getExtras();
                 SmsMessage[] msgs;

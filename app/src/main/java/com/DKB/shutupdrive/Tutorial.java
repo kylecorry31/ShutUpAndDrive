@@ -89,6 +89,14 @@ public class Tutorial extends Activity implements View.OnClickListener {
 
     protected void updateUI() {
         if (nextCount < features.length) {
+            /*
+                nextCount = 0 -> permission activity recognition
+                    else: fab ask
+                nextCount = 1 -> permission sms
+                    else: autoreply -> false
+                nextCount = 2 -> permission phone
+                    else: phone -> block
+             */
             featureText.startAnimation(fadeOut);
             descriptionText.startAnimation(fadeOut);
             image.startAnimation(fadeOut);
