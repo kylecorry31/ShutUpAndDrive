@@ -29,8 +29,6 @@ public class text extends BroadcastReceiver {
                             msgs[i] = SmsMessage
                                     .createFromPdu((byte[]) pdus[i]);
                             msg_from = msgs[i].getOriginatingAddress();
-                            System.out
-                                    .println("#### SMS Received: " + msg_from);
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(msg_from, null, msg,
                                     null, null);

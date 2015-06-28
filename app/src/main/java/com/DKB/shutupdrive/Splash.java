@@ -2,10 +2,8 @@ package com.DKB.shutupdrive;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,17 +15,14 @@ import android.widget.TextView;
  * Created by kyle on 8/12/14.
  */
 public class Splash extends Activity {
-    ImageView image;
-    TextView titleText;
-    SharedPreferences.Editor editor;
+    private ImageView image;
+    private TextView titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.putInt(Constants.TUT_NUM_KEY, 0);
-        editor.apply();
+        Utils.setTutNumber(this, 0);
         setContentView(R.layout.splash);
         getWindow().setBackgroundDrawable(null);
         image = (ImageView) findViewById(R.id.icon);
@@ -49,10 +44,9 @@ public class Splash extends Activity {
     }
 
     private boolean isFirst() {
-        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean first = getPrefs.getBoolean("firstTime", true);
+        boolean first = Utils.isFirst(this);
         if (first) {
-            getPrefs.edit().putBoolean("firstTime", false).apply();
+            Utils.setFirst(this, false);
             Intent intent = new Intent(getApplicationContext(), Tutorial.class);
             startActivity(intent);
             return true;

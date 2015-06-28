@@ -10207,33 +10207,35 @@ android.support.v7.widget.Toolbar$SavedState$1 -> android.support.v7.widget.ba:
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
 com.DKB.shutupdrive.CarMode -> com.DKB.shutupdrive.CarMode:
-    int previousAudioMode -> h
-    int mId -> i
+    int previousAudioMode -> d
     boolean autoreply -> a
     java.lang.String msg -> b
-    int phone -> j
-    android.app.NotificationManager nm -> k
-    android.content.SharedPreferences getPrefs -> l
-    android.speech.tts.TextToSpeech tts -> c
-    android.telephony.PhoneStateListener psl -> d
-    android.telephony.TelephonyManager tm -> e
-    android.media.AudioManager am -> f
-    boolean $assertionsDisabled -> g
+    int phone -> e
+    android.app.NotificationManager nm -> f
+    android.speech.tts.TextToSpeech tts -> g
+    android.telephony.PhoneStateListener psl -> h
+    android.telephony.TelephonyManager tm -> i
+    android.media.AudioManager am -> j
+    boolean $assertionsDisabled -> c
     android.os.IBinder onBind(android.content.Intent) -> onBind
     int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    void setUp() -> i
-    void createPhoneStateListener() -> a
+    void setUp() -> a
+    void createPhoneStateListener() -> b
     java.lang.String quickCallerId(java.lang.String) -> a
     void onDestroy() -> onDestroy
-    void notification() -> b
-    android.app.PendingIntent createNotDrivingPendingIntent() -> c
-    void getUserSettings() -> d
-    void silent() -> e
-    void vibrate() -> f
-    void normal() -> g
-    void restorePreviousSoundMode() -> h
+    void notification() -> c
+    android.app.PendingIntent createNotDrivingPendingIntent() -> d
+    void getUserSettings() -> e
+    void silent() -> f
+    void vibrate() -> g
+    void normal() -> h
+    void restorePreviousSoundMode() -> i
     int access$000(com.DKB.shutupdrive.CarMode) -> a
-    java.lang.String access$100(com.DKB.shutupdrive.CarMode,java.lang.String) -> a
+    android.speech.tts.TextToSpeech access$102(com.DKB.shutupdrive.CarMode,android.speech.tts.TextToSpeech) -> a
+    android.speech.tts.TextToSpeech access$100(com.DKB.shutupdrive.CarMode) -> b
+    java.lang.String access$200(com.DKB.shutupdrive.CarMode,java.lang.String) -> a
+    void access$300(com.DKB.shutupdrive.CarMode) -> c
+    void access$400(com.DKB.shutupdrive.CarMode) -> d
 com.DKB.shutupdrive.CarMode$1 -> com.DKB.shutupdrive.a:
     com.DKB.shutupdrive.CarMode this$0 -> a
     void onCallStateChanged(int,java.lang.String) -> onCallStateChanged
@@ -10252,22 +10254,21 @@ com.DKB.shutupdrive.MainActivity -> com.DKB.shutupdrive.MainActivity:
     android.widget.ImageView titleImage -> s
     boolean running -> t
     boolean toast -> u
-    android.content.SharedPreferences prefs -> v
-    android.view.MenuItem item -> w
-    com.google.android.gms.ads.AdView adView -> x
+    android.view.MenuItem item -> v
+    com.google.android.gms.ads.AdView adView -> w
     void onCreate(android.os.Bundle) -> onCreate
-    void createAds() -> p
-    void setUpUI() -> k
-    void buildGoogleApiClient() -> l
+    void createAds() -> k
+    void setUpUI() -> l
+    void buildGoogleApiClient() -> m
     void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
     void onStop() -> onStop
-    void startActivityRecognition() -> m
+    void startActivityRecognition() -> n
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void animateOut() -> n
-    void stopActivityRecognition() -> o
+    void animateOut() -> o
+    void stopActivityRecognition() -> p
     void onConnected(android.os.Bundle) -> a
     android.app.PendingIntent getActivityRecognitionPI() -> q
     void onConnectionSuspended(int) -> a
@@ -10275,6 +10276,7 @@ com.DKB.shutupdrive.MainActivity -> com.DKB.shutupdrive.MainActivity:
     void onResult(com.google.android.gms.common.api.Status) -> a
     void onClick(android.view.View) -> onClick
     void onResult(com.google.android.gms.common.api.Result) -> a
+    android.view.MenuItem access$000(com.DKB.shutupdrive.MainActivity) -> a
 com.DKB.shutupdrive.MainActivity$1 -> com.DKB.shutupdrive.c:
     com.DKB.shutupdrive.MainActivity this$0 -> a
     void run() -> run
@@ -10283,8 +10285,16 @@ com.DKB.shutupdrive.NotificationReceiver -> com.DKB.shutupdrive.NotificationRece
 com.DKB.shutupdrive.Settings -> com.DKB.shutupdrive.Settings:
     android.preference.Preference messagePreference -> n
     android.preference.Preference phonePreference -> o
-    android.content.SharedPreferences sharedPreferences -> p
+    android.content.Context context -> p
+    android.content.SharedPreferences sharedPreferences -> q
     void onCreate(android.os.Bundle) -> onCreate
+    android.content.SharedPreferences access$002(android.content.SharedPreferences) -> a
+    android.preference.Preference access$102(android.preference.Preference) -> a
+    android.content.Context access$200() -> k
+    android.preference.Preference access$100() -> l
+    android.preference.Preference access$302(android.preference.Preference) -> b
+    android.preference.Preference access$300() -> m
+    android.content.SharedPreferences access$000() -> n
 com.DKB.shutupdrive.Settings$SettingsFragment -> com.DKB.shutupdrive.d:
     void onCreate(android.os.Bundle) -> onCreate
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
@@ -10303,7 +10313,6 @@ com.DKB.shutupdrive.SpeedService -> com.DKB.shutupdrive.SpeedService:
 com.DKB.shutupdrive.Splash -> com.DKB.shutupdrive.Splash:
     android.widget.ImageView image -> a
     android.widget.TextView titleText -> b
-    android.content.SharedPreferences$Editor editor -> c
     void onCreate(android.os.Bundle) -> onCreate
     boolean isFirst() -> a
     void onPause() -> onPause
@@ -10312,15 +10321,13 @@ com.DKB.shutupdrive.Splash$1 -> com.DKB.shutupdrive.e:
     com.DKB.shutupdrive.Splash this$0 -> a
     void run() -> run
 com.DKB.shutupdrive.Tutorial -> com.DKB.shutupdrive.Tutorial:
-    int[][] features -> m
-    int[] images -> n
-    int nextCount -> a
-    android.widget.TextView featureText -> b
-    android.widget.TextView descriptionText -> c
-    android.widget.ImageView image -> d
-    android.support.design.widget.FloatingActionButton fab -> e
-    android.content.SharedPreferences prefs -> f
-    android.content.SharedPreferences$Editor editor -> g
+    int[][] features -> a
+    int[] images -> b
+    int nextCount -> c
+    android.widget.TextView featureText -> d
+    android.widget.TextView descriptionText -> e
+    android.widget.ImageView image -> f
+    android.support.design.widget.FloatingActionButton fab -> g
     android.view.animation.Animation fadeIn -> h
     android.view.animation.Animation fadeOut -> i
     android.graphics.Bitmap featureImage -> j
@@ -10329,6 +10336,10 @@ com.DKB.shutupdrive.Tutorial -> com.DKB.shutupdrive.Tutorial:
     void onCreate(android.os.Bundle) -> onCreate
     void onClick(android.view.View) -> onClick
     void updateUI() -> a
+    android.widget.ImageView access$100(com.DKB.shutupdrive.Tutorial) -> a
+    android.graphics.Bitmap access$200(com.DKB.shutupdrive.Tutorial) -> b
+    android.graphics.Bitmap access$202(com.DKB.shutupdrive.Tutorial,android.graphics.Bitmap) -> a
+    android.graphics.BitmapFactory$Options access$300(com.DKB.shutupdrive.Tutorial) -> c
 com.DKB.shutupdrive.Tutorial$1 -> com.DKB.shutupdrive.f:
     com.DKB.shutupdrive.Tutorial this$0 -> a
     void run() -> run
@@ -10338,6 +10349,24 @@ com.DKB.shutupdrive.Tutorial$LoadAndShowImages -> com.DKB.shutupdrive.g:
     java.lang.Void doInBackground(java.lang.Integer[]) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.DKB.shutupdrive.Utils -> com.DKB.shutupdrive.h:
+    long DETECTION_INTERVAL -> a
+    long minutesToMillis(int) -> a
+    int getTutNumber(android.content.Context) -> a
+    void setTutNumber(android.content.Context,int) -> a
+    void setRunning(android.content.Context,boolean) -> a
+    boolean isRunning(android.content.Context) -> b
+    boolean isAutoStart(android.content.Context) -> c
+    long getNotDrivingTime(android.content.Context) -> d
+    void setNotDrivingTime(android.content.Context,long) -> a
+    boolean getGPS(android.content.Context) -> e
+    boolean getGPSDrive(android.content.Context) -> f
+    void setGPSDrive(android.content.Context,boolean) -> b
+    java.lang.String getAutoReplyMessage(android.content.Context) -> g
+    boolean isAutoReply(android.content.Context) -> h
+    int getPhoneOption(android.content.Context) -> i
+    boolean isFirst(android.content.Context) -> j
+    void setFirst(android.content.Context,boolean) -> c
 com.DKB.shutupdrive.text -> com.DKB.shutupdrive.text:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.google.ads.AdRequest -> com.google.a.a:

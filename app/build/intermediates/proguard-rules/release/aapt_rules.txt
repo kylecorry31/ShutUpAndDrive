@@ -4,9 +4,9 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:58
+# view land/res/layout-land/layout_main.xml #generated:62
 # view land/res/layout-land/layout_tutorial.xml #generated:40
-# view res/layout/layout_main.xml #generated:61
+# view res/layout/layout_main.xml #generated:65
 # view res/layout/layout_tutorial.xml #generated:40
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
@@ -77,34 +77,31 @@
 # view res/layout/abc_screen_toolbar.xml #generated:36
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
 
-# view AndroidManifest.xml #generated:101
+# view AndroidManifest.xml #generated:87
 -keep class com.DKB.shutupdrive.CarMode { <init>(...); }
 
-# view AndroidManifest.xml #generated:103
+# view AndroidManifest.xml #generated:93
 -keep class com.DKB.shutupdrive.DetectedActivityIntentService { <init>(...); }
 
-# view AndroidManifest.xml #generated:58
+# view AndroidManifest.xml #generated:44
 -keep class com.DKB.shutupdrive.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:30
--keep class com.DKB.shutupdrive.MyApplication { <init>(...); }
-
-# view AndroidManifest.xml #generated:112
+# view AndroidManifest.xml #generated:102
 -keep class com.DKB.shutupdrive.NotificationReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:85
+# view AndroidManifest.xml #generated:71
 -keep class com.DKB.shutupdrive.Settings { <init>(...); }
 
-# view AndroidManifest.xml #generated:102
+# view AndroidManifest.xml #generated:92
 -keep class com.DKB.shutupdrive.SpeedService { <init>(...); }
 
-# view AndroidManifest.xml #generated:67
+# view AndroidManifest.xml #generated:53
 -keep class com.DKB.shutupdrive.Splash { <init>(...); }
 
-# view AndroidManifest.xml #generated:76
+# view AndroidManifest.xml #generated:62
 -keep class com.DKB.shutupdrive.Tutorial { <init>(...); }
 
-# view AndroidManifest.xml #generated:105
+# view AndroidManifest.xml #generated:95
 -keep class com.DKB.shutupdrive.text { <init>(...); }
 
 # view AndroidManifest.xml #generated:40
@@ -114,12 +111,6 @@
 # view res/layout/layout_main.xml #generated:12
 -keep class com.google.android.gms.ads.AdView { <init>(...); }
 
-# view AndroidManifest.xml #generated:114
+# view AndroidManifest.xml #generated:104
 -keep class com.google.android.gms.ads.purchase.InAppPurchaseActivity { <init>(...); }
-
-# view AndroidManifest.xml #generated:45
--keep class com.google.android.gms.analytics.AnalyticsReceiver { <init>(...); }
-
-# view AndroidManifest.xml #generated:53
--keep class com.google.android.gms.analytics.AnalyticsService { <init>(...); }
 

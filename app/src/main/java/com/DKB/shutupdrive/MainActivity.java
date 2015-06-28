@@ -2,11 +2,9 @@ package com.DKB.shutupdrive;
 
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -20,8 +18,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -35,20 +31,20 @@ import com.google.android.gms.location.ActivityRecognition;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, ResultCallback<Status> {
 
-    GoogleApiClient mGoogleApiClient;
-    FloatingActionButton fab;
-    TextView statusText, mottoText, descText;
-    ImageView titleImage;
-    boolean running;
-    boolean toast;
-    SharedPreferences prefs;
-    MenuItem item;
+    private GoogleApiClient mGoogleApiClient;
+    private FloatingActionButton fab;
+    private TextView statusText;
+    private TextView mottoText;
+    private TextView descText;
+    private ImageView titleImage;
+    private boolean running;
+    private boolean toast;
+    private MenuItem item;
     private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.layout_main);
         getWindow().setBackgroundDrawable(null);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -58,14 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         titleImage = (ImageView) findViewById(R.id.titleImage);
         adView = (AdView) findViewById(R.id.adView);
         createAds();
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        running = prefs.getBoolean("Running", false);
+        running = Utils.isRunning(this);
         toast = false;
         buildGoogleApiClient();
     }
 
     private void createAds() {
-        if (!Constants.DEVELOPER) {
+        if (!Utils.DEVELOPER) {
             AdRequest adRequest = new AdRequest.Builder().build();
             adView.loadAd(adRequest);
         } else {
@@ -74,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    protected void setUpUI() {
+    private void setUpUI() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_top);
             slideDown.setStartOffset(275);
@@ -92,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    protected synchronized void buildGoogleApiClient() {
+    private synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -128,16 +123,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    protected void startActivityRecognition() {
+    private void startActivityRecognition() {
         running = true;
         fab.setImageResource(R.drawable.ic_stop_white_24dp);
         fab.setContentDescription(getString(R.string.stop_button));
-
-        prefs.edit().putBoolean("Running", true).apply();
+        Utils.setRunning(this, true);
         statusText.setText(getString(R.string.on));
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(
                 mGoogleApiClient,
-                Constants.DETECTION_INTERVAL,
+                Utils.DETECTION_INTERVAL,
                 getActivityRecognitionPI()
         )
                 .setResultCallback(this);
@@ -156,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
-    protected void animateOut() {
+    private void animateOut() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_top);
             slideUp.setFillAfter(true);
@@ -183,9 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.action_tutorial:
                         // Tutorial
                         Intent openTut = new Intent(getApplicationContext(), Tutorial.class);
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putInt(Constants.TUT_NUM_KEY, 0);
-                        editor.apply();
+                        Utils.setTutNumber(getBaseContext(), 0);
                         startActivity(openTut);
                         finish();
                         break;
@@ -194,11 +186,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }, fadeOut.getDuration());
     }
 
-    protected void stopActivityRecognition() {
+    private void stopActivityRecognition() {
         running = false;
         fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         fab.setContentDescription(getString(R.string.start_button));
-        prefs.edit().putBoolean("Running", false).apply();
+        Utils.setRunning(this, false);
         statusText.setText(getString(R.string.off));
         ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(
                 mGoogleApiClient,
@@ -210,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (running || prefs.getBoolean("autoStart", false)) {
+        if (running || Utils.isAutoStart(this)) {
             toast = false;
             startActivityRecognition();
         }
@@ -229,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(getBaseContext(), "Google Play Services Unavailable", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), getString(R.string.common_google_play_services_unsupported_text), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -249,14 +241,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toast = true;
         if (mGoogleApiClient.isConnected() && !running) {
             startActivityRecognition();
-            prefs.edit().putLong("NotDrivingTime", 0).apply();
-            prefs.edit().putBoolean("gpsDrive", false).apply();
+            Utils.setNotDrivingTime(this, 0);
+            Utils.setGPSDrive(this, false);
         } else if (mGoogleApiClient.isConnected() && running) {
             stopActivityRecognition();
-            prefs.edit().putLong("NotDrivingTime", 0).apply();
-            prefs.edit().putBoolean("gpsDrive", false).apply();
+            Utils.setNotDrivingTime(this, 0);
+            Utils.setGPSDrive(this, false);
         } else
-            Toast.makeText(this, "No connection to Google Play Services", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
 
     }
 

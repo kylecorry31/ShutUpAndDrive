@@ -1,5 +1,6 @@
 package com.DKB.shutupdrive;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -10,15 +11,17 @@ import android.support.v7.app.AppCompatActivity;
  * Created by kyle on 11/3/14.
  */
 public class Settings extends AppCompatActivity {
-    static Preference messagePreference;
-    static Preference phonePreference;
-    static SharedPreferences sharedPreferences;
+    private static Preference messagePreference;
+    private static Preference phonePreference;
+    private static Context context;
+    private static SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.blank);
+        context = this;
         getWindow().setBackgroundDrawable(null);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
@@ -30,15 +33,11 @@ public class Settings extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.prefs);
             sharedPreferences = getPreferenceManager().getSharedPreferences();
-            String userMessage = sharedPreferences.getString("msg", Constants.DEFAULT_MSG);
-            if (userMessage.isEmpty()) {
-                userMessage = Constants.DEFAULT_MSG;
-            }
-            messagePreference = getPreferenceScreen().findPreference("msg");
-            messagePreference.setSummary(userMessage);
-            messagePreference.setEnabled(sharedPreferences.getBoolean("autoReply", true));
+            messagePreference = getPreferenceScreen().findPreference(getString(R.string.key_auto_reply_message));
+            messagePreference.setSummary(Utils.getAutoReplyMessage(context));
+            messagePreference.setEnabled(Utils.isAutoReply(context));
 
-            phonePreference = getPreferenceScreen().findPreference("phoneOpt");
+            phonePreference = getPreferenceScreen().findPreference(getString(R.string.key_phone_option));
             phonePreference.setSummary(getPhoneOption());
 
 
@@ -47,16 +46,13 @@ public class Settings extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.contentEquals("msg")) {
-                String userMessage = sharedPreferences.getString("msg", Constants.DEFAULT_MSG);
-                if (userMessage.isEmpty()) {
-                    userMessage = Constants.DEFAULT_MSG;
-                }
+            if (key.contentEquals(getString(R.string.key_auto_reply_message))) {
+                String userMessage = Utils.getAutoReplyMessage(context);
                 messagePreference.setSummary(userMessage);
-            } else if (key.contentEquals("autoReply")) {
-                messagePreference.setEnabled(sharedPreferences.getBoolean("autoReply", true));
+            } else if (key.contentEquals(getString(R.string.key_auto_reply))) {
+                messagePreference.setEnabled(Utils.isAutoReply(context));
                 // on -> permission sms
-            } else if (key.contentEquals("phoneOpt")) {
+            } else if (key.contentEquals(getString(R.string.key_phone_option))) {
                 phonePreference.setSummary(getPhoneOption());
                 // on -> permission phone
             }
@@ -64,16 +60,16 @@ public class Settings extends AppCompatActivity {
 
 
         public String getPhoneOption() {
-            int phoneOption = Integer.valueOf(sharedPreferences.getString("phoneOpt", "2"));
+            int phoneOption = Utils.getPhoneOption(context);
             switch (phoneOption) {
-                case 1:
-                    return "Blocking calls";
-                case 2:
-                    return "Reading caller ID";
-                case 3:
-                    return "Allowing calls";
+                case Utils.PHONE_BLOCK_CALLS:
+                    return getString(R.string.phone_option_block);
+                case Utils.PHONE_READ_CALLER:
+                    return getString(R.string.phone_option_read);
+                case Utils.PHONE_ALLOW_CALLS:
+                    return getString(R.string.phone_option_allow);
             }
-            return "Reading caller ID";
+            return getString(R.string.phone_option_read);
         }
     }
 }

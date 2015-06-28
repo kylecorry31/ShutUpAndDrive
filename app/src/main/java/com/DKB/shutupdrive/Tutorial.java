@@ -2,55 +2,47 @@ package com.DKB.shutupdrive;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by kyle on 5/31/15.
  */
 public class Tutorial extends Activity implements View.OnClickListener {
 
-    private int features[][] = {
+    private final int[][] features = {
             {R.string.feature_driving_detection, R.string.description_driving_detection},
             {R.string.feature_auto_reply, R.string.description_auto_reply},
             {R.string.feature_caller_id_readout, R.string.description_caller_id_readout}
     };
 
-    private int images[] = {
+    private final int[] images = {
             R.drawable.car_image,
             R.drawable.sms_image,
             R.drawable.phone_image
     };
 
-    int nextCount;
-    TextView featureText, descriptionText;
-    ImageView image;
-    FloatingActionButton fab;
-    SharedPreferences prefs;
-    SharedPreferences.Editor editor;
-    Animation fadeIn, fadeOut;
-    Bitmap featureImage;
-    BitmapFactory.Options options;
-    LinearLayout progressDots;
+    private int nextCount;
+    private TextView featureText;
+    private TextView descriptionText;
+    private ImageView image;
+    private FloatingActionButton fab;
+    private Animation fadeIn;
+    private Animation fadeOut;
+    private Bitmap featureImage;
+    private BitmapFactory.Options options;
+    private LinearLayout progressDots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +52,7 @@ public class Tutorial extends Activity implements View.OnClickListener {
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         setContentView(R.layout.layout_tutorial);
         getWindow().setBackgroundDrawable(null);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = prefs.edit();
-        nextCount = prefs.getInt(Constants.TUT_NUM_KEY, 0);
+        nextCount = Utils.getTutNumber(this);
         featureText = (TextView) findViewById(R.id.feature_name);
         descriptionText = (TextView) findViewById(R.id.description);
         progressDots = (LinearLayout) findViewById(R.id.progressDots);
@@ -91,7 +81,7 @@ public class Tutorial extends Activity implements View.OnClickListener {
         updateUI();
     }
 
-    protected void updateUI() {
+    private void updateUI() {
         if (nextCount < features.length) {
             /*
                 nextCount = 0 -> permission activity recognition
@@ -116,10 +106,9 @@ public class Tutorial extends Activity implements View.OnClickListener {
                 else
                     ((TextView) progressDots.getChildAt(i)).setTextColor(getResources().getColor(R.color.white));
             }
-            editor.putInt(Constants.TUT_NUM_KEY, nextCount);
-            editor.apply();
+            Utils.setTutNumber(this, nextCount);
         } else {
-            editor.putInt(Constants.TUT_NUM_KEY, 0);
+            Utils.setTutNumber(this, 0);
             featureText.startAnimation(fadeOut);
             descriptionText.startAnimation(fadeOut);
             image.startAnimation(fadeOut);

@@ -2,7 +2,6 @@ package com.DKB.shutupdrive;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.preference.PreferenceManager;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
@@ -31,21 +30,21 @@ public class DetectedActivityIntentService extends IntentService {
             DetectedActivity mostProbableActivity = result.getMostProbableActivity();
             int confidence = mostProbableActivity.getConfidence();
             int activityType = mostProbableActivity.getType();
-            long waitTime = PreferenceManager.getDefaultSharedPreferences(this).getLong("NotDrivingTime", 0);
-            boolean diffTimeOK = (new Date().getTime() - waitTime) >= 10 * Constants.MILLIS_IN_MINUTE;
-            if (confidence >= Constants.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
+            long waitTime = Utils.getNotDrivingTime(this);
+            boolean diffTimeOK = (new Date().getTime() - waitTime) >= Utils.minutesToMillis(10);
+            if (confidence >= Utils.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
                 /*
                     if gps
                         check permission location
                             else: start carmode, notify
                  */
-                if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gps", false))
+                if (Utils.getGPS(this))
                     startService(new Intent(this, SpeedService.class));
                 else
                     startService(new Intent(this, CarMode.class));
-            } else if (confidence >= Constants.DETECTION_THRESHOLD) {
+            } else if (confidence >= Utils.DETECTION_THRESHOLD) {
                 stopService(new Intent(this, CarMode.class));
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("gpsDrive", false).apply();
+                Utils.setGPSDrive(this, false);
             }
 
         }

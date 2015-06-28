@@ -354,6 +354,7 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="banner_ad_unit_id">ca-app-pub-5617453255042566/1905751930</string>
+    <string name="car_mode_on">Car mode on</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text"><ns1:g id="app_name">%1$s</ns1:g> requires an update to the Android Wear app.</string>
@@ -395,6 +396,7 @@
     <string name="decline">Decline</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="default_message">I am driving right now, I will contact you later —Auto reply message—</string>
     <string name="description_auto_reply">Automatically responds to messages while driving</string>
     <string name="description_caller_id_readout">Reads out who\'s calling while driving</string>
     <string name="description_driving_detection">Automatically turns on while driving</string>
@@ -402,9 +404,25 @@
     <string name="feature_auto_reply">Auto Reply</string>
     <string name="feature_caller_id_readout">Caller ID Readout</string>
     <string name="feature_driving_detection">Driving Detection</string>
+    <string name="key_auto_reply">autoReply</string>
+    <string name="key_auto_reply_message">msg</string>
+    <string name="key_auto_start">autoStart</string>
+    <string name="key_first_time">firstTime</string>
+    <string name="key_gps">gps</string>
+    <string name="key_gps_driving">gpsDrive</string>
+    <string name="key_not_driving_time">NotDrivingTime</string>
+    <string name="key_phone_option">phoneOpt</string>
+    <string name="key_running">Running</string>
+    <string name="key_tutorial_number">tutNum</string>
     <string name="next_button">Next</string>
+    <string name="no_connection">No connection to Google Play Services</string>
+    <string name="not_driving">Not driving</string>
     <string name="off">OFF</string>
     <string name="on">ON</string>
+    <string name="phone_option_allow">Allowing calls</string>
+    <string name="phone_option_block">Blocking calls</string>
+    <string name="phone_option_read">Reading caller ID</string>
+    <string name="services_unavailable">Google Play Services unavailable</string>
     <string name="start_button">Start</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,16 +17,16 @@ import com.google.android.gms.location.LocationServices;
  */
 public class SpeedService extends Service implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
-    boolean self = false;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
+    private boolean self = false;
 
     @Override
     public void onLocationChanged(Location location) {
         if (location.hasSpeed()) {
-            if (location.getSpeed() >= Constants.DRIVING_SPEED_THRESHOLD) {
+            if (location.getSpeed() >= Utils.DRIVING_SPEED_THRESHOLD) {
                 startService(new Intent(this, CarMode.class));
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("gpsDrive", true).apply();
+                Utils.setGPSDrive(this, true);
             }
             stopSelf();
         }
@@ -40,7 +39,7 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gpsDrive", false)) {
+        if (Utils.getGPSDrive(this)) {
             stopSelf();
             self = true;
         } else {

@@ -4,7 +4,7 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:58
+# view land/res/layout-land/layout_main.xml #generated:62
 # view land/res/layout-land/layout_tutorial.xml #generated:40
 # view res/layout/layout_main.xml #generated:65
 # view res/layout/layout_tutorial.xml #generated:40

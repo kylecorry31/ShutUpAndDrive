@@ -4272,7 +4272,6 @@ android.support.v7.widget.Toolbar$LayoutParams:
     1798:1812:public Toolbar$LayoutParams(int,int,int)
     1815:1816:public Toolbar$LayoutParams(int)
 com.DKB.shutupdrive.BuildConfig
-com.DKB.shutupdrive.Constants
 com.DKB.shutupdrive.R
 com.DKB.shutupdrive.R$anim
 com.DKB.shutupdrive.R$array
@@ -4291,6 +4290,18 @@ com.DKB.shutupdrive.R$string
 com.DKB.shutupdrive.R$style
 com.DKB.shutupdrive.R$styleable
 com.DKB.shutupdrive.R$xml
+com.DKB.shutupdrive.Utils:
+    private static final long MILLIS_IN_SECOND
+    private static final long MILLIS_IN_MINUTE
+    public static final double DRIVING_SPEED_THRESHOLD
+    public static final boolean DEVELOPER
+    public static final int PHONE_BLOCK_CALLS
+    public static final int PHONE_READ_CALLER
+    public static final int PHONE_ALLOW_CALLS
+    public static final int NOTIFICATION_ID
+    public static final int DETECTION_THRESHOLD
+    10:10:Utils()
+    83:88:public static void setAutoReplyMessage(android.content.Context,java.lang.String)
 com.google.ads.AdRequest:
     public static final java.lang.String VERSION
     public static final java.lang.String LOGTAG
