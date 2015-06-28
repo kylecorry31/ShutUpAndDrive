@@ -48,6 +48,12 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <color name="cardview_dark_background">#FF202020</color>
+    <color name="cardview_light_background">#FFFAFAFA</color>
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#37000000</color>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values/common_colors.xml -->
     <eat-comment/>
     <color name="common_action_bar_splitter">#d2d2d2</color>
@@ -133,6 +139,7 @@
     <declare-styleable name="AppBarLayout"><attr name="elevation"/><attr name="android:background"/></declare-styleable>
     <declare-styleable name="AppBarLayout_LayoutParams"><attr name="layout_scrollFlags"><flag name="scroll" value="0x1"/><flag name="exitUntilCollapsed" value="0x2"/><flag name="enterAlways" value="0x4"/><flag name="enterAlwaysCollapsed" value="0x8"/></attr><attr format="reference" name="layout_scrollInterpolator"/></declare-styleable>
     <declare-styleable name="AppCompatTextView"><attr format="reference|boolean" name="textAllCaps"/><attr name="android:textAppearance"/></declare-styleable>
+    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
     <declare-styleable name="CollapsingAppBarLayout_LayoutParams"><attr name="layout_collapseMode"><enum name="none" value="0"/><enum name="pin" value="1"/><enum name="parallax" value="2"/></attr><attr format="float" name="layout_collapseParallaxMultiplier"/></declare-styleable>
     <declare-styleable name="CollapsingToolbarLayout"><attr format="dimension" name="expandedTitleMargin"/><attr format="dimension" name="expandedTitleMarginStart"/><attr format="dimension" name="expandedTitleMarginTop"/><attr format="dimension" name="expandedTitleMarginEnd"/><attr format="dimension" name="expandedTitleMarginBottom"/><attr format="reference" name="expandedTitleTextAppearance"/><attr format="reference" name="collapsedTitleTextAppearance"/><attr format="color" name="contentScrim"/><attr format="color" name="statusBarScrim"/><attr format="reference" name="toolbarId"/></declare-styleable>
     <declare-styleable name="CoordinatorLayout"><attr format="reference" name="keylines"/><attr format="reference" name="statusBarBackground"/></declare-styleable>
@@ -232,6 +239,11 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="appbar_elevation">4dp</dimen>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="cardview_compat_inset_shadow">1dp</dimen>
+    <dimen name="cardview_default_elevation">2dp</dimen>
+    <dimen name="cardview_default_radius">2dp</dimen>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
@@ -329,6 +341,7 @@
     <string name="accept">Accept</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="action_help">Help</string>
     <string name="action_settings">Settings</string>
     <string name="app_name">Shut Up &amp; Drive!</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/res/values/values.xml -->
@@ -382,21 +395,24 @@
     <string name="decline">Decline</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="description_auto_reply">Automatically reply to messages while driving</string>
-    <string name="description_caller_id_readout">Read out who\'s calling while driving</string>
-    <string name="description_driving_detection">Automatically activate while driving</string>
-    <string name="description_main">Activates when you drive to keep you safe and focused on the road</string>
-    <string name="feature_auto_reply">Auto-Reply</string>
+    <string name="description_auto_reply">Automatically responds to messages while driving</string>
+    <string name="description_caller_id_readout">Reads out who\'s calling while driving</string>
+    <string name="description_driving_detection">Automatically turns on while driving</string>
+    <string name="description_main">Turns on when you drive to keep you safe and focused on the road</string>
+    <string name="feature_auto_reply">Auto Reply</string>
     <string name="feature_caller_id_readout">Caller ID Readout</string>
     <string name="feature_driving_detection">Driving Detection</string>
+    <string name="next_button">Next</string>
     <string name="off">OFF</string>
     <string name="on">ON</string>
+    <string name="start_button">Start</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="stay_safe">Stay safe while you drive</string>
+    <string name="stop_button">Stop</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
@@ -1345,6 +1361,22 @@
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <style name="CardView">
+        <item name="cardBackgroundColor">@color/cardview_light_background</item>
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardPreventCornerOverlap">true</item>
+    </style>
+    <style name="CardView.Dark">
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
+    </style>
+    <style name="CardView.Light">
+        <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>

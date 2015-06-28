@@ -6,9 +6,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 /**
  * Created by kyle on 11/3/14.
  */
@@ -16,7 +13,6 @@ public class Settings extends AppCompatActivity {
     static Preference messagePreference;
     static Preference phonePreference;
     static SharedPreferences sharedPreferences;
-    static Tracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +20,6 @@ public class Settings extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.blank);
         getWindow().setBackgroundDrawable(null);
-        tracker = ((MyApplication) getApplication()).tracker;
-        tracker.setScreenName("Settings");
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
 
@@ -62,35 +56,16 @@ public class Settings extends AppCompatActivity {
             } else if (key.contentEquals("autoReply")) {
                 messagePreference.setEnabled(sharedPreferences.getBoolean("autoReply", true));
                 // on -> permission sms
-            } else if (key.contentEquals("phoneOpt")){
+            } else if (key.contentEquals("phoneOpt")) {
                 phonePreference.setSummary(getPhoneOption());
-                tracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Preferences")
-                        .setAction("Phone Options")
-                        .setLabel(getPhoneOption())
-                        .build());
                 // on -> permission phone
-            } else if(key.contentEquals("autoStart")){
-                tracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Preferences")
-                        .setAction("Auto Start")
-                        .setLabel(String.valueOf(sharedPreferences.getBoolean("autoStart", false)))
-                        .build());
-            } else if(key.contentEquals("gps")){
-                tracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Preferences")
-                        .setAction("Improve Accuracy")
-                        .setLabel(String.valueOf(sharedPreferences.getBoolean("gps", false)))
-                        .build());
-                /*
-                    on -> permission location
-                 */
             }
         }
 
-        public String getPhoneOption(){
+
+        public String getPhoneOption() {
             int phoneOption = Integer.valueOf(sharedPreferences.getString("phoneOpt", "2"));
-            switch (phoneOption){
+            switch (phoneOption) {
                 case 1:
                     return "Blocking calls";
                 case 2:

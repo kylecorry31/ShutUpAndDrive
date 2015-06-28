@@ -4254,9 +4254,6 @@ android.support.v7.widget.Toolbar$LayoutParams:
     1798:1812:public Toolbar$LayoutParams(int,int,int)
     1815:1816:public Toolbar$LayoutParams(int)
 com.DKB.shutupdrive.BuildConfig
-com.DKB.shutupdrive.CarMode:
-    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient
-    com.google.android.gms.location.LocationRequest mLocationRequest
 com.DKB.shutupdrive.Constants
 com.DKB.shutupdrive.R
 com.DKB.shutupdrive.R$anim
@@ -4276,8 +4273,6 @@ com.DKB.shutupdrive.R$string
 com.DKB.shutupdrive.R$style
 com.DKB.shutupdrive.R$styleable
 com.DKB.shutupdrive.R$xml
-com.DKB.shutupdrive.Splash:
-    private static final java.lang.String FILENAME
 com.google.ads.AdRequest:
     public static final java.lang.String VERSION
     public static final java.lang.String LOGTAG

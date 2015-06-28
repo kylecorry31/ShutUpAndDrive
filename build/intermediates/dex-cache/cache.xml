@@ -30,13 +30,6 @@
         <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-7257720bce3c1056e3919b20774af580166c8cb3.jar" />
     </item>
     <item
-        jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
-        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
-    </item>
-    <item
         jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -56,27 +49,6 @@
         revision="22.0.1"
         sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
         <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/classes-f032a5f94b2d82a9f97b3cb73a1a84b45f00e72a.jar" />
-    </item>
-    <item
-        jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
-        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
-    </item>
-    <item
-        jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
-        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
-    </item>
-    <item
-        jar="/home/kyle/Development/ShutUpAndDrive/app/libs/AdBuddiz-2.3.3.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="4746a897742e5cca986019bfc5f3b7bd2810dd91">
-        <dex dex="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/pre-dexed/debug/AdBuddiz-2.3.3-1d250da5493d75e849961cc76055981108d0e2d7.jar" />
     </item>
     <item
         jar="/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/classes.jar"

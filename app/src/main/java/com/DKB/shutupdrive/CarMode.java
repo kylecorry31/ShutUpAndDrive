@@ -12,13 +12,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.location.Location;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
@@ -26,12 +23,6 @@ import android.support.v4.app.NotificationCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 
 import java.util.Locale;
 
@@ -41,7 +32,6 @@ public class CarMode extends Service {
     private int mId;
     public static boolean autoreply = false;
     static String msg = Constants.DEFAULT_MSG;
-    private boolean auto;
     private int phone;
     private NotificationManager nm;
     private SharedPreferences getPrefs;
@@ -69,7 +59,6 @@ public class CarMode extends Service {
                 .getDefaultSharedPreferences(getBaseContext());
         getUserSettings();
         silent();
-        autoreply = auto;
         notification();
         if (phone != 1) {
             tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -210,7 +199,7 @@ public class CarMode extends Service {
 
          */
         phone = Integer.valueOf(getPrefs.getString("phoneOpt", "2"));
-        auto = getPrefs.getBoolean("autoReply", true);
+        autoreply = getPrefs.getBoolean("autoReply", true);
         msg = getPrefs
                 .getString("msg",
                         Constants.DEFAULT_MSG);

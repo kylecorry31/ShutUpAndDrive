@@ -6,12 +6,16 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="feature_driving_detection">Driving Detection</string>
-    <string name="description_driving_detection">Automatically activate while driving</string>
-    <string name="feature_auto_reply">Auto-Reply</string>
-    <string name="description_auto_reply">Automatically reply to messages while driving</string>
+    <string name="description_driving_detection">Automatically turns on while driving</string>
+    <string name="feature_auto_reply">Auto Reply</string>
+    <string name="description_auto_reply">Automatically responds to messages while driving</string>
     <string name="feature_caller_id_readout">Caller ID Readout</string>
-    <string name="description_caller_id_readout">Read out who\'s calling while driving</string>
-    <string name="description_main">Activates when you drive to keep you safe and focused on the road</string>
+    <string name="description_caller_id_readout">Reads out who\'s calling while driving</string>
+    <string name="description_main">Turns on when you drive to keep you safe and focused on the road</string>
     <string name="stay_safe">Stay safe while you drive</string>
     <string name="banner_ad_unit_id">ca-app-pub-5617453255042566/1905751930</string>
+    <string name="action_help">Help</string>
+    <string name="start_button">Start</string>
+    <string name="stop_button">Stop</string>
+    <string name="next_button">Next</string>
 </resources>

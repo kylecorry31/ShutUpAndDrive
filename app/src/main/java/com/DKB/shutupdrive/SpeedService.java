@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -19,12 +20,14 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
 
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
+    boolean self = false;
 
     @Override
     public void onLocationChanged(Location location) {
-        if(location.hasSpeed()){
-            if(location.getSpeed() >= Constants.DRIVING_SPEED_THRESHOLD){
+        if (location.hasSpeed()) {
+            if (location.getSpeed() >= Constants.DRIVING_SPEED_THRESHOLD) {
                 startService(new Intent(this, CarMode.class));
+                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("gpsDrive", true).apply();
             }
             stopSelf();
         }
@@ -37,24 +40,31 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(500);
-        mLocationRequest.setNumUpdates(5);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mGoogleApiClient.connect();
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gpsDrive", false)) {
+            stopSelf();
+            self = true;
+        } else {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(1000);
+            mLocationRequest.setFastestInterval(500);
+            mLocationRequest.setNumUpdates(5);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            mGoogleApiClient.connect();
+        }
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        mGoogleApiClient.disconnect();
+        if (!self) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            mGoogleApiClient.disconnect();
+        }
         super.onDestroy();
     }
 

@@ -2756,6 +2756,39 @@ android.support.v7.appcompat.R$styleable: int View_backgroundTintMode
 android.support.v7.appcompat.R$styleable: int View_paddingEnd
 android.support.v7.appcompat.R$styleable: int View_paddingStart
 android.support.v7.appcompat.R$styleable: int View_theme
+android.support.v7.cardview.R$attr: int cardBackgroundColor
+android.support.v7.cardview.R$attr: int cardCornerRadius
+android.support.v7.cardview.R$attr: int cardElevation
+android.support.v7.cardview.R$attr: int cardMaxElevation
+android.support.v7.cardview.R$attr: int cardPreventCornerOverlap
+android.support.v7.cardview.R$attr: int cardUseCompatPadding
+android.support.v7.cardview.R$attr: int contentPadding
+android.support.v7.cardview.R$attr: int contentPaddingBottom
+android.support.v7.cardview.R$attr: int contentPaddingLeft
+android.support.v7.cardview.R$attr: int contentPaddingRight
+android.support.v7.cardview.R$attr: int contentPaddingTop
+android.support.v7.cardview.R$color: int cardview_dark_background
+android.support.v7.cardview.R$color: int cardview_light_background
+android.support.v7.cardview.R$color: int cardview_shadow_end_color
+android.support.v7.cardview.R$color: int cardview_shadow_start_color
+android.support.v7.cardview.R$dimen: int cardview_compat_inset_shadow
+android.support.v7.cardview.R$dimen: int cardview_default_elevation
+android.support.v7.cardview.R$dimen: int cardview_default_radius
+android.support.v7.cardview.R$style: int CardView
+android.support.v7.cardview.R$style: int CardView_Dark
+android.support.v7.cardview.R$style: int CardView_Light
+android.support.v7.cardview.R$styleable: int[] CardView
+android.support.v7.cardview.R$styleable: int CardView_cardBackgroundColor
+android.support.v7.cardview.R$styleable: int CardView_cardCornerRadius
+android.support.v7.cardview.R$styleable: int CardView_cardElevation
+android.support.v7.cardview.R$styleable: int CardView_cardMaxElevation
+android.support.v7.cardview.R$styleable: int CardView_cardPreventCornerOverlap
+android.support.v7.cardview.R$styleable: int CardView_cardUseCompatPadding
+android.support.v7.cardview.R$styleable: int CardView_contentPadding
+android.support.v7.cardview.R$styleable: int CardView_contentPaddingBottom
+android.support.v7.cardview.R$styleable: int CardView_contentPaddingLeft
+android.support.v7.cardview.R$styleable: int CardView_contentPaddingRight
+android.support.v7.cardview.R$styleable: int CardView_contentPaddingTop
 android.support.v7.internal.view.menu.ActionMenuItemView
 android.support.v7.internal.view.menu.ActionMenuItemView: ActionMenuItemView(android.content.Context)
 android.support.v7.internal.view.menu.ActionMenuItemView: ActionMenuItemView(android.content.Context,android.util.AttributeSet)
@@ -2982,6 +3015,21 @@ android.support.v7.widget.AppCompatTextView: AppCompatTextView(android.content.C
 android.support.v7.widget.AppCompatTextView: AppCompatTextView(android.content.Context,android.util.AttributeSet)
 android.support.v7.widget.AppCompatTextView: AppCompatTextView(android.content.Context,android.util.AttributeSet,int)
 android.support.v7.widget.AppCompatTextView: void setAllCaps(boolean)
+android.support.v7.widget.CardView: boolean getUseCompatPadding()
+android.support.v7.widget.CardView: void setUseCompatPadding(boolean)
+android.support.v7.widget.CardView: void setCardBackgroundColor(int)
+android.support.v7.widget.CardView: int getContentPaddingLeft()
+android.support.v7.widget.CardView: int getContentPaddingRight()
+android.support.v7.widget.CardView: int getContentPaddingTop()
+android.support.v7.widget.CardView: int getContentPaddingBottom()
+android.support.v7.widget.CardView: void setRadius(float)
+android.support.v7.widget.CardView: float getRadius()
+android.support.v7.widget.CardView: void setCardElevation(float)
+android.support.v7.widget.CardView: float getCardElevation()
+android.support.v7.widget.CardView: void setMaxCardElevation(float)
+android.support.v7.widget.CardView: float getMaxCardElevation()
+android.support.v7.widget.CardView: boolean getPreventCornerOverlap()
+android.support.v7.widget.CardView: void setPreventCornerOverlap(boolean)
 android.support.v7.widget.LinearLayoutCompat: LinearLayoutCompat(android.content.Context)
 android.support.v7.widget.LinearLayoutCompat: LinearLayoutCompat(android.content.Context,android.util.AttributeSet)
 android.support.v7.widget.LinearLayoutCompat: LinearLayoutCompat(android.content.Context,android.util.AttributeSet,int)
@@ -3113,8 +3161,6 @@ com.DKB.shutupdrive.DetectedActivityIntentService: DetectedActivityIntentService
 com.DKB.shutupdrive.MainActivity
 com.DKB.shutupdrive.MainActivity: MainActivity()
 com.DKB.shutupdrive.MainActivity: void onClick(android.view.View)
-com.DKB.shutupdrive.MyApplication
-com.DKB.shutupdrive.MyApplication: MyApplication()
 com.DKB.shutupdrive.NotificationReceiver
 com.DKB.shutupdrive.NotificationReceiver: NotificationReceiver()
 com.DKB.shutupdrive.R$anim: int abc_fade_in
@@ -3197,6 +3243,12 @@ com.DKB.shutupdrive.R$attr: int cameraTargetLat
 com.DKB.shutupdrive.R$attr: int cameraTargetLng
 com.DKB.shutupdrive.R$attr: int cameraTilt
 com.DKB.shutupdrive.R$attr: int cameraZoom
+com.DKB.shutupdrive.R$attr: int cardBackgroundColor
+com.DKB.shutupdrive.R$attr: int cardCornerRadius
+com.DKB.shutupdrive.R$attr: int cardElevation
+com.DKB.shutupdrive.R$attr: int cardMaxElevation
+com.DKB.shutupdrive.R$attr: int cardPreventCornerOverlap
+com.DKB.shutupdrive.R$attr: int cardUseCompatPadding
 com.DKB.shutupdrive.R$attr: int checkboxStyle
 com.DKB.shutupdrive.R$attr: int checkedTextViewStyle
 com.DKB.shutupdrive.R$attr: int circleCrop
@@ -3219,6 +3271,11 @@ com.DKB.shutupdrive.R$attr: int contentInsetEnd
 com.DKB.shutupdrive.R$attr: int contentInsetLeft
 com.DKB.shutupdrive.R$attr: int contentInsetRight
 com.DKB.shutupdrive.R$attr: int contentInsetStart
+com.DKB.shutupdrive.R$attr: int contentPadding
+com.DKB.shutupdrive.R$attr: int contentPaddingBottom
+com.DKB.shutupdrive.R$attr: int contentPaddingLeft
+com.DKB.shutupdrive.R$attr: int contentPaddingRight
+com.DKB.shutupdrive.R$attr: int contentPaddingTop
 com.DKB.shutupdrive.R$attr: int contentScrim
 com.DKB.shutupdrive.R$attr: int customNavigationLayout
 com.DKB.shutupdrive.R$attr: int defaultQueryHint
@@ -3442,6 +3499,10 @@ com.DKB.shutupdrive.R$color: int bright_foreground_material_dark
 com.DKB.shutupdrive.R$color: int bright_foreground_material_light
 com.DKB.shutupdrive.R$color: int button_material_dark
 com.DKB.shutupdrive.R$color: int button_material_light
+com.DKB.shutupdrive.R$color: int cardview_dark_background
+com.DKB.shutupdrive.R$color: int cardview_light_background
+com.DKB.shutupdrive.R$color: int cardview_shadow_end_color
+com.DKB.shutupdrive.R$color: int cardview_shadow_start_color
 com.DKB.shutupdrive.R$color: int common_action_bar_splitter
 com.DKB.shutupdrive.R$color: int common_signin_btn_dark_text_default
 com.DKB.shutupdrive.R$color: int common_signin_btn_dark_text_disabled
@@ -3565,6 +3626,9 @@ com.DKB.shutupdrive.R$dimen: int abc_text_size_title_material_toolbar
 com.DKB.shutupdrive.R$dimen: int activity_horizontal_margin
 com.DKB.shutupdrive.R$dimen: int activity_vertical_margin
 com.DKB.shutupdrive.R$dimen: int appbar_elevation
+com.DKB.shutupdrive.R$dimen: int cardview_compat_inset_shadow
+com.DKB.shutupdrive.R$dimen: int cardview_default_elevation
+com.DKB.shutupdrive.R$dimen: int cardview_default_radius
 com.DKB.shutupdrive.R$dimen: int dialog_fixed_height_major
 com.DKB.shutupdrive.R$dimen: int dialog_fixed_height_minor
 com.DKB.shutupdrive.R$dimen: int dialog_fixed_width_major
@@ -3687,6 +3751,7 @@ com.DKB.shutupdrive.R$drawable: int common_signin_btn_text_normal_light
 com.DKB.shutupdrive.R$drawable: int common_signin_btn_text_pressed_dark
 com.DKB.shutupdrive.R$drawable: int common_signin_btn_text_pressed_light
 com.DKB.shutupdrive.R$drawable: int fab_background
+com.DKB.shutupdrive.R$drawable: int ic_arrow_back_white_24dp
 com.DKB.shutupdrive.R$drawable: int ic_arrow_forward_white_24dp
 com.DKB.shutupdrive.R$drawable: int ic_cancel_white_24dp
 com.DKB.shutupdrive.R$drawable: int ic_directions_car_white_24dp
@@ -3789,7 +3854,7 @@ com.DKB.shutupdrive.R$id: int parallax
 com.DKB.shutupdrive.R$id: int parentPanel
 com.DKB.shutupdrive.R$id: int photo
 com.DKB.shutupdrive.R$id: int pin
-com.DKB.shutupdrive.R$id: int progressBar
+com.DKB.shutupdrive.R$id: int progressDots
 com.DKB.shutupdrive.R$id: int progress_circular
 com.DKB.shutupdrive.R$id: int progress_horizontal
 com.DKB.shutupdrive.R$id: int radio
@@ -3916,6 +3981,7 @@ com.DKB.shutupdrive.R$string: int abc_shareactionprovider_share_with
 com.DKB.shutupdrive.R$string: int abc_shareactionprovider_share_with_application
 com.DKB.shutupdrive.R$string: int abc_toolbar_collapse_description
 com.DKB.shutupdrive.R$string: int accept
+com.DKB.shutupdrive.R$string: int action_help
 com.DKB.shutupdrive.R$string: int action_settings
 com.DKB.shutupdrive.R$string: int app_name
 com.DKB.shutupdrive.R$string: int appbar_scrolling_view_behavior
@@ -3964,10 +4030,13 @@ com.DKB.shutupdrive.R$string: int description_main
 com.DKB.shutupdrive.R$string: int feature_auto_reply
 com.DKB.shutupdrive.R$string: int feature_caller_id_readout
 com.DKB.shutupdrive.R$string: int feature_driving_detection
+com.DKB.shutupdrive.R$string: int next_button
 com.DKB.shutupdrive.R$string: int off
 com.DKB.shutupdrive.R$string: int on
+com.DKB.shutupdrive.R$string: int start_button
 com.DKB.shutupdrive.R$string: int status_bar_notification_info_overflow
 com.DKB.shutupdrive.R$string: int stay_safe
+com.DKB.shutupdrive.R$string: int stop_button
 com.DKB.shutupdrive.R$string: int store_picture_message
 com.DKB.shutupdrive.R$string: int store_picture_title
 com.DKB.shutupdrive.R$string: int tutorial
@@ -4109,6 +4178,9 @@ com.DKB.shutupdrive.R$style: int Base_Widget_AppCompat_TextView_SpinnerItem
 com.DKB.shutupdrive.R$style: int Base_Widget_AppCompat_Toolbar
 com.DKB.shutupdrive.R$style: int Base_Widget_AppCompat_Toolbar_Button_Navigation
 com.DKB.shutupdrive.R$style: int Base_Widget_Design_TabLayout
+com.DKB.shutupdrive.R$style: int CardView
+com.DKB.shutupdrive.R$style: int CardView_Dark
+com.DKB.shutupdrive.R$style: int CardView_Light
 com.DKB.shutupdrive.R$style: int Platform_AppCompat
 com.DKB.shutupdrive.R$style: int Platform_AppCompat_Light
 com.DKB.shutupdrive.R$style: int Platform_ThemeOverlay_AppCompat_Dark
@@ -4343,6 +4415,18 @@ com.DKB.shutupdrive.R$styleable: int AppBarLayout_LayoutParams_layout_scrollInte
 com.DKB.shutupdrive.R$styleable: int[] AppCompatTextView
 com.DKB.shutupdrive.R$styleable: int AppCompatTextView_android_textAppearance
 com.DKB.shutupdrive.R$styleable: int AppCompatTextView_textAllCaps
+com.DKB.shutupdrive.R$styleable: int[] CardView
+com.DKB.shutupdrive.R$styleable: int CardView_cardBackgroundColor
+com.DKB.shutupdrive.R$styleable: int CardView_cardCornerRadius
+com.DKB.shutupdrive.R$styleable: int CardView_cardElevation
+com.DKB.shutupdrive.R$styleable: int CardView_cardMaxElevation
+com.DKB.shutupdrive.R$styleable: int CardView_cardPreventCornerOverlap
+com.DKB.shutupdrive.R$styleable: int CardView_cardUseCompatPadding
+com.DKB.shutupdrive.R$styleable: int CardView_contentPadding
+com.DKB.shutupdrive.R$styleable: int CardView_contentPaddingBottom
+com.DKB.shutupdrive.R$styleable: int CardView_contentPaddingLeft
+com.DKB.shutupdrive.R$styleable: int CardView_contentPaddingRight
+com.DKB.shutupdrive.R$styleable: int CardView_contentPaddingTop
 com.DKB.shutupdrive.R$styleable: int[] CollapsingAppBarLayout_LayoutParams
 com.DKB.shutupdrive.R$styleable: int CollapsingAppBarLayout_LayoutParams_layout_collapseMode
 com.DKB.shutupdrive.R$styleable: int CollapsingAppBarLayout_LayoutParams_layout_collapseParallaxMultiplier
@@ -5091,10 +5175,6 @@ com.google.android.gms.ads.search.SearchAdView: java.lang.String getAdUnitId()
 com.google.android.gms.ads.search.SearchAdView: void setAdListener(com.google.android.gms.ads.AdListener)
 com.google.android.gms.ads.search.SearchAdView: void setAdSize(com.google.android.gms.ads.AdSize)
 com.google.android.gms.ads.search.SearchAdView: void setAdUnitId(java.lang.String)
-com.google.android.gms.analytics.AnalyticsReceiver
-com.google.android.gms.analytics.AnalyticsReceiver: AnalyticsReceiver()
-com.google.android.gms.analytics.AnalyticsService
-com.google.android.gms.analytics.AnalyticsService: AnalyticsService()
 com.google.android.gms.analytics.R$attr: int adSize
 com.google.android.gms.analytics.R$attr: int adSizes
 com.google.android.gms.analytics.R$attr: int adUnitId

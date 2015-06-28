@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean toast;
     SharedPreferences prefs;
     MenuItem item;
-    Tracker tracker;
     private AdView adView;
 
     @Override
@@ -52,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.layout_main);
         getWindow().setBackgroundDrawable(null);
-        tracker = ((MyApplication) getApplication()).tracker;
-        tracker.setScreenName("Main Screen");
         fab = (FloatingActionButton) findViewById(R.id.fab);
         statusText = (TextView) findViewById(R.id.status);
         mottoText = (TextView) findViewById(R.id.motto);
@@ -83,14 +80,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             slideDown.setStartOffset(275);
             titleImage.startAnimation(slideDown);
         }
-        Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_bottom);
-        slideUp.setStartOffset(250);
+        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_in);
+        fabIn.setStartOffset(250);
+        fabIn.setDuration(250);
         Animation fadeIn = AnimationUtils.loadAnimation(getBaseContext(), R.anim.abc_fade_in);
         fadeIn.setStartOffset(250);
-        fab.startAnimation(slideUp);
+        fab.startAnimation(fabIn);
         statusText.startAnimation(fadeIn);
         descText.startAnimation(fadeIn);
         mottoText.startAnimation(fadeIn);
+
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -132,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void startActivityRecognition() {
         running = true;
         fab.setImageResource(R.drawable.ic_stop_white_24dp);
+        fab.setContentDescription(getString(R.string.stop_button));
+
         prefs.edit().putBoolean("Running", true).apply();
         statusText.setText(getString(R.string.on));
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(
@@ -161,11 +162,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             slideUp.setFillAfter(true);
             titleImage.startAnimation(slideUp);
         }
-        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_bottom);
-        slideDown.setFillAfter(true);
+        Animation fabOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_out);
+        fabOut.setFillAfter(true);
+        fabOut.setDuration(250);
         Animation fadeOut = AnimationUtils.loadAnimation(getBaseContext(), R.anim.abc_fade_out);
         fadeOut.setFillAfter(true);
-        fab.startAnimation(slideDown);
+        fab.startAnimation(fabOut);
         statusText.startAnimation(fadeOut);
         descText.startAnimation(fadeOut);
         mottoText.startAnimation(fadeOut);
@@ -195,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void stopActivityRecognition() {
         running = false;
         fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+        fab.setContentDescription(getString(R.string.start_button));
         prefs.edit().putBoolean("Running", false).apply();
         statusText.setText(getString(R.string.off));
         ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(
@@ -246,22 +249,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toast = true;
         if (mGoogleApiClient.isConnected() && !running) {
             startActivityRecognition();
-            tracker.send(new HitBuilders.EventBuilder()
-                    .setCategory("Control")
-                    .setAction("click")
-                    .setLabel("Start service")
-                    .build());
             prefs.edit().putLong("NotDrivingTime", 0).apply();
+            prefs.edit().putBoolean("gpsDrive", false).apply();
         } else if (mGoogleApiClient.isConnected() && running) {
             stopActivityRecognition();
-            tracker.send(new HitBuilders.EventBuilder()
-                    .setCategory("Control")
-                    .setAction("click")
-                    .setLabel("Stop service")
-                    .build());
             prefs.edit().putLong("NotDrivingTime", 0).apply();
+            prefs.edit().putBoolean("gpsDrive", false).apply();
         } else
             Toast.makeText(this, "No connection to Google Play Services", Toast.LENGTH_SHORT).show();
+
     }
 
 

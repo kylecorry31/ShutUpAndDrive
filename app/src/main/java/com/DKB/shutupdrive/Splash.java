@@ -17,7 +17,6 @@ import android.widget.TextView;
  * Created by kyle on 8/12/14.
  */
 public class Splash extends Activity {
-    private static final String FILENAME = "firstTime";
     ImageView image;
     TextView titleText;
     SharedPreferences.Editor editor;
@@ -30,7 +29,6 @@ public class Splash extends Activity {
         editor.putInt(Constants.TUT_NUM_KEY, 0);
         editor.apply();
         setContentView(R.layout.splash);
-        ((MyApplication) getApplication()).tracker.setScreenName("Splash Screen");
         getWindow().setBackgroundDrawable(null);
         image = (ImageView) findViewById(R.id.icon);
         titleText = (TextView) findViewById(R.id.title);

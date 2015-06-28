@@ -3,22 +3,26 @@ package com.DKB.shutupdrive;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.graphics.BitmapCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by kyle on 5/31/15.
@@ -41,12 +45,12 @@ public class Tutorial extends Activity implements View.OnClickListener {
     TextView featureText, descriptionText;
     ImageView image;
     FloatingActionButton fab;
-    ProgressBar progressBar;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     Animation fadeIn, fadeOut;
     Bitmap featureImage;
     BitmapFactory.Options options;
+    LinearLayout progressDots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +59,23 @@ public class Tutorial extends Activity implements View.OnClickListener {
         options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         setContentView(R.layout.layout_tutorial);
-        ((MyApplication) getApplication()).tracker.setScreenName("Tutorial Screen");
         getWindow().setBackgroundDrawable(null);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         editor = prefs.edit();
         nextCount = prefs.getInt(Constants.TUT_NUM_KEY, 0);
         featureText = (TextView) findViewById(R.id.feature_name);
         descriptionText = (TextView) findViewById(R.id.description);
+        progressDots = (LinearLayout) findViewById(R.id.progressDots);
         image = (ImageView) findViewById(R.id.photo);
         fab = (FloatingActionButton) findViewById(R.id.next);
-        Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_bottom);
+        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_in);
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_in);
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_out);
-
-        slideUp.setStartOffset(250);
-        fab.startAnimation(slideUp);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.startAnimation(fadeIn);
+        fadeOut.setFillAfter(true);
+        fabIn.setStartOffset(250);
+        fabIn.setDuration(250);
+        fab.startAnimation(fabIn);
+        progressDots.startAnimation(fadeIn);
         featureText.startAnimation(fadeIn);
         descriptionText.startAnimation(fadeIn);
         fadeIn.setStartOffset(250);
@@ -106,9 +110,12 @@ public class Tutorial extends Activity implements View.OnClickListener {
             featureText.startAnimation(fadeIn);
             descriptionText.startAnimation(fadeIn);
             image.startAnimation(fadeIn);
-            progressBar.setProgress((int) ((nextCount + 1) / (double) features.length * 100));
-            ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, (int) (nextCount / (double) features.length * 100), (int) ((nextCount + 1) / (double) features.length * 100));
-            progressBar.startAnimation(anim);
+            for (int i = 0; i < 3; i++) {
+                if (i == nextCount)
+                    ((TextView) progressDots.getChildAt(i)).setTextColor(getResources().getColor(R.color.accent));
+                else
+                    ((TextView) progressDots.getChildAt(i)).setTextColor(getResources().getColor(R.color.white));
+            }
             editor.putInt(Constants.TUT_NUM_KEY, nextCount);
             editor.apply();
         } else {
@@ -116,48 +123,24 @@ public class Tutorial extends Activity implements View.OnClickListener {
             featureText.startAnimation(fadeOut);
             descriptionText.startAnimation(fadeOut);
             image.startAnimation(fadeOut);
-            progressBar.startAnimation(fadeOut);
-            Animation slideOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_out_bottom);
+            progressDots.startAnimation(fadeOut);
+            Animation fabOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_out);
+            fabOut.setFillAfter(true);
+            fabOut.setDuration(250);
             new Handler()
                     .postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            featureText.setVisibility(View.GONE);
-                            fab.setVisibility(View.GONE);
-                            progressBar.setVisibility(View.GONE);
-                            descriptionText.setVisibility(View.GONE);
-                            image.setVisibility(View.GONE);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             image.setImageDrawable(null);
                             featureImage.recycle();
                             System.gc();
                             finish();
                         }
-                    }, slideOut.getDuration());
+                    }, fabOut.getDuration());
 
-            fab.startAnimation(slideOut);
+            fab.startAnimation(fabOut);
         }
-    }
-
-    public class ProgressBarAnimation extends Animation {
-        private ProgressBar progressBar;
-        private float from;
-        private float to;
-
-        public ProgressBarAnimation(ProgressBar progressBar, float from, float to) {
-            super();
-            this.progressBar = progressBar;
-            this.from = from;
-            this.to = to;
-        }
-
-        @Override
-        protected void applyTransformation(float interpolatedTime, Transformation t) {
-            super.applyTransformation(interpolatedTime, t);
-            float value = from + (to - from) * interpolatedTime;
-            progressBar.setProgress((int) value);
-        }
-
     }
 
     private class LoadAndShowImages extends AsyncTask<Integer, Void, Void> {

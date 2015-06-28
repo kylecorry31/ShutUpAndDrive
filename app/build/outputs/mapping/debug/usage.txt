@@ -3575,6 +3575,13 @@ android.support.v7.appcompat.R$style:
     591:591:public R$style()
 android.support.v7.appcompat.R$styleable:
     885:885:public R$styleable()
+android.support.v7.cardview.BuildConfig
+android.support.v7.cardview.R
+android.support.v7.cardview.R$attr
+android.support.v7.cardview.R$color
+android.support.v7.cardview.R$dimen
+android.support.v7.cardview.R$style
+android.support.v7.cardview.R$styleable
 android.support.v7.internal.VersionUtils:
     10:10:private VersionUtils()
 android.support.v7.internal.app.AppCompatViewInflater:
@@ -4071,6 +4078,14 @@ android.support.v7.widget.AppCompatRatingBar:
     56:57:public AppCompatRatingBar(android.content.Context)
 android.support.v7.widget.AppCompatSpinner:
     55:56:public AppCompatSpinner(android.content.Context)
+android.support.v7.widget.CardView
+android.support.v7.widget.CardViewApi21
+android.support.v7.widget.CardViewDelegate
+android.support.v7.widget.CardViewEclairMr1
+android.support.v7.widget.CardViewEclairMr1$1
+android.support.v7.widget.CardViewImpl
+android.support.v7.widget.CardViewJellybeanMr1
+android.support.v7.widget.CardViewJellybeanMr1$1
 android.support.v7.widget.LinearLayoutCompat:
     public static final int HORIZONTAL
     public static final int VERTICAL
@@ -4143,6 +4158,9 @@ android.support.v7.widget.PopupMenu
 android.support.v7.widget.PopupMenu$1
 android.support.v7.widget.PopupMenu$OnDismissListener
 android.support.v7.widget.PopupMenu$OnMenuItemClickListener
+android.support.v7.widget.RoundRectDrawable
+android.support.v7.widget.RoundRectDrawableWithShadow
+android.support.v7.widget.RoundRectDrawableWithShadow$RoundRectHelper
 android.support.v7.widget.SearchView:
     private static final boolean DBG
     private static final java.lang.String LOG_TAG
@@ -4254,9 +4272,6 @@ android.support.v7.widget.Toolbar$LayoutParams:
     1798:1812:public Toolbar$LayoutParams(int,int,int)
     1815:1816:public Toolbar$LayoutParams(int)
 com.DKB.shutupdrive.BuildConfig
-com.DKB.shutupdrive.CarMode:
-    com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient
-    com.google.android.gms.location.LocationRequest mLocationRequest
 com.DKB.shutupdrive.Constants
 com.DKB.shutupdrive.R
 com.DKB.shutupdrive.R$anim
@@ -4276,8 +4291,6 @@ com.DKB.shutupdrive.R$string
 com.DKB.shutupdrive.R$style
 com.DKB.shutupdrive.R$styleable
 com.DKB.shutupdrive.R$xml
-com.DKB.shutupdrive.Splash:
-    private static final java.lang.String FILENAME
 com.google.ads.AdRequest:
     public static final java.lang.String VERSION
     public static final java.lang.String LOGTAG
@@ -4645,20 +4658,30 @@ com.google.android.gms.ads.search.SearchAdRequest:
 com.google.android.gms.ads.search.SearchAdRequest$1
 com.google.android.gms.ads.search.SearchAdRequest$Builder
 com.google.android.gms.ads.search.SearchAdView
-com.google.android.gms.analytics.ExceptionReporter:
-    public com.google.android.gms.analytics.ExceptionParser getExceptionParser()
-    public void setExceptionParser(com.google.android.gms.analytics.ExceptionParser)
+com.google.android.gms.analytics.ExceptionParser
+com.google.android.gms.analytics.ExceptionReporter
 com.google.android.gms.analytics.GoogleAnalytics:
+    private boolean zzIw
+    public void enableAutoActivityReports(android.app.Application)
     public void reportActivityStart(android.app.Activity)
+    void zzl(android.app.Activity)
     public void reportActivityStop(android.app.Activity)
+    void zzm(android.app.Activity)
     public com.google.android.gms.analytics.Tracker newTracker(int)
+    void zza(com.google.android.gms.analytics.GoogleAnalytics$zza)
+    void zzb(com.google.android.gms.analytics.GoogleAnalytics$zza)
     public void setAppOptOut(boolean)
+    public void setLocalDispatchPeriod(int)
+    public void dispatchLocalHits()
+    void zzhk()
+    private com.google.android.gms.analytics.internal.zzb zzhl()
+com.google.android.gms.analytics.GoogleAnalytics$zza
+com.google.android.gms.analytics.GoogleAnalytics$zzb
 com.google.android.gms.analytics.HitBuilders:
     public HitBuilders()
 com.google.android.gms.analytics.HitBuilders$AppViewBuilder
-com.google.android.gms.analytics.HitBuilders$EventBuilder:
-    public HitBuilders$EventBuilder(java.lang.String,java.lang.String)
-    public com.google.android.gms.analytics.HitBuilders$EventBuilder setValue(long)
+com.google.android.gms.analytics.HitBuilders$EventBuilder
+com.google.android.gms.analytics.HitBuilders$ExceptionBuilder
 com.google.android.gms.analytics.HitBuilders$HitBuilder:
     public com.google.android.gms.analytics.HitBuilders$HitBuilder setNewSession()
     public com.google.android.gms.analytics.HitBuilders$HitBuilder setNonInteraction(boolean)
@@ -4673,6 +4696,8 @@ com.google.android.gms.analytics.HitBuilders$SocialBuilder
 com.google.android.gms.analytics.HitBuilders$TimingBuilder
 com.google.android.gms.analytics.HitBuilders$TransactionBuilder
 com.google.android.gms.analytics.Logger:
+    public abstract void verbose(java.lang.String)
+    public abstract void info(java.lang.String)
     public abstract void error(java.lang.Exception)
 com.google.android.gms.analytics.Logger$LogLevel
 com.google.android.gms.analytics.R
@@ -4685,9 +4710,15 @@ com.google.android.gms.analytics.R$raw
 com.google.android.gms.analytics.R$string
 com.google.android.gms.analytics.R$style
 com.google.android.gms.analytics.R$styleable
+com.google.android.gms.analytics.StandardExceptionParser
 com.google.android.gms.analytics.Tracker:
+    private com.google.android.gms.analytics.ExceptionReporter zzIL
+    private com.google.android.gms.analytics.internal.zzal zzIM
     void zza(com.google.android.gms.analytics.internal.zzal)
+    private boolean zzho()
+    public void enableExceptionReporting(boolean)
     public void setSessionTimeout(long)
+    public void enableAutoActivityTracking(boolean)
     public java.lang.String get(java.lang.String)
     public void setSampleRate(double)
     public void setUseSecure(boolean)
@@ -4707,8 +4738,19 @@ com.google.android.gms.analytics.Tracker:
     public void setAppInstallerId(java.lang.String)
     public void setAppVersion(java.lang.String)
     public void setAnonymizeIp(boolean)
+    public void setCampaignParamsOnNextHit(android.net.Uri)
+    static java.lang.String zzp(android.app.Activity)
+    static synthetic com.google.android.gms.analytics.internal.zzal zzk(com.google.android.gms.analytics.Tracker)
 com.google.android.gms.analytics.Tracker$zza:
+    private boolean zzIV
+    private int zzIW
+    private long zzIZ
     public void setSessionTimeout(long)
+    public void enableAutoActivityTracking(boolean)
+    private void zzhr()
+    public void zzn(android.app.Activity)
+    public void zzo(android.app.Activity)
+    boolean zzhs()
 com.google.android.gms.analytics.ecommerce.ProductAction:
     public static final java.lang.String ACTION_DETAIL
     public static final java.lang.String ACTION_CLICK
@@ -4723,41 +4765,35 @@ com.google.android.gms.analytics.ecommerce.ProductAction:
 com.google.android.gms.analytics.ecommerce.Promotion:
     public static final java.lang.String ACTION_CLICK
     public static final java.lang.String ACTION_VIEW
+com.google.android.gms.analytics.internal.zzae:
+    public static void zzaA(java.lang.String)
+    public static void zzaB(java.lang.String)
 com.google.android.gms.analytics.internal.zzak
 com.google.android.gms.analytics.internal.zzak$zza
-com.google.android.gms.analytics.internal.zzal:
-    public java.lang.String zztd
-    public double zzME
-    public int zzMF
-    public int zzMG
-    public int zzMH
-    public int zzMI
-    public zzal()
-    public boolean zzky()
-    public java.lang.String getTrackingId()
-    public boolean zzkz()
-    public double zzkA()
-    public boolean zzkB()
-    public int getSessionTimeout()
-    public boolean zzkC()
-    public boolean zzkD()
-    public boolean zzkE()
-    public boolean zzkF()
-    public boolean zzkG()
+com.google.android.gms.analytics.internal.zzal
 com.google.android.gms.analytics.internal.zzam:
     public static java.util.Map zzbi(java.lang.String)
+    public static java.lang.String zzH(boolean)
     public static java.lang.String zzbk(java.lang.String)
 com.google.android.gms.analytics.internal.zzb:
+    public void setLocalDispatchPeriod(int)
     public void zzhG()
+    public boolean zzhI()
+com.google.android.gms.analytics.internal.zzb$1
 com.google.android.gms.analytics.internal.zzb$5
+com.google.android.gms.analytics.internal.zzb$7
 com.google.android.gms.analytics.internal.zzi:
     public boolean zzim()
 com.google.android.gms.analytics.internal.zzj:
     public void zziq()
     public void zzir()
 com.google.android.gms.analytics.internal.zzl:
+    public void zzs(long)
     public void zzhG()
+    public void zziF()
 com.google.android.gms.analytics.internal.zzs:
+    public void verbose(java.lang.String)
+    public void info(java.lang.String)
     public void error(java.lang.Exception)
 com.google.android.gms.analytics.zzc:
     public static java.lang.String zzN(int)
@@ -6315,6 +6351,8 @@ com.google.android.gms.tagmanager.zzcp:
     public synchronized void zzs(java.util.List)
 com.google.android.gms.tagmanager.zzdc$zza:
     public void error(java.lang.Exception)
+    public void info(java.lang.String)
+    public void verbose(java.lang.String)
 com.google.android.gms.tagmanager.zzdf:
     public static java.lang.Double zzzM()
     public static java.lang.Double zzG(java.lang.Object)

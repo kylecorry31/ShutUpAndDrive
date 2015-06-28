@@ -2,19 +2,11 @@ package com.DKB.shutupdrive;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.location.Location;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 
-import java.io.FileOutputStream;
 import java.util.Date;
 
 /**
@@ -47,12 +39,13 @@ public class DetectedActivityIntentService extends IntentService {
                         check permission location
                             else: start carmode, notify
                  */
-                if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gps", false))
+                if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gps", false))
                     startService(new Intent(this, SpeedService.class));
                 else
                     startService(new Intent(this, CarMode.class));
             } else if (confidence >= Constants.DETECTION_THRESHOLD) {
                 stopService(new Intent(this, CarMode.class));
+                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("gpsDrive", false).apply();
             }
 
         }
