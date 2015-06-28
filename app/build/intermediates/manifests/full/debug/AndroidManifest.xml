@@ -92,13 +92,6 @@
         <service android:name="com.DKB.shutupdrive.SpeedService" />
         <service android:name="com.DKB.shutupdrive.DetectedActivityIntentService" />
 
-        <receiver android:name="com.DKB.shutupdrive.text" >
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
         <receiver android:name="com.DKB.shutupdrive.NotificationReceiver" />
 
         <activity

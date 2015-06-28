@@ -4028,6 +4028,8 @@ com.DKB.shutupdrive.R$string: int description_auto_reply
 com.DKB.shutupdrive.R$string: int description_caller_id_readout
 com.DKB.shutupdrive.R$string: int description_driving_detection
 com.DKB.shutupdrive.R$string: int description_main
+com.DKB.shutupdrive.R$string: int dkb_software
+com.DKB.shutupdrive.R$string: int exit_car_mode
 com.DKB.shutupdrive.R$string: int feature_auto_reply
 com.DKB.shutupdrive.R$string: int feature_caller_id_readout
 com.DKB.shutupdrive.R$string: int feature_driving_detection
@@ -4802,8 +4804,6 @@ com.DKB.shutupdrive.Splash: Splash()
 com.DKB.shutupdrive.Tutorial
 com.DKB.shutupdrive.Tutorial: Tutorial()
 com.DKB.shutupdrive.Tutorial: void onClick(android.view.View)
-com.DKB.shutupdrive.text
-com.DKB.shutupdrive.text: text()
 com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode[] values()
 com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode valueOf(java.lang.String)
 com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender[] values()

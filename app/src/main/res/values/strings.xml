@@ -20,12 +20,13 @@
     <string name="next_button">Next</string>
     <string name="no_connection">No connection to Google Play Services</string>
     <string name="services_unavailable">Google Play Services unavailable</string>
-    <string name="car_mode_on">Car mode on</string>
     <string name="not_driving">Not driving</string>
     <string name="default_message">I am driving right now, I will contact you later —Auto reply message—</string>
     <string name="phone_option_block">Blocking calls</string>
     <string name="phone_option_read">Reading caller ID</string>
     <string name="phone_option_allow">Allowing calls</string>
+    <string name="exit_car_mode">Touch to exit car mode.</string>
+    <string name="car_mode_on">Car mode enabled</string>
 
     <string name="key_tutorial_number">tutNum</string>
     <string name="key_running">Running</string>
@@ -37,4 +38,6 @@
     <string name="key_auto_reply">autoReply</string>
     <string name="key_phone_option">phoneOpt</string>
     <string name="key_first_time">firstTime</string>
+    <string name="dkb_software">{ DKB }\nSoftware</string>
+
 </resources>

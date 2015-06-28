@@ -186,20 +186,10 @@ service#com.DKB.shutupdrive.DetectedActivityIntentService
 ADDED from AndroidManifest.xml:79:9
 	android:name
 		ADDED from AndroidManifest.xml:79:18
-receiver#com.DKB.shutupdrive.text
-ADDED from AndroidManifest.xml:81:9
-	android:name
-		ADDED from AndroidManifest.xml:81:19
-intent-filter#android.intent.category.DEFAULT+android.provider.Telephony.SMS_RECEIVED
-ADDED from AndroidManifest.xml:82:13
-action#android.provider.Telephony.SMS_RECEIVED
-ADDED from AndroidManifest.xml:83:17
-	android:name
-		ADDED from AndroidManifest.xml:83:25
 receiver#com.DKB.shutupdrive.NotificationReceiver
-ADDED from AndroidManifest.xml:89:9
+ADDED from AndroidManifest.xml:83:9
 	android:name
-		ADDED from AndroidManifest.xml:89:19
+		ADDED from AndroidManifest.xml:83:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.google.android.gms:play-services-location:7.5.0:18:5

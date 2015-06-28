@@ -354,7 +354,7 @@
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="banner_ad_unit_id">ca-app-pub-5617453255042566/1905751930</string>
-    <string name="car_mode_on">Car mode on</string>
+    <string name="car_mode_on">Car mode enabled</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text"><ns1:g id="app_name">%1$s</ns1:g> requires an update to the Android Wear app.</string>
@@ -401,6 +401,8 @@
     <string name="description_caller_id_readout">Reads out who\'s calling while driving</string>
     <string name="description_driving_detection">Automatically turns on while driving</string>
     <string name="description_main">Turns on when you drive to keep you safe and focused on the road</string>
+    <string name="dkb_software">{ DKB }\nSoftware</string>
+    <string name="exit_car_mode">Touch to exit car mode.</string>
     <string name="feature_auto_reply">Auto Reply</string>
     <string name="feature_caller_id_readout">Caller ID Readout</string>
     <string name="feature_driving_detection">Driving Detection</string>

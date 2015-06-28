@@ -675,6 +675,8 @@ android.support.v4.app.NotificationCompat:
     41:41:static synthetic android.app.Notification[] access$500(android.os.Bundle,java.lang.String)
 android.support.v4.app.NotificationCompat$1
 android.support.v4.app.NotificationCompat$Action:
+    1825:1826:public NotificationCompat$Action(int,java.lang.CharSequence,android.app.PendingIntent)
+    1829:1835:private NotificationCompat$Action(int,java.lang.CharSequence,android.app.PendingIntent,android.os.Bundle,android.support.v4.app.RemoteInput[])
     1806:1806:static synthetic android.os.Bundle access$300(android.support.v4.app.NotificationCompat$Action)
     1806:1806:synthetic NotificationCompat$Action(int,java.lang.CharSequence,android.app.PendingIntent,android.os.Bundle,android.support.v4.app.RemoteInput[],android.support.v4.app.NotificationCompat$1)
 android.support.v4.app.NotificationCompat$Action$1:
@@ -729,6 +731,7 @@ android.support.v4.app.NotificationCompat$Builder:
     1398:1405:public android.support.v4.app.NotificationCompat$Builder addExtras(android.os.Bundle)
     1421:1422:public android.support.v4.app.NotificationCompat$Builder setExtras(android.os.Bundle)
     1436:1439:public android.os.Bundle getExtras()
+    1459:1460:public android.support.v4.app.NotificationCompat$Builder addAction(int,java.lang.CharSequence,android.app.PendingIntent)
     1478:1479:public android.support.v4.app.NotificationCompat$Builder addAction(android.support.v4.app.NotificationCompat$Action)
     1491:1497:public android.support.v4.app.NotificationCompat$Builder setStyle(android.support.v4.app.NotificationCompat$Style)
     1508:1509:public android.support.v4.app.NotificationCompat$Builder setColor(int)
@@ -849,6 +852,8 @@ android.support.v4.app.NotificationCompatApi21:
     217:217:private static android.support.v4.app.RemoteInputCompatBase$RemoteInput toCompatRemoteInput(android.app.RemoteInput,android.support.v4.app.RemoteInputCompatBase$RemoteInput$Factory)
 android.support.v4.app.NotificationCompatBase:
     25:41:public NotificationCompatBase()
+android.support.v4.app.NotificationCompatBase$Action:
+    27:34:public NotificationCompatBase$Action()
 android.support.v4.app.NotificationCompatBase$Action$Factory:
     public abstract android.support.v4.app.NotificationCompatBase$Action build(int,java.lang.CharSequence,android.app.PendingIntent,android.os.Bundle,android.support.v4.app.RemoteInputCompatBase$RemoteInput[])
     public abstract android.support.v4.app.NotificationCompatBase$Action[] newArray(int)
@@ -4300,8 +4305,7 @@ com.DKB.shutupdrive.Utils:
     public static final int PHONE_ALLOW_CALLS
     public static final int NOTIFICATION_ID
     public static final int DETECTION_THRESHOLD
-    10:10:Utils()
-    83:88:public static void setAutoReplyMessage(android.content.Context,java.lang.String)
+    89:94:public static void setAutoReplyMessage(android.content.Context,java.lang.String)
 com.google.ads.AdRequest:
     public static final java.lang.String VERSION
     public static final java.lang.String LOGTAG

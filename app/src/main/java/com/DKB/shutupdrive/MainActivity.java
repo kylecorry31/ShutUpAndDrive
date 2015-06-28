@@ -1,12 +1,15 @@
 package com.DKB.shutupdrive;
 
 import android.app.PendingIntent;
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean toast;
     private MenuItem item;
     private AdView adView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 switch (item.getItemId()) {
                     case R.id.action_settings:
-                        // settings menu
+                        // settings menus
                         Intent openSettings = new Intent(getApplicationContext(), Settings.class);
                         startActivity(openSettings);
                         break;

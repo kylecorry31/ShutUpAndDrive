@@ -45,6 +45,12 @@ public class Settings extends AppCompatActivity {
         }
 
         @Override
+        public void onDestroy() {
+            sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+            super.onDestroy();
+        }
+
+        @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key.contentEquals(getString(R.string.key_auto_reply_message))) {
                 String userMessage = Utils.getAutoReplyMessage(context);

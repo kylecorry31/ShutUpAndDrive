@@ -78,13 +78,7 @@
         <service android:name=".SpeedService" />
         <service android:name=".DetectedActivityIntentService" />
 
-        <receiver android:name=".text">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
 
         <receiver android:name=".NotificationReceiver" />
 

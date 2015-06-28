@@ -1,8 +1,14 @@
 package com.DKB.shutupdrive;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
+import android.util.Log;
 
 /**
  * Created by kyle on 6/28/15.
@@ -116,5 +122,29 @@ class Utils {
     public static final int NOTIFICATION_ID = 753815731;
 
     public static final int DETECTION_THRESHOLD = 75;
+
+    public static String callerId(Context c, String phoneNumber) {
+        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+        ContentResolver resolver = c.getContentResolver();
+        Cursor cur = resolver.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+        if (cur != null && cur.moveToFirst()) {
+            String value = cur.getString(cur.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+            if (value != null) {
+                cur.close();
+                return value;
+            }
+        }
+        try {
+            assert cur != null;
+            cur.close();
+        } catch (NullPointerException e) {
+            Log.e("Utils", e.getMessage());
+        }
+        String readNumber = "";
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            readNumber += phoneNumber.charAt(i) + " ";
+        }
+        return readNumber;
+    }
 
 }
