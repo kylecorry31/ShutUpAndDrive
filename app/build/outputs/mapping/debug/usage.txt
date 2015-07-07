@@ -4303,9 +4303,11 @@ com.DKB.shutupdrive.Utils:
     public static final int PHONE_BLOCK_CALLS
     public static final int PHONE_READ_CALLER
     public static final int PHONE_ALLOW_CALLS
+    public static final java.lang.String TUTORIAL_NUM_KEY
+    public static final java.lang.String ACTION_NOTIFICATION_CLICKED
     public static final int NOTIFICATION_ID
     public static final int DETECTION_THRESHOLD
-    89:94:public static void setAutoReplyMessage(android.content.Context,java.lang.String)
+    83:88:public static void setAutoReplyMessage(android.content.Context,java.lang.String)
 com.google.ads.AdRequest:
     public static final java.lang.String VERSION
     public static final java.lang.String LOGTAG

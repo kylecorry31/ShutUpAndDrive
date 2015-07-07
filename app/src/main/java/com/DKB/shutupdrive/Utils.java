@@ -33,16 +33,10 @@ class Utils {
     public static final int PHONE_READ_CALLER = 2;
     public static final int PHONE_ALLOW_CALLS = 3;
 
+    public static final String TUTORIAL_NUM_KEY = "tutNum";
 
-    public static int getTutNumber(Context c) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
-        return prefs.getInt(c.getString(R.string.key_tutorial_number), 0);
-    }
+    public static final String ACTION_NOTIFICATION_CLICKED = "com.DKB.shutupdrive.ACTION_NOTIFICATION_CLICKED";
 
-    public static void setTutNumber(Context c, int tutNum) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
-        prefs.edit().putInt(c.getString(R.string.key_tutorial_number), tutNum).apply();
-    }
 
     public static void setRunning(Context c, boolean running) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);

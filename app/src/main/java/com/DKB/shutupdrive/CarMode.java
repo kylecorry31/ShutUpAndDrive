@@ -28,6 +28,7 @@ import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import java.util.Date;
 import java.util.Locale;
 
 public class CarMode extends Service {
@@ -41,7 +42,7 @@ public class CarMode extends Service {
     private PhoneStateListener psl;
     private TelephonyManager tm;
     private AudioManager am;
-    private BroadcastReceiver textReceiver;
+    private BroadcastReceiver textReceiver, notificationReceiver;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -165,6 +166,7 @@ public class CarMode extends Service {
             tts.stop();
             tts.shutdown();
         }
+        unregisterReceiver(notificationReceiver);
         unregisterReceiver(textReceiver);
         super.onDestroy();
     }
@@ -179,10 +181,20 @@ public class CarMode extends Service {
         mBuilder.setContentIntent(createNotDrivingPendingIntent());
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(Utils.NOTIFICATION_ID, mBuilder.build());
+        notificationReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(Utils.ACTION_NOTIFICATION_CLICKED)) {
+                    Utils.setNotDrivingTime(context, new Date().getTime());
+                    stopSelf();
+                }
+            }
+        };
+        registerReceiver(notificationReceiver, new IntentFilter(Utils.ACTION_NOTIFICATION_CLICKED));
     }
 
     private PendingIntent createNotDrivingPendingIntent() {
-        Intent i = new Intent(getBaseContext(), NotificationReceiver.class);
+        Intent i = new Intent(Utils.ACTION_NOTIFICATION_CLICKED);
         return PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
     }
 

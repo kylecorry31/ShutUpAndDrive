@@ -16,31 +16,23 @@ public class Splash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Utils.setTutNumber(this, 0);
         setContentView(R.layout.splash);
         getWindow().setBackgroundDrawable(null);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (!isFirst()) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                Intent i;
+                if (Utils.isFirst(getApplicationContext())) {
+                    Utils.setFirst(getApplicationContext(), false);
+                    i = new Intent(getApplicationContext(), Tutorial.class);
+                } else {
+                    i = new Intent(getApplicationContext(), MainActivity.class);
                 }
+                startActivity(i);
             }
         }, 1000);
     }
 
-    private boolean isFirst() {
-        boolean first = Utils.isFirst(this);
-        if (first) {
-            Utils.setFirst(this, false);
-            Intent intent = new Intent(getApplicationContext(), Tutorial.class);
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @Override
     protected void onPause() {

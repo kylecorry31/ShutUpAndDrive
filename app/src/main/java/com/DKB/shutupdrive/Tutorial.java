@@ -52,7 +52,11 @@ public class Tutorial extends Activity implements View.OnClickListener {
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         setContentView(R.layout.layout_tutorial);
         getWindow().setBackgroundDrawable(null);
-        nextCount = Utils.getTutNumber(this);
+        if (savedInstanceState != null && savedInstanceState.containsKey(Utils.TUTORIAL_NUM_KEY)) {
+            nextCount = savedInstanceState.getInt(Utils.TUTORIAL_NUM_KEY);
+        } else {
+            nextCount = 0;
+        }
         featureText = (TextView) findViewById(R.id.feature_name);
         descriptionText = (TextView) findViewById(R.id.description);
         progressDots = (LinearLayout) findViewById(R.id.progressDots);
@@ -73,6 +77,12 @@ public class Tutorial extends Activity implements View.OnClickListener {
         updateUI();
         fab.setOnClickListener(this);
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(Utils.TUTORIAL_NUM_KEY, nextCount);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -106,9 +116,7 @@ public class Tutorial extends Activity implements View.OnClickListener {
                 else
                     ((TextView) progressDots.getChildAt(i)).setTextColor(getResources().getColor(R.color.white));
             }
-            Utils.setTutNumber(this, nextCount);
         } else {
-            Utils.setTutNumber(this, 0);
             featureText.startAnimation(fadeOut);
             descriptionText.startAnimation(fadeOut);
             image.startAnimation(fadeOut);

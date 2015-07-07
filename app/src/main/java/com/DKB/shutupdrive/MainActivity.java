@@ -181,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.action_tutorial:
                         // Tutorial
                         Intent openTut = new Intent(getApplicationContext(), Tutorial.class);
-                        Utils.setTutNumber(getBaseContext(), 0);
                         startActivity(openTut);
                         finish();
                         break;
@@ -230,10 +229,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onResult(Status status) {
-        if (status.isSuccess()) {
-            if (toast)
-                Toast.makeText(this, running ? "Started" : "Stopped", Toast.LENGTH_SHORT).show();
-        }
+        if (status.isSuccess() && toast)
+            Toast.makeText(this, running ? getString(R.string.started) : getString(R.string.stopped), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -249,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Utils.setGPSDrive(this, false);
         } else if (mGoogleApiClient.isConnected() && running) {
             stopActivityRecognition();
+            stopService(new Intent(this, CarMode.class));
             Utils.setNotDrivingTime(this, 0);
             Utils.setGPSDrive(this, false);
         } else

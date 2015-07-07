@@ -415,7 +415,6 @@
     <string name="key_not_driving_time">NotDrivingTime</string>
     <string name="key_phone_option">phoneOpt</string>
     <string name="key_running">Running</string>
-    <string name="key_tutorial_number">tutNum</string>
     <string name="next_button">Next</string>
     <string name="no_connection">No connection to Google Play Services</string>
     <string name="not_driving">Not driving</string>
@@ -426,6 +425,7 @@
     <string name="phone_option_read">Reading caller ID</string>
     <string name="services_unavailable">Google Play Services unavailable</string>
     <string name="start_button">Start</string>
+    <string name="started">Started</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
@@ -433,6 +433,7 @@
     <eat-comment/>
     <string name="stay_safe">Stay safe while you drive</string>
     <string name="stop_button">Stop</string>
+    <string name="stopped">Stopped</string>
     <!-- From: file:/home/kyle/Development/ShutUpAndDrive/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>

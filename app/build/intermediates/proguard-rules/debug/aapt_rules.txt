@@ -86,9 +86,6 @@
 # view AndroidManifest.xml #generated:44
 -keep class com.DKB.shutupdrive.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:95
--keep class com.DKB.shutupdrive.NotificationReceiver { <init>(...); }
-
 # view AndroidManifest.xml #generated:71
 -keep class com.DKB.shutupdrive.Settings { <init>(...); }
 
@@ -108,6 +105,6 @@
 # view res/layout/layout_main.xml #generated:12
 -keep class com.google.android.gms.ads.AdView { <init>(...); }
 
-# view AndroidManifest.xml #generated:97
+# view AndroidManifest.xml #generated:95
 -keep class com.google.android.gms.ads.purchase.InAppPurchaseActivity { <init>(...); }
 

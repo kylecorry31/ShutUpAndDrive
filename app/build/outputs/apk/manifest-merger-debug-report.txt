@@ -186,10 +186,6 @@ service#com.DKB.shutupdrive.DetectedActivityIntentService
 ADDED from AndroidManifest.xml:79:9
 	android:name
 		ADDED from AndroidManifest.xml:79:18
-receiver#com.DKB.shutupdrive.NotificationReceiver
-ADDED from AndroidManifest.xml:83:9
-	android:name
-		ADDED from AndroidManifest.xml:83:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.google.android.gms:play-services-location:7.5.0:18:5
