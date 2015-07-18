@@ -654,6 +654,8 @@ android.support.design.R$layout: int design_navigation_item_subheader
 android.support.design.R$layout: int design_navigation_menu
 android.support.design.R$layout: int layout_snackbar
 android.support.design.R$layout: int layout_snackbar_include
+android.support.design.R$layout: int layout_tab_icon
+android.support.design.R$layout: int layout_tab_text
 android.support.design.R$layout: int notification_media_action
 android.support.design.R$layout: int notification_media_cancel_action
 android.support.design.R$layout: int notification_template_big_media
@@ -886,6 +888,7 @@ android.support.design.R$style: int TextAppearance_AppCompat_Widget_PopupMenu_La
 android.support.design.R$style: int TextAppearance_AppCompat_Widget_PopupMenu_Small
 android.support.design.R$style: int TextAppearance_AppCompat_Widget_Switch
 android.support.design.R$style: int TextAppearance_AppCompat_Widget_TextView_SpinnerItem
+android.support.design.R$style: int TextAppearance_Design_CollapsingToolbar_Expanded
 android.support.design.R$style: int TextAppearance_Design_Error
 android.support.design.R$style: int TextAppearance_Design_Hint
 android.support.design.R$style: int TextAppearance_Design_Snackbar_Action
@@ -1405,6 +1408,7 @@ android.support.design.widget.AppBarLayout: void setWindowInsets(android.support
 android.support.design.widget.AppBarLayout$Behavior$SavedState
 android.support.design.widget.AppBarLayout$Behavior$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.design.widget.CollapsingToolbarLayout: void setTitle(java.lang.CharSequence)
+android.support.design.widget.CollapsingToolbarLayout: void setScrimAlpha(int)
 android.support.design.widget.CollapsingToolbarLayout: void setContentScrim(android.graphics.drawable.Drawable)
 android.support.design.widget.CollapsingToolbarLayout: void setContentScrimColor(int)
 android.support.design.widget.CollapsingToolbarLayout: void setContentScrimResource(int)
@@ -1418,6 +1422,7 @@ android.support.design.widget.CollapsingToolbarLayout: void setCollapsedTitleTex
 android.support.design.widget.CollapsingToolbarLayout: void setExpandedTitleTextAppearance(int)
 android.support.design.widget.CollapsingToolbarLayout: void setExpandedTitleColor(int)
 android.support.design.widget.CollapsingToolbarLayout: int getScrimTriggerOffset()
+android.support.design.widget.CoordinatorLayout: void setOnHierarchyChangeListener(android.view.ViewGroup$OnHierarchyChangeListener)
 android.support.design.widget.CoordinatorLayout: void setStatusBarBackground(android.graphics.drawable.Drawable)
 android.support.design.widget.CoordinatorLayout: android.graphics.drawable.Drawable getStatusBarBackground()
 android.support.design.widget.CoordinatorLayout: void setStatusBarBackgroundResource(int)
@@ -1459,6 +1464,7 @@ android.support.design.widget.Snackbar$SnackbarLayout: android.widget.TextView g
 android.support.design.widget.Snackbar$SnackbarLayout: void setOnLayoutChangeListener(android.support.design.widget.Snackbar$SnackbarLayout$OnLayoutChangeListener)
 android.support.design.widget.TabLayout: void setOnTabSelectedListener(android.support.design.widget.TabLayout$OnTabSelectedListener)
 android.support.design.widget.TabLayout: int getTabCount()
+android.support.design.widget.TabLayout: int getSelectedTabPosition()
 android.support.design.widget.TabLayout: void setTabMode(int)
 android.support.design.widget.TabLayout: int getTabMode()
 android.support.design.widget.TabLayout: void setTabGravity(int)
@@ -3942,6 +3948,8 @@ com.DKB.shutupdrive.R$layout: int design_navigation_menu
 com.DKB.shutupdrive.R$layout: int layout_main
 com.DKB.shutupdrive.R$layout: int layout_snackbar
 com.DKB.shutupdrive.R$layout: int layout_snackbar_include
+com.DKB.shutupdrive.R$layout: int layout_tab_icon
+com.DKB.shutupdrive.R$layout: int layout_tab_text
 com.DKB.shutupdrive.R$layout: int layout_tutorial
 com.DKB.shutupdrive.R$layout: int notification_media_action
 com.DKB.shutupdrive.R$layout: int notification_media_cancel_action
@@ -4262,6 +4270,7 @@ com.DKB.shutupdrive.R$style: int TextAppearance_AppCompat_Widget_PopupMenu_Large
 com.DKB.shutupdrive.R$style: int TextAppearance_AppCompat_Widget_PopupMenu_Small
 com.DKB.shutupdrive.R$style: int TextAppearance_AppCompat_Widget_Switch
 com.DKB.shutupdrive.R$style: int TextAppearance_AppCompat_Widget_TextView_SpinnerItem
+com.DKB.shutupdrive.R$style: int TextAppearance_Design_CollapsingToolbar_Expanded
 com.DKB.shutupdrive.R$style: int TextAppearance_Design_Error
 com.DKB.shutupdrive.R$style: int TextAppearance_Design_Hint
 com.DKB.shutupdrive.R$style: int TextAppearance_Design_Snackbar_Action

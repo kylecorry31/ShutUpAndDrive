@@ -41,7 +41,7 @@ android.support.annotation.WorkerThread
 android.support.annotation.XmlRes
 android.support.design.BuildConfig
 android.support.design.R:
-    9:1026:public R()
+    9:1029:public R()
 android.support.design.R$anim:
     10:10:public R$anim()
 android.support.design.R$attr:
@@ -59,27 +59,31 @@ android.support.design.R$layout:
     650:650:public R$layout()
 android.support.design.R$string
 android.support.design.R$style:
-    717:717:public R$style()
+    719:719:public R$style()
 android.support.design.R$styleable:
-    1026:1026:public R$styleable()
+    1029:1029:public R$styleable()
 android.support.design.internal.NavigationMenuItemView:
     108:108:public void setShortcut(boolean,char)
-    128:128:public boolean showsIcon()
+    127:127:public boolean showsIcon()
 android.support.design.internal.NavigationMenuPresenter:
     private static final java.lang.String STATE_HIERARCHY
+    private static final java.lang.String STATE_ADAPTER
     private android.widget.LinearLayout mHeader
-    51:396:public NavigationMenuPresenter()
-    92:104:public android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
-    116:117:public void setCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
-    152:153:public void setId(int)
-    184:186:public android.view.View inflateHeaderView(int)
-    190:193:public void addHeaderView(android.view.View)
-    196:200:public void removeHeaderView(android.view.View)
+    51:451:public NavigationMenuPresenter()
+    93:105:public android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
+    117:118:public void setCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
+    153:154:public void setId(int)
+    192:194:public android.view.View inflateHeaderView(int)
+    198:201:public void addHeaderView(android.view.View)
+    204:208:public void removeHeaderView(android.view.View)
+    237:240:public void setUpdateSuspended(boolean)
 android.support.design.internal.NavigationMenuPresenter$NavigationMenuAdapter:
+    private static final java.lang.String STATE_CHECKED_ITEMS
     private static final int VIEW_TYPE_NORMAL
     private static final int VIEW_TYPE_SUBHEADER
     private static final int VIEW_TYPE_SEPARATOR
-    233:238:NavigationMenuPresenter$NavigationMenuAdapter(android.support.design.internal.NavigationMenuPresenter)
+    250:256:NavigationMenuPresenter$NavigationMenuAdapter(android.support.design.internal.NavigationMenuPresenter)
+    443:444:public void setUpdateSuspended(boolean)
 android.support.design.internal.ScrimInsetsFrameLayout:
     44:45:public ScrimInsetsFrameLayout(android.content.Context)
     48:49:public ScrimInsetsFrameLayout(android.content.Context,android.util.AttributeSet)
@@ -127,20 +131,23 @@ android.support.design.widget.CollapsingToolbarLayout$LayoutParams
 android.support.design.widget.CollapsingToolbarLayout$OffsetUpdateListener
 android.support.design.widget.CoordinatorLayout:
     static final java.lang.String TAG
-    155:156:public CoordinatorLayout(android.content.Context)
-    159:160:public CoordinatorLayout(android.content.Context,android.util.AttributeSet)
-    107:183:public CoordinatorLayout(android.content.Context,android.util.AttributeSet,int)
-    85:85:static synthetic void access$000(android.support.design.widget.CoordinatorLayout,android.support.v4.view.WindowInsetsCompat)
+    158:159:public CoordinatorLayout(android.content.Context)
+    162:163:public CoordinatorLayout(android.content.Context,android.util.AttributeSet)
+    108:187:public CoordinatorLayout(android.content.Context,android.util.AttributeSet,int)
+    1122:1132:void dispatchDependentViewRemoved(android.view.View)
+    86:86:static synthetic void access$000(android.support.design.widget.CoordinatorLayout,android.support.v4.view.WindowInsetsCompat)
+    86:86:static synthetic android.view.ViewGroup$OnHierarchyChangeListener access$100(android.support.design.widget.CoordinatorLayout)
 android.support.design.widget.CoordinatorLayout$1
 android.support.design.widget.CoordinatorLayout$ApplyInsetsListener
 android.support.design.widget.CoordinatorLayout$Behavior:
-    1583:1584:public CoordinatorLayout$Behavior(android.content.Context,android.util.AttributeSet)
-    1814:1816:public static void setTag(android.view.View,java.lang.Object)
-    1826:1827:public static java.lang.Object getTag(android.view.View)
+    1605:1606:public CoordinatorLayout$Behavior(android.content.Context,android.util.AttributeSet)
+    1772:1772:public void onDependentViewRemoved(android.support.design.widget.CoordinatorLayout,android.view.View,android.view.View)
+    1853:1855:public static void setTag(android.view.View,java.lang.Object)
+    1865:1866:public static java.lang.Object getTag(android.view.View)
+android.support.design.widget.CoordinatorLayout$HierarchyChangeListener
 android.support.design.widget.CoordinatorLayout$LayoutParams:
-    2192:2192:public int getAnchorId()
-    2206:2208:public void setAnchorId(int)
-    2351:2352:void invalidateAnchor()
+    2245:2247:public void setAnchorId(int)
+    2390:2391:void invalidateAnchor()
 android.support.design.widget.CoordinatorLayoutInsetsHelper:
     public abstract void setupForWindowInsets(android.view.View,android.support.v4.view.OnApplyWindowInsetsListener)
 android.support.design.widget.CoordinatorLayoutInsetsHelperLollipop:
@@ -149,7 +156,11 @@ android.support.design.widget.FloatingActionButton:
     private static final int SIZE_MINI
     private static final int SIZE_NORMAL
 android.support.design.widget.FloatingActionButton$Behavior:
-    296:296:public FloatingActionButton$Behavior()
+    326:326:public FloatingActionButton$Behavior()
+    357:365:public void onDependentViewRemoved(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton,android.view.View)
+    326:326:public bridge synthetic void onDependentViewRemoved(android.support.design.widget.CoordinatorLayout,android.view.View,android.view.View)
+android.support.design.widget.FloatingActionButtonImpl:
+    static final int SHOW_HIDE_ANIM_DURATION
 android.support.design.widget.MathUtils:
     19:19:MathUtils()
     26:26:static float constrain(float,float,float)
@@ -158,11 +169,11 @@ android.support.design.widget.NavigationView:
     84:85:public NavigationView(android.content.Context)
     88:89:public NavigationView(android.content.Context,android.util.AttributeSet)
     92:156:public NavigationView(android.content.Context,android.util.AttributeSet,int)
-    210:211:public void inflateMenu(int)
-    227:227:public android.view.View inflateHeaderView(int)
-    236:237:public void addHeaderView(android.view.View)
-    245:246:public void removeHeaderView(android.view.View)
-    334:344:private android.content.res.ColorStateList createDefaultColorStateList(int)
+    210:218:public void inflateMenu(int)
+    234:234:public android.view.View inflateHeaderView(int)
+    243:244:public void addHeaderView(android.view.View)
+    252:253:public void removeHeaderView(android.view.View)
+    341:351:private android.content.res.ColorStateList createDefaultColorStateList(int)
     68:68:static synthetic android.support.design.widget.NavigationView$OnNavigationItemSelectedListener access$000(android.support.design.widget.NavigationView)
 android.support.design.widget.NavigationView$1
 android.support.design.widget.NavigationView$OnNavigationItemSelectedListener:
@@ -178,6 +189,7 @@ android.support.design.widget.ShadowDrawableWrapper:
     341:343:public float getMinWidth()
     347:349:public float getMinHeight()
 android.support.design.widget.Snackbar:
+    public static final int LENGTH_INDEFINITE
     public static final int LENGTH_SHORT
     public static final int LENGTH_LONG
     private static final int ANIMATION_DURATION
@@ -186,20 +198,20 @@ android.support.design.widget.Snackbar:
     private static final int MSG_DISMISS
     private final android.content.Context mContext
     private int mDuration
-    114:317:Snackbar(android.view.ViewGroup)
-    140:143:public static android.support.design.widget.Snackbar make(android.view.View,java.lang.CharSequence,int)
-    164:164:public static android.support.design.widget.Snackbar make(android.view.View,int,int)
-    169:193:private static android.view.ViewGroup findSuitableParent(android.view.View)
-    203:203:public android.support.design.widget.Snackbar setAction(int,android.view.View$OnClickListener)
-    213:231:public android.support.design.widget.Snackbar setAction(java.lang.CharSequence,android.view.View$OnClickListener)
-    239:241:public android.support.design.widget.Snackbar setActionTextColor(android.content.res.ColorStateList)
-    249:251:public android.support.design.widget.Snackbar setActionTextColor(int)
-    260:262:public android.support.design.widget.Snackbar setText(java.lang.CharSequence)
-    271:271:public android.support.design.widget.Snackbar setText(int)
-    282:283:public android.support.design.widget.Snackbar setDuration(int)
-    293:293:public int getDuration()
-    300:300:public android.view.View getView()
-    307:308:public void show()
+    122:325:Snackbar(android.view.ViewGroup)
+    148:151:public static android.support.design.widget.Snackbar make(android.view.View,java.lang.CharSequence,int)
+    172:172:public static android.support.design.widget.Snackbar make(android.view.View,int,int)
+    177:201:private static android.view.ViewGroup findSuitableParent(android.view.View)
+    211:211:public android.support.design.widget.Snackbar setAction(int,android.view.View$OnClickListener)
+    221:239:public android.support.design.widget.Snackbar setAction(java.lang.CharSequence,android.view.View$OnClickListener)
+    247:249:public android.support.design.widget.Snackbar setActionTextColor(android.content.res.ColorStateList)
+    257:259:public android.support.design.widget.Snackbar setActionTextColor(int)
+    268:270:public android.support.design.widget.Snackbar setText(java.lang.CharSequence)
+    279:279:public android.support.design.widget.Snackbar setText(int)
+    290:291:public android.support.design.widget.Snackbar setDuration(int)
+    301:301:public int getDuration()
+    308:308:public android.view.View getView()
+    315:316:public void show()
     62:62:static synthetic android.os.Handler access$000()
 android.support.design.widget.Snackbar$2
 android.support.design.widget.Snackbar$3
@@ -228,9 +240,9 @@ android.support.design.widget.SwipeDismissBehavior:
     private static final float DEFAULT_DRAG_DISMISS_THRESHOLD
     private static final float DEFAULT_ALPHA_START_DISTANCE
     private static final float DEFAULT_ALPHA_END_DISTANCE
-    133:134:public void setDragDismissDistance(float)
-    162:164:public void setSensitivity(float)
-    374:374:static float lerp(float,float,float)
+    134:135:public void setDragDismissDistance(float)
+    163:165:public void setSensitivity(float)
+    375:375:static float lerp(float,float,float)
 android.support.design.widget.TabLayout
 android.support.design.widget.TabLayout$1
 android.support.design.widget.TabLayout$2
@@ -298,7 +310,7 @@ android.support.design.widget.ViewOffsetBehavior:
     71:76:public boolean setLeftAndRightOffset(int)
     84:84:public int getLeftAndRightOffset()
 android.support.design.widget.ViewOffsetHelper:
-    101:101:public int getLeftAndRightOffset()
+    99:99:public int getLeftAndRightOffset()
 android.support.design.widget.ViewUtils:
     22:45:ViewUtils()
     64:65:static void setBoundsViewOutlineProvider(android.view.View)
@@ -1314,32 +1326,32 @@ android.support.v4.media.session.MediaSessionCompat:
     private final java.util.ArrayList mActiveListeners
     public static final int FLAG_HANDLES_MEDIA_BUTTONS
     public static final int FLAG_HANDLES_TRANSPORT_CONTROLS
-    78:122:public MediaSessionCompat(android.content.Context,java.lang.String,android.content.ComponentName,android.app.PendingIntent)
-    78:127:private MediaSessionCompat(android.content.Context,android.support.v4.media.session.MediaSessionCompat$MediaSessionImpl)
-    137:138:public void setCallback(android.support.v4.media.session.MediaSessionCompat$Callback)
-    149:150:public void setCallback(android.support.v4.media.session.MediaSessionCompat$Callback,android.os.Handler)
-    161:162:public void setSessionActivity(android.app.PendingIntent)
-    178:179:public void setMediaButtonReceiver(android.app.PendingIntent)
-    187:188:public void setFlags(int)
-    201:202:public void setPlaybackToLocal(int)
-    220:224:public void setPlaybackToRemote(android.support.v4.media.VolumeProviderCompat)
-    240:244:public void setActive(boolean)
-    252:252:public boolean isActive()
-    264:268:public void sendSessionEvent(java.lang.String,android.os.Bundle)
-    276:277:public void release()
-    294:294:public android.support.v4.media.session.MediaSessionCompat$Token getSessionToken()
-    304:304:public android.support.v4.media.session.MediaControllerCompat getController()
-    313:314:public void setPlaybackState(android.support.v4.media.session.PlaybackStateCompat)
-    323:324:public void setMetadata(android.support.v4.media.MediaMetadataCompat)
-    338:339:public void setQueue(java.util.List)
-    349:350:public void setQueueTitle(java.lang.CharSequence)
-    366:367:public void setRatingType(int)
-    378:379:public void setExtras(android.os.Bundle)
-    392:392:public java.lang.Object getMediaSession()
-    406:406:public java.lang.Object getRemoteControlClient()
-    417:421:public void addOnActiveChangeListener(android.support.v4.media.session.MediaSessionCompat$OnActiveChangeListener)
-    430:434:public void removeOnActiveChangeListener(android.support.v4.media.session.MediaSessionCompat$OnActiveChangeListener)
-    444:444:public static android.support.v4.media.session.MediaSessionCompat obtain(android.content.Context,java.lang.Object)
+    78:130:public MediaSessionCompat(android.content.Context,java.lang.String,android.content.ComponentName,android.app.PendingIntent)
+    78:135:private MediaSessionCompat(android.content.Context,android.support.v4.media.session.MediaSessionCompat$MediaSessionImpl)
+    145:146:public void setCallback(android.support.v4.media.session.MediaSessionCompat$Callback)
+    157:158:public void setCallback(android.support.v4.media.session.MediaSessionCompat$Callback,android.os.Handler)
+    169:170:public void setSessionActivity(android.app.PendingIntent)
+    186:187:public void setMediaButtonReceiver(android.app.PendingIntent)
+    195:196:public void setFlags(int)
+    209:210:public void setPlaybackToLocal(int)
+    228:232:public void setPlaybackToRemote(android.support.v4.media.VolumeProviderCompat)
+    248:252:public void setActive(boolean)
+    260:260:public boolean isActive()
+    272:276:public void sendSessionEvent(java.lang.String,android.os.Bundle)
+    284:285:public void release()
+    302:302:public android.support.v4.media.session.MediaSessionCompat$Token getSessionToken()
+    312:312:public android.support.v4.media.session.MediaControllerCompat getController()
+    321:322:public void setPlaybackState(android.support.v4.media.session.PlaybackStateCompat)
+    331:332:public void setMetadata(android.support.v4.media.MediaMetadataCompat)
+    346:347:public void setQueue(java.util.List)
+    357:358:public void setQueueTitle(java.lang.CharSequence)
+    374:375:public void setRatingType(int)
+    386:387:public void setExtras(android.os.Bundle)
+    400:400:public java.lang.Object getMediaSession()
+    414:414:public java.lang.Object getRemoteControlClient()
+    425:429:public void addOnActiveChangeListener(android.support.v4.media.session.MediaSessionCompat$OnActiveChangeListener)
+    438:442:public void removeOnActiveChangeListener(android.support.v4.media.session.MediaSessionCompat$OnActiveChangeListener)
+    452:452:public static android.support.v4.media.session.MediaSessionCompat obtain(android.content.Context,java.lang.Object)
 android.support.v4.media.session.MediaSessionCompat$Callback
 android.support.v4.media.session.MediaSessionCompat$Callback$StubApi21
 android.support.v4.media.session.MediaSessionCompat$MediaSessionImpl
@@ -1354,18 +1366,18 @@ android.support.v4.media.session.MediaSessionCompat$OnActiveChangeListener
 android.support.v4.media.session.MediaSessionCompat$QueueItem:
     public static final int UNKNOWN_ID
     private java.lang.Object mItem
-    756:757:public MediaSessionCompat$QueueItem(android.support.v4.media.MediaDescriptionCompat,long)
-    759:769:private MediaSessionCompat$QueueItem(java.lang.Object,android.support.v4.media.MediaDescriptionCompat,long)
-    780:780:public android.support.v4.media.MediaDescriptionCompat getDescription()
-    787:787:public long getQueueId()
-    812:817:public java.lang.Object getQueueItem()
-    828:832:public static android.support.v4.media.session.MediaSessionCompat$QueueItem obtain(java.lang.Object)
+    764:765:public MediaSessionCompat$QueueItem(android.support.v4.media.MediaDescriptionCompat,long)
+    767:777:private MediaSessionCompat$QueueItem(java.lang.Object,android.support.v4.media.MediaDescriptionCompat,long)
+    788:788:public android.support.v4.media.MediaDescriptionCompat getDescription()
+    795:795:public long getQueueId()
+    820:825:public java.lang.Object getQueueItem()
+    836:840:public static android.support.v4.media.session.MediaSessionCompat$QueueItem obtain(java.lang.Object)
 android.support.v4.media.session.MediaSessionCompat$ResultReceiverWrapper:
-    865:867:public MediaSessionCompat$ResultReceiverWrapper(android.os.ResultReceiver)
-    862:862:static synthetic android.os.ResultReceiver access$600(android.support.v4.media.session.MediaSessionCompat$ResultReceiverWrapper)
+    873:875:public MediaSessionCompat$ResultReceiverWrapper(android.os.ResultReceiver)
+    870:870:static synthetic android.os.ResultReceiver access$600(android.support.v4.media.session.MediaSessionCompat$ResultReceiverWrapper)
 android.support.v4.media.session.MediaSessionCompat$Token:
-    680:683:public static android.support.v4.media.session.MediaSessionCompat$Token fromToken(java.lang.Object)
-    710:710:public java.lang.Object getToken()
+    688:691:public static android.support.v4.media.session.MediaSessionCompat$Token fromToken(java.lang.Object)
+    718:718:public java.lang.Object getToken()
 android.support.v4.media.session.MediaSessionCompatApi14
 android.support.v4.media.session.MediaSessionCompatApi14$Callback
 android.support.v4.media.session.MediaSessionCompatApi18
@@ -2268,6 +2280,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat:
     935:938:public android.support.v4.view.ViewPropertyAnimatorCompat rotationXBy(float)
     952:955:public android.support.v4.view.ViewPropertyAnimatorCompat rotationY(float)
     969:972:public android.support.v4.view.ViewPropertyAnimatorCompat rotationYBy(float)
+    986:989:public android.support.v4.view.ViewPropertyAnimatorCompat scaleX(float)
     1003:1006:public android.support.v4.view.ViewPropertyAnimatorCompat scaleXBy(float)
     1037:1040:public android.support.v4.view.ViewPropertyAnimatorCompat scaleYBy(float)
     1064:1067:public android.support.v4.view.ViewPropertyAnimatorCompat x(float)
@@ -2280,6 +2293,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat:
     1183:1186:public android.support.v4.view.ViewPropertyAnimatorCompat translationZ(float)
     1200:1203:public android.support.v4.view.ViewPropertyAnimatorCompat z(float)
     1217:1220:public android.support.v4.view.ViewPropertyAnimatorCompat zBy(float)
+    1271:1274:public android.support.v4.view.ViewPropertyAnimatorCompat withLayer()
     1296:1299:public android.support.v4.view.ViewPropertyAnimatorCompat withStartAction(java.lang.Runnable)
     24:24:static synthetic java.lang.Runnable access$002(android.support.v4.view.ViewPropertyAnimatorCompat,java.lang.Runnable)
     24:24:static synthetic java.lang.Runnable access$102(android.support.v4.view.ViewPropertyAnimatorCompat,java.lang.Runnable)
@@ -2295,6 +2309,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat$BaseViewPropertyAnimatorCompa
     165:166:public void rotationXBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     171:172:public void rotationY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     177:178:public void rotationYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
+    183:184:public void scaleX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     189:190:public void scaleXBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     201:202:public void scaleYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     213:214:public void x(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
@@ -2307,6 +2322,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat$BaseViewPropertyAnimatorCompa
     253:254:public void translationYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     259:259:public void translationZ(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     264:264:public void translationZBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
+    275:275:public void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View)
     279:281:public void withStartAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
 android.support.v4.view.ViewPropertyAnimatorCompat$ICSViewPropertyAnimatorCompatImpl:
     387:387:public long getDuration(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View)
@@ -2318,6 +2334,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ICSViewPropertyAnimatorCompat
     427:428:public void rotationXBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     432:433:public void rotationY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     437:438:public void rotationYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
+    442:443:public void scaleX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     447:448:public void scaleXBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     457:458:public void scaleYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     467:468:public void x(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
@@ -2328,11 +2345,13 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ICSViewPropertyAnimatorCompat
     492:493:public void translationYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     508:510:public void withEndAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
     514:516:public void withStartAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
+    520:522:public void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View)
 android.support.v4.view.ViewPropertyAnimatorCompat$JBMr2ViewPropertyAnimatorCompatImpl:
     610:610:public android.view.animation.Interpolator getInterpolator(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View)
 android.support.v4.view.ViewPropertyAnimatorCompat$JBViewPropertyAnimatorCompatImpl:
     592:593:public void withStartAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
     597:598:public void withEndAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
+    602:603:public void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View)
 android.support.v4.view.ViewPropertyAnimatorCompat$LollipopViewPropertyAnimatorCompatImpl:
     624:625:public void translationZ(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     629:630:public void translationZBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
@@ -2349,6 +2368,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ViewPropertyAnimatorCompatImp
     public abstract void rotationXBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void rotationY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void rotationYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
+    public abstract void scaleX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void scaleXBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void scaleYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void x(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
@@ -2361,6 +2381,7 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ViewPropertyAnimatorCompatImp
     public abstract void translationYBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void translationZ(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
     public abstract void translationZBy(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float)
+    public abstract void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View)
     public abstract void withStartAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
     public abstract void withEndAction(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,java.lang.Runnable)
 android.support.v4.view.ViewPropertyAnimatorCompatICS:
@@ -2374,6 +2395,7 @@ android.support.v4.view.ViewPropertyAnimatorCompatICS:
     74:75:public static void rotationXBy(android.view.View,float)
     78:79:public static void rotationY(android.view.View,float)
     82:83:public static void rotationYBy(android.view.View,float)
+    86:87:public static void scaleX(android.view.View,float)
     90:91:public static void scaleXBy(android.view.View,float)
     98:99:public static void scaleYBy(android.view.View,float)
     106:107:public static void x(android.view.View,float)
@@ -2386,6 +2408,7 @@ android.support.v4.view.ViewPropertyAnimatorCompatJB:
     22:22:ViewPropertyAnimatorCompatJB()
     25:26:public static void withStartAction(android.view.View,java.lang.Runnable)
     29:30:public static void withEndAction(android.view.View,java.lang.Runnable)
+    33:34:public static void withLayer(android.view.View)
 android.support.v4.view.ViewPropertyAnimatorCompatJellybeanMr2
 android.support.v4.view.ViewPropertyAnimatorCompatKK:
     21:21:ViewPropertyAnimatorCompatKK()
@@ -3521,10 +3544,10 @@ android.support.v7.app.AppCompatDelegate:
     public abstract void setHandleNativeActionModesEnabled(boolean)
     public abstract boolean isHandleNativeActionModesEnabled()
 android.support.v7.app.AppCompatDelegateImplBase:
-    105:106:final void setSupportActionBar(android.support.v7.app.ActionBar)
-    151:151:public final android.support.v7.app.ActionBarDrawerToggle$Delegate getDrawerToggleDelegate()
-    218:218:public void setHandleNativeActionModesEnabled(boolean)
-    223:223:public boolean isHandleNativeActionModesEnabled()
+    107:108:final void setSupportActionBar(android.support.v7.app.ActionBar)
+    153:153:public final android.support.v7.app.ActionBarDrawerToggle$Delegate getDrawerToggleDelegate()
+    220:220:public void setHandleNativeActionModesEnabled(boolean)
+    225:225:public boolean isHandleNativeActionModesEnabled()
 android.support.v7.app.AppCompatDelegateImplBase$1
 android.support.v7.app.AppCompatDelegateImplBase$ActionBarDrawableToggleImpl
 android.support.v7.app.AppCompatDelegateImplV14:
@@ -3532,16 +3555,16 @@ android.support.v7.app.AppCompatDelegateImplV14:
     46:46:public boolean isHandleNativeActionModesEnabled()
 android.support.v7.app.AppCompatDelegateImplV7:
     186:203:public void setSupportActionBar(android.support.v7.widget.Toolbar)
-    1485:1485:android.view.ViewGroup getSubDecor()
+    1488:1488:android.view.ViewGroup getSubDecor()
 android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState:
     boolean wasLastOpen
     android.os.Bundle frozenMenuState
-    1659:1663:public void clearMenuPresenters()
-    1725:1734:android.os.Parcelable onSaveInstanceState()
-    1738:1745:void onRestoreInstanceState(android.os.Parcelable)
-    1748:1752:void applyFrozenState()
+    1662:1666:public void clearMenuPresenters()
+    1728:1737:android.os.Parcelable onSaveInstanceState()
+    1741:1748:void onRestoreInstanceState(android.os.Parcelable)
+    1751:1755:void applyFrozenState()
 android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState$SavedState:
-    1754:1754:synthetic AppCompatDelegateImplV7$PanelFeatureState$SavedState(android.support.v7.app.AppCompatDelegateImplV7$1)
+    1757:1757:synthetic AppCompatDelegateImplV7$PanelFeatureState$SavedState(android.support.v7.app.AppCompatDelegateImplV7$1)
 android.support.v7.app.AppCompatDialog:
     38:39:public AppCompatDialog(android.content.Context)
     53:54:protected AppCompatDialog(android.content.Context,boolean,android.content.DialogInterface$OnCancelListener)
@@ -3594,11 +3617,74 @@ android.support.v7.internal.app.AppCompatViewInflater:
 android.support.v7.internal.app.NavItemSelectedListener
 android.support.v7.internal.app.NotificationCompatImpl21
 android.support.v7.internal.app.NotificationCompatImplBase
-android.support.v7.internal.app.ToolbarActionBar
-android.support.v7.internal.app.ToolbarActionBar$1
+android.support.v7.internal.app.ToolbarActionBar:
+    private boolean mToolbarMenuPrepared
+    private android.support.v7.internal.view.menu.ListMenuPresenter mListMenuPresenter
+    private final android.support.v7.widget.Toolbar$OnMenuItemClickListener mMenuClicker
+    57:82:public ToolbarActionBar(android.support.v7.widget.Toolbar,java.lang.CharSequence,android.view.Window$Callback)
+    85:85:public android.view.Window$Callback getWrappedWindowCallback()
+    90:91:public void setCustomView(android.view.View)
+    95:97:public void setCustomView(android.view.View,android.support.v7.app.ActionBar$LayoutParams)
+    101:103:public void setCustomView(int)
+    107:108:public void setIcon(int)
+    112:113:public void setIcon(android.graphics.drawable.Drawable)
+    117:118:public void setLogo(int)
+    122:123:public void setLogo(android.graphics.drawable.Drawable)
+    128:128:public void setStackedBackgroundDrawable(android.graphics.drawable.Drawable)
+    133:133:public void setSplitBackgroundDrawable(android.graphics.drawable.Drawable)
+    147:147:public float getElevation()
+    157:157:public boolean isTitleTruncated()
+    162:163:public void setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+    167:168:public void setHomeAsUpIndicator(int)
+    172:173:public void setHomeActionContentDescription(java.lang.CharSequence)
+    182:183:public void setHomeActionContentDescription(int)
+    197:198:public void setListNavigationCallbacks(android.widget.SpinnerAdapter,android.support.v7.app.ActionBar$OnNavigationListener)
+    202:210:public void setSelectedNavigationItem(int)
+    214:214:public int getSelectedNavigationIndex()
+    219:219:public int getNavigationItemCount()
+    224:225:public void setTitle(java.lang.CharSequence)
+    229:230:public void setTitle(int)
+    239:240:public void setSubtitle(java.lang.CharSequence)
+    244:245:public void setSubtitle(int)
+    249:250:public void setDisplayOptions(int)
+    260:261:public void setDisplayUseLogoEnabled(boolean)
+    265:266:public void setDisplayShowHomeEnabled(boolean)
+    275:276:public void setDisplayShowTitleEnabled(boolean)
+    280:281:public void setDisplayShowCustomEnabled(boolean)
+    285:286:public void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    290:290:public android.view.View getCustomView()
+    295:295:public java.lang.CharSequence getTitle()
+    300:300:public java.lang.CharSequence getSubtitle()
+    305:305:public int getNavigationMode()
+    310:314:public void setNavigationMode(int)
+    323:323:public android.support.v7.app.ActionBar$Tab newTab()
+    329:329:public void addTab(android.support.v7.app.ActionBar$Tab)
+    335:335:public void addTab(android.support.v7.app.ActionBar$Tab,boolean)
+    341:341:public void addTab(android.support.v7.app.ActionBar$Tab,int)
+    347:347:public void addTab(android.support.v7.app.ActionBar$Tab,int,boolean)
+    353:353:public void removeTab(android.support.v7.app.ActionBar$Tab)
+    359:359:public void removeTabAt(int)
+    365:365:public void removeAllTabs()
+    371:371:public void selectTab(android.support.v7.app.ActionBar$Tab)
+    377:377:public android.support.v7.app.ActionBar$Tab getSelectedTab()
+    383:383:public android.support.v7.app.ActionBar$Tab getTabAt(int)
+    389:389:public int getTabCount()
+    394:394:public int getHeight()
+    401:402:public void show()
+    408:409:public void hide()
+    413:413:public boolean isShowing()
+    418:418:public boolean openOptionsMenu()
+    458:461:public boolean onMenuKeyEvent(android.view.KeyEvent)
+    471:472:public void addOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    475:476:public void removeOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    491:500:private android.view.View getListMenuView(android.view.Menu)
+    504:534:private void ensureListMenuPresenter(android.view.Menu)
+    50:50:static synthetic boolean access$200(android.support.v7.internal.app.ToolbarActionBar)
+    50:50:static synthetic boolean access$202(android.support.v7.internal.app.ToolbarActionBar,boolean)
+    50:50:static synthetic android.view.View access$400(android.support.v7.internal.app.ToolbarActionBar,android.view.Menu)
+android.support.v7.internal.app.ToolbarActionBar$1:
+    61:61:ToolbarActionBar$1(android.support.v7.internal.app.ToolbarActionBar)
 android.support.v7.internal.app.ToolbarActionBar$2
-android.support.v7.internal.app.ToolbarActionBar$ActionMenuPresenterCallback
-android.support.v7.internal.app.ToolbarActionBar$MenuBuilderCallback
 android.support.v7.internal.app.ToolbarActionBar$PanelMenuPresenterCallback
 android.support.v7.internal.app.ToolbarActionBar$ToolbarCallbackWrapper
 android.support.v7.internal.app.WindowDecorActionBar:
@@ -3930,8 +4016,6 @@ android.support.v7.internal.widget.DecorToolbar:
     public abstract int getHeight()
     public abstract void setVisibility(int)
     public abstract int getVisibility()
-    public abstract void setMenuCallbacks(android.support.v7.internal.view.menu.MenuPresenter$Callback,android.support.v7.internal.view.menu.MenuBuilder$Callback)
-    public abstract android.view.Menu getMenu()
     public abstract int getPopupTheme()
 android.support.v7.internal.widget.DrawableUtils
 android.support.v7.internal.widget.ListViewCompat:
@@ -4050,8 +4134,6 @@ android.support.v7.internal.widget.ToolbarWidgetWrapper:
     687:687:public int getHeight()
     692:693:public void setVisibility(int)
     697:697:public int getVisibility()
-    703:704:public void setMenuCallbacks(android.support.v7.internal.view.menu.MenuPresenter$Callback,android.support.v7.internal.view.menu.MenuBuilder$Callback)
-    708:708:public android.view.Menu getMenu()
     713:713:public int getPopupTheme()
 android.support.v7.internal.widget.ViewUtils:
     private static final java.lang.String TAG
@@ -4266,10 +4348,9 @@ android.support.v7.widget.Toolbar:
     857:858:public void inflateMenu(int)
     947:948:public void setContentInsetsAbsolute(int,int)
     1721:1721:private static boolean isCustomView(android.view.View)
-    1765:1767:public void setMenuCallbacks(android.support.v7.internal.view.menu.MenuPresenter$Callback,android.support.v7.internal.view.menu.MenuBuilder$Callback)
 android.support.v7.widget.Toolbar$ExpandedActionViewMenuPresenter:
-    1897:1897:public android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
-    1926:1926:public void setCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
+    1896:1896:public android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
+    1925:1925:public void setCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
 android.support.v7.widget.Toolbar$LayoutParams:
     static final int CUSTOM
     static final int SYSTEM

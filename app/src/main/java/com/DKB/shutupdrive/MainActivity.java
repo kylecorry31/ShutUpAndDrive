@@ -160,12 +160,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             slideUp.setFillAfter(true);
             titleImage.startAnimation(slideUp);
         }
-        Animation fabOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_out);
-        fabOut.setFillAfter(true);
-        fabOut.setDuration(250);
         Animation fadeOut = AnimationUtils.loadAnimation(getBaseContext(), R.anim.abc_fade_out);
         fadeOut.setFillAfter(true);
-        fab.startAnimation(fabOut);
+        fab.hide();
         statusText.startAnimation(fadeOut);
         descText.startAnimation(fadeOut);
         mottoText.startAnimation(fadeOut);

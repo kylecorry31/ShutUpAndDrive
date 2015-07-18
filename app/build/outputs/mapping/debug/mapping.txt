@@ -586,6 +586,8 @@ android.support.design.R$layout -> android.support.design.g:
     int design_navigation_menu -> design_navigation_menu
     int layout_snackbar -> layout_snackbar
     int layout_snackbar_include -> layout_snackbar_include
+    int layout_tab_icon -> layout_tab_icon
+    int layout_tab_text -> layout_tab_text
     int notification_media_action -> notification_media_action
     int notification_media_cancel_action -> notification_media_cancel_action
     int notification_template_big_media -> notification_template_big_media
@@ -800,6 +802,7 @@ android.support.design.R$style -> android.support.design.h:
     int TextAppearance_AppCompat_Widget_PopupMenu_Small -> TextAppearance_AppCompat_Widget_PopupMenu_Small
     int TextAppearance_AppCompat_Widget_Switch -> TextAppearance_AppCompat_Widget_Switch
     int TextAppearance_AppCompat_Widget_TextView_SpinnerItem -> TextAppearance_AppCompat_Widget_TextView_SpinnerItem
+    int TextAppearance_Design_CollapsingToolbar_Expanded -> TextAppearance_Design_CollapsingToolbar_Expanded
     int TextAppearance_Design_Error -> TextAppearance_Design_Error
     int TextAppearance_Design_Hint -> TextAppearance_Design_Hint
     int TextAppearance_Design_Snackbar_Action -> TextAppearance_Design_Snackbar_Action
@@ -1346,6 +1349,7 @@ android.support.design.internal.NavigationMenuPresenter -> android.support.desig
 android.support.design.internal.NavigationMenuPresenter$NavigationMenuAdapter -> android.support.design.internal.b:
     java.util.ArrayList mItems -> b
     android.graphics.drawable.ColorDrawable mTransparentIcon -> c
+    boolean mUpdateSuspended -> d
     android.support.design.internal.NavigationMenuPresenter this$0 -> a
     int getCount() -> getCount
     android.support.design.internal.NavigationMenuPresenter$NavigationMenuItem getItem(int) -> a
@@ -1356,8 +1360,10 @@ android.support.design.internal.NavigationMenuPresenter$NavigationMenuAdapter ->
     boolean areAllItemsEnabled() -> areAllItemsEnabled
     boolean isEnabled(int) -> isEnabled
     void notifyDataSetChanged() -> notifyDataSetChanged
-    void prepareMenuItems() -> a
+    void prepareMenuItems() -> b
     void appendTransparentIconIfMissing(int,int) -> a
+    android.os.Bundle createInstanceState() -> a
+    void restoreInstanceState(android.os.Bundle) -> a
     java.lang.Object getItem(int) -> getItem
 android.support.design.internal.NavigationMenuPresenter$NavigationMenuItem -> android.support.design.internal.c:
     android.support.v7.internal.view.menu.MenuItemImpl mMenuItem -> a
@@ -1386,9 +1392,9 @@ android.support.design.widget.AnimationUtils -> android.support.design.widget.a:
     android.view.animation.Interpolator DECELERATE_INTERPOLATOR -> c
     int lerp(int,int,float) -> a
 android.support.design.widget.AnimationUtils$AnimationListenerAdapter -> android.support.design.widget.b:
-    void onAnimationStart(android.view.animation.Animation) -> a
-    void onAnimationEnd(android.view.animation.Animation) -> b
-    void onAnimationRepeat(android.view.animation.Animation) -> c
+    void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
+    void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
+    void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
 android.support.design.widget.AppBarLayout -> android.support.design.widget.AppBarLayout:
     int mTotalScrollRange -> b
     int mDownPreScrollRange -> c
@@ -1493,12 +1499,14 @@ android.support.design.widget.CircularBorderDrawable -> android.support.design.w
     int mTopInnerStrokeColor -> f
     int mBottomOuterStrokeColor -> g
     int mBottomInnerStrokeColor -> h
-    boolean mInvalidateShader -> i
+    int mTintColor -> i
+    boolean mInvalidateShader -> j
     void setGradientColors(int,int,int,int) -> a
     void setBorderWidth(float) -> a
     void draw(android.graphics.Canvas) -> draw
     boolean getPadding(android.graphics.Rect) -> getPadding
     void setAlpha(int) -> setAlpha
+    void setTintColor(int) -> a
     void setColorFilter(android.graphics.ColorFilter) -> setColorFilter
     int getOpacity() -> getOpacity
     void onBoundsChange(android.graphics.Rect) -> onBoundsChange
@@ -1510,6 +1518,7 @@ android.support.design.widget.CircularBorderDrawableLollipop -> android.support.
     void draw(android.graphics.Canvas) -> draw
     void setTintList(android.content.res.ColorStateList) -> setTintList
     void setTintMode(android.graphics.PorterDuff$Mode) -> setTintMode
+    void getOutline(android.graphics.Outline) -> getOutline
     android.graphics.PorterDuffColorFilter updateTintFilter(android.content.res.ColorStateList,android.graphics.PorterDuff$Mode) -> a
 android.support.design.widget.CoordinatorLayout -> android.support.design.widget.CoordinatorLayout:
     java.lang.String WIDGET_PACKAGE_NAME -> a
@@ -1536,7 +1545,9 @@ android.support.design.widget.CoordinatorLayout -> android.support.design.widget
     android.support.v4.view.WindowInsetsCompat mLastInsets -> v
     boolean mDrawStatusBarBackground -> w
     android.graphics.drawable.Drawable mStatusBarBackground -> x
-    android.support.v4.view.NestedScrollingParentHelper mNestedScrollingParentHelper -> y
+    android.view.ViewGroup$OnHierarchyChangeListener mOnHierarchyChangeListener -> y
+    android.support.v4.view.NestedScrollingParentHelper mNestedScrollingParentHelper -> z
+    void setOnHierarchyChangeListener(android.view.ViewGroup$OnHierarchyChangeListener) -> setOnHierarchyChangeListener
     void onAttachedToWindow() -> onAttachedToWindow
     void onDetachedFromWindow() -> onDetachedFromWindow
     void setStatusBarBackground(android.graphics.drawable.Drawable) -> setStatusBarBackground
@@ -1638,20 +1649,21 @@ android.support.design.widget.CoordinatorLayout$LayoutParams -> android.support.
     boolean mDidChangeAfterNestedScroll -> m
     android.graphics.Rect mLastChildRect -> i
     java.lang.Object mBehaviorTag -> j
-    android.support.design.widget.CoordinatorLayout$Behavior getBehavior() -> a
+    int getAnchorId() -> a
+    android.support.design.widget.CoordinatorLayout$Behavior getBehavior() -> b
     void setBehavior(android.support.design.widget.CoordinatorLayout$Behavior) -> a
     void setLastChildRect(android.graphics.Rect) -> a
-    android.graphics.Rect getLastChildRect() -> b
-    boolean checkAnchorChanged() -> c
-    boolean didBlockInteraction() -> d
+    android.graphics.Rect getLastChildRect() -> c
+    boolean checkAnchorChanged() -> d
+    boolean didBlockInteraction() -> e
     boolean isBlockingInteractionBelow(android.support.design.widget.CoordinatorLayout,android.view.View) -> a
-    void resetTouchBehaviorTracking() -> e
-    void resetNestedScroll() -> f
+    void resetTouchBehaviorTracking() -> f
+    void resetNestedScroll() -> g
     void acceptNestedScroll(boolean) -> a
-    boolean isNestedScrollAccepted() -> g
-    boolean getChangedAfterNestedScroll() -> h
+    boolean isNestedScrollAccepted() -> h
+    boolean getChangedAfterNestedScroll() -> i
     void setChangedAfterNestedScroll(boolean) -> b
-    void resetChangedAfterNestedScroll() -> i
+    void resetChangedAfterNestedScroll() -> j
     boolean dependsOn(android.support.design.widget.CoordinatorLayout,android.view.View,android.view.View) -> a
     android.view.View findAnchorView(android.support.design.widget.CoordinatorLayout,android.view.View) -> b
     boolean isDirty(android.support.design.widget.CoordinatorLayout,android.view.View) -> c
@@ -1690,6 +1702,8 @@ android.support.design.widget.FloatingActionButton -> android.support.design.wid
     android.graphics.PorterDuff$Mode getBackgroundTintMode() -> getBackgroundTintMode
     void setBackgroundTintMode(android.graphics.PorterDuff$Mode) -> setBackgroundTintMode
     void setBackgroundDrawable(android.graphics.drawable.Drawable) -> setBackgroundDrawable
+    void show() -> a
+    void hide() -> b
     int getSizeDimension() -> getSizeDimension
     void drawableStateChanged() -> drawableStateChanged
     void jumpDrawablesToCurrentState() -> jumpDrawablesToCurrentState
@@ -1706,28 +1720,18 @@ android.support.design.widget.FloatingActionButton$1 -> android.support.design.w
 android.support.design.widget.FloatingActionButton$Behavior -> android.support.design.widget.s:
     boolean SNACKBAR_BEHAVIOR_ENABLED -> a
     android.graphics.Rect mTmpRect -> b
-    boolean mIsAnimatingOut -> c
-    float mTranslationY -> d
+    float mTranslationY -> c
     boolean layoutDependsOn(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton,android.view.View) -> a
     boolean onDependentViewChanged(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton,android.view.View) -> b
+    boolean updateFabVisibility(android.support.design.widget.CoordinatorLayout,android.support.design.widget.AppBarLayout,android.support.design.widget.FloatingActionButton) -> a
     void updateFabTranslationForSnackbar(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton,android.view.View) -> c
     float getFabTranslationYForSnackbar(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton) -> a
-    void animateIn(android.support.design.widget.FloatingActionButton) -> a
-    void animateOut(android.support.design.widget.FloatingActionButton) -> b
+    boolean onLayoutChild(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton,int) -> a
+    void offsetIfNeeded(android.support.design.widget.CoordinatorLayout,android.support.design.widget.FloatingActionButton) -> b
+    boolean onLayoutChild(android.support.design.widget.CoordinatorLayout,android.view.View,int) -> a
     boolean onDependentViewChanged(android.support.design.widget.CoordinatorLayout,android.view.View,android.view.View) -> c
     boolean layoutDependsOn(android.support.design.widget.CoordinatorLayout,android.view.View,android.view.View) -> b
-    boolean access$302(android.support.design.widget.FloatingActionButton$Behavior,boolean) -> a
-android.support.design.widget.FloatingActionButton$Behavior$1 -> android.support.design.widget.t:
-    android.support.design.widget.FloatingActionButton$Behavior this$0 -> a
-    void onAnimationStart(android.view.View) -> a
-    void onAnimationCancel(android.view.View) -> b
-    void onAnimationEnd(android.view.View) -> c
-android.support.design.widget.FloatingActionButton$Behavior$2 -> android.support.design.widget.u:
-    android.support.design.widget.FloatingActionButton val$button -> a
-    android.support.design.widget.FloatingActionButton$Behavior this$0 -> b
-    void onAnimationStart(android.view.animation.Animation) -> a
-    void onAnimationEnd(android.view.animation.Animation) -> b
-android.support.design.widget.FloatingActionButtonEclairMr1 -> android.support.design.widget.v:
+android.support.design.widget.FloatingActionButtonEclairMr1 -> android.support.design.widget.t:
     android.graphics.drawable.Drawable mShapeDrawable -> g
     android.graphics.drawable.Drawable mRippleDrawable -> h
     android.graphics.drawable.Drawable mBorderDrawable -> i
@@ -1736,6 +1740,7 @@ android.support.design.widget.FloatingActionButtonEclairMr1 -> android.support.d
     int mAnimationDuration -> l
     android.support.design.widget.StateListAnimator mStateListAnimator -> m
     android.support.design.widget.ShadowDrawableWrapper mShadowDrawable -> a
+    boolean mIsHiding -> n
     void setBackgroundDrawable(android.graphics.drawable.Drawable,android.content.res.ColorStateList,android.graphics.PorterDuff$Mode,int,int) -> a
     void setBackgroundTintList(android.content.res.ColorStateList) -> a
     void setBackgroundTintMode(android.graphics.PorterDuff$Mode) -> a
@@ -1744,25 +1749,41 @@ android.support.design.widget.FloatingActionButtonEclairMr1 -> android.support.d
     void setPressedTranslationZ(float) -> b
     void onDrawableStateChanged(int[]) -> a
     void jumpDrawableToCurrentState() -> a
-    void updatePadding() -> c
+    void hide() -> b
+    void show() -> c
+    void updatePadding() -> e
     android.view.animation.Animation setupAnimation(android.view.animation.Animation) -> a
     android.content.res.ColorStateList createColorStateList(int) -> b
-    float access$300(android.support.design.widget.FloatingActionButtonEclairMr1) -> a
-    float access$400(android.support.design.widget.FloatingActionButtonEclairMr1) -> b
-android.support.design.widget.FloatingActionButtonEclairMr1$1 -> android.support.design.widget.w:
-android.support.design.widget.FloatingActionButtonEclairMr1$BaseShadowAnimation -> android.support.design.widget.x:
+    boolean access$202(android.support.design.widget.FloatingActionButtonEclairMr1,boolean) -> a
+    float access$400(android.support.design.widget.FloatingActionButtonEclairMr1) -> a
+    float access$500(android.support.design.widget.FloatingActionButtonEclairMr1) -> b
+android.support.design.widget.FloatingActionButtonEclairMr1$1 -> android.support.design.widget.u:
+    android.support.design.widget.FloatingActionButtonEclairMr1 this$0 -> a
+    void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
+    void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
+android.support.design.widget.FloatingActionButtonEclairMr1$BaseShadowAnimation -> android.support.design.widget.v:
     float mShadowSizeStart -> b
     float mShadowSizeDiff -> c
     android.support.design.widget.FloatingActionButtonEclairMr1 this$0 -> a
     void reset() -> reset
     void applyTransformation(float,android.view.animation.Transformation) -> applyTransformation
     float getTargetShadowSize() -> a
-android.support.design.widget.FloatingActionButtonEclairMr1$ElevateToTranslationZAnimation -> android.support.design.widget.y:
+android.support.design.widget.FloatingActionButtonEclairMr1$ElevateToTranslationZAnimation -> android.support.design.widget.w:
     android.support.design.widget.FloatingActionButtonEclairMr1 this$0 -> b
     float getTargetShadowSize() -> a
-android.support.design.widget.FloatingActionButtonEclairMr1$ResetElevationAnimation -> android.support.design.widget.z:
+android.support.design.widget.FloatingActionButtonEclairMr1$ResetElevationAnimation -> android.support.design.widget.x:
     android.support.design.widget.FloatingActionButtonEclairMr1 this$0 -> b
     float getTargetShadowSize() -> a
+android.support.design.widget.FloatingActionButtonHoneycombMr1 -> android.support.design.widget.y:
+    boolean mIsHiding -> g
+    void hide() -> b
+    void show() -> c
+    boolean access$002(android.support.design.widget.FloatingActionButtonHoneycombMr1,boolean) -> a
+android.support.design.widget.FloatingActionButtonHoneycombMr1$1 -> android.support.design.widget.z:
+    android.support.design.widget.FloatingActionButtonHoneycombMr1 this$0 -> a
+    void onAnimationStart(android.animation.Animator) -> onAnimationStart
+    void onAnimationCancel(android.animation.Animator) -> onAnimationCancel
+    void onAnimationEnd(android.animation.Animator) -> onAnimationEnd
 android.support.design.widget.FloatingActionButtonImpl -> android.support.design.widget.aa:
     int[] PRESSED_ENABLED_STATE_SET -> b
     int[] FOCUSED_ENABLED_STATE_SET -> c
@@ -1777,13 +1798,15 @@ android.support.design.widget.FloatingActionButtonImpl -> android.support.design
     void setPressedTranslationZ(float) -> b
     void onDrawableStateChanged(int[]) -> a
     void jumpDrawableToCurrentState() -> a
+    void hide() -> b
+    void show() -> c
     android.graphics.drawable.Drawable createBorderDrawable(int,android.content.res.ColorStateList) -> a
-    android.support.design.widget.CircularBorderDrawable newCircularDrawable() -> b
+    android.support.design.widget.CircularBorderDrawable newCircularDrawable() -> d
 android.support.design.widget.FloatingActionButtonLollipop -> android.support.design.widget.ab:
-    android.graphics.drawable.Drawable mShapeDrawable -> a
-    android.graphics.drawable.RippleDrawable mRippleDrawable -> g
-    android.graphics.drawable.Drawable mBorderDrawable -> h
-    android.view.animation.Interpolator mInterpolator -> i
+    android.graphics.drawable.Drawable mShapeDrawable -> g
+    android.graphics.drawable.RippleDrawable mRippleDrawable -> h
+    android.graphics.drawable.Drawable mBorderDrawable -> i
+    android.view.animation.Interpolator mInterpolator -> j
     void setBackgroundDrawable(android.graphics.drawable.Drawable,android.content.res.ColorStateList,android.graphics.PorterDuff$Mode,int,int) -> a
     void setBackgroundTintList(android.content.res.ColorStateList) -> a
     void setBackgroundTintMode(android.graphics.PorterDuff$Mode) -> a
@@ -1793,7 +1816,7 @@ android.support.design.widget.FloatingActionButtonLollipop -> android.support.de
     void onDrawableStateChanged(int[]) -> a
     void jumpDrawableToCurrentState() -> a
     android.animation.Animator setupAnimator(android.animation.Animator) -> a
-    android.support.design.widget.CircularBorderDrawable newCircularDrawable() -> b
+    android.support.design.widget.CircularBorderDrawable newCircularDrawable() -> d
 android.support.design.widget.MathUtils -> android.support.design.widget.ac:
     int constrain(int,int,int) -> a
 android.support.design.widget.NavigationView -> android.support.design.widget.NavigationView:
@@ -4584,11 +4607,9 @@ android.support.v4.view.ViewPropertyAnimatorCompat -> android.support.v4.view.dp
     android.support.v4.view.ViewPropertyAnimatorCompat translationY(float) -> c
     android.support.v4.view.ViewPropertyAnimatorCompat setInterpolator(android.view.animation.Interpolator) -> a
     android.support.v4.view.ViewPropertyAnimatorCompat setStartDelay(long) -> b
-    android.support.v4.view.ViewPropertyAnimatorCompat scaleX(float) -> d
-    android.support.v4.view.ViewPropertyAnimatorCompat scaleY(float) -> e
+    android.support.v4.view.ViewPropertyAnimatorCompat scaleY(float) -> d
     void cancel() -> a
     void start() -> b
-    android.support.v4.view.ViewPropertyAnimatorCompat withLayer() -> c
     android.support.v4.view.ViewPropertyAnimatorCompat setListener(android.support.v4.view.ViewPropertyAnimatorListener) -> a
     android.support.v4.view.ViewPropertyAnimatorCompat setUpdateListener(android.support.v4.view.ViewPropertyAnimatorUpdateListener) -> a
     java.lang.Runnable access$100(android.support.v4.view.ViewPropertyAnimatorCompat) -> a
@@ -4604,16 +4625,14 @@ android.support.v4.view.ViewPropertyAnimatorCompat$BaseViewPropertyAnimatorCompa
     void translationY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> c
     void setInterpolator(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.view.animation.Interpolator) -> a
     void setStartDelay(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,long) -> b
-    void scaleX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> d
-    void scaleY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> e
+    void scaleY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> d
     void cancel(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> a
     void start(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> b
-    void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> c
     void setListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorListener) -> a
     void setUpdateListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorUpdateListener) -> a
-    void startAnimation(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> d
+    void startAnimation(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> c
     void removeStartMessage(android.view.View) -> a
-    void postStartMessage(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> e
+    void postStartMessage(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> d
     void access$200(android.support.v4.view.ViewPropertyAnimatorCompat$BaseViewPropertyAnimatorCompatImpl,android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> a
 android.support.v4.view.ViewPropertyAnimatorCompat$BaseViewPropertyAnimatorCompatImpl$Starter -> android.support.v4.view.ds:
     java.lang.ref.WeakReference mViewRef -> a
@@ -4628,12 +4647,10 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ICSViewPropertyAnimatorCompat
     void translationY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> c
     void setInterpolator(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.view.animation.Interpolator) -> a
     void setStartDelay(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,long) -> b
-    void scaleX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> d
-    void scaleY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> e
+    void scaleY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> d
     void cancel(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> a
     void start(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> b
     void setListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorListener) -> a
-    void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> c
 android.support.v4.view.ViewPropertyAnimatorCompat$ICSViewPropertyAnimatorCompatImpl$MyVpaListener -> android.support.v4.view.du:
     android.support.v4.view.ViewPropertyAnimatorCompat mVpa -> a
     void onAnimationStart(android.view.View) -> a
@@ -4642,7 +4659,6 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ICSViewPropertyAnimatorCompat
 android.support.v4.view.ViewPropertyAnimatorCompat$JBMr2ViewPropertyAnimatorCompatImpl -> android.support.v4.view.dv:
 android.support.v4.view.ViewPropertyAnimatorCompat$JBViewPropertyAnimatorCompatImpl -> android.support.v4.view.dw:
     void setListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorListener) -> a
-    void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> c
 android.support.v4.view.ViewPropertyAnimatorCompat$KitKatViewPropertyAnimatorCompatImpl -> android.support.v4.view.dx:
     void setUpdateListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorUpdateListener) -> a
 android.support.v4.view.ViewPropertyAnimatorCompat$LollipopViewPropertyAnimatorCompatImpl -> android.support.v4.view.dy:
@@ -4651,13 +4667,11 @@ android.support.v4.view.ViewPropertyAnimatorCompat$ViewPropertyAnimatorCompatImp
     void setInterpolator(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.view.animation.Interpolator) -> a
     void setStartDelay(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,long) -> b
     void alpha(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> a
-    void scaleX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> d
-    void scaleY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> e
+    void scaleY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> d
     void cancel(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> a
     void translationX(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> b
     void translationY(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,float) -> c
     void start(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> b
-    void withLayer(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View) -> c
     void setListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorListener) -> a
     void setUpdateListener(android.support.v4.view.ViewPropertyAnimatorCompat,android.view.View,android.support.v4.view.ViewPropertyAnimatorUpdateListener) -> a
 android.support.v4.view.ViewPropertyAnimatorCompatICS -> android.support.v4.view.ea:
@@ -4667,8 +4681,7 @@ android.support.v4.view.ViewPropertyAnimatorCompatICS -> android.support.v4.view
     void translationY(android.view.View,float) -> c
     void setInterpolator(android.view.View,android.view.animation.Interpolator) -> a
     void setStartDelay(android.view.View,long) -> b
-    void scaleX(android.view.View,float) -> d
-    void scaleY(android.view.View,float) -> e
+    void scaleY(android.view.View,float) -> d
     void cancel(android.view.View) -> a
     void start(android.view.View) -> b
     void setListener(android.view.View,android.support.v4.view.ViewPropertyAnimatorListener) -> a
@@ -4679,7 +4692,6 @@ android.support.v4.view.ViewPropertyAnimatorCompatICS$1 -> android.support.v4.vi
     void onAnimationEnd(android.animation.Animator) -> onAnimationEnd
     void onAnimationStart(android.animation.Animator) -> onAnimationStart
 android.support.v4.view.ViewPropertyAnimatorCompatJB -> android.support.v4.view.ec:
-    void withLayer(android.view.View) -> a
     void setListener(android.view.View,android.support.v4.view.ViewPropertyAnimatorListener) -> a
 android.support.v4.view.ViewPropertyAnimatorCompatJB$1 -> android.support.v4.view.ed:
     android.support.v4.view.ViewPropertyAnimatorListener val$listener -> a
@@ -5950,16 +5962,17 @@ android.support.v7.app.AppCompatDelegateImplBase -> android.support.v7.app.t:
     android.content.Context mContext -> a
     android.view.Window mWindow -> b
     android.view.Window$Callback mOriginalWindowCallback -> c
-    android.support.v7.app.AppCompatCallback mAppCompatCallback -> d
-    android.support.v7.app.ActionBar mActionBar -> j
-    android.view.MenuInflater mMenuInflater -> k
-    boolean mHasActionBar -> e
-    boolean mOverlayActionBar -> f
-    boolean mOverlayActionMode -> g
-    boolean mIsFloating -> h
-    boolean mWindowNoTitle -> i
-    java.lang.CharSequence mTitle -> l
-    boolean mIsDestroyed -> m
+    android.view.Window$Callback mAppCompatWindowCallback -> d
+    android.support.v7.app.AppCompatCallback mAppCompatCallback -> e
+    android.support.v7.app.ActionBar mActionBar -> k
+    android.view.MenuInflater mMenuInflater -> l
+    boolean mHasActionBar -> f
+    boolean mOverlayActionBar -> g
+    boolean mOverlayActionMode -> h
+    boolean mIsFloating -> i
+    boolean mWindowNoTitle -> j
+    java.lang.CharSequence mTitle -> m
+    boolean mIsDestroyed -> n
     android.support.v7.app.ActionBar createSupportActionBar() -> h
     android.view.Window$Callback wrapWindowCallback(android.view.Window$Callback) -> a
     android.support.v7.app.ActionBar getSupportActionBar() -> a
@@ -5990,7 +6003,7 @@ android.support.v7.app.AppCompatDelegateImplBase$AppCompatWindowCallbackBase -> 
 android.support.v7.app.AppCompatDelegateImplV11 -> android.support.v7.app.v:
     android.view.View callActivityOnCreateView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet) -> b
 android.support.v7.app.AppCompatDelegateImplV14 -> android.support.v7.app.w:
-    boolean mHandleNativeActionModes -> n
+    boolean mHandleNativeActionModes -> o
     android.view.Window$Callback wrapWindowCallback(android.view.Window$Callback) -> a
     boolean access$000(android.support.v7.app.AppCompatDelegateImplV14) -> a
 android.support.v7.app.AppCompatDelegateImplV14$AppCompatWindowCallbackV14 -> android.support.v7.app.x:
@@ -5998,30 +6011,30 @@ android.support.v7.app.AppCompatDelegateImplV14$AppCompatWindowCallbackV14 -> an
     android.view.ActionMode onWindowStartingActionMode(android.view.ActionMode$Callback) -> onWindowStartingActionMode
     android.view.ActionMode startAsSupportActionMode(android.view.ActionMode$Callback) -> a
 android.support.v7.app.AppCompatDelegateImplV7 -> android.support.v7.app.AppCompatDelegateImplV7:
-    android.support.v7.internal.widget.DecorContentParent mDecorContentParent -> n
-    android.support.v7.app.AppCompatDelegateImplV7$ActionMenuPresenterCallback mActionMenuPresenterCallback -> o
-    android.support.v7.app.AppCompatDelegateImplV7$PanelMenuPresenterCallback mPanelMenuPresenterCallback -> p
-    android.support.v7.view.ActionMode mActionMode -> j
-    android.support.v7.internal.widget.ActionBarContextView mActionModeView -> k
-    android.widget.PopupWindow mActionModePopup -> l
-    java.lang.Runnable mShowActionModePopup -> m
-    boolean mSubDecorInstalled -> q
-    android.view.ViewGroup mWindowDecor -> r
-    android.view.ViewGroup mSubDecor -> s
-    android.widget.TextView mTitleView -> t
-    android.view.View mStatusGuard -> u
-    boolean mFeatureProgress -> v
-    boolean mFeatureIndeterminateProgress -> w
-    boolean mClosingActionMenu -> x
-    android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState[] mPanels -> y
-    android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState mPreparedPanel -> z
-    boolean mInvalidatePanelMenuPosted -> A
-    int mInvalidatePanelMenuFeatures -> B
-    java.lang.Runnable mInvalidatePanelMenuRunnable -> C
-    boolean mEnableDefaultActionBarUp -> D
-    android.graphics.Rect mTempRect1 -> E
-    android.graphics.Rect mTempRect2 -> F
-    android.support.v7.internal.app.AppCompatViewInflater mAppCompatViewInflater -> G
+    android.support.v7.internal.widget.DecorContentParent mDecorContentParent -> o
+    android.support.v7.app.AppCompatDelegateImplV7$ActionMenuPresenterCallback mActionMenuPresenterCallback -> p
+    android.support.v7.app.AppCompatDelegateImplV7$PanelMenuPresenterCallback mPanelMenuPresenterCallback -> q
+    android.support.v7.view.ActionMode mActionMode -> k
+    android.support.v7.internal.widget.ActionBarContextView mActionModeView -> l
+    android.widget.PopupWindow mActionModePopup -> m
+    java.lang.Runnable mShowActionModePopup -> n
+    boolean mSubDecorInstalled -> r
+    android.view.ViewGroup mWindowDecor -> s
+    android.view.ViewGroup mSubDecor -> t
+    android.widget.TextView mTitleView -> u
+    android.view.View mStatusGuard -> v
+    boolean mFeatureProgress -> w
+    boolean mFeatureIndeterminateProgress -> x
+    boolean mClosingActionMenu -> y
+    android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState[] mPanels -> z
+    android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState mPreparedPanel -> A
+    boolean mInvalidatePanelMenuPosted -> B
+    int mInvalidatePanelMenuFeatures -> C
+    java.lang.Runnable mInvalidatePanelMenuRunnable -> D
+    boolean mEnableDefaultActionBarUp -> E
+    android.graphics.Rect mTempRect1 -> F
+    android.graphics.Rect mTempRect2 -> G
+    android.support.v7.internal.app.AppCompatViewInflater mAppCompatViewInflater -> H
     void onCreate(android.os.Bundle) -> a
     void onPostCreate(android.os.Bundle) -> b
     android.support.v7.app.ActionBar createSupportActionBar() -> h
@@ -6063,7 +6076,7 @@ android.support.v7.app.AppCompatDelegateImplV7 -> android.support.v7.app.AppComp
     void closePanel(int) -> c
     void closePanel(android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState,boolean) -> a
     boolean onKeyDownPanel(int,android.view.KeyEvent) -> d
-    void onKeyUpPanel(int,android.view.KeyEvent) -> e
+    boolean onKeyUpPanel(int,android.view.KeyEvent) -> e
     void callOnPanelClosed(int,android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState,android.view.Menu) -> a
     android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState findMenuPanel(android.view.Menu) -> a
     android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState getPanelState(int,boolean) -> a
@@ -7379,7 +7392,44 @@ android.support.v7.internal.app.AppCompatViewInflater -> android.support.v7.inte
     android.view.View createViewFromTag(android.content.Context,java.lang.String,android.util.AttributeSet) -> a
     android.view.View createView(android.content.Context,java.lang.String,java.lang.String) -> a
     android.content.Context themifyContext(android.content.Context,android.util.AttributeSet,boolean,boolean) -> a
-android.support.v7.internal.app.WindowDecorActionBar -> android.support.v7.internal.a.b:
+android.support.v7.internal.app.ToolbarActionBar -> android.support.v7.internal.a.b:
+    android.support.v7.internal.widget.DecorToolbar mDecorToolbar -> a
+    android.view.Window$Callback mWindowCallback -> b
+    boolean mMenuCallbackSet -> c
+    boolean mLastMenuVisibility -> d
+    java.util.ArrayList mMenuVisibilityListeners -> e
+    java.lang.Runnable mMenuInvalidator -> f
+    void setHomeButtonEnabled(boolean) -> b
+    void setElevation(float) -> a
+    android.content.Context getThemedContext() -> b
+    void setDefaultDisplayHomeAsUpEnabled(boolean) -> d
+    void setShowHideAnimationEnabled(boolean) -> e
+    void onConfigurationChanged(android.content.res.Configuration) -> a
+    void setWindowTitle(java.lang.CharSequence) -> a
+    void setDisplayOptions(int,int) -> a
+    void setDisplayHomeAsUpEnabled(boolean) -> a
+    int getDisplayOptions() -> a
+    boolean invalidateOptionsMenu() -> c
+    boolean collapseActionView() -> d
+    void populateOptionsMenu() -> e
+    boolean onKeyShortcut(int,android.view.KeyEvent) -> a
+    void dispatchMenuVisibilityChanged(boolean) -> f
+    android.view.Menu getMenu() -> f
+    android.view.Window$Callback access$000(android.support.v7.internal.app.ToolbarActionBar) -> a
+    android.support.v7.internal.widget.DecorToolbar access$300(android.support.v7.internal.app.ToolbarActionBar) -> b
+android.support.v7.internal.app.ToolbarActionBar$1 -> android.support.v7.internal.a.c:
+    android.support.v7.internal.app.ToolbarActionBar this$0 -> a
+    void run() -> run
+android.support.v7.internal.app.ToolbarActionBar$ActionMenuPresenterCallback -> android.support.v7.internal.a.d:
+    boolean mClosingActionMenu -> b
+    android.support.v7.internal.app.ToolbarActionBar this$0 -> a
+    boolean onOpenSubMenu(android.support.v7.internal.view.menu.MenuBuilder) -> a
+    void onCloseMenu(android.support.v7.internal.view.menu.MenuBuilder,boolean) -> a
+android.support.v7.internal.app.ToolbarActionBar$MenuBuilderCallback -> android.support.v7.internal.a.e:
+    android.support.v7.internal.app.ToolbarActionBar this$0 -> a
+    boolean onMenuItemSelected(android.support.v7.internal.view.menu.MenuBuilder,android.view.MenuItem) -> a
+    void onMenuModeChange(android.support.v7.internal.view.menu.MenuBuilder) -> a
+android.support.v7.internal.app.WindowDecorActionBar -> android.support.v7.internal.a.f:
     boolean ALLOW_SHOW_HIDE_ANIMATIONS -> i
     android.content.Context mContext -> j
     android.content.Context mThemedContext -> k
@@ -7460,16 +7510,16 @@ android.support.v7.internal.app.WindowDecorActionBar -> android.support.v7.inter
     android.support.v7.internal.widget.ActionBarContextView access$1000(android.support.v7.internal.app.WindowDecorActionBar) -> i
     android.support.v7.internal.widget.DecorToolbar access$1100(android.support.v7.internal.app.WindowDecorActionBar) -> j
     android.content.Context access$1200(android.support.v7.internal.app.WindowDecorActionBar) -> k
-android.support.v7.internal.app.WindowDecorActionBar$1 -> android.support.v7.internal.a.c:
+android.support.v7.internal.app.WindowDecorActionBar$1 -> android.support.v7.internal.a.g:
     android.support.v7.internal.app.WindowDecorActionBar this$0 -> a
     void onAnimationEnd(android.view.View) -> b
-android.support.v7.internal.app.WindowDecorActionBar$2 -> android.support.v7.internal.a.d:
+android.support.v7.internal.app.WindowDecorActionBar$2 -> android.support.v7.internal.a.h:
     android.support.v7.internal.app.WindowDecorActionBar this$0 -> a
     void onAnimationEnd(android.view.View) -> b
-android.support.v7.internal.app.WindowDecorActionBar$3 -> android.support.v7.internal.a.e:
+android.support.v7.internal.app.WindowDecorActionBar$3 -> android.support.v7.internal.a.i:
     android.support.v7.internal.app.WindowDecorActionBar this$0 -> a
     void onAnimationUpdate(android.view.View) -> a
-android.support.v7.internal.app.WindowDecorActionBar$ActionModeImpl -> android.support.v7.internal.a.f:
+android.support.v7.internal.app.WindowDecorActionBar$ActionModeImpl -> android.support.v7.internal.a.j:
     android.content.Context mActionModeContext -> b
     android.support.v7.internal.view.menu.MenuBuilder mMenu -> c
     android.support.v7.view.ActionMode$Callback mCallback -> d
@@ -7572,7 +7622,6 @@ android.support.v7.internal.view.SupportActionModeWrapper$CallbackWrapper -> and
     boolean onActionItemClicked(android.support.v7.view.ActionMode,android.view.MenuItem) -> a
     void onDestroyActionMode(android.support.v7.view.ActionMode) -> a
     android.view.Menu getMenuWrapper(android.view.Menu) -> a
-    void addActionModeWrapper(android.support.v7.internal.view.SupportActionModeWrapper) -> a
     android.view.ActionMode getActionModeWrapper(android.support.v7.view.ActionMode) -> b
 android.support.v7.internal.view.SupportMenuInflater -> android.support.v7.internal.view.f:
     java.lang.Class[] ACTION_VIEW_CONSTRUCTOR_SIGNATURE -> a
@@ -7781,7 +7830,6 @@ android.support.v7.internal.view.menu.ActionMenuItemView$ActionMenuItemForwardin
     android.support.v7.internal.view.menu.ActionMenuItemView this$0 -> a
     android.support.v7.widget.ListPopupWindow getPopup() -> a
     boolean onForwardingStarted() -> b
-    boolean onForwardingStopped() -> c
 android.support.v7.internal.view.menu.ActionMenuItemView$PopupCallback -> android.support.v7.internal.view.menu.c:
     android.support.v7.widget.ListPopupWindow getPopup() -> a
 android.support.v7.internal.view.menu.BaseMenuPresenter -> android.support.v7.internal.view.menu.d:
@@ -8921,6 +8969,8 @@ android.support.v7.internal.widget.DecorToolbar -> android.support.v7.internal.w
     void setHomeButtonEnabled(boolean) -> b
     int getNavigationMode() -> q
     void animateToVisibility(int) -> d
+    void setMenuCallbacks(android.support.v7.internal.view.menu.MenuPresenter$Callback,android.support.v7.internal.view.menu.MenuBuilder$Callback) -> a
+    android.view.Menu getMenu() -> r
 android.support.v7.internal.widget.DialogTitle -> android.support.v7.internal.widget.DialogTitle:
     void onMeasure(int,int) -> onMeasure
 android.support.v7.internal.widget.FitWindowsFrameLayout -> android.support.v7.internal.widget.FitWindowsFrameLayout:
@@ -9282,7 +9332,7 @@ android.support.v7.internal.widget.ToolbarWidgetWrapper -> android.support.v7.in
     android.graphics.drawable.Drawable mDefaultNavigationIcon -> r
     void setDefaultNavigationContentDescription(int) -> e
     void setDefaultNavigationIcon(android.graphics.drawable.Drawable) -> b
-    int detectDisplayOptions() -> r
+    int detectDisplayOptions() -> s
     android.view.ViewGroup getViewGroup() -> a
     android.content.Context getContext() -> b
     boolean isSplit() -> c
@@ -9300,7 +9350,7 @@ android.support.v7.internal.widget.ToolbarWidgetWrapper -> android.support.v7.in
     void setIcon(android.graphics.drawable.Drawable) -> a
     void setLogo(int) -> b
     void setLogo(android.graphics.drawable.Drawable) -> c
-    void updateToolbarLogo() -> s
+    void updateToolbarLogo() -> t
     boolean canShowOverflowMenu() -> i
     boolean isOverflowMenuShowing() -> j
     boolean isOverflowMenuShowPending() -> k
@@ -9320,8 +9370,10 @@ android.support.v7.internal.widget.ToolbarWidgetWrapper -> android.support.v7.in
     void setNavigationIcon(android.graphics.drawable.Drawable) -> d
     void setNavigationContentDescription(java.lang.CharSequence) -> d
     void setNavigationContentDescription(int) -> f
-    void updateHomeAccessibility() -> t
-    void updateNavigationIcon() -> u
+    void updateHomeAccessibility() -> u
+    void updateNavigationIcon() -> v
+    void setMenuCallbacks(android.support.v7.internal.view.menu.MenuPresenter$Callback,android.support.v7.internal.view.menu.MenuBuilder$Callback) -> a
+    android.view.Menu getMenu() -> r
     android.support.v7.widget.Toolbar access$000(android.support.v7.internal.widget.ToolbarWidgetWrapper) -> a
     java.lang.CharSequence access$100(android.support.v7.internal.widget.ToolbarWidgetWrapper) -> b
     android.view.Window$Callback access$200(android.support.v7.internal.widget.ToolbarWidgetWrapper) -> c
@@ -10159,6 +10211,7 @@ android.support.v7.widget.Toolbar -> android.support.v7.widget.Toolbar:
     void setChildVisibilityForExpandedActionView(boolean) -> setChildVisibilityForExpandedActionView
     void updateChildVisibilityForExpandedActionView(android.view.View) -> e
     void setCollapsible(boolean) -> setCollapsible
+    void setMenuCallbacks(android.support.v7.internal.view.menu.MenuPresenter$Callback,android.support.v7.internal.view.menu.MenuBuilder$Callback) -> a
     android.view.ViewGroup$LayoutParams generateDefaultLayoutParams() -> generateDefaultLayoutParams
     android.view.ViewGroup$LayoutParams generateLayoutParams(android.view.ViewGroup$LayoutParams) -> generateLayoutParams
     android.view.ViewGroup$LayoutParams generateLayoutParams(android.util.AttributeSet) -> generateLayoutParams

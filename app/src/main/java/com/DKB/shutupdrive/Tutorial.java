@@ -121,9 +121,6 @@ public class Tutorial extends Activity implements View.OnClickListener {
             descriptionText.startAnimation(fadeOut);
             image.startAnimation(fadeOut);
             progressDots.startAnimation(fadeOut);
-            Animation fabOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_out);
-            fabOut.setFillAfter(true);
-            fabOut.setDuration(250);
             new Handler()
                     .postDelayed(new Runnable() {
                         @Override
@@ -134,9 +131,9 @@ public class Tutorial extends Activity implements View.OnClickListener {
                             System.gc();
                             finish();
                         }
-                    }, fabOut.getDuration());
+                    }, fadeOut.getDuration());
 
-            fab.startAnimation(fabOut);
+            fab.hide();
         }
     }
 
