@@ -4,14 +4,14 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:62
-# view land/res/layout-land/layout_tutorial.xml #generated:40
+# view land\res/layout-land/layout_main.xml #generated:62
+# view land\res/layout-land/layout_tutorial.xml #generated:40
 # view res/layout/layout_main.xml #generated:65
 # view res/layout/layout_tutorial.xml #generated:40
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
 # view res/layout/layout_snackbar.xml #generated:18
-# view sw600dp-v13/res/layout-sw600dp-v13/layout_snackbar.xml #generated:18
+# view sw600dp-v13\res/layout-sw600dp-v13/layout_snackbar.xml #generated:18
 -keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(...); }
 
 # view res/layout/abc_alert_dialog_material.xml #generated:130
@@ -101,7 +101,7 @@
 # view AndroidManifest.xml #generated:40
 -keep class com.google.android.gms.ads.AdActivity { <init>(...); }
 
-# view land/res/layout-land/layout_main.xml #generated:17
+# view land\res/layout-land/layout_main.xml #generated:17
 # view res/layout/layout_main.xml #generated:12
 -keep class com.google.android.gms.ads.AdView { <init>(...); }
 
