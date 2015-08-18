@@ -4,6 +4,7 @@ package com.DKB.shutupdrive;
  * Created by kyle on 8/19/14.
  */
 
+import android.Manifest;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -12,6 +13,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -61,8 +63,9 @@ public class CarMode extends Service {
         getUserSettings();
         silent();
         notification();
-        setupTextReceiver();
-        if (phone != Utils.PHONE_BLOCK_CALLS) {
+        if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
+            setupTextReceiver();
+        if (phone != Utils.PHONE_BLOCK_CALLS && checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             createPhoneStateListener();
             tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
@@ -108,7 +111,7 @@ public class CarMode extends Service {
                 //if the phone is ringing
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
                     //read out the caller name
-                    if (phone == Utils.PHONE_READ_CALLER) {
+                    if (phone == Utils.PHONE_READ_CALLER && checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                         tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
                             @SuppressWarnings("deprecation")
                             @Override
@@ -199,15 +202,6 @@ public class CarMode extends Service {
     }
 
     private void getUserSettings() {
-        /*
-            if phone != 1
-                check permission phone
-                    else: phone = 1, notify
-            if autoreply
-                check permission sms
-                    else: auto = false, notify
-
-         */
         phone = Utils.getPhoneOption(this);
         autoreply = Utils.isAutoReply(this);
         msg = Utils.getAutoReplyMessage(this);

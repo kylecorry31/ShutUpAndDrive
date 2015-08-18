@@ -1,9 +1,11 @@
 package com.DKB.shutupdrive;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
@@ -106,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setUpUI();
         fab.show();
         mGoogleApiClient.connect();
-
     }
 
     @Override
@@ -233,10 +235,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        /*
-            permission activity recognition
-                else: nothing
-         */
         toast = true;
         if (mGoogleApiClient.isConnected() && !running) {
             startActivityRecognition();
@@ -251,6 +249,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
 
     }
-
 
 }

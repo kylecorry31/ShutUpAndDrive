@@ -1,13 +1,16 @@
 package com.DKB.shutupdrive;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -93,14 +96,22 @@ public class Tutorial extends Activity implements View.OnClickListener {
 
     private void updateUI() {
         if (nextCount < features.length) {
-            /*
-                nextCount = 0 -> permission activity recognition
-                    else: fab ask
-                nextCount = 1 -> permission sms
-                    else: autoreply -> false
-                nextCount = 2 -> permission phone
-                    else: phone -> block
-             */
+
+            if (nextCount == 1) {
+                if (checkSelfPermission(Manifest.permission.SEND_SMS)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.SEND_SMS}, Utils.PERMISSION_REQUEST_CODE_SMS);
+                }
+            } else if (nextCount == 2) {
+                if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, Utils.PERMISSION_REQUEST_CODE_PHONE);
+                }
+                if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, Utils.PERMISSION_REQUEST_CODE_CONTACTS);
+                }
+            }
             featureText.startAnimation(fadeOut);
             descriptionText.startAnimation(fadeOut);
             image.startAnimation(fadeOut);
@@ -151,4 +162,52 @@ public class Tutorial extends Activity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case Utils.PERMISSION_REQUEST_CODE_SMS: {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Utils.setAutoReply(this, true);
+                } else {
+                    Utils.setAutoReply(this, false);
+                }
+                return;
+            }
+            case Utils.PERMISSION_REQUEST_CODE_PHONE: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        Utils.setPhoneOption(this, Utils.PHONE_READ_CALLER);
+
+                    } else {
+                        Utils.setPhoneOption(this, Utils.PHONE_ALLOW_CALLS);
+                    }
+                } else {
+                    Utils.setPhoneOption(this, Utils.PHONE_BLOCK_CALLS);
+                }
+                return;
+            }
+            case Utils.PERMISSION_REQUEST_CODE_CONTACTS: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        Utils.setPhoneOption(this, Utils.PHONE_READ_CALLER);
+
+                    } else {
+                        Utils.setPhoneOption(this, Utils.PHONE_BLOCK_CALLS);
+                    }
+                } else {
+                    if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        Utils.setPhoneOption(this, Utils.PHONE_ALLOW_CALLS);
+                    } else {
+                        Utils.setPhoneOption(this, Utils.PHONE_BLOCK_CALLS);
+                    }
+                }
+                return;
+            }
+
+        }
+    }
 }

@@ -27,11 +27,16 @@ class Utils {
 
     public static final double DRIVING_SPEED_THRESHOLD = 8.5;
 
-    public static final boolean DEVELOPER = true;
+    public static final boolean DEVELOPER = false;
 
     public static final int PHONE_BLOCK_CALLS = 1;
     public static final int PHONE_READ_CALLER = 2;
     public static final int PHONE_ALLOW_CALLS = 3;
+
+    public static final int PERMISSION_REQUEST_CODE_SMS = 2;
+    public static final int PERMISSION_REQUEST_CODE_PHONE = 3;
+    public static final int PERMISSION_REQUEST_CODE_LOCATION = 4;
+    public static final int PERMISSION_REQUEST_CODE_CONTACTS = 6;
 
     public static final String TUTORIAL_NUM_KEY = "tutNum";
 
@@ -69,6 +74,11 @@ class Utils {
         return prefs.getBoolean(c.getString(R.string.key_gps), false);
     }
 
+    public static void setGPS(Context c, boolean gps){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        prefs.edit().putBoolean(c.getString(R.string.key_gps), gps).apply();
+    }
+
     public static boolean getGPSDrive(Context c) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         return prefs.getBoolean(c.getString(R.string.key_gps_driving), false);
@@ -98,9 +108,19 @@ class Utils {
         return prefs.getBoolean(c.getString(R.string.key_auto_reply), true);
     }
 
+    public static void setAutoReply(Context c, boolean auto){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        prefs.edit().putBoolean(c.getString(R.string.key_auto_reply), auto).apply();
+    }
+
     public static int getPhoneOption(Context c) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         return Integer.valueOf(prefs.getString(c.getString(R.string.key_phone_option), "2"));
+    }
+
+    public static void setPhoneOption(Context c, int phoneOption) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        prefs.edit().putString(c.getString(R.string.key_phone_option), String.valueOf(phoneOption)).apply();
     }
 
     public static boolean isFirst(Context c) {
