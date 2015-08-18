@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             slideDown.setStartOffset(275);
             titleImage.startAnimation(slideDown);
         }
-        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_in);
+        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.design_fab_in);
         fabIn.setStartOffset(250);
         fabIn.setDuration(250);
         Animation fadeIn = AnimationUtils.loadAnimation(getBaseContext(), R.anim.abc_fade_in);

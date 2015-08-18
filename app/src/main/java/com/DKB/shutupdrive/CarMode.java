@@ -24,6 +24,7 @@ import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -63,9 +64,9 @@ public class CarMode extends Service {
         getUserSettings();
         silent();
         notification();
-        if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
             setupTextReceiver();
-        if (phone != Utils.PHONE_BLOCK_CALLS && checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+        if (phone != Utils.PHONE_BLOCK_CALLS && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             createPhoneStateListener();
             tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
@@ -111,7 +112,7 @@ public class CarMode extends Service {
                 //if the phone is ringing
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
                     //read out the caller name
-                    if (phone == Utils.PHONE_READ_CALLER && checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                    if (phone == Utils.PHONE_READ_CALLER && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                         tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
                             @SuppressWarnings("deprecation")
                             @Override

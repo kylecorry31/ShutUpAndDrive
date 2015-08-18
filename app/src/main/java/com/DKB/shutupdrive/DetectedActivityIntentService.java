@@ -1,7 +1,10 @@
 package com.DKB.shutupdrive;
 
+import android.Manifest;
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
@@ -33,12 +36,7 @@ public class DetectedActivityIntentService extends IntentService {
             long waitTime = Utils.getNotDrivingTime(this);
             boolean diffTimeOK = (new Date().getTime() - waitTime) >= Utils.minutesToMillis(10);
             if (confidence >= Utils.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
-                /*
-                    if gps
-                        check permission location
-                            else: start carmode, notify
-                 */
-                if (Utils.getGPS(this))
+                if (Utils.getGPS(this) && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                     startService(new Intent(this, SpeedService.class));
                 else
                     startService(new Intent(this, CarMode.class));

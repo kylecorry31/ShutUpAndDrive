@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -65,7 +67,7 @@ public class Tutorial extends Activity implements View.OnClickListener {
         progressDots = (LinearLayout) findViewById(R.id.progressDots);
         image = (ImageView) findViewById(R.id.photo);
         fab = (FloatingActionButton) findViewById(R.id.next);
-        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_in);
+        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.design_fab_in);
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_in);
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_out);
         fadeOut.setFillAfter(true);
@@ -94,23 +96,28 @@ public class Tutorial extends Activity implements View.OnClickListener {
         updateUI();
     }
 
+    private void enableSMS() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.SEND_SMS}, Utils.PERMISSION_REQUEST_CODE_SMS);
+        }
+    }
+
+    private void enablePhone() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS}, Utils.PERMISSION_REQUEST_CODE_PHONE);
+        }
+    }
+
     private void updateUI() {
         if (nextCount < features.length) {
 
             if (nextCount == 1) {
-                if (checkSelfPermission(Manifest.permission.SEND_SMS)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.SEND_SMS}, Utils.PERMISSION_REQUEST_CODE_SMS);
-                }
+                enableSMS();
             } else if (nextCount == 2) {
-                if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, Utils.PERMISSION_REQUEST_CODE_PHONE);
-                }
-                if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, Utils.PERMISSION_REQUEST_CODE_CONTACTS);
-                }
+                enablePhone();
             }
             featureText.startAnimation(fadeOut);
             descriptionText.startAnimation(fadeOut);
@@ -167,7 +174,7 @@ public class Tutorial extends Activity implements View.OnClickListener {
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case Utils.PERMISSION_REQUEST_CODE_SMS: {
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Utils.setAutoReply(this, true);
                 } else {
                     Utils.setAutoReply(this, false);
@@ -175,39 +182,16 @@ public class Tutorial extends Activity implements View.OnClickListener {
                 return;
             }
             case Utils.PERMISSION_REQUEST_CODE_PHONE: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        Utils.setPhoneOption(this, Utils.PHONE_READ_CALLER);
-
-                    } else {
-                        Utils.setPhoneOption(this, Utils.PHONE_ALLOW_CALLS);
-                    }
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_READ_CALLER);
+                } else if ((grantResults[1] != PackageManager.PERMISSION_GRANTED && permissions[1].contentEquals(Manifest.permission.READ_PHONE_STATE)) ||
+                        (grantResults[0] != PackageManager.PERMISSION_GRANTED && permissions[0].contentEquals(Manifest.permission.READ_PHONE_STATE))) {
+                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_BLOCK_CALLS);
                 } else {
-                    Utils.setPhoneOption(this, Utils.PHONE_BLOCK_CALLS);
+                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_ALLOW_CALLS);
                 }
                 return;
             }
-            case Utils.PERMISSION_REQUEST_CODE_CONTACTS: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        Utils.setPhoneOption(this, Utils.PHONE_READ_CALLER);
-
-                    } else {
-                        Utils.setPhoneOption(this, Utils.PHONE_BLOCK_CALLS);
-                    }
-                } else {
-                    if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        Utils.setPhoneOption(this, Utils.PHONE_ALLOW_CALLS);
-                    } else {
-                        Utils.setPhoneOption(this, Utils.PHONE_BLOCK_CALLS);
-                    }
-                }
-                return;
-            }
-
         }
     }
 }

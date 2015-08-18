@@ -9,6 +9,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -65,7 +66,7 @@ public class Settings extends AppCompatActivity {
                 messagePreference.setSummary(userMessage);
             } else if (key.contentEquals(getString(R.string.key_auto_reply))) {
                 if (Utils.isAutoReply(context)) {
-                    if (context.checkSelfPermission(Manifest.permission.SEND_SMS)
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.SEND_SMS}, Utils.PERMISSION_REQUEST_CODE_SMS);
                     } else {
@@ -76,20 +77,20 @@ public class Settings extends AppCompatActivity {
                 }
             } else if (key.contentEquals(getString(R.string.key_phone_option))) {
                 if (Utils.getPhoneOption(context) == Utils.PHONE_ALLOW_CALLS) {
-                    if (context.checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, Utils.PERMISSION_REQUEST_CODE_PHONE);
                     } else {
                         phonePreference.setSummary(getPhoneOption());
                     }
                 } else if (Utils.getPhoneOption(context) == Utils.PHONE_READ_CALLER) {
-                    if (context.checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, Utils.PERMISSION_REQUEST_CODE_PHONE);
                     } else {
                         phonePreference.setSummary(getPhoneOption());
                     }
-                    if (context.checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, Utils.PERMISSION_REQUEST_CODE_CONTACTS);
                     } else {
@@ -99,7 +100,7 @@ public class Settings extends AppCompatActivity {
                     phonePreference.setSummary(getPhoneOption());
                 }
             } else if (key.contentEquals(getString(R.string.key_gps))) {
-                if (Utils.getGPS(context) && context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                if (Utils.getGPS(context) && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Utils.PERMISSION_REQUEST_CODE_LOCATION);
                 }
@@ -158,7 +159,7 @@ public class Settings extends AppCompatActivity {
                 }
                 case Utils.PERMISSION_REQUEST_CODE_CONTACTS: {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        if (context.checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                                 == PackageManager.PERMISSION_GRANTED) {
                             Utils.setPhoneOption(context, Utils.PHONE_READ_CALLER);
 
@@ -166,7 +167,7 @@ public class Settings extends AppCompatActivity {
                             Utils.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
                         }
                     } else {
-                        if (context.checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                                 == PackageManager.PERMISSION_GRANTED) {
                             Utils.setPhoneOption(context, Utils.PHONE_ALLOW_CALLS);
                         } else {
