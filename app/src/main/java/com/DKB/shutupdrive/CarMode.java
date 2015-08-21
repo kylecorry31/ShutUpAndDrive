@@ -55,6 +55,7 @@ public class CarMode extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         setUp();
+        Utils.setStartTime(this, System.currentTimeMillis());
         return START_STICKY;
     }
 
@@ -172,6 +173,7 @@ public class CarMode extends Service {
         }
         unregisterReceiver(notificationReceiver);
         unregisterReceiver(textReceiver);
+        Utils.addTime(this, System.currentTimeMillis() - Utils.getStartTime(this));
         super.onDestroy();
     }
 

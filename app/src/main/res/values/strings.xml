@@ -38,8 +38,11 @@
     <string name="key_auto_reply">autoReply</string>
     <string name="key_phone_option">phoneOpt</string>
     <string name="key_first_time">firstTime</string>
+    <string name="key_start_time">StartTime</string>
+    <string name="key_total_time">TotalTime</string>
     <string name="started">Started</string>
     <string name="stopped">Stopped</string>
+    <string name="action_share">Share</string>
 
 
 </resources>

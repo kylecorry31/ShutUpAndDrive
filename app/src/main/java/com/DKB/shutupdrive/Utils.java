@@ -18,6 +18,7 @@ class Utils {
     private static final long MILLIS_IN_SECOND = 1000;
 
     private static final long MILLIS_IN_MINUTE = 60 * MILLIS_IN_SECOND;
+    private static final long MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
 
     public static long minutesToMillis(int minutes) {
         return MILLIS_IN_MINUTE * minutes;
@@ -53,7 +54,31 @@ class Utils {
         return prefs.getBoolean(c.getString(R.string.key_running), false);
     }
 
+    public static void setStartTime(Context c, long startTime) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        prefs.edit().putLong(c.getString(R.string.key_start_time), startTime).apply();
+    }
 
+    public static long getStartTime(Context c) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        return prefs.getLong(c.getString(R.string.key_start_time), 0);
+    }
+
+    public static long getTotalTime(Context c) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        return prefs.getLong(c.getString(R.string.key_total_time), 0);
+    }
+
+    public static void addTime(Context c, long time) {
+        long currentTime = getTotalTime(c);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        prefs.edit().putLong(c.getString(R.string.key_total_time), currentTime + time).apply();
+    }
+
+    public static double millisToHours(long millis) {
+        return millis / MILLIS_IN_HOUR;
+    }
+    
     public static boolean isAutoStart(Context c) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         return prefs.getBoolean(c.getString(R.string.key_auto_start), false);
@@ -74,7 +99,7 @@ class Utils {
         return prefs.getBoolean(c.getString(R.string.key_gps), false);
     }
 
-    public static void setGPS(Context c, boolean gps){
+    public static void setGPS(Context c, boolean gps) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         prefs.edit().putBoolean(c.getString(R.string.key_gps), gps).apply();
     }
@@ -108,7 +133,7 @@ class Utils {
         return prefs.getBoolean(c.getString(R.string.key_auto_reply), true);
     }
 
-    public static void setAutoReply(Context c, boolean auto){
+    public static void setAutoReply(Context c, boolean auto) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         prefs.edit().putBoolean(c.getString(R.string.key_auto_reply), auto).apply();
     }

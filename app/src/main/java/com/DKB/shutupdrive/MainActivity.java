@@ -1,17 +1,15 @@
 package com.DKB.shutupdrive;
 
-import android.Manifest;
 import android.app.PendingIntent;
-import android.app.UiModeManager;
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +22,6 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
@@ -48,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MenuItem item;
     private AdView adView;
 
+
+    private static final String PLAY_STORE_LINK = "https://play.google.com/store/apps/details?id=com.DKB.shutupdrive";
+    private static final String PREVENT = "You can too by downloading “Shut Up & Drive!” for Android at ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +147,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+        ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, "I’ve driven without distractions for " +
+                (int) Math.round(Utils.millisToHours(Utils.getTotalTime(this)))
+                + " hours!\n\n" + PREVENT + PLAY_STORE_LINK);
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(i);
+        }
         return true;
     }
 
