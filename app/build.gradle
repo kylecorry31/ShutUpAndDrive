@@ -12,11 +12,9 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
         }
 
         debug {
-            shrinkResources true
         }
 
     }
