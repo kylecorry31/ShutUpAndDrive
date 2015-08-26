@@ -18,6 +18,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:fullBackupContent="true"
         android:theme="@style/AppTheme">
 
         <meta-data
@@ -70,11 +71,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".CarMode">
-            <intent-filter>
-                <category android:name="android.intent.category.CAR_MODE" />
-            </intent-filter>
-        </service>
+        <service android:name=".CarMode"/>
         <service android:name=".SpeedService" />
         <service android:name=".DetectedActivityIntentService" />
 

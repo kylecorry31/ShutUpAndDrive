@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="&#8226; "
+            android:text="@string/dot"
             android:textColor="@color/accent"
             android:textSize="64dp" />
 
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="&#8226; "
+            android:text="@string/dot"
             android:textColor="@android:color/white"
             android:textSize="64dp" />
 
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="&#8226;"
+            android:text="@string/dot"
             android:textColor="@android:color/white"
             android:textSize="64dp" />
     </LinearLayout>

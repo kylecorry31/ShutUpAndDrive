@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivityRecognition();
             Utils.setNotDrivingTime(this, 0);
             Utils.setGPSDrive(this, false);
-        } else if (mGoogleApiClient.isConnected() && running) {
+        } else if (mGoogleApiClient.isConnected()) {
             stopActivityRecognition();
             stopService(new Intent(this, CarMode.class));
             Utils.setNotDrivingTime(this, 0);

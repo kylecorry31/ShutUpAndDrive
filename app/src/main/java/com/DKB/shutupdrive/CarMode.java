@@ -9,19 +9,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.ContactsContract;
-import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
@@ -37,8 +32,8 @@ import java.util.Locale;
 public class CarMode extends Service {
 
     private static int previousAudioMode;
-    public static boolean autoreply = false;
-    static String msg;
+    private static boolean autoreply = false;
+    private static String msg;
     private int phone;
     private NotificationManager nm;
     private TextToSpeech tts;
@@ -90,7 +85,7 @@ public class CarMode extends Service {
                             msgs = new SmsMessage[pdus.length];
                             for (int i = 0; i < msgs.length; i++) {
                                 msgs[i] = SmsMessage
-                                        .createFromPdu((byte[]) pdus[i]);
+                                        .createFromPdu((byte[]) pdus[i], bundle.getString("format"));
                                 msg_from = msgs[i].getOriginatingAddress();
                                 SmsManager smsManager = SmsManager.getDefault();
                                 smsManager.sendTextMessage(msg_from, null, msg,

@@ -175,7 +175,6 @@ public class Settings extends AppCompatActivity {
                     }
                     phonePreference.setValue(String.valueOf(Utils.getPhoneOption(context)));
                     phonePreference.setSummary(getPhoneOption());
-                    return;
                 }
 
             }

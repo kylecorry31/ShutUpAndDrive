@@ -14,13 +14,10 @@
     <string name="description_main">Turns on when you drive to keep you safe and focused on the road</string>
     <string name="stay_safe">Stay safe while you drive</string>
     <string name="banner_ad_unit_id">ca-app-pub-5617453255042566/1905751930</string>
-    <string name="action_help">Help</string>
     <string name="start_button">Start</string>
     <string name="stop_button">Stop</string>
     <string name="next_button">Next</string>
     <string name="no_connection">No connection to Google Play Services</string>
-    <string name="services_unavailable">Google Play Services unavailable</string>
-    <string name="not_driving">Not driving</string>
     <string name="default_message">I am driving right now, I will contact you later —Auto reply message—</string>
     <string name="phone_option_block">Blocking calls</string>
     <string name="phone_option_read">Reading caller ID</string>
@@ -43,6 +40,7 @@
     <string name="started">Started</string>
     <string name="stopped">Stopped</string>
     <string name="action_share">Share</string>
+    <string name="dot">• </string>
 
 
 </resources>

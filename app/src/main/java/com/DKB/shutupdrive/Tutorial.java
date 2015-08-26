@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -130,9 +128,9 @@ public class Tutorial extends Activity implements View.OnClickListener {
             image.startAnimation(fadeIn);
             for (int i = 0; i < 3; i++) {
                 if (i == nextCount)
-                    ((TextView) progressDots.getChildAt(i)).setTextColor(getResources().getColor(R.color.accent));
+                    ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(this, R.color.accent));
                 else
-                    ((TextView) progressDots.getChildAt(i)).setTextColor(getResources().getColor(R.color.white));
+                    ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(this, R.color.white));
             }
         } else {
             featureText.startAnimation(fadeOut);
@@ -190,7 +188,6 @@ public class Tutorial extends Activity implements View.OnClickListener {
                 } else {
                     Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_ALLOW_CALLS);
                 }
-                return;
             }
         }
     }
