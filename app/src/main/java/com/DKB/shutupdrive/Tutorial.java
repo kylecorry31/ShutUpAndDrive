@@ -1,97 +1,126 @@
 package com.DKB.shutupdrive;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by kyle on 5/31/15.
+ * Created by kyle on 9/6/15.
  */
-public class Tutorial extends Activity implements View.OnClickListener {
+public class Tutorial extends FragmentActivity {
 
-    private final int[][] features = {
-            {R.string.feature_driving_detection, R.string.description_driving_detection},
-            {R.string.feature_auto_reply, R.string.description_auto_reply},
-            {R.string.feature_caller_id_readout, R.string.description_caller_id_readout}
-    };
+    private static final int NUM_PAGES = 4;
 
-    private final int[] images = {
-            R.drawable.car_image,
-            R.drawable.sms_image,
-            R.drawable.phone_image
-    };
+    private ViewPager mPager;
 
-    private int nextCount;
-    private TextView featureText;
-    private TextView descriptionText;
-    private ImageView image;
-    private FloatingActionButton fab;
-    private Animation fadeIn;
-    private Animation fadeOut;
-    private Bitmap featureImage;
-    private BitmapFactory.Options options;
     private LinearLayout progressDots;
+
+    private PagerAdapter mPagerAdapter;
+
+    private Button start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         setContentView(R.layout.layout_tutorial);
         getWindow().setBackgroundDrawable(null);
-        if (savedInstanceState != null && savedInstanceState.containsKey(Utils.TUTORIAL_NUM_KEY)) {
-            nextCount = savedInstanceState.getInt(Utils.TUTORIAL_NUM_KEY);
-        } else {
-            nextCount = 0;
-        }
-        featureText = (TextView) findViewById(R.id.feature_name);
-        descriptionText = (TextView) findViewById(R.id.description);
         progressDots = (LinearLayout) findViewById(R.id.progressDots);
-        image = (ImageView) findViewById(R.id.photo);
-        fab = (FloatingActionButton) findViewById(R.id.next);
-        Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.design_fab_in);
-        fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_in);
-        fadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_fade_out);
-        fadeOut.setFillAfter(true);
-        fabIn.setStartOffset(250);
-        fabIn.setDuration(250);
-        fab.startAnimation(fabIn);
-        progressDots.startAnimation(fadeIn);
-        featureText.startAnimation(fadeIn);
-        descriptionText.startAnimation(fadeIn);
-        fadeIn.setStartOffset(250);
-        image.startAnimation(fadeIn);
-        updateUI();
-        fab.setOnClickListener(this);
+        start = (Button) findViewById(R.id.getStarted);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.gc();
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ContentPageAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+                    enableSMS();
+                } else if (position == 3) {
+                    enablePhone();
+                }
+                for (int i = 0; i < NUM_PAGES; i++) {
+                    if (i == position)
+                        ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.accent));
+                    else
+                        ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(Utils.TUTORIAL_NUM_KEY, nextCount);
-        super.onSaveInstanceState(outState);
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
     }
 
-    @Override
-    public void onClick(View v) {
-        nextCount++;
-        updateUI();
+    /**
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
+     */
+    private class ContentPageAdapter extends FragmentStatePagerAdapter {
+        public ContentPageAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new MainTutorialContent();
+                case 1:
+                    return new DrivingContent();
+                case 2:
+                    return new AutoReplyContent();
+                case 3:
+                    return new CallerIDContent();
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
     }
 
     private void enableSMS() {
@@ -106,64 +135,6 @@ public class Tutorial extends Activity implements View.OnClickListener {
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS}, Utils.PERMISSION_REQUEST_CODE_PHONE);
-        }
-    }
-
-    private void updateUI() {
-        if (nextCount < features.length) {
-
-            if (nextCount == 1) {
-                enableSMS();
-            } else if (nextCount == 2) {
-                enablePhone();
-            }
-            featureText.startAnimation(fadeOut);
-            descriptionText.startAnimation(fadeOut);
-            image.startAnimation(fadeOut);
-            featureText.setText(getString(features[nextCount][0]));
-            descriptionText.setText(getString(features[nextCount][1]));
-            new LoadAndShowImages().execute(images[nextCount]);
-            featureText.startAnimation(fadeIn);
-            descriptionText.startAnimation(fadeIn);
-            image.startAnimation(fadeIn);
-            for (int i = 0; i < 3; i++) {
-                if (i == nextCount)
-                    ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(this, R.color.accent));
-                else
-                    ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(this, R.color.white));
-            }
-        } else {
-            featureText.startAnimation(fadeOut);
-            descriptionText.startAnimation(fadeOut);
-            image.startAnimation(fadeOut);
-            progressDots.startAnimation(fadeOut);
-            new Handler()
-                    .postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            image.setImageDrawable(null);
-                            featureImage.recycle();
-                            System.gc();
-                            finish();
-                        }
-                    }, fadeOut.getDuration());
-
-            fab.hide();
-        }
-    }
-
-    private class LoadAndShowImages extends AsyncTask<Integer, Void, Void> {
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            image.setImageBitmap(featureImage);
-        }
-
-        @Override
-        protected Void doInBackground(Integer... params) {
-            featureImage = BitmapFactory.decodeResource(getResources(), params[0], options);
-            return null;
         }
     }
 

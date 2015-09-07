@@ -5,11 +5,11 @@
     <string name="tutorial">Tutorial</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
-    <string name="feature_driving_detection">Driving Detection</string>
+    <string name="feature_driving_detection">Driving detection</string>
     <string name="description_driving_detection">Automatically turns on while driving</string>
-    <string name="feature_auto_reply">Auto Reply</string>
+    <string name="feature_auto_reply">Auto reply</string>
     <string name="description_auto_reply">Automatically responds to messages while driving</string>
-    <string name="feature_caller_id_readout">Caller ID Readout</string>
+    <string name="feature_caller_id_readout">Caller ID readout</string>
     <string name="description_caller_id_readout">Reads out who\'s calling while driving</string>
     <string name="description_main">Turns on when you drive to keep you safe and focused on the road</string>
     <string name="stay_safe">Stay safe while you drive</string>
@@ -34,13 +34,14 @@
     <string name="key_auto_reply_message">msg</string>
     <string name="key_auto_reply">autoReply</string>
     <string name="key_phone_option">phoneOpt</string>
-    <string name="key_first_time">firstTime</string>
+    <string name="key_first_time">firstTime2</string>
     <string name="key_start_time">StartTime</string>
     <string name="key_total_time">TotalTime</string>
     <string name="started">Started</string>
     <string name="stopped">Stopped</string>
     <string name="action_share">Share</string>
     <string name="dot">• </string>
+    <string name="get_started">GET STARTED</string>
 
 
 </resources>
