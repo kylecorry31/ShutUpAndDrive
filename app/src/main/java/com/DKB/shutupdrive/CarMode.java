@@ -5,7 +5,7 @@ package com.DKB.shutupdrive;
  */
 
 import android.Manifest;
-import android.app.NotificationManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.SmsManager;
@@ -31,12 +32,9 @@ import java.util.Locale;
 
 public class CarMode extends Service {
 
-    private static int previousAudioMode;
-    private static boolean autoreply = false;
-    private static String msg;
+    private int previousAudioMode;
     private int phone;
-    private NotificationManager nm;
-    private TextToSpeech tts;
+    private TextToSpeech tts, tts2;
     private PhoneStateListener psl;
     private TelephonyManager tm;
     private AudioManager am;
@@ -72,21 +70,49 @@ public class CarMode extends Service {
     private void setupTextReceiver() {
         textReceiver = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context context, Intent intent) {
+            public void onReceive(final Context context, Intent intent) {
                 if (intent.getAction().equals(
-                        "android.provider.Telephony.SMS_RECEIVED") && autoreply) {
+                        "android.provider.Telephony.SMS_RECEIVED") && Utils.isAutoReply(context)) {
                     Bundle bundle = intent.getExtras();
                     SmsMessage[] msgs;
                     String msg_from;
-                    String msg = CarMode.msg;
+                    String msg = Utils.getAutoReplyMessage(context);
                     if (bundle != null) {
                         try {
                             Object[] pdus = (Object[]) bundle.get("pdus");
                             msgs = new SmsMessage[pdus.length];
                             for (int i = 0; i < msgs.length; i++) {
-                                msgs[i] = SmsMessage
-                                        .createFromPdu((byte[]) pdus[i], bundle.getString("format"));
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    msgs[i] = SmsMessage
+                                            .createFromPdu((byte[]) pdus[i], bundle.getString("format"));
+                                } else {
+                                    msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                                }
                                 msg_from = msgs[i].getOriginatingAddress();
+                                final String phoneNumber = msg_from;
+                                if (Utils.shouldReadMessages(context)) {
+                                    final String message = msgs[i].getMessageBody();
+                                    tts2 = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
+                                        @SuppressWarnings("deprecation")
+                                        @Override
+                                        public void onInit(int status) {
+                                            if (status != TextToSpeech.ERROR) {
+                                                tts2.setLanguage(Locale.US);
+                                                String readNumber = "New text from " + Utils.callerId(getBaseContext(), phoneNumber) + ". The message is " + message;
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                                                    tts2.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null, null);
+                                                else
+                                                    tts2.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null);
+
+//                                            while (tts2.isSpeaking()) {
+//                                                continue;
+//                                            }
+//                                            // Get user speech
+                                            }
+                                        }
+
+                                    });
+                                }
                                 SmsManager smsManager = SmsManager.getDefault();
                                 smsManager.sendTextMessage(msg_from, null, msg,
                                         null, null);
@@ -108,7 +134,7 @@ public class CarMode extends Service {
                 //if the phone is ringing
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
                     //read out the caller name
-                    if (phone == Utils.PHONE_READ_CALLER && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                    if (phone == Utils.PHONE_READ_CALLER) {
                         tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
                             @SuppressWarnings("deprecation")
                             @Override
@@ -157,14 +183,17 @@ public class CarMode extends Service {
 
     @Override
     public void onDestroy() {
-        nm.cancel(Utils.NOTIFICATION_ID);
-        autoreply = false;
+        NotificationManagerCompat.from(this).cancel(Utils.NOTIFICATION_ID);
         restorePreviousSoundMode();
         if (phone != Utils.PHONE_BLOCK_CALLS)
             tm.listen(psl, PhoneStateListener.LISTEN_NONE);
         if (tts != null) {
             tts.stop();
             tts.shutdown();
+        }
+        if (tts2 != null) {
+            tts2.stop();
+            tts2.shutdown();
         }
         unregisterReceiver(notificationReceiver);
         unregisterReceiver(textReceiver);
@@ -178,10 +207,11 @@ public class CarMode extends Service {
                         .setSmallIcon(R.drawable.ic_directions_car_white_24dp)
                         .setContentTitle(getString(R.string.car_mode_on))
                         .setContentText(getString(R.string.exit_car_mode))
-                        .setOngoing(true);
+                        .setOngoing(true)
+                        .setColor(ContextCompat.getColor(this, R.color.primary));
         mBuilder.setContentIntent(createNotDrivingPendingIntent());
-        nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(Utils.NOTIFICATION_ID, mBuilder.build());
+        Notification notification = mBuilder.build();
+        NotificationManagerCompat.from(this).notify(Utils.NOTIFICATION_ID, notification);
         notificationReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -201,9 +231,6 @@ public class CarMode extends Service {
 
     private void getUserSettings() {
         phone = Utils.getPhoneOption(this);
-        autoreply = Utils.isAutoReply(this);
-        msg = Utils.getAutoReplyMessage(this);
-
     }
 
     private void silent() {

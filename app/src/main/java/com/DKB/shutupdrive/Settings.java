@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -18,7 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 public class Settings extends AppCompatActivity {
     private static Preference messagePreference;
     private static ListPreference phonePreference;
-    private static CheckBoxPreference gpsPreference, autoPreference;
+    private static SwitchPreference gpsPreference, autoPreference;
     private static Context context;
     private static SharedPreferences sharedPreferences;
 
@@ -40,8 +40,8 @@ public class Settings extends AppCompatActivity {
             addPreferencesFromResource(R.xml.prefs);
             sharedPreferences = getPreferenceManager().getSharedPreferences();
             messagePreference = getPreferenceScreen().findPreference(getString(R.string.key_auto_reply_message));
-            gpsPreference = (CheckBoxPreference) getPreferenceScreen().findPreference(getString(R.string.key_gps));
-            autoPreference = (CheckBoxPreference) getPreferenceScreen().findPreference(getString(R.string.key_auto_reply));
+            gpsPreference = (SwitchPreference) getPreferenceScreen().findPreference(getString(R.string.key_gps));
+            autoPreference = (SwitchPreference) getPreferenceScreen().findPreference(getString(R.string.key_auto_reply));
             messagePreference.setSummary(Utils.getAutoReplyMessage(context));
             messagePreference.setEnabled(Utils.isAutoReply(context));
 

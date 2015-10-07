@@ -1,12 +1,15 @@
 package com.DKB.shutupdrive;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 /**
@@ -37,8 +40,6 @@ class Utils {
     public static final int PERMISSION_REQUEST_CODE_PHONE = 3;
     public static final int PERMISSION_REQUEST_CODE_LOCATION = 4;
     public static final int PERMISSION_REQUEST_CODE_CONTACTS = 6;
-
-    public static final String TUTORIAL_NUM_KEY = "tutNum";
 
     public static final String ACTION_NOTIFICATION_CLICKED = "com.DKB.shutupdrive.ACTION_NOTIFICATION_CLICKED";
 
@@ -77,11 +78,7 @@ class Utils {
     public static double millisToHours(long millis) {
         return millis / MILLIS_IN_HOUR;
     }
-    
-    public static boolean isAutoStart(Context c) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
-        return prefs.getBoolean(c.getString(R.string.key_auto_start), false);
-    }
+
 
     public static long getNotDrivingTime(Context c) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
@@ -91,6 +88,11 @@ class Utils {
     public static void setNotDrivingTime(Context c, long time) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         prefs.edit().putLong(c.getString(R.string.key_not_driving_time), time).apply();
+    }
+
+    public static boolean shouldReadMessages(Context c){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        return prefs.getBoolean(c.getString(R.string.key_read_messages), false);
     }
 
     public static boolean getGPS(Context c) {
@@ -162,21 +164,23 @@ class Utils {
     public static final int DETECTION_THRESHOLD = 75;
 
     public static String callerId(Context c, String phoneNumber) {
-        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
-        ContentResolver resolver = c.getContentResolver();
-        Cursor cur = resolver.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
-        if (cur != null && cur.moveToFirst()) {
-            String value = cur.getString(cur.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-            if (value != null) {
-                cur.close();
-                return value;
+        if(ContextCompat.checkSelfPermission(c, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+            ContentResolver resolver = c.getContentResolver();
+            Cursor cur = resolver.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+            if (cur != null && cur.moveToFirst()) {
+                String value = cur.getString(cur.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                if (value != null) {
+                    cur.close();
+                    return value;
+                }
             }
-        }
-        try {
-            assert cur != null;
-            cur.close();
-        } catch (NullPointerException e) {
-            Log.e("Utils", e.getMessage());
+            try {
+                assert cur != null;
+                cur.close();
+            } catch (NullPointerException e) {
+                Log.e("Utils", e.getMessage());
+            }
         }
         String readNumber = "";
         for (int i = 0; i < phoneNumber.length(); i++) {

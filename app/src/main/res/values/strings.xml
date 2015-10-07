@@ -27,7 +27,6 @@
     <string name="dkb_software">{ DKB }\nSoftware</string>
 
     <string name="key_running">Running</string>
-    <string name="key_auto_start">autoStart</string>
     <string name="key_not_driving_time">NotDrivingTime</string>
     <string name="key_gps_driving">gpsDrive</string>
     <string name="key_gps">gps</string>
@@ -42,6 +41,13 @@
     <string name="action_share">Share</string>
     <string name="dot">• </string>
     <string name="get_started">GET STARTED</string>
+    <string name="pref_auto_reply_message_title">Auto reply message</string>
+    <string name="pref_auto_reply_message_summary">This message will be automatically sent while driving.</string>
+    <string name="pref_auto_reply_title">Auto reply</string>
+    <string name="pref_improve_accuracy_title">Improve accuracy (experimental)</string>
+    <string name="pref_phone_calls_title">Phone calls</string>
+    <string name="pref_read_text_title">Read out messages</string>
+    <string name="key_read_messages">readMessages</string>
 
 
 </resources>

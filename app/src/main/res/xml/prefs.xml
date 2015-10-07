@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
+    <SwitchPreference
         android:defaultValue="true"
-        android:key="autoReply"
-        android:title="Auto reply" />
+        android:key="@string/key_auto_reply"
+        android:title="@string/pref_auto_reply_title" />
     <EditTextPreference
-        android:key="msg"
-        android:summary="This message will be automatically sent while driving."
-        android:title="Auto reply message" />
+        android:key="@string/key_auto_reply_message"
+        android:summary="@string/pref_auto_reply_message_summary"
+        android:title="@string/pref_auto_reply_message_title" />
     <ListPreference
         android:defaultValue="2"
         android:entries="@array/phoneOptions"
         android:entryValues="@array/phoneValues"
-        android:key="phoneOpt"
-        android:title="Phone calls" />
-    <CheckBoxPreference
+        android:key="@string/key_phone_option"
+        android:title="@string/pref_phone_calls_title" />
+    <!--<SwitchPreference-->
+        <!--android:defaultValue="false"-->
+        <!--android:title="@string/pref_read_text_title"-->
+        <!--android:key="@string/key_read_messages"/>-->
+    <SwitchPreference
         android:defaultValue="false"
-        android:key="autoStart"
-        android:title="Start when opened" />
-
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="gps"
-        android:title="Improve accuracy (experimental)" />
+        android:key="@string/key_gps"
+        android:title="@string/pref_improve_accuracy_title" />
 </PreferenceScreen>
