@@ -30,7 +30,7 @@ class Utils {
 
     public static final double DRIVING_SPEED_THRESHOLD = 8.5;
 
-    public static final boolean DEVELOPER = false;
+    public static final boolean DEVELOPER = true;
 
     public static final int PHONE_BLOCK_CALLS = 1;
     public static final int PHONE_READ_CALLER = 2;

@@ -23,7 +23,6 @@ public class Splash extends Activity {
             public void run() {
                 Intent i;
                 if (Utils.isFirst(getApplicationContext())) {
-                    Utils.setFirst(getApplicationContext(), false);
                     i = new Intent(getApplicationContext(), Tutorial.class);
                 } else {
                     i = new Intent(getApplicationContext(), MainActivity.class);

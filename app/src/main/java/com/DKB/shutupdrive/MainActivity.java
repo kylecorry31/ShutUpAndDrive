@@ -147,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        if (Utils.DEVELOPER)
+            menu.add(getString(R.string.tutorial));
         MenuItem item = menu.findItem(R.id.action_share);
         ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         Intent i = new Intent(Intent.ACTION_SEND);
@@ -182,18 +184,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                switch (item.getItemId()) {
-                    case R.id.action_settings:
-                        // settings menus
-                        Intent openSettings = new Intent(getApplicationContext(), Settings.class);
-                        startActivity(openSettings);
-                        break;
-                    case R.id.action_tutorial:
-                        // Tutorial
-                        Intent openTut = new Intent(getApplicationContext(), Tutorial.class);
-                        startActivity(openTut);
-                        finish();
-                        break;
+                if (item.getTitle().equals(getString(R.string.tutorial))) {
+                    // Tutorial
+                    Intent openTut = new Intent(getApplicationContext(), Tutorial.class);
+                    startActivity(openTut);
+                    finish();
+                } else if (item.getItemId() == R.id.action_settings) {
+                    // settings menus
+                    Intent openSettings = new Intent(getApplicationContext(), Settings.class);
+                    startActivity(openSettings);
                 }
             }
         }, fadeOut.getDuration());

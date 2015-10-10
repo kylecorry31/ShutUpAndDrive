@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +15,10 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by kyle on 9/6/15.
@@ -30,19 +33,35 @@ public class Tutorial extends FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
 
-    private Button start;
+    private TextView skip, done;
+
+    private ImageButton next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.layout_tutorial);
+        setContentView(R.layout.layout_tutorial2);
         getWindow().setBackgroundDrawable(null);
         progressDots = (LinearLayout) findViewById(R.id.progressDots);
-        start = (Button) findViewById(R.id.getStarted);
-        start.setOnClickListener(new View.OnClickListener() {
+        skip = (TextView) findViewById(R.id.skip);
+        done = (TextView) findViewById(R.id.done);
+        next = (ImageButton) findViewById(R.id.next);
+
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.setFirst(getApplicationContext(), false);
+                System.gc();
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.setFirst(getApplicationContext(), false);
                 System.gc();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
@@ -52,6 +71,12 @@ public class Tutorial extends FragmentActivity {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ContentPageAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.arrowScroll(View.FOCUS_RIGHT);
+            }
+        });
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -61,9 +86,17 @@ public class Tutorial extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 2) {
-                    enableSMS();
+                    if (Utils.isFirst(getApplication()))
+                        enableSMS();
+                    skip.setVisibility(View.VISIBLE);
+                    done.setVisibility(View.GONE);
+                    next.setVisibility(View.VISIBLE);
                 } else if (position == 3) {
-                    enablePhone();
+                    if (Utils.isFirst(getApplication()))
+                        enablePhone();
+                    skip.setVisibility(View.GONE);
+                    done.setVisibility(View.VISIBLE);
+                    next.setVisibility(View.INVISIBLE);
                 }
                 for (int i = 0; i < NUM_PAGES; i++) {
                     if (i == position)
@@ -83,11 +116,8 @@ public class Tutorial extends FragmentActivity {
     @Override
     public void onBackPressed() {
         if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
             super.onBackPressed();
         } else {
-            // Otherwise, select the previous step.
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
@@ -125,16 +155,35 @@ public class Tutorial extends FragmentActivity {
 
     private void enableSMS() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.SEND_SMS}, Utils.PERMISSION_REQUEST_CODE_SMS);
+                == PackageManager.PERMISSION_GRANTED) {
+            Utils.setAutoReply(this, true);
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+                Toast.makeText(this, "SMS permission is needed to auto reply to messages.",
+                        Toast.LENGTH_SHORT).show();
+            }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, Utils.PERMISSION_REQUEST_CODE_SMS);
         }
+
     }
 
     private void enablePhone() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS}, Utils.PERMISSION_REQUEST_CODE_PHONE);
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED) {
+            Utils.setPhoneOption(this, Utils.PHONE_READ_CALLER);
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE)) {
+                Toast.makeText(this, "Read Phone State permission is needed to detect when the phone is ringing.",
+                        Toast.LENGTH_SHORT).show();
+            }
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS)) {
+                Toast.makeText(this, "Read Contacts permission is needed to read out the name of the caller.",
+                        Toast.LENGTH_SHORT).show();
+            }
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS},
+                    Utils.PERMISSION_REQUEST_CODE_PHONE);
         }
     }
 
@@ -146,6 +195,8 @@ public class Tutorial extends FragmentActivity {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Utils.setAutoReply(this, true);
                 } else {
+                    Toast.makeText(this, "Permission was not granted, auto reply disabled.",
+                            Toast.LENGTH_SHORT).show();
                     Utils.setAutoReply(this, false);
                 }
                 return;
@@ -157,7 +208,7 @@ public class Tutorial extends FragmentActivity {
                         (grantResults[0] != PackageManager.PERMISSION_GRANTED && permissions[0].contentEquals(Manifest.permission.READ_PHONE_STATE))) {
                     Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_BLOCK_CALLS);
                 } else {
-                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_ALLOW_CALLS);
+                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_READ_CALLER);
                 }
             }
         }

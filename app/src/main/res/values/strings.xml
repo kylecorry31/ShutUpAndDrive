@@ -48,6 +48,8 @@
     <string name="pref_phone_calls_title">Phone calls</string>
     <string name="pref_read_text_title">Read out messages</string>
     <string name="key_read_messages">readMessages</string>
+    <string name="skip">SKIP</string>
+    <string name="done">DONE</string>
 
 
 </resources>
