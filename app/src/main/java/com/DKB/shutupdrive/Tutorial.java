@@ -14,11 +14,15 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.DKB.shutupdrive.tutorial.AutoReplyContent;
+import com.DKB.shutupdrive.tutorial.CallerIDContent;
+import com.DKB.shutupdrive.tutorial.DrivingContent;
+import com.DKB.shutupdrive.tutorial.MainTutorialContent;
+import com.DKB.shutupdrive.ui.DotsPageIndicator;
 
 /**
  * Created by kyle on 9/6/15.
@@ -29,10 +33,6 @@ public class Tutorial extends FragmentActivity {
 
     private ViewPager mPager;
 
-    private LinearLayout progressDots;
-
-    private PagerAdapter mPagerAdapter;
-
     private TextView skip, done;
 
     private ImageButton next;
@@ -41,9 +41,9 @@ public class Tutorial extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.layout_tutorial2);
+        setContentView(R.layout.layout_tutorial);
         getWindow().setBackgroundDrawable(null);
-        progressDots = (LinearLayout) findViewById(R.id.progressDots);
+        DotsPageIndicator progressDots = (DotsPageIndicator) findViewById(R.id.progressDots);
         skip = (TextView) findViewById(R.id.skip);
         done = (TextView) findViewById(R.id.done);
         next = (ImageButton) findViewById(R.id.next);
@@ -69,7 +69,7 @@ public class Tutorial extends FragmentActivity {
             }
         });
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ContentPageAdapter(getSupportFragmentManager());
+        PagerAdapter mPagerAdapter = new ContentPageAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +77,7 @@ public class Tutorial extends FragmentActivity {
                 mPager.arrowScroll(View.FOCUS_RIGHT);
             }
         });
+        progressDots.setViewPager(mPager);
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -98,12 +99,6 @@ public class Tutorial extends FragmentActivity {
                     done.setVisibility(View.VISIBLE);
                     next.setVisibility(View.INVISIBLE);
                 }
-                for (int i = 0; i < NUM_PAGES; i++) {
-                    if (i == position)
-                        ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.accent));
-                    else
-                        ((TextView) progressDots.getChildAt(i)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-                }
             }
 
             @Override
@@ -122,10 +117,7 @@ public class Tutorial extends FragmentActivity {
         }
     }
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
+
     private class ContentPageAdapter extends FragmentStatePagerAdapter {
         public ContentPageAdapter(FragmentManager fm) {
             super(fm);

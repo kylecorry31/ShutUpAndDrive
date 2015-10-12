@@ -1,7 +1,6 @@
 package com.DKB.shutupdrive;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,7 +12,6 @@ import android.preference.SwitchPreference;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -132,7 +130,7 @@ public class Settings extends AppCompatActivity {
         }
     }
 
-    public String getPhoneOption() {
+    private String getPhoneOption() {
         int phoneOption = Utils.getPhoneOption(context);
         switch (phoneOption) {
             case Utils.PHONE_BLOCK_CALLS:

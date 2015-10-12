@@ -1,72 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryLight">
+    android:background="@color/primaryLight"
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="450dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
     </android.support.v4.view.ViewPager>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:padding="16dp"
+            android:text="@string/skip"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <com.DKB.shutupdrive.ui.DotsPageIndicator
             android:id="@+id/progressDots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+            custom:dotColor="@color/white"
+            custom:dotSelectedColor="@color/accent"
+            custom:dotSize="16sp"
+            custom:padding="10dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/dot"
-                android:textColor="@color/accent"
-                android:textSize="32dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/dot"
-                android:textColor="@android:color/white"
-                android:textSize="32dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/dot"
-                android:textColor="@android:color/white"
-                android:textSize="32dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/dot"
-                android:textColor="@android:color/white"
-                android:textSize="32dp" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/getStarted"
+        <ImageButton
+            android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/white"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
             android:padding="16dp"
-            android:text="@string/get_started" />
-    </LinearLayout>
+            android:src="@drawable/ic_keyboard_arrow_right_white_36dp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="16dp"
+            android:text="@string/done"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

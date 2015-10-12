@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DotsPageIndicator">
+        <attr name="dotSize" format="dimension" />
+        <attr name="dotSelectedColor" format="color" />
+        <attr name="dotColor" format="color" />
+        <attr name="padding" format="dimension"/>
+    </declare-styleable>
+</resources>
