@@ -27,7 +27,6 @@ import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import java.util.Date;
 import java.util.Locale;
 
 public class CarMode extends Service {
@@ -38,6 +37,7 @@ public class CarMode extends Service {
     private PhoneStateListener psl;
     private TelephonyManager tm;
     private AudioManager am;
+    public static boolean running = false;
     private BroadcastReceiver textReceiver, notificationReceiver;
 
     @Override
@@ -48,6 +48,7 @@ public class CarMode extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         setUp();
+        running = true;
         Utils.setStartTime(this, System.currentTimeMillis());
         return START_STICKY;
     }
@@ -72,7 +73,7 @@ public class CarMode extends Service {
             @Override
             public void onReceive(final Context context, Intent intent) {
                 if (intent.getAction().equals(
-                        "android.provider.Telephony.SMS_RECEIVED") && Utils.isAutoReply(context)) {
+                        "android.provider.Telephony.SMS_RECEIVED")) {
                     Bundle bundle = intent.getExtras();
                     SmsMessage[] msgs;
                     String msg_from;
@@ -103,19 +104,16 @@ public class CarMode extends Service {
                                                     tts2.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null, null);
                                                 else
                                                     tts2.speak(readNumber, TextToSpeech.QUEUE_FLUSH, null);
-
-//                                            while (tts2.isSpeaking()) {
-//                                                continue;
-//                                            }
-//                                            // Get user speech
                                             }
                                         }
 
                                     });
                                 }
-                                SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(msg_from, null, msg,
-                                        null, null);
+                                if (Utils.isAutoReply(getApplicationContext())) {
+                                    SmsManager smsManager = SmsManager.getDefault();
+                                    smsManager.sendTextMessage(msg_from, null, msg,
+                                            null, null);
+                                }
                             }
                         } catch (Exception e) {
                             Log.d("Text", e.getMessage());
@@ -185,6 +183,7 @@ public class CarMode extends Service {
     public void onDestroy() {
         NotificationManagerCompat.from(this).cancel(Utils.NOTIFICATION_ID);
         restorePreviousSoundMode();
+        running = false;
         if (phone != Utils.PHONE_BLOCK_CALLS)
             tm.listen(psl, PhoneStateListener.LISTEN_NONE);
         if (tts != null) {
@@ -216,7 +215,7 @@ public class CarMode extends Service {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Utils.ACTION_NOTIFICATION_CLICKED)) {
-                    Utils.setNotDrivingTime(context, new Date().getTime());
+                    Utils.setNotDrivingTime(context, System.currentTimeMillis());
                     stopSelf();
                 }
             }

@@ -39,6 +39,12 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
         if (Utils.getGPSDrive(this)) {
             stopSelf();
             self = true;
@@ -48,14 +54,8 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
-            mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(1000);
-            mLocationRequest.setFastestInterval(500);
-            mLocationRequest.setNumUpdates(5);
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
             mGoogleApiClient.connect();
         }
-        return START_STICKY;
     }
 
     @Override
@@ -69,16 +69,22 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
 
     @Override
     public void onConnected(Bundle bundle) {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(500);
+        mLocationRequest.setNumUpdates(5);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        mGoogleApiClient.connect();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
+        stopSelf();
+        self = true;
     }
 }
