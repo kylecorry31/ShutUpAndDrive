@@ -194,8 +194,10 @@ public class CarMode extends Service {
             tts2.stop();
             tts2.shutdown();
         }
-        unregisterReceiver(notificationReceiver);
-        unregisterReceiver(textReceiver);
+        if (notificationReceiver != null)
+            unregisterReceiver(notificationReceiver);
+        if (textReceiver != null)
+            unregisterReceiver(textReceiver);
         Utils.addTime(this, System.currentTimeMillis() - Utils.getStartTime(this));
         super.onDestroy();
     }
