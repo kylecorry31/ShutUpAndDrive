@@ -36,11 +36,13 @@ public class DetectedActivityIntentService extends IntentService {
             int activityType = mostProbableActivity.getType();
             long waitTime = Utils.getNotDrivingTime(this);
             boolean diffTimeOK = (new Date().getTime() - waitTime) >= Utils.minutesToMillis(10);
-            if (confidence >= Utils.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK && !CarMode.running) {
-                if (Utils.getGPS(this) && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-                    startService(new Intent(this, SpeedService.class));
-                else
-                    startService(new Intent(this, CarMode.class));
+            if (confidence >= Utils.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
+                if (!CarMode.running) {
+                    if (Utils.getGPS(this) && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                        startService(new Intent(this, SpeedService.class));
+                    else
+                        startService(new Intent(this, CarMode.class));
+                }
             } else if (confidence >= Utils.DETECTION_THRESHOLD) {
                 stopService(new Intent(this, CarMode.class));
                 Utils.setGPSDrive(this, false);
