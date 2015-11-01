@@ -3,7 +3,7 @@
 > Stay safe while you drive.
 
 <center>
-![App screenshot](https://lh3.googleusercontent.com/JHa_VfrHgYubdEW93n4Thlt88unrpNHQ9Z8Cs1QtrntT5SJErCS2pf8GD_8RGC3m4bc=h900-rw)
+![App screenshot](https://raw.githubusercontent.com/dkbsoftware/dkbsoftware.github.io/master/res/images/splash.png)
 </center>
 
 ## About
