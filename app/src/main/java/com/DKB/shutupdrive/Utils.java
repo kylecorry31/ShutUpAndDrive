@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
@@ -30,7 +31,7 @@ class Utils {
 
     public static final double DRIVING_SPEED_THRESHOLD = 8.5;
 
-    public static final boolean DEVELOPER = true;
+    public static final boolean DEVELOPER = false;
 
     public static final int PHONE_BLOCK_CALLS = 1;
     public static final int PHONE_READ_CALLER = 2;
@@ -90,7 +91,7 @@ class Utils {
         prefs.edit().putLong(c.getString(R.string.key_not_driving_time), time).apply();
     }
 
-    public static boolean shouldReadMessages(Context c){
+    public static boolean shouldReadMessages(Context c) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
         return prefs.getBoolean(c.getString(R.string.key_read_messages), false);
     }
@@ -151,6 +152,10 @@ class Utils {
 
     public static boolean isFirst(Context c) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !prefs.getBoolean(c.getString(R.string.key_marshmallow), false)) {
+            prefs.edit().putBoolean(c.getString(R.string.key_marshmallow), true).apply();
+            return true;
+        }
         return prefs.getBoolean(c.getString(R.string.key_first_time), true);
     }
 
@@ -164,7 +169,7 @@ class Utils {
     public static final int DETECTION_THRESHOLD = 75;
 
     public static String callerId(Context c, String phoneNumber) {
-        if(ContextCompat.checkSelfPermission(c, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(c, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
             ContentResolver resolver = c.getContentResolver();
             Cursor cur = resolver.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);

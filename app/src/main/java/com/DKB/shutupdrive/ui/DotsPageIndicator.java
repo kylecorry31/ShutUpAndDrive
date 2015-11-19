@@ -39,9 +39,8 @@ public class DotsPageIndicator extends LinearLayout implements ViewPager.OnPageC
     }
 
     public void setViewPager(ViewPager pager) {
-        ViewPager pager1 = pager;
-        pager1.addOnPageChangeListener(this);
-        this.pages = pager1.getAdapter().getCount();
+        pager.addOnPageChangeListener(this);
+        this.pages = pager.getAdapter().getCount();
         createDots();
     }
 

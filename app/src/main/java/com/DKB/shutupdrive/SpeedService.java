@@ -18,7 +18,6 @@ import com.google.android.gms.location.LocationServices;
 public class SpeedService extends Service implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
     private boolean self = false;
 
     @Override
@@ -69,7 +68,7 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
 
     @Override
     public void onConnected(Bundle bundle) {
-        mLocationRequest = new LocationRequest();
+        LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(500);
         mLocationRequest.setNumUpdates(5);
