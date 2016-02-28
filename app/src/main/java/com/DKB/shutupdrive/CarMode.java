@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -31,12 +30,10 @@ import java.util.Locale;
 
 public class CarMode extends Service {
 
-    private int previousAudioMode;
-    private int phone;
     private TextToSpeech tts, tts2;
     private PhoneStateListener psl;
     private TelephonyManager tm;
-    private AudioManager am;
+    private RingerMode ringer;
     public static boolean running = false;
     private BroadcastReceiver textReceiver, notificationReceiver;
 
@@ -49,19 +46,17 @@ public class CarMode extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         setUp();
         running = true;
-        Utils.setStartTime(this, System.currentTimeMillis());
+        UserSettings.setStartTime(this, System.currentTimeMillis());
         return START_STICKY;
     }
 
     private void setUp() {
-        am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-        previousAudioMode = am.getRingerMode();
-        getUserSettings();
-        silent();
+        ringer = new RingerMode(this);
+        ringer.toSilentMode();
         notification();
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
             setupTextReceiver();
-        if (phone != Utils.PHONE_BLOCK_CALLS && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+        if (UserSettings.getPhoneOption(this) != Utils.PHONE_BLOCK_CALLS && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             createPhoneStateListener();
             tm.listen(psl, PhoneStateListener.LISTEN_CALL_STATE);
@@ -77,7 +72,7 @@ public class CarMode extends Service {
                     Bundle bundle = intent.getExtras();
                     SmsMessage[] msgs;
                     String msg_from;
-                    String msg = Utils.getAutoReplyMessage(context);
+                    String msg = UserSettings.getAutoReplyMessage(context);
                     if (bundle != null) {
                         try {
                             Object[] pdus = (Object[]) bundle.get("pdus");
@@ -91,7 +86,7 @@ public class CarMode extends Service {
                                 }
                                 msg_from = msgs[i].getOriginatingAddress();
                                 final String phoneNumber = msg_from;
-                                if (Utils.shouldReadMessages(context)) {
+                                if (UserSettings.shouldReadMessages(context)) {
                                     final String message = msgs[i].getMessageBody();
                                     tts2 = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
                                         @SuppressWarnings("deprecation")
@@ -109,7 +104,7 @@ public class CarMode extends Service {
 
                                     });
                                 }
-                                if (Utils.isAutoReply(getApplicationContext())) {
+                                if (UserSettings.isAutoReply(getApplicationContext())) {
                                     SmsManager smsManager = SmsManager.getDefault();
                                     smsManager.sendTextMessage(msg_from, null, msg,
                                             null, null);
@@ -132,7 +127,7 @@ public class CarMode extends Service {
                 //if the phone is ringing
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
                     //read out the caller name
-                    if (phone == Utils.PHONE_READ_CALLER) {
+                    if (UserSettings.getPhoneOption(getApplicationContext()) == Utils.PHONE_READ_CALLER) {
                         tts = new TextToSpeech(CarMode.this, new TextToSpeech.OnInitListener() {
                             @SuppressWarnings("deprecation")
                             @Override
@@ -148,7 +143,7 @@ public class CarMode extends Service {
                             }
                         });
                     } else {
-                        normal();
+                        ringer.toNormalMode();
                     }
 
                 }
@@ -158,8 +153,8 @@ public class CarMode extends Service {
                         tts.stop();
                         tts.shutdown();
                     }
-                    if (phone == Utils.PHONE_ALLOW_CALLS) {
-                        silent();
+                    if (UserSettings.getPhoneOption(getApplicationContext()) == Utils.PHONE_ALLOW_CALLS) {
+                        ringer.toSilentMode();
                     }
                 }
                 if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
@@ -169,8 +164,8 @@ public class CarMode extends Service {
                         tts.shutdown();
                     }
 
-                    if (phone == Utils.PHONE_ALLOW_CALLS) {
-                        silent();
+                    if (UserSettings.getPhoneOption(getApplicationContext()) == Utils.PHONE_ALLOW_CALLS) {
+                        ringer.toSilentMode();
                     }
                 }
             }
@@ -182,9 +177,9 @@ public class CarMode extends Service {
     @Override
     public void onDestroy() {
         NotificationManagerCompat.from(this).cancel(Utils.NOTIFICATION_ID);
-        restorePreviousSoundMode();
+        ringer.restoreAudioProfileOnStart();
         running = false;
-        if (phone != Utils.PHONE_BLOCK_CALLS)
+        if (UserSettings.getPhoneOption(this) != Utils.PHONE_BLOCK_CALLS)
             tm.listen(psl, PhoneStateListener.LISTEN_NONE);
         if (tts != null) {
             tts.stop();
@@ -198,7 +193,7 @@ public class CarMode extends Service {
             unregisterReceiver(notificationReceiver);
         if (textReceiver != null)
             unregisterReceiver(textReceiver);
-        Utils.addTime(this, System.currentTimeMillis() - Utils.getStartTime(this));
+        UserSettings.addTime(this, System.currentTimeMillis() - UserSettings.getStartTime(this));
         super.onDestroy();
     }
 
@@ -217,7 +212,7 @@ public class CarMode extends Service {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Utils.ACTION_NOTIFICATION_CLICKED)) {
-                    Utils.setNotDrivingTime(context, System.currentTimeMillis());
+                    UserSettings.setNotDrivingTime(context, System.currentTimeMillis());
                     stopSelf();
                 }
             }
@@ -230,33 +225,4 @@ public class CarMode extends Service {
         return PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
     }
 
-    private void getUserSettings() {
-        phone = Utils.getPhoneOption(this);
-    }
-
-    private void silent() {
-        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-    }
-
-    private void vibrate() {
-        am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-    }
-
-    private void normal() {
-        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-    }
-
-    private void restorePreviousSoundMode() {
-        switch (previousAudioMode) {
-            case AudioManager.RINGER_MODE_VIBRATE:
-                vibrate();
-                break;
-            case AudioManager.RINGER_MODE_NORMAL:
-                normal();
-                break;
-            default:
-                silent();
-                break;
-        }
-    }
 }

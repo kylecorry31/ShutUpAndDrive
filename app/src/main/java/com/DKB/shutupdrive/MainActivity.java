@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
-        getWindow().setBackgroundDrawable(null);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         statusText = (TextView) findViewById(R.id.status);
         mottoText = (TextView) findViewById(R.id.motto);
@@ -77,21 +77,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void setUpUI() {
+        slideDownTitleImage();
+        showFAB();
+        fadeInText();
+    }
+
+    private void slideDownTitleImage() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.abc_slide_in_top);
             slideDown.setStartOffset(275);
             titleImage.startAnimation(slideDown);
         }
+    }
+
+    private void showFAB() {
         Animation fabIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.design_fab_in);
         fabIn.setStartOffset(250);
         fabIn.setDuration(250);
+        fab.startAnimation(fabIn);
+    }
+
+    private void fadeInText() {
         Animation fadeIn = AnimationUtils.loadAnimation(getBaseContext(), R.anim.abc_fade_in);
         fadeIn.setStartOffset(250);
-        fab.startAnimation(fabIn);
         statusText.startAnimation(fadeIn);
         descText.startAnimation(fadeIn);
         mottoText.startAnimation(fadeIn);
-
     }
 
     private synchronized void buildGoogleApiClient() {
@@ -247,13 +258,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toast = true;
         if (mGoogleApiClient.isConnected() && !running) {
             startActivityRecognition();
-            Utils.setNotDrivingTime(this, 0);
-            Utils.setGPSDrive(this, false);
+            UserSettings.setNotDrivingTime(this, 0);
+            UserSettings.setGPSDrive(this, false);
         } else if (mGoogleApiClient.isConnected()) {
             stopActivityRecognition();
             stopService(new Intent(this, CarMode.class));
-            Utils.setNotDrivingTime(this, 0);
-            Utils.setGPSDrive(this, false);
+            UserSettings.setNotDrivingTime(this, 0);
+            UserSettings.setGPSDrive(this, false);
         } else
             Toast.makeText(this, getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
 
