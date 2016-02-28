@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         running = Utils.isRunning(this);
         toast = false;
         buildGoogleApiClient();
+        startService(new Intent(this, CarMode.class));
     }
 
     private void createAds() {
