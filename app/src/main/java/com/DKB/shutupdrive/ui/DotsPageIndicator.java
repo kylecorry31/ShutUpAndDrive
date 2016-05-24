@@ -44,12 +44,17 @@ public class DotsPageIndicator extends LinearLayout implements ViewPager.OnPageC
         createDots();
     }
 
-    private void createDots(){
+    private void createDots() {
         for (int i = 0; i < pages; i++) {
             TextView tv = new TextView(getContext());
             tv.setText(getContext().getString(R.string.dot));
             tv.setTextSize(size);
-            tv.setPadding(padding, padding, padding, padding);
+            int leftPadding = 0;
+            int rightPadding = padding;
+            if (i == 0) {
+                leftPadding = padding;
+            }
+            tv.setPadding(leftPadding, padding, rightPadding, padding);
             tv.setGravity(Gravity.CENTER);
             if (i == 0) {
                 tv.setTextColor(dotSelectedColor);

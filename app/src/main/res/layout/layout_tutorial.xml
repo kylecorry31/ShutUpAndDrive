@@ -36,8 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            custom:dotColor="@color/white"
-            custom:dotSelectedColor="@color/accent"
+            custom:dotColor="#64ffffff"
+            custom:dotSelectedColor="@color/white"
             custom:dotSize="16sp"
             custom:padding="10dp" />
 

@@ -14,6 +14,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,50 +34,61 @@ public class Tutorial extends FragmentActivity {
 
     private ViewPager mPager;
 
-    private TextView skip, done;
+//    private TextView skip, done;
+//
+//    private ImageButton next;
 
-    private ImageButton next;
+    private Button getStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.layout_tutorial);
+        setContentView(R.layout.layout_tutorial2);
         getWindow().setBackgroundDrawable(null);
         DotsPageIndicator progressDots = (DotsPageIndicator) findViewById(R.id.progressDots);
-        skip = (TextView) findViewById(R.id.skip);
-        done = (TextView) findViewById(R.id.done);
-        next = (ImageButton) findViewById(R.id.next);
-
-        skip.setOnClickListener(new View.OnClickListener() {
+        getStarted = (Button) findViewById(R.id.getStarted);
+//        skip = (TextView) findViewById(R.id.skip);
+//        done = (TextView) findViewById(R.id.done);
+//        next = (ImageButton) findViewById(R.id.next);
+        getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utils.setFirst(getApplicationContext(), false);
-                System.gc();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Utils.setFirst(getApplicationContext(), false);
-                System.gc();
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+//        skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Utils.setFirst(getApplicationContext(), false);
+//                System.gc();
+//                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
+//        done.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Utils.setFirst(getApplicationContext(), false);
+//                System.gc();
+//                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
         mPager = (ViewPager) findViewById(R.id.pager);
         PagerAdapter mPagerAdapter = new ContentPageAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPager.arrowScroll(View.FOCUS_RIGHT);
-            }
-        });
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mPager.arrowScroll(View.FOCUS_RIGHT);
+//            }
+//        });
         progressDots.setViewPager(mPager);
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -89,15 +101,15 @@ public class Tutorial extends FragmentActivity {
                 if (position == 2) {
                     if (Utils.isFirst(getApplication()))
                         enableSMS();
-                    skip.setVisibility(View.VISIBLE);
-                    done.setVisibility(View.GONE);
-                    next.setVisibility(View.VISIBLE);
+//                    skip.setVisibility(View.VISIBLE);
+//                    done.setVisibility(View.GONE);
+//                    next.setVisibility(View.VISIBLE);
                 } else if (position == 3) {
                     if (Utils.isFirst(getApplication()))
                         enablePhone();
-                    skip.setVisibility(View.GONE);
-                    done.setVisibility(View.VISIBLE);
-                    next.setVisibility(View.INVISIBLE);
+//                    skip.setVisibility(View.GONE);
+//                    done.setVisibility(View.VISIBLE);
+//                    next.setVisibility(View.INVISIBLE);
                 }
             }
 
