@@ -27,7 +27,7 @@ public class DrivingContent extends Fragment {
 
         title.setText(getString(R.string.feature_driving_detection));
         content.setText(getString(R.string.description_driving_detection));
-        pic.setImageResource(R.drawable.driving_car);
+        pic.setImageResource(R.drawable.driving_car_opt);
 
         return rootView;
     }

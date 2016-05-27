@@ -27,7 +27,7 @@ public class AutoReplyContent extends Fragment {
 
         title.setText(getString(R.string.feature_auto_reply));
         content.setText(getString(R.string.description_auto_reply));
-        pic.setImageResource(R.drawable.auto_reply);
+        pic.setImageResource(R.drawable.auto_reply_opt);
 
         return rootView;
     }

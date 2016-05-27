@@ -27,7 +27,7 @@ public class CallerIDContent  extends Fragment {
 
         title.setText(getString(R.string.feature_caller_id_readout));
         content.setText(getString(R.string.description_caller_id_readout));
-        pic.setImageResource(R.drawable.caller_id);
+        pic.setImageResource(R.drawable.caller_id_opt);
 
         return rootView;
     }

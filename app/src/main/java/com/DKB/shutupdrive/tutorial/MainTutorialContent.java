@@ -13,7 +13,7 @@ import com.DKB.shutupdrive.R;
 /**
  * Created by kyle on 9/6/15.
  */
-public class MainTutorialContent  extends Fragment {
+public class MainTutorialContent extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +27,7 @@ public class MainTutorialContent  extends Fragment {
 
         title.setText(getString(R.string.app_name));
         content.setText(getString(R.string.stay_safe));
-        pic.setImageResource(R.drawable.icon);
+        pic.setImageResource(R.drawable.icon_opt);
 
         return rootView;
     }
