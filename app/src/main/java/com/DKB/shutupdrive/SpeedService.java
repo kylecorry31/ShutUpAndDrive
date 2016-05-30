@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 
+import com.DKB.shutupdrive.utils.UserSettings;
+import com.DKB.shutupdrive.utils.Utils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -28,7 +30,7 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
         if (location.hasSpeed()) {
             if (location.getSpeed() >= Utils.DRIVING_SPEED_THRESHOLD) {
                 startService(new Intent(this, CarMode.class));
-                Utils.setGPSDrive(this, true);
+                UserSettings.setGPSDrive(this, true);
             }
             stopSelf();
         }
@@ -47,7 +49,7 @@ public class SpeedService extends Service implements LocationListener, GoogleApi
     @Override
     public void onCreate() {
         super.onCreate();
-        if (Utils.getGPSDrive(this)) {
+        if (UserSettings.getGPSDrive(this)) {
             stopSelf();
             self = true;
         } else {

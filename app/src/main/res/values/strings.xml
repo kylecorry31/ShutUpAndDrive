@@ -49,6 +49,7 @@
     <string name="key_read_messages">readMessages</string>
     <string name="skip">SKIP</string>
     <string name="done">DONE</string>
+    <string name="icon">icon</string>
 
 
 </resources>

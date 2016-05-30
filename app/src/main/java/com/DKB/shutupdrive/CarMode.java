@@ -8,6 +8,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.DKB.shutupdrive.utils.DrivingMode;
+import com.DKB.shutupdrive.utils.UserSettings;
+
 public class CarMode extends Service {
 
     public static boolean running = false;

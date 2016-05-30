@@ -15,8 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.DKB.shutupdrive.tutorial.AutoReplyContent;
@@ -24,6 +22,8 @@ import com.DKB.shutupdrive.tutorial.CallerIDContent;
 import com.DKB.shutupdrive.tutorial.DrivingContent;
 import com.DKB.shutupdrive.tutorial.MainTutorialContent;
 import com.DKB.shutupdrive.ui.DotsPageIndicator;
+import com.DKB.shutupdrive.utils.UserSettings;
+import com.DKB.shutupdrive.utils.Utils;
 
 /**
  * Created by kyle on 9/6/15.
@@ -54,7 +54,7 @@ public class Tutorial extends FragmentActivity {
         getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.setFirst(getApplicationContext(), false);
+                UserSettings.setFirst(getApplicationContext(), false);
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 finish();
@@ -99,13 +99,13 @@ public class Tutorial extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 2) {
-                    if (Utils.isFirst(getApplication()))
+                    if (UserSettings.isFirst(getApplication()))
                         enableSMS();
 //                    skip.setVisibility(View.VISIBLE);
 //                    done.setVisibility(View.GONE);
 //                    next.setVisibility(View.VISIBLE);
                 } else if (position == 3) {
-                    if (Utils.isFirst(getApplication()))
+                    if (UserSettings.isFirst(getApplication()))
                         enablePhone();
 //                    skip.setVisibility(View.GONE);
 //                    done.setVisibility(View.VISIBLE);
@@ -160,7 +160,7 @@ public class Tutorial extends FragmentActivity {
     private void enableSMS() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
                 == PackageManager.PERMISSION_GRANTED) {
-            Utils.setAutoReply(this, true);
+            UserSettings.setAutoReply(this, true);
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
                 Toast.makeText(this, "SMS permission is needed to auto reply to messages.",
@@ -175,7 +175,7 @@ public class Tutorial extends FragmentActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
                 == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
-            Utils.setPhoneOption(this, Utils.PHONE_READ_CALLER);
+            UserSettings.setPhoneOption(this, Utils.PHONE_READ_CALLER);
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE)) {
                 Toast.makeText(this, "Read Phone State permission is needed to detect when the phone is ringing.",
@@ -197,22 +197,22 @@ public class Tutorial extends FragmentActivity {
         switch (requestCode) {
             case Utils.PERMISSION_REQUEST_CODE_SMS: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Utils.setAutoReply(this, true);
+                    UserSettings.setAutoReply(this, true);
                 } else {
                     Toast.makeText(this, "Permission was not granted, auto reply disabled.",
                             Toast.LENGTH_SHORT).show();
-                    Utils.setAutoReply(this, false);
+                    UserSettings.setAutoReply(this, false);
                 }
                 return;
             }
             case Utils.PERMISSION_REQUEST_CODE_PHONE: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_READ_CALLER);
+                    UserSettings.setPhoneOption(getApplicationContext(), Utils.PHONE_READ_CALLER);
                 } else if ((grantResults[1] != PackageManager.PERMISSION_GRANTED && permissions[1].contentEquals(Manifest.permission.READ_PHONE_STATE)) ||
                         (grantResults[0] != PackageManager.PERMISSION_GRANTED && permissions[0].contentEquals(Manifest.permission.READ_PHONE_STATE))) {
-                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_BLOCK_CALLS);
+                    UserSettings.setPhoneOption(getApplicationContext(), Utils.PHONE_BLOCK_CALLS);
                 } else {
-                    Utils.setPhoneOption(getApplicationContext(), Utils.PHONE_READ_CALLER);
+                    UserSettings.setPhoneOption(getApplicationContext(), Utils.PHONE_READ_CALLER);
                 }
             }
         }

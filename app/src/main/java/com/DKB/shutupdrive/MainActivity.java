@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.DKB.shutupdrive.utils.UserSettings;
+import com.DKB.shutupdrive.utils.Utils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
@@ -60,8 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         descText = (TextView) findViewById(R.id.desc);
         titleImage = (ImageView) findViewById(R.id.titleImage);
         adView = (AdView) findViewById(R.id.adView);
+        if (UserSettings.isFirst(getApplicationContext())) {
+            Intent i = new Intent(getApplicationContext(), Tutorial.class);
+            startActivity(i);
+        }
         createAds();
-        running = Utils.isRunning(this);
+        running = UserSettings.isRunning(this);
         toast = false;
         buildGoogleApiClient();
     }
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         running = true;
         fab.setImageResource(R.drawable.ic_stop_white_24dp);
         fab.setContentDescription(getString(R.string.stop_button));
-        Utils.setRunning(this, true);
+        UserSettings.setRunning(this, true);
         statusText.setText(getString(R.string.on));
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(
                 mGoogleApiClient,
@@ -165,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
         i.putExtra(Intent.EXTRA_TEXT, "I’ve driven without distractions for " +
-                (int) Math.round(Utils.millisToHours(Utils.getTotalTime(this)))
+                (int) Math.round(Utils.millisToHours(UserSettings.getTotalTime(this)))
                 + " hours!\n\n" + PREVENT + PLAY_STORE_LINK);
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(i);
@@ -213,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         running = false;
         fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         fab.setContentDescription(getString(R.string.start_button));
-        Utils.setRunning(this, false);
+        UserSettings.setRunning(this, false);
         statusText.setText(getString(R.string.off));
         ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(
                 mGoogleApiClient,

@@ -1,4 +1,4 @@
-package com.DKB.shutupdrive;
+package com.DKB.shutupdrive.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

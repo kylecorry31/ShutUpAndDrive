@@ -14,6 +14,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.DKB.shutupdrive.utils.UserSettings;
+import com.DKB.shutupdrive.utils.Utils;
+
 /**
  * Created by kyle on 11/3/14.
  */
@@ -43,8 +46,8 @@ public class Settings extends AppCompatActivity {
             messagePreference = getPreferenceScreen().findPreference(getString(R.string.key_auto_reply_message));
             gpsPreference = (SwitchPreference) getPreferenceScreen().findPreference(getString(R.string.key_gps));
             autoPreference = (SwitchPreference) getPreferenceScreen().findPreference(getString(R.string.key_auto_reply));
-            messagePreference.setSummary(Utils.getAutoReplyMessage(context));
-            messagePreference.setEnabled(Utils.isAutoReply(context));
+            messagePreference.setSummary(UserSettings.getAutoReplyMessage(context));
+            messagePreference.setEnabled(UserSettings.isAutoReply(context));
 
             phonePreference = (ListPreference) getPreferenceScreen().findPreference(getString(R.string.key_phone_option));
             phonePreference.setSummary(getPhoneOption());
@@ -62,10 +65,10 @@ public class Settings extends AppCompatActivity {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key.equals(getString(R.string.key_auto_reply_message))) {
-                String userMessage = Utils.getAutoReplyMessage(context);
+                String userMessage = UserSettings.getAutoReplyMessage(context);
                 messagePreference.setSummary(userMessage);
             } else if (key.equals(getString(R.string.key_auto_reply))) {
-                if (Utils.isAutoReply(context)) {
+                if (UserSettings.isAutoReply(context)) {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)
                             == PackageManager.PERMISSION_GRANTED) {
                         messagePreference.setEnabled(true);
@@ -80,7 +83,7 @@ public class Settings extends AppCompatActivity {
                     messagePreference.setEnabled(false);
                 }
             } else if (key.contentEquals(getString(R.string.key_phone_option))) {
-                if (Utils.getPhoneOption(context) == Utils.PHONE_ALLOW_CALLS) {
+                if (UserSettings.getPhoneOption(context) == Utils.PHONE_ALLOW_CALLS) {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                             == PackageManager.PERMISSION_GRANTED) {
                         phonePreference.setSummary(getPhoneOption());
@@ -91,7 +94,7 @@ public class Settings extends AppCompatActivity {
                         }
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, Utils.PERMISSION_REQUEST_CODE_PHONE);
                     }
-                } else if (Utils.getPhoneOption(context) == Utils.PHONE_READ_CALLER) {
+                } else if (UserSettings.getPhoneOption(context) == Utils.PHONE_READ_CALLER) {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                             != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, Utils.PERMISSION_REQUEST_CODE_PHONE);
@@ -108,7 +111,7 @@ public class Settings extends AppCompatActivity {
                     phonePreference.setSummary(getPhoneOption());
                 }
             } else if (key.contentEquals(getString(R.string.key_gps))) {
-                if (Utils.getGPS(context) && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                if (UserSettings.getGPS(context) && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Utils.PERMISSION_REQUEST_CODE_LOCATION);
                 }
@@ -116,7 +119,7 @@ public class Settings extends AppCompatActivity {
         }
 
         public String getPhoneOption() {
-            int phoneOption = Utils.getPhoneOption(context);
+            int phoneOption = UserSettings.getPhoneOption(context);
             switch (phoneOption) {
                 case Utils.PHONE_BLOCK_CALLS:
                     return getString(R.string.phone_option_block);
@@ -130,7 +133,7 @@ public class Settings extends AppCompatActivity {
     }
 
     private String getPhoneOption() {
-        int phoneOption = Utils.getPhoneOption(context);
+        int phoneOption = UserSettings.getPhoneOption(context);
         switch (phoneOption) {
             case Utils.PHONE_BLOCK_CALLS:
                 return getString(R.string.phone_option_block);
@@ -154,7 +157,7 @@ public class Settings extends AppCompatActivity {
                     Toast.makeText(context, "Permission was not granted",
                             Toast.LENGTH_SHORT).show();
                     autoPreference.setChecked(false);
-                    Utils.setAutoReply(context, false);
+                    UserSettings.setAutoReply(context, false);
                 }
                 return;
             }
@@ -163,7 +166,7 @@ public class Settings extends AppCompatActivity {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(context, "Permission was not granted",
                             Toast.LENGTH_SHORT).show();
-                    Utils.setGPS(context, false);
+                    UserSettings.setGPS(context, false);
                     gpsPreference.setChecked(false);
                 }
                 return;
@@ -171,19 +174,19 @@ public class Settings extends AppCompatActivity {
             // Phone Permission
             case Utils.PERMISSION_REQUEST_CODE_PHONE: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    int option = Utils.getPhoneOption(context);
+                    int option = UserSettings.getPhoneOption(context);
                     if (option == Utils.PHONE_READ_CALLER && ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS)
                             == PackageManager.PERMISSION_GRANTED) {
-                        Utils.setPhoneOption(context, Utils.PHONE_READ_CALLER);
+                        UserSettings.setPhoneOption(context, Utils.PHONE_READ_CALLER);
                     } else {
-                        Utils.setPhoneOption(context, Utils.PHONE_ALLOW_CALLS);
+                        UserSettings.setPhoneOption(context, Utils.PHONE_ALLOW_CALLS);
                     }
                 } else {
                     Toast.makeText(context, "Permission was not granted",
                             Toast.LENGTH_SHORT).show();
-                    Utils.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
+                    UserSettings.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
                 }
-                phonePreference.setValue(String.valueOf(Utils.getPhoneOption(context)));
+                phonePreference.setValue(String.valueOf(UserSettings.getPhoneOption(context)));
                 phonePreference.setSummary(getPhoneOption());
                 return;
             }
@@ -192,26 +195,26 @@ public class Settings extends AppCompatActivity {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                             == PackageManager.PERMISSION_GRANTED) {
-                        Utils.setPhoneOption(context, Utils.PHONE_READ_CALLER);
+                        UserSettings.setPhoneOption(context, Utils.PHONE_READ_CALLER);
 
                     } else {
                         Toast.makeText(context, "Permission was not granted",
                                 Toast.LENGTH_SHORT).show();
-                        Utils.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
+                        UserSettings.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
                     }
                 } else {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
                             == PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(context, "Permission was not granted",
                                 Toast.LENGTH_SHORT).show();
-                        Utils.setPhoneOption(context, Utils.PHONE_ALLOW_CALLS);
+                        UserSettings.setPhoneOption(context, Utils.PHONE_ALLOW_CALLS);
                     } else {
                         Toast.makeText(context, "Permission was not granted",
                                 Toast.LENGTH_SHORT).show();
-                        Utils.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
+                        UserSettings.setPhoneOption(context, Utils.PHONE_BLOCK_CALLS);
                     }
                 }
-                phonePreference.setValue(String.valueOf(Utils.getPhoneOption(context)));
+                phonePreference.setValue(String.valueOf(UserSettings.getPhoneOption(context)));
                 phonePreference.setSummary(getPhoneOption());
             }
 

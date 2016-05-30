@@ -1,4 +1,4 @@
-package com.DKB.shutupdrive;
+package com.DKB.shutupdrive.utils;
 
 import android.Manifest;
 import android.app.Notification;
@@ -14,6 +14,9 @@ import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+
+import com.DKB.shutupdrive.CarMode;
+import com.DKB.shutupdrive.R;
 
 /**
  * Created by kyle on 2/28/16.

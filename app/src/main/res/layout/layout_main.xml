@@ -19,9 +19,10 @@
     <ImageView
         android:id="@+id/titleImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_below="@id/adView"
-        android:background="@drawable/driving_opt" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/driving_opt" />
 
     <TextView
         android:id="@+id/motto"

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 
+import com.DKB.shutupdrive.utils.UserSettings;
+import com.DKB.shutupdrive.utils.Utils;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
@@ -33,7 +35,7 @@ public class DetectedActivityIntentService extends IntentService {
             DetectedActivity mostProbableActivity = result.getMostProbableActivity();
             int confidence = mostProbableActivity.getConfidence();
             int activityType = mostProbableActivity.getType();
-            long waitTime = Utils.getNotDrivingTime(this);
+            long waitTime = UserSettings.getNotDrivingTime(this);
             boolean diffTimeOK = (new Date().getTime() - waitTime) >= Utils.minutesToMillis(10);
             if (confidence >= Utils.DETECTION_THRESHOLD && activityType == DetectedActivity.IN_VEHICLE && diffTimeOK) {
                 if (!CarMode.running) {
